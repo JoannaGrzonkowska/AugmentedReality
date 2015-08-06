@@ -73,7 +73,6 @@ $( document ).ready(function() {
             var selector = document.querySelector("#templateControlObjectSelector");
             selector.addEventListener("change", handleChange, false);
         
-        debugger;
     // The next line will apply declarative control binding to all elements
     // (e.g. DIV with attribute: data-win-control="WinJS.UI.Rating")
         
@@ -140,45 +139,41 @@ function onDeviceReady() {
         navigator.splashscreen.hide() ;                 // hide splash screen
     }
   var json = { Id: 8, Content: 'test0909090' };
-
+    var apiUrl = 'http://skynote3.azurewebsites.net/api/';
+var commentsUrl = apiUrl+'comments';
   $.ajax({ 
-  url: 'http://localhost:56495/api/comments',
+  url: commentsUrl,//http://localhost:56495
   type: 'GET',
   success: function(data) {
-        debugger;
       data.forEach(function(item){
-       // alert("get all: " +item.Content);
-      
+      alert("get all: " +item.Content);
       });
         }
   });
     
       $.ajax({
-  url: 'http://localhost:56495/api/comments/5',
+  url: commentsUrl+'/5',
   type: 'GET',
   success: function(data) {
-        debugger;
-       // alert("get one: " +data.Content);
+        alert("get one: " +data.Content);
         }
   });
     
-      $.ajax({
-  url: 'http://skynote3.azurewebsites.net/api/comments',
+      $.ajax({ 
+  url: commentsUrl, 
   type: 'POST',
   data: json,
   success: function(data) {
-        debugger;
-        //alert("post: " + data.Content);
+        alert("post: " + data.Content);
         }
   });
     
       $.ajax({
-  url: 'http://localhost:56495/api/comments',
+  url: commentsUrl,
   type: 'PUT',
   data: json,
   success: function(data) {
-        debugger;
-        //alert("put: " +data.Content);
+        alert("put: " +data.Content);
         }
   });
     

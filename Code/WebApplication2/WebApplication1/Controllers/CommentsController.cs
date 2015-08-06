@@ -56,20 +56,12 @@ namespace WebApplication2.Controllers
 
         // POST api/values
         public HttpResponseMessage Post(Comment comment)
-        {
-
-            /*var context = new skynoteEntities();
-
-            var unitOfWork = new UnitOfWork(context);
-            var examinationsRepository = new NotesRepository(context, unitOfWork);
-
-           var notesService = new NotesService(examinationsRepository);*/
-
+        {       
             int id=-1;
             _notesService.Add(new BusinessLogic.Models.NoteModel
             {
                 Content = comment.Content+"tttest",
-                Id = comment.Id+100
+                Id = comment.Id+1000
             }, ref id);
 
             var commentAdded = new Comment
@@ -87,10 +79,10 @@ namespace WebApplication2.Controllers
             var commentAdded = new Comment
             {
                 Id = comment.Id,
-                Content = comment.Content
+                Content = comment.Content+" sjfbdjf"
             };
 
-            var r = Request.CreateResponse<Comment>(HttpStatusCode.Created, comment);
+            var r = Request.CreateResponse<Comment>(HttpStatusCode.Created, commentAdded);
             return r;
         }
 

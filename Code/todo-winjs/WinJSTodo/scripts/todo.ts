@@ -98,7 +98,7 @@ module Todo {
 
         WinJS.xhr({
             type: "POST",
-            url: 'http://skynote3.azurewebsites.net/api/comments',//http://localhost:56495
+            url: 'http://skynote3.azurewebsites.net/api/comments', //http://localhost:56495
             headers: { "Content-type": "application/json" },
             data: json
         }).then(function (r) {

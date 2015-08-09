@@ -1,0 +1,5 @@
+https://msdn.microsoft.com/en-us/library/windows/apps/hh465493.aspx
+http://try.buildwinjs.com/#contentdialog
+https://msdn.microsoft.com/en-us/library/hh700358.aspx
+https://msdn.microsoft.com/en-us/library/hh700355.aspx
+https://msdn.microsoft.com/en-us/library/hh700356.aspx

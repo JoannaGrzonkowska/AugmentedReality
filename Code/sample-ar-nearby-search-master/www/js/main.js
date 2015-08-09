@@ -185,6 +185,19 @@ var commentsUrl = apiUrl+'comments';
     startGeolocation();
 }
 
+
+// start intel.xdk augmented reality mode, adds camera in background       
+function xdkStartAR(){
+    intel.xdk.display.startAR(); 
+    $('#arView').css('background-color','transparent');
+    $('body').css('background-color','transparent');
+}
+        
+// stop intel.xdk augmented reality mode        
+function xdkStopAR(){
+    intel.xdk.display.stopAR(); 
+}   
+
 // setup google maps api        
 function setupMap(){
     $("#map").height($(window).height()-60);
@@ -373,7 +386,7 @@ function startAccelerometer() {
 
 // Stop checking the accelerometer
 function stopAccelerometer() {
-    if (watchAccelerometerID) {
+    if (watchAccelerometerID) { 
         navigator.accelerometer.clearWatch(watchAccelerometerID);
         watchAccelerometerID = null;
     }
@@ -390,10 +403,12 @@ function onAccelerometerSuccess(acceleration) {
         $("#arView").fadeIn();
         $("#topView").hide();
         document.getElementById('body').style.background = "#d22";
+        xdkStartAR();
     } else {
         $("#arView").hide();
         $("#topView").fadeIn();
         document.getElementById('body').style.background = "#fff";
+        xdkStopAR();
     }
 }
 

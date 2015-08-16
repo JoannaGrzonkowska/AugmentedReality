@@ -17,5 +17,9 @@ namespace Common
         public bool IsSuccess { get; private set; }
 
         public IEnumerable<string> Errors { get; private set; }
+
+        public string ErrorsToString { get {
+            return string.Join(",", Errors);
+        } }
     }
 }

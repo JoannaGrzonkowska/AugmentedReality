@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "https://edge-intel.s3.amazonaws.com/jsapp/production/release-2014-ww51/sample-ar-nearby-search/sample.zip",
       "projectGuid": "418d9fa9-c7ee-4d11-bc1f-08ee6b4e65e4",
-      "lastModifiedDate": 1437916688223,
+      "lastModifiedDate": 1439712327942,
       "creationDate": 1423605516237
     },
     "sourceDirectory": "www",
@@ -46,6 +46,31 @@
       {
         "id": "org.apache.cordova.device-motion",
         "version": "0.2.11",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [],
+        "dependedBy": []
+      },
+      {
+        "id": "org.apache.cordova.camera",
+        "version": "0.3.4",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [],
+        "dependedBy": []
+      },
+      {
+        "id": "intel.xdk.display",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [],
+        "dependedBy": []
+      },
+      {
+        "id": "intel.xdk.camera",
         "selectedState": "Included",
         "data": {},
         "paramvals": {},

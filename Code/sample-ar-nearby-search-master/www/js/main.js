@@ -2,9 +2,10 @@
 /*jshint sub:true */
 /*global $, Math, calculateDirection, document, google, navigator, onDeviceReady, onGeoError, onGeoSuccess, parseInt, relativePosition, setupMap,  window */
 
+var isCameraOn = false;
 
-
-
+var apiUrl = 'http://skynote3.azurewebsites.net/api/';
+ 
 var pin = [
     {"name":"New York", "lat":"40.714353", "lng":"-74.005973"},
     {"name":"San Francisco", "lat":"37.77493", "lng":"-122.419416"},
@@ -19,7 +20,7 @@ var pin = [
     {"name":"Atlanta", "lat":"33.748995", "lng":"-84.387982"},
     {"name":"Kansas City", "lat":"39.099727", "lng":"-94.578567"}
 ];        
-var markersArray = [], bounds, map, watchGeoID, watchCompassID, watchAccelerometerID;
+var markersArray = [], bounds, map, watchGeoID, watchCompassID, watchAccelerometerID; 
 var myLat = 0, myLng = 0; 
 var bearing, distance;
 var dataStatus = 0;    
@@ -27,10 +28,92 @@ var dataStatus = 0;
 
 // setup map and listen to deviceready        
 $( document ).ready(function() {
+    
+    
+    var $signupForm = $("#signupForm");
+        $signupForm.submit(function (event) {
+            event.preventDefault();
+            debugger;
+            if ($signupForm.valid()) {
+                $.ajax({
+                    url: apiUrl/*'http://localhost:56495/api/'*/+'user',
+                    type: 'POST',
+                    data: $signupForm.serializeArray(),
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            debugger;
+                            $("#success-message").html("OK").show();
+                            $signupForm.hide();
+                        } else {
+                            $(".alert").html(data.ErrorsToString).show();
+                        }
+                    }
+                });                
+            }
+        });
+    
+    // validate signup form on keyup and submit
+		$signupForm.validate({
+			rules: {
+				firstname: "required",
+				lastname: "required",
+				username: {
+					required: true,
+					minlength: 2
+				},
+				password: {
+					required: true,
+                    pattern: /^(?=.*\d)(?=.*[a-zA-Z]).*$/,
+                    minlength: 8,
+                    maxlength: 16
+				},
+				confirm_password: {
+					required: true,
+					equalTo: "#password"
+				},
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				firstname: "Please enter your firstname",
+				lastname: "Please enter your lastname",
+				username: {
+					required: "Please enter a username",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+				password: {
+					required: "Please provide a password",
+					pattern: "Password has to contain at least one letter and one digit",
+                    minlength: "Your password must consist of at least 8 characters",
+                    maxlength: "Your password must consist of max 16 characters"
+				},
+				confirm_password: {
+					required: "Please provide a password",
+					equalTo: "Please enter the same password as above"
+				},
+				email: "Please enter a valid email address"
+			}
+		});
+
+    
     document.addEventListener("deviceready", onDeviceReady, false);
     
     WinJS.Application.onready = function () {
             
+        
+WinJS.UI.Pages.define("/pages/home.html", {
+
+        // This function is called whenever a user navigates to this page. It
+        // populates the page elements with the app's data.
+        ready: function (element, options) {
+           alert("page");
+
+        }
+    });
+        
+        
             // Define a Person 'class' with bindable properties.
     var Person = WinJS.Binding.define({
         name: "",
@@ -80,12 +163,24 @@ $( document ).ready(function() {
      var personDiv = document.querySelector('#nameSpan');
     WinJS.Binding.processAll(personDiv, person);
    
-  
+        
+WinJS.Namespace.define("Sample", {
+    navBarInvoked: WinJS.UI.eventHandler(navBarInvoked)
+});
+
+WinJS.UI.processAll().done(function () {
+    document.getElementById('createNavBar').winControl.open();
+});
+
+        
     WinJS.UI.processAll().then(function () {
-    var control = document.getElementById("ratingControlHost").winControl;
+    /*var control = document.getElementById("ratingControlHost").winControl;
     control.averageRating = 3; 
         control.addEventListener("change", ratingChanged, false); 
+      */  
         
+        var controlNav = document.getElementById("createNavBar").winControl;
+        controlNav.addEventListener("navigated", onnavigatedFun, false); 
         
          var bindingSource = WinJS.Binding.as(person);
         
@@ -129,17 +224,41 @@ function ratingChanged(event) {
         for (property in event) {
             output += "<li>" + property + ": " + event[property] + "</li>";
         }
-
+ 
        // outputParagraph.innerHTML = output + "</ul>";
     
 }
+
+function navBarInvoked(ev) {
+    var navbarCommand = ev.detail.navbarCommand;
+    log(navbarCommand.label + " NavBarCommand invoked<br/>");
+    debugger;
+    
+        var contentHost = 
+            document.body.querySelector("#contenthost"),
+            url = navbarCommand.location;
+ alert(url);
+    
+        // Remove existing content from the host element.
+        WinJS.Utilities.empty(contentHost);
+
+        // Display the new page in the content host.
+        WinJS.UI.Pages.render(url, contentHost);
+    
+}
+
+function log(msg) {
+    var statusEl = document.getElementById("status");
+    statusEl.innerHTML += msg;
+    statusEl.scrollTop = statusEl.scrollHeight;
+}
+
 // start device compass, accelerometer and geolocation after deviceready        
 function onDeviceReady() {
     if( window.Cordova && navigator.splashscreen ) {     // Cordova API detected
         navigator.splashscreen.hide() ;                 // hide splash screen
     }
   var json = { Id: 8, Content: 'test0909090' };
-    var apiUrl = 'http://skynote3.azurewebsites.net/api/';
 var commentsUrl = apiUrl+'comments';
   $.ajax({ 
   url: commentsUrl,//http://localhost:56495
@@ -182,13 +301,16 @@ var commentsUrl = apiUrl+'comments';
     // start cordova device sensors
     startAccelerometer();
     startCompass();
-    startGeolocation();
+    startGeolocation(); 
 }
 
 
 // start intel.xdk augmented reality mode, adds camera in background       
 function xdkStartAR(){
+ //   alert("before start ar");
     intel.xdk.display.startAR(); 
+    isCameraOn = true;
+  //  alert("after start ar");
     $('#arView').css('background-color','transparent');
     $('body').css('background-color','transparent');
 }
@@ -196,6 +318,9 @@ function xdkStartAR(){
 // stop intel.xdk augmented reality mode        
 function xdkStopAR(){
     intel.xdk.display.stopAR(); 
+    isCameraOn = false;
+   //  alert("camera off");
+    
 }   
 
 // setup google maps api        
@@ -212,7 +337,7 @@ function setupMap(){
     };
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
 }        
-
+ 
 // toggle between list view and map view        
 function toggleView(){
     if($(".listView").is(":visible")){
@@ -317,10 +442,32 @@ function calculateDirection(degree){
 
 } 
 
+
+
+
+function success(pos) {
+  var crd = pos.coords;
+
+  alert('Your current position is:');
+  alert('Latitude : ' + crd.latitude);
+  alert('Longitude: ' + crd.longitude);
+  alert('More or less ' + crd.accuracy + ' meters.');
+};
+
+function error(err) {
+  alert('ERROR(' + err.code + '): ' + err.message);
+};
+
+
 // Start watching the geolocation        
 function startGeolocation(){
-    var options = { timeout: 30000 };
-    watchGeoID = navigator.geolocation.watchPosition(onGeoSuccess, onGeoError, options);
+   // var options = { timeout: 30000 };
+    var options = {
+  enableHighAccuracy: true,
+  timeout: 15000,
+  maximumAge: 90000
+};
+    watchGeoID = navigator.geolocation.watchPosition(onGeoSuccess, onGeoError, options);    
 }
 
 // Stop watching the geolocation
@@ -344,6 +491,7 @@ function onGeoSuccess(position) {
 
 // onError: Failed to get the location
 function onGeoError() {
+    
     document.getElementById('log').innerHTML += "onError=.";
 } 
 
@@ -380,7 +528,7 @@ function onCompassError(compassError) {
 
 // Start checking the accelerometer
 function startAccelerometer() {
-    var options = { frequency: 100 };
+    var options = { frequency: 1000 }; 
     watchAccelerometerID = navigator.accelerometer.watchAcceleration(onAccelerometerSuccess, onAccelerometerError, options);
 }
 
@@ -399,12 +547,13 @@ function onAccelerometerSuccess(acceleration) {
     element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
                         'Acceleration Y: ' + acceleration.y + '<br />' +
                         'Acceleration Z: ' + acceleration.z ;
-    if(acceleration.y > 7){
+    if(acceleration.y > 7 ){//&& !isCameraOn){
         $("#arView").fadeIn();
         $("#topView").hide();
         document.getElementById('body').style.background = "#d22";
         xdkStartAR();
     } else {
+        //alert("ac: "+acceleration.y + " cam: " + isCameraOn);
         $("#arView").hide();
         $("#topView").fadeIn();
         document.getElementById('body').style.background = "#fff";
@@ -416,3 +565,16 @@ function onAccelerometerSuccess(acceleration) {
 function onAccelerometerError() {
     document.getElementById('log').innerHTML += "onError.";
 }
+
+function onnavigatedFun(evt) {
+    alert("nav");
+        var contentHost = 
+            document.body.querySelector("#contenthost"),
+            url = evt.detail.location;
+
+        // Remove existing content from the host element.
+        WinJS.Utilities.empty(contentHost);
+
+        // Display the new page in the content host.
+        WinJS.UI.Pages.render(url, contentHost);
+    }

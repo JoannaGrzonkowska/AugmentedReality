@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
     <title>Nearby</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-type">
     <meta content="&copy; 2013, Intel Corporation. All rights reserved." name=
@@ -17,7 +17,11 @@
     <script src="lib/jquery/jquery-1.8.2.min.js"></script>
     <script src="cordova.js"></script>
     <script src="js/main.js"></script>
+    <script src="jquery-validation\dist\jquery.validate.min.js"></script>
+    <script src="jquery-validation\dist\additional-methods.min.js"></script>
     
+    
+    <link rel="stylesheet" href="jquery-validation\dist\css\screen.css">
     <link href="winjs/css/ui-light.css" rel="stylesheet" />
 <link href="styles.css" rel="stylesheet" />
 <script src="winjs/js/base.js"></script>
@@ -25,6 +29,7 @@
     
     
     <style>
+        #signupForm .error { color:red}
         body {
             background-color:#fff;
             font-family:Arial;
@@ -177,8 +182,6 @@
 </head>
 
 <body id="body">
-    
-    
     <div id="arView">
         <div class="arMessage">
             &uarr;<br>
@@ -196,6 +199,27 @@
 
     <div id="topView">
         
+        
+<div id="createNavBar" data-win-control="WinJS.UI.NavBar" data-win-options="{
+    placement: 'top',
+    oninvoked: Sample.navBarInvoked
+}">
+    <div data-win-control="WinJS.UI.NavBarContainer">
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'url(/pages/navbar/content/images/homeIcon.png)' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Notes', icon: 'delete',location: '/pages/notes.html' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Delete', icon: 'delete',location: '/pages/home.html' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Music', icon: 'audio' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Edit', icon: 'edit' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
+    </div>
+</div>
+<div class="box">
+    <div id="pane">
+                <div id="status" style="overflow: auto; max-height: 240px;"></div><br />
+    </div>
+</div>
+        
+        <div id="contenthost">Testtt</div>
 
         
         <div class="navbar">
@@ -209,7 +233,7 @@
 
             <div class="navtitle">
                 Nearby
-            </div>
+            </div> 
         </div>
 
                     <div id="content">
@@ -218,9 +242,9 @@
     <p>Your HTML here...</p>
     
     
-    <div id="ratingControlHost" data-win-control="WinJS.UI.Rating"
+    <!--<div id="ratingControlHost" data-win-control="WinJS.UI.Rating"
     data-win-options="{maxRating: 10, averageRating: 6}">
-</div>
+</div>-->
     
     <div id="timepicker" data-win-control="WinJS.UI.TimePicker" 
     data-win-options="{current: '10:29 am'}">
@@ -258,13 +282,74 @@
     </fieldset>
 
      <div id="templateControlRenderTarget">Test</div>
-   
+     
+       <div id="success-message" style="display: none"></div>
+    <div class="alert" style="display: none; white-space: pre-line"></div>
+ 
+    
+    <form class="cmxform" id="signupForm" method="post" action="">
+<fieldset>
+<legend>Validating a complete form</legend>
+<p>
+<label for="firstname">Firstname</label>
+<input id="firstname" name="firstname" type="text" class='win-textbox'>
+</p>
+<p>
+<label for="lastname">Lastname</label>
+<input id="lastname" name="lastname" type="text" class='win-textbox'>
+</p>
+<p>
+<label for="username">Username</label>
+<input id="username" name="username" type="text">
+</p>
+<p>
+<label for="password">Password</label>
+<input id="password" name="password" type="password">
+</p>
+<p>
+<label for="confirm_password">Confirm password</label>
+<input id="confirm_password" name="confirm_password" type="password">
+</p>
+<p>
+<label for="email">Email</label>
+<input id="email" name="email" type="email">
+</p>
+</fieldset>
+<p>
+<input class="submit win-button win-button-primary"  type="submit" value="Submit">
+</p>
+</fieldset>
+</form>
+    
+    <div id="debug">
+        
+         <div class="heading">
+            Geolocation
+        </div>
+
+        <div id="geolocation"></div>
+
+        
+        <div class="heading">
+            Compass 
+        </div>
+
+        <div id="compass"></div>
+
+                     <div class="heading">
+            Accelerometer
+        </div>
+
+            <div id="accelerometer"></div>
+       
+        <div class="heading">
+            Log
+        </div>
+
+        <div id="log"></div>
+    </div>
     
 </div>
-        
-        
-        
-        
         
         </div>
         
@@ -273,34 +358,10 @@
         </div>
 
         <div class="mapView">
+            
             <div id="map"></div>
         </div>
     </div>
 
-    <div id="debug">
-        <div class="heading">
-            Geolocation
-        </div>
-
-        <div id="geolocation"></div>
-
-        <div class="heading">
-            Compass
-        </div>
-
-        <div id="compass"></div>
-
-        <div class="heading">
-            Accelerometer
-        </div>
-
-        <div id="accelerometer"></div>
-
-        <div class="heading">
-            Log
-        </div>
-
-        <div id="log"></div>
-    </div>
 </body>
 </html>

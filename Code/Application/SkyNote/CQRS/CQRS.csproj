@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC2E8569-4B9D-43FE-85EB-D566E80CCF8B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CQRS</RootNamespace>
+    <AssemblyName>CQRS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="StructureMap, Version=3.1.6.186, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.3.1.6.186\lib\net40\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap.Net4, Version=3.1.6.186, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.3.1.6.186\lib\net40\StructureMap.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandHandlers\CreateNoteCommandHandler.cs" />
+    <Compile Include="CommandHandlers\ICommandHandler.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CreateNoteCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="EventHandlers\IEventHandler.cs" />
+    <Compile Include="EventHandlers\NoteCreatedEventHandler.cs" />
+    <Compile Include="Events\Event.cs" />
+    <Compile Include="Events\EventStorage.cs" />
+    <Compile Include="Events\IEvent.cs" />
+    <Compile Include="Events\IEventStorage.cs" />
+    <Compile Include="Events\NoteCreatedEvent.cs" />
+    <Compile Include="Messaging\IQueryBus.cs" />
+    <Compile Include="Messaging\QueryBus.cs" />
+    <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Queries\IQueryResult.cs" />
+    <Compile Include="Queries\NotesByDateQuery.cs" />
+    <Compile Include="Queries\NotesByDateQueryResult.cs" />
+    <Compile Include="Queries\Query.cs" />
+    <Compile Include="QueryHandlers\IQueryHandler.cs" />
+    <Compile Include="QueryHandlers\NotesByDateQueryHandler.cs" />
+    <Compile Include="Utils\IQueryHandlerFactory.cs" />
+    <Compile Include="Utils\StructureMapCommandHandlerFactory.cs" />
+    <Compile Include="Messaging\CommandBus.cs" />
+    <Compile Include="Messaging\EventBus.cs" />
+    <Compile Include="Messaging\ICommandBus.cs" />
+    <Compile Include="Messaging\IEventBus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ICommandHandlerFactory.cs" />
+    <Compile Include="Utils\IEventHandlerFactory.cs" />
+    <Compile Include="Utils\StructureMapEventHandlerFactory.cs" />
+    <Compile Include="Utils\StructureMapQueryHandlerFactory.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{8c6cd01b-30a1-4da8-8c28-3b14e6d1e850}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessDenormalized\DataAccessDenormalized.csproj">
+      <Project>{6d37ab73-97d2-477f-bdaa-8bc1d13a29a0}</Project>
+      <Name>DataAccessDenormalized</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{15cd88d4-d890-4efa-b190-57c4944522a2}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

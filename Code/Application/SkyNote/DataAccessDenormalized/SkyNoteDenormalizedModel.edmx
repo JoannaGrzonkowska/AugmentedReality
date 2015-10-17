@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="skynotedenormalizeddbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Topic" Type="varchar" MaxLength="45" />
+          <Property Name="Content" Type="varchar" MaxLength="200" />
+          <Property Name="Date" Type="datetime" Precision="0" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="XCord" Type="decimal" Precision="10" Scale="8" />
+          <Property Name="YCord" Type="decimal" Precision="10" Scale="8" />
+          <Property Name="ZCord" Type="decimal" Precision="10" Scale="8" />
+          <Property Name="Name" Type="varchar" MaxLength="45" />
+          <Property Name="Login" Type="varchar" MaxLength="20" />
+          <Property Name="Mail" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
+          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedenormalizeddb" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="skynotedenormalizeddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Topic" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="XCord" Type="Decimal" />
+          <Property Name="YCord" Type="Decimal" />
+          <Property Name="ZCord" Type="Decimal" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="note" EntityType="Self.note" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities">
+          <EntitySetMapping Name="note">
+            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
+              <MappingFragment StoreEntitySet="note">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="XCord" ColumnName="XCord" />
+                <ScalarProperty Name="YCord" ColumnName="YCord" />
+                <ScalarProperty Name="ZCord" ColumnName="ZCord" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

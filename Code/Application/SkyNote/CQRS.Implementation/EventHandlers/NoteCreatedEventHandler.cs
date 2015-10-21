@@ -1,8 +1,10 @@
-﻿using CQRS.Events;
+﻿using CQRS.EventHandlers;
+using CQRS.Events;
+using CQRS.Implementation.Events;
 using DataAccessDenormalized;
 using DataAccessDenormalized.Repository;
 
-namespace CQRS.EventHandlers
+namespace CQRS.Implementation.EventHandlers
 {
     public class NoteCreatedEventHandler : IEventHandler<NoteCreatedEvent>
     {
@@ -14,7 +16,7 @@ namespace CQRS.EventHandlers
         }
         public void Handle(NoteCreatedEvent handle)
         {
-            note item = new note()
+            notedto item = new notedto()
             {
                 Id = handle.AggregateId,
                 Content = handle.Content,

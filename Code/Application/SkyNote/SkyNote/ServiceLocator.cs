@@ -1,4 +1,5 @@
 ﻿using CQRS.Events;
+using CQRS.Implementation.Utils;
 using CQRS.Messaging;
 using CQRS.Utils;
 using DataAccess.Repositories;

@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="skynotedenormalizeddbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="note">
+        <EntityType Name="notedto">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -23,14 +23,14 @@
           <Property Name="Mail" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
-          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedenormalizeddb" store:Type="Tables" />
+          <EntitySet Name="notedto" EntityType="Self.notedto" Schema="skynotedenormalizeddb" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="skynotedenormalizeddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="note">
+        <EntityType Name="notedto">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -47,18 +47,18 @@
           <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="note" EntityType="Self.note" />
+        <EntityContainer Name="skynotedenormalizeddbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="notedto" EntityType="Self.notedto" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities">
-          <EntitySetMapping Name="note">
-            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
-              <MappingFragment StoreEntitySet="note">
+        <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities1">
+          <EntitySetMapping Name="notedto">
+            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.notedto">
+              <MappingFragment StoreEntitySet="notedto">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Topic" ColumnName="Topic" />

@@ -1,6 +1,6 @@
 ﻿namespace DataAccessDenormalized.Repository
 {
-    public interface INoteDenormalizedRepository : IRepository<note>
+    public interface INoteDenormalizedRepository : IRepository<notedto>
     {
     }
 }

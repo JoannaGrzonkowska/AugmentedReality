@@ -1,5 +1,5 @@
 
-CREATE TABLE `note` (
+CREATE TABLE `noteDTO` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) DEFAULT NULL,  
   `Topic` varchar(45) DEFAULT NULL,

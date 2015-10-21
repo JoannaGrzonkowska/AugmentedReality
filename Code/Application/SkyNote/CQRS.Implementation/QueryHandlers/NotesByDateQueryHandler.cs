@@ -2,8 +2,10 @@
 using CQRS.Queries;
 using DataAccessDenormalized.Repository;
 using System.Linq;
+using CQRS.QueryHandlers;
+using CQRS.Implementation.Queries;
 
-namespace CQRS.QueryHandlers
+namespace CQRS.Implementation.QueryHandlers
 {
     public class NotesByDateQueryHandler : IQueryHandler<NotesByDateQuery, NotesByDateQueryResult>
     {

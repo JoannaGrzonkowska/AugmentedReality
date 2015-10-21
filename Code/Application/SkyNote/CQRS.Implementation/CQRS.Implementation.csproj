@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC2E8569-4B9D-43FE-85EB-D566E80CCF8B}</ProjectGuid>
+    <ProjectGuid>{46C8B9FE-7CD1-4F7C-A6E3-DFB9985EC915}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CQRS</RootNamespace>
-    <AssemblyName>CQRS</AssemblyName>
+    <RootNamespace>CQRS.Implementation</RootNamespace>
+    <AssemblyName>CQRS.Implementation</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,33 +48,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandHandlers\ICommandHandler.cs" />
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="EventHandlers\IEventHandler.cs" />
-    <Compile Include="Events\Event.cs" />
-    <Compile Include="Events\EventStorage.cs" />
-    <Compile Include="Events\IEvent.cs" />
-    <Compile Include="Events\IEventStorage.cs" />
-    <Compile Include="Messaging\IQueryBus.cs" />
-    <Compile Include="Messaging\QueryBus.cs" />
-    <Compile Include="Queries\IQuery.cs" />
-    <Compile Include="Queries\IQueryResult.cs" />
-    <Compile Include="Queries\Query.cs" />
-    <Compile Include="QueryHandlers\IQueryHandler.cs" />
-    <Compile Include="Utils\IQueryHandlerFactory.cs" />
-    <Compile Include="Messaging\CommandBus.cs" />
-    <Compile Include="Messaging\EventBus.cs" />
-    <Compile Include="Messaging\ICommandBus.cs" />
-    <Compile Include="Messaging\IEventBus.cs" />
+    <Compile Include="CommandHandlers\CreateNoteCommandHandler.cs" />
+    <Compile Include="Commands\CreateNoteCommand.cs" />
+    <Compile Include="EventHandlers\NoteCreatedEventHandler.cs" />
+    <Compile Include="Events\NoteCreatedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\ICommandHandlerFactory.cs" />
-    <Compile Include="Utils\IEventHandlerFactory.cs" />
+    <Compile Include="Queries\NotesByDateQuery.cs" />
+    <Compile Include="Queries\NotesByDateQueryResult.cs" />
+    <Compile Include="QueryHandlers\NotesByDateQueryHandler.cs" />
+    <Compile Include="Utils\StructureMapCommandHandlerFactory.cs" />
+    <Compile Include="Utils\StructureMapEventHandlerFactory.cs" />
+    <Compile Include="Utils\StructureMapQueryHandlerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{8c6cd01b-30a1-4da8-8c28-3b14e6d1e850}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CQRS\CQRS.csproj">
+      <Project>{ec2e8569-4b9d-43fe-85eb-d566e80ccf8b}</Project>
+      <Name>CQRS</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAccessDenormalized\DataAccessDenormalized.csproj">
       <Project>{6d37ab73-97d2-477f-bdaa-8bc1d13a29a0}</Project>

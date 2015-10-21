@@ -13,10 +13,10 @@ namespace DataAccessDenormalized
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class skynotedenormalizeddbEntities : DbContext
+    public partial class skynotedenormalizeddbEntities1 : DbContext
     {
-        public skynotedenormalizeddbEntities()
-            : base("name=skynotedenormalizeddbEntities")
+        public skynotedenormalizeddbEntities1()
+            : base("name=skynotedenormalizeddbEntities1")
         {
         }
     
@@ -25,6 +25,6 @@ namespace DataAccessDenormalized
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<note> note { get; set; }
+        public DbSet<notedto> notedto { get; set; }
     }
 }

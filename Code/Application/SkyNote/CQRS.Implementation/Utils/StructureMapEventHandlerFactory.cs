@@ -1,11 +1,13 @@
 ﻿using CQRS.EventHandlers;
 using CQRS.Events;
+using CQRS.Utils;
 using StructureMap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
-namespace CQRS.Utils
+namespace CQRS.Implementation.Utils
 {
     public class StructureMapEventHandlerFactory : IEventHandlerFactory
     {
@@ -22,7 +24,7 @@ namespace CQRS.Utils
         private static IEnumerable<Type> GetHandlerType<T>() where T : Event
         {
 
-            var handlers = typeof(IEventHandler<>).Assembly.GetExportedTypes()
+            var handlers = Assembly.Load("CQRS.Implementation").GetExportedTypes()
                 .Where(x => x.GetInterfaces()
                     .Any(a => a.IsGenericType && a.GetGenericTypeDefinition() == typeof(IEventHandler<>))).Where(h => h.GetInterfaces().Any(ii => ii.GetGenericArguments().Any(aa => aa == typeof(T)))).ToList();
 

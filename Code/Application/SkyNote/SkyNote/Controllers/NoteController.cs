@@ -1,10 +1,8 @@
-﻿using Common;
-using CQRS.Commands;
-using CQRS.Queries;
+﻿using CQRS.Implementation.Commands;
+using CQRS.Implementation.Queries;
+using DataAccess;
 using DataAccessDenormalized;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -17,7 +15,7 @@ namespace SkyNote.Controllers
 
 
         // GET api/values
-        public IEnumerable<DataAccessDenormalized.note> Get()
+        public IEnumerable<notedto> Get()
         {
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
             return notes;
@@ -41,11 +39,11 @@ namespace SkyNote.Controllers
         //}
 
         // POST api/values
-        public HttpResponseMessage Post(DataAccess.note note)
+        public HttpResponseMessage Post(note note)
         {
             ServiceLocator.CommandBus.Send(new CreateNoteCommand(1, 1, "kasia asia", "Szymon", 1));
 
-            var r = Request.CreateResponse<DataAccess.note>(HttpStatusCode.Created, note);
+            var r = Request.CreateResponse(HttpStatusCode.Created, note);
             return r;
         }
 

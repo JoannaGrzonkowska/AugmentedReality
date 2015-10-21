@@ -6,16 +6,16 @@ namespace CQRS.Messaging
 {
     public class CommandBus : ICommandBus
     {
-        private readonly ICommandHandlerFactory _commandHandlerFactory;
+        private readonly ICommandHandlerFactory commandHandlerFactory;
 
         public CommandBus(ICommandHandlerFactory commandHandlerFactory)
         {
-            _commandHandlerFactory = commandHandlerFactory;
+            this.commandHandlerFactory = commandHandlerFactory;
         }
 
         public void Send<T>(T command) where T : Command
         {
-            var handler = _commandHandlerFactory.GetHandler<T>();
+            var handler = commandHandlerFactory.GetHandler<T>();
             if (handler != null)
             {
                 handler.Execute(command);

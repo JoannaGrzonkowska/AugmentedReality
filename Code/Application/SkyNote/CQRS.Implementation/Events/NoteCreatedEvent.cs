@@ -1,4 +1,6 @@
-﻿namespace CQRS.Events
+﻿using CQRS.Events;
+
+namespace CQRS.Implementation.Events
 {
     public class NoteCreatedEvent : Event
     {

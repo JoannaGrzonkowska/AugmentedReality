@@ -10,9 +10,8 @@
 namespace DataAccessDenormalized
 {
     using System;
-    using System.Collections.Generic;
-    
-    public partial class note
+
+    public partial class notedto
     {
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }

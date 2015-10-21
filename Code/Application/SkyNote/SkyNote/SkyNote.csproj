@@ -231,6 +231,10 @@
       <Project>{8c6cd01b-30a1-4da8-8c28-3b14e6d1e850}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CQRS.Implementation\CQRS.Implementation.csproj">
+      <Project>{46c8b9fe-7cd1-4f7c-a6e3-dfb9985ec915}</Project>
+      <Name>CQRS.Implementation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CQRS\CQRS.csproj">
       <Project>{ec2e8569-4b9d-43fe-85eb-d566e80ccf8b}</Project>
       <Name>CQRS</Name>

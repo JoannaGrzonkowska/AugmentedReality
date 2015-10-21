@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessDenormalized", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{8C6CD01B-30A1-4DA8-8C28-3B14E6D1E850}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRS.Implementation", "CQRS.Implementation\CQRS.Implementation.csproj", "{46C8B9FE-7CD1-4F7C-A6E3-DFB9985EC915}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{8C6CD01B-30A1-4DA8-8C28-3B14E6D1E850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C6CD01B-30A1-4DA8-8C28-3B14E6D1E850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C6CD01B-30A1-4DA8-8C28-3B14E6D1E850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46C8B9FE-7CD1-4F7C-A6E3-DFB9985EC915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46C8B9FE-7CD1-4F7C-A6E3-DFB9985EC915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46C8B9FE-7CD1-4F7C-A6E3-DFB9985EC915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46C8B9FE-7CD1-4F7C-A6E3-DFB9985EC915}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

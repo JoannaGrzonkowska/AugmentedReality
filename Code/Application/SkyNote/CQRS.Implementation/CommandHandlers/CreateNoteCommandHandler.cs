@@ -1,14 +1,12 @@
-﻿using CQRS.Commands;
+﻿using CQRS.CommandHandlers;
 using CQRS.Events;
+using CQRS.Implementation.Commands;
+using CQRS.Implementation.Events;
 using DataAccess;
 using DataAccess.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CQRS.CommandHandlers
+namespace CQRS.Implementation.CommandHandlers
 {
     public class CreateNoteCommandHandler : ICommandHandler<CreateNoteCommand>
     {

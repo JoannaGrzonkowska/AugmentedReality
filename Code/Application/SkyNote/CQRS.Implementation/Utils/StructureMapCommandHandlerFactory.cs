@@ -5,8 +5,9 @@ using StructureMap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
-namespace CQRS.Utils
+namespace CQRS.Implementation.Utils
 {
     public class StructureMapCommandHandlerFactory : ICommandHandlerFactory
     {
@@ -25,7 +26,7 @@ namespace CQRS.Utils
 
         private IEnumerable<Type> GetHandlerTypes<T>() where T : Command
         {
-            var handlers = typeof(ICommandHandler<>).Assembly.GetExportedTypes()
+            var handlers = /*typeof(ICommandHandler<>).*/Assembly.Load("CQRS.Implementation").GetExportedTypes()
                 .Where(x => x.GetInterfaces()
                     .Any(a => a.IsGenericType && a.GetGenericTypeDefinition() == typeof(ICommandHandler<>)))
                     .Where(h => h.GetInterfaces()

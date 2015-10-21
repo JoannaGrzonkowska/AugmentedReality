@@ -1,4 +1,6 @@
-﻿namespace CQRS.Commands
+﻿using CQRS.Commands;
+
+namespace CQRS.Implementation.Commands
 {
     public class CreateNoteCommand : Command
     {

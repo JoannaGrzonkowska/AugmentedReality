@@ -1,19 +1,27 @@
 {
   "project": {
-    "projectSettingsVersion": "1.2",
+    "projectSettingsVersion": "2.0.0",
     "creationData": {
       "type": "Demo",
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "https://edge-intel.s3.amazonaws.com/jsapp/production/release-2014-ww51/sample-ar-nearby-search/sample.zip",
       "projectGuid": "418d9fa9-c7ee-4d11-bc1f-08ee6b4e65e4",
-      "lastModifiedDate": 1439712327942,
+      "lastModifiedDate": 1445844737430,
       "creationDate": 1423605516237
     },
     "sourceDirectory": "www",
     "cordovaPluginsDirectory": "plugins",
     "startFile": "index.html",
     "projectFiles": {},
-    "projectDirectories": {},
+    "projectDirectories": {
+      "www/xdk": {
+        "settings": {
+          "project": {
+            "XDK-generated": "true"
+          }
+        }
+      }
+    },
     "libraries": [],
     "cordovaPlugins": [
       {
@@ -23,7 +31,20 @@
         "data": {},
         "paramvals": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "originType": "cordova.io",
+        "origin": "org.apache.cordova.geolocation",
+        "permissions": {
+          "android:name": [
+            "android.permission.ACCESS_COARSE_LOCATION",
+            "android.permission.ACCESS_FINE_LOCATION"
+          ]
+        },
+        "topLevel": true,
+        "checksum": "a6101431",
+        "gitref": "",
+        "name": "Geolocation",
+        "description": "Cordova Geolocation Plugin"
       },
       {
         "id": "org.apache.cordova.splashscreen",
@@ -32,7 +53,15 @@
         "data": {},
         "paramvals": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "originType": "cordova.io",
+        "origin": "org.apache.cordova.splashscreen",
+        "permissions": {},
+        "topLevel": true,
+        "checksum": "fb21842c",
+        "gitref": "",
+        "name": "Splashscreen",
+        "description": "Cordova Splashscreen Plugin"
       },
       {
         "id": "org.apache.cordova.device-orientation",
@@ -41,7 +70,20 @@
         "data": {},
         "paramvals": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "originType": "cordova.io",
+        "origin": "org.apache.cordova.device-orientation",
+        "permissions": {
+          "android:name": [
+            "android.permission.ACCESS_COARSE_LOCATION",
+            "android.permission.ACCESS_FINE_LOCATION"
+          ]
+        },
+        "topLevel": true,
+        "checksum": "9f57025d",
+        "gitref": "",
+        "name": "Device Orientation",
+        "description": "Cordova Device Orientation Plugin"
       },
       {
         "id": "org.apache.cordova.device-motion",
@@ -50,7 +92,15 @@
         "data": {},
         "paramvals": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "originType": "cordova.io",
+        "origin": "org.apache.cordova.device-motion",
+        "permissions": {},
+        "topLevel": true,
+        "checksum": "ed8231ab",
+        "gitref": "",
+        "name": "Device Motion",
+        "description": "Cordova Device Motion Plugin"
       },
       {
         "id": "org.apache.cordova.camera",
@@ -59,7 +109,19 @@
         "data": {},
         "paramvals": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "originType": "cordova.io",
+        "origin": "org.apache.cordova.camera",
+        "permissions": {
+          "android:name": [
+            "android.permission.WRITE_EXTERNAL_STORAGE"
+          ]
+        },
+        "topLevel": true,
+        "checksum": "a7855f34",
+        "gitref": "",
+        "name": "Camera",
+        "description": "Cordova Camera Plugin"
       },
       {
         "id": "intel.xdk.display",
@@ -67,7 +129,21 @@
         "data": {},
         "paramvals": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "originType": "repo",
+        "origin": "https://github.com/01org/cordova-plugin-intel-xdk-display.git",
+        "gitref": "r1.1.1",
+        "subdir": ".",
+        "permissions": {
+          "android:name": [
+            "android.permission.CAMERA"
+          ]
+        },
+        "topLevel": true,
+        "checksum": "c2267e7",
+        "version": "1.1.1",
+        "name": "Intel XDK Display",
+        "description": "Intel XDK Display Plugin"
       },
       {
         "id": "intel.xdk.camera",
@@ -75,7 +151,22 @@
         "data": {},
         "paramvals": {},
         "dependsOn": [],
-        "dependedBy": []
+        "dependedBy": [],
+        "originType": "repo",
+        "origin": "https://github.com/01org/cordova-plugin-intel-xdk-camera.git",
+        "gitref": "r1.1.5",
+        "subdir": ".",
+        "permissions": {
+          "android:name": [
+            "android.permission.CAMERA",
+            "android.permission.WRITE_EXTERNAL_STORAGE"
+          ]
+        },
+        "topLevel": true,
+        "checksum": "c8ea9882",
+        "version": "1.1.5",
+        "name": "Intel XDK Camera",
+        "description": "Intel XDK Camera Plugin"
       }
     ],
     "serviceMethods": [],
@@ -92,11 +183,14 @@
         "isActive_": true,
         "appName_": "ARLocationSearch",
         "appID_": "xdk.sample.arlocationsearch",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -121,11 +215,14 @@
         "isActive_": true,
         "appName_": "ARLocationSearch",
         "appID_": "xdk.sample.arlocationsearch",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -149,11 +246,14 @@
         "isActive_": true,
         "appName_": "ARLocationSearch",
         "appID_": "xdk.sample.arlocationsearch",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -173,11 +273,14 @@
         "isActive_": true,
         "appName_": "ARLocationSearch",
         "appID_": "xdk.sample.arlocationsearch",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -197,11 +300,14 @@
         "isActive_": false,
         "appName_": "ARLocationSearch",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -217,11 +323,14 @@
         "isActive_": false,
         "appName_": "ARLocationSearch",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -237,11 +346,14 @@
         "isActive_": false,
         "appName_": "ARLocationSearch",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -257,21 +369,46 @@
         "isActive_": false,
         "appName_": "ARLocationSearch",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "appAuthor_": "Intel XDK",
         "appVersion_": "0.0.1"
+      },
+      "WP81": {
+        "platform_": "wp81",
+        "runtime_": "Cordova 3.x",
+        "name_": "WP81",
+        "preferences_": {},
+        "isActive_": true,
+        "appName_": "ARLocationSearch",
+        "appID_": "not.yet.specified",
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [],
+          "intents": [],
+          "navigation": []
+        },
+        "icons_": [],
+        "splashes_": [],
+        "addlPermissions_": "",
+        "excludedLibraries_": "",
+        "appVersion_": "0.0.0.1",
+        "cordovaCLIVersion_": "5.1.1"
       }
     },
     "gameAssetDirectory": "asset",
     "gameMetadata": {},
-    "projectTags": []
+    "projectTags": [],
+    "testDirectory": "test"
   }
 }

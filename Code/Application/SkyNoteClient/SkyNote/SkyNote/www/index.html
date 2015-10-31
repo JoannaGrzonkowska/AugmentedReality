@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <title>SkyNote</title>
+
+    <link href="lib/WinJS/css/ui-light.css" rel="stylesheet" />
+    <script src="lib/WinJS/js/WinJS.js"></script>
+
+    <!-- SkyNote references -->
+    <link href="css/index.css" rel="stylesheet" />
+
+    <script src="lib/knockout-3.3.0.debug.js"></script>
+    <script src="lib/knockout-winjs.js"></script>
+
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+
+    <script src="lib/navigator.js"></script> 
+
+    <script src="scripts/index.js"></script>
+</head>
+<body>
+    <p>Hello, your application is ready!</p>
+    <div data-win-control="WinJS.UI.NavBarContainer">
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'url(/pages/page2/page2.html)' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Notes', icon: 'delete',location: 'pages/notes.html' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Delete', icon: 'delete',location: 'pages/page2/page2.html' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Music', icon: 'audio' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Edit', icon: 'edit' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
+    </div>
+
+    <p>Hello, wqewqeyour application is ready!</p>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            debugger;
+            alert("test");
+            WinJS.UI.processAll().done(function () {
+            });
+
+            WinJS.Application.start();
+        });
+    </script>
+
+
+</body>
+</html>

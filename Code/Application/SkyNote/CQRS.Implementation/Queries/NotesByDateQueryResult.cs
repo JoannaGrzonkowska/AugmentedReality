@@ -6,6 +6,6 @@ namespace CQRS.Implementation.Queries
 {
     public class NotesByDateQueryResult : IQueryResult
     {
-        public IEnumerable<notedto> Notes { get; set; }
+        public IEnumerable<note> Notes { get; set; }
     }
 }

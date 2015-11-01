@@ -1,22 +1,26 @@
 ﻿using CQRS.Commands;
+using DataAccess;
+using System;
 
 namespace CQRS.Implementation.Commands
 {
-    public class CreateNoteCommand : Command
+    public class CreateNoteCommand : Command<note>
     {
         public int UserId { get; set; }
         public int LocationId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
 
-        public CreateNoteCommand( int userId, int locationId, string topic,
-            string content, int version)
-            : base(0/*, version*/)
+        public override note Build()
         {
-            UserId = userId;
-            LocationId = locationId;
-            Topic = topic;
-            Content = content;
+            return new note
+            {
+                Content = Content,
+                Topic = Topic,
+                UserId = UserId,
+                LocationId = LocationId,
+                Date = DateTime.Now
+            };
         }
     }
 }

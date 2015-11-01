@@ -16,7 +16,7 @@ namespace CQRS.Implementation.EventHandlers
         }
         public void Handle(NoteCreatedEvent handle)
         {
-            notedto item = new notedto()
+            var item = new note()
             {
                 Id = handle.AggregateId,
                 Content = handle.Content,

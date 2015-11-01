@@ -13,17 +13,14 @@ namespace CQRS.Messaging
             this.commandHandlerFactory = commandHandlerFactory;
         }
 
-        public void Send<T>(T command) where T : Command
+        public CommandResult Send<T>(T command) where T : ICommand
         {
             var handler = commandHandlerFactory.GetHandler<T>();
             if (handler != null)
             {
-                handler.Execute(command);
+                return handler.Execute(command);
             }
-            else
-            {
-                throw new UnregisteredDomainCommandException("no handler registered");
-            }
+           return new CommandResult(new[] {"no handler registered"});
         }
     }
 }

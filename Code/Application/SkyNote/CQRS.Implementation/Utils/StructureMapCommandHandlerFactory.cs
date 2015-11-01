@@ -11,7 +11,7 @@ namespace CQRS.Implementation.Utils
 {
     public class StructureMapCommandHandlerFactory : ICommandHandlerFactory
     {
-        public ICommandHandler<T> GetHandler<T>() where T : Command
+        public ICommandHandler<T> GetHandler<T>() where T : ICommand
         {
             var handlers = GetHandlerTypes<T>().ToList();
 
@@ -24,7 +24,7 @@ namespace CQRS.Implementation.Utils
             return cmdHandler;
         }
 
-        private IEnumerable<Type> GetHandlerTypes<T>() where T : Command
+        private IEnumerable<Type> GetHandlerTypes<T>() where T : ICommand
         {
             var handlers = /*typeof(ICommandHandler<>).*/Assembly.Load("CQRS.Implementation").GetExportedTypes()
                 .Where(x => x.GetInterfaces()

@@ -1,4 +1,5 @@
 ﻿using CQRS.CommandHandlers;
+using CQRS.Commands;
 using CQRS.Events;
 using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
@@ -19,32 +20,16 @@ namespace CQRS.Implementation.CommandHandlers
             this.eventStorage = eventStorage;
         }
 
-        public void Execute(CreateNoteCommand command)
+        public CommandResult Execute(CreateNoteCommand command)
         {
-            if (command == null)
-            {
-                throw new ArgumentNullException("command");
-            }
-            if (repository == null)
-            {
-                throw new InvalidOperationException("Repository is not initialized.");
-            }
-            var note = new note
-            {
-                Id = command.Id,
-                Topic = command.Topic,
-                Content = command.Content,
-                Date = DateTime.Now,
-                LocationId = command.LocationId,
-                UserId = command.UserId
-            };
-            //aggregate.Version = -1;
-            //repository.Save(aggregate, aggregate.Version);
+            var note = command.Build();
+
             repository.Add(note);
             repository.SaveChanges();
             eventStorage.Publish(
                 new NoteCreatedEvent(note.Id, (int)note.UserId, (int)note.LocationId, note.Topic, note.Content));
 
+            return new CommandResult();
 
         }
     }

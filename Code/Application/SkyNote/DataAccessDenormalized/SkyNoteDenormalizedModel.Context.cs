@@ -25,6 +25,6 @@ namespace DataAccessDenormalized
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<notedto> notedto { get; set; }
+        public DbSet<note> note { get; set; }
     }
 }

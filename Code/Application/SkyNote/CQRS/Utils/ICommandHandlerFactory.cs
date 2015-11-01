@@ -5,6 +5,6 @@ namespace CQRS.Utils
 {
     public interface ICommandHandlerFactory
     {
-        ICommandHandler<T> GetHandler<T>() where T : Command;
+        ICommandHandler<T> GetHandler<T>() where T : ICommand;
     }
 }

@@ -13,21 +13,20 @@ namespace CQRS.Implementation.Commands
         public string Topic { get; set; }
         public string Content { get; set; }
 
-        public override note Build(note noteParam = null, Action<note> action = null)
+        public override note Build(note note = null, Action<note> additionalAction = null)
         {
-            var note = noteParam ?? new note();
-            note.Content = Content;
-            note.Topic = Topic;
-            note.UserId = UserId;
-           // note.LocationId = LocationId;
-            note.Date = DateTime.Now;
-
-            if (action != null)
+            Action<note> action = x =>
             {
-                action(note);
-            }
-
-            return note;
+                x.Content = Content;
+                x.Topic = Topic;
+                x.UserId = UserId;
+                x.Date = DateTime.Now;
+                if (additionalAction != null)
+                {
+                    additionalAction(x);
+                }
+            };
+            return base.Build(note, action);
         }
     }
 }

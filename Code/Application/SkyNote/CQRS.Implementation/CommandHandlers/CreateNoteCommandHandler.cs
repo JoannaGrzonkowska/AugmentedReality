@@ -37,7 +37,7 @@ namespace CQRS.Implementation.CommandHandlers
                 locationRepository.SaveChanges();
             }
 
-            var note = command.Build(action: x => x.LocationId = location.LocationId);
+            var note = command.Build(additionalAction: x => x.LocationId = location.LocationId);
 
             noteRepository.Add(note);
             noteRepository.SaveChanges();

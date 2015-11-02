@@ -12,6 +12,21 @@
             var elem = document.querySelector(".navButton");
             elem.addEventListener('click', this.btnHandler);
 
+            var noteService = new NoteService();
+
+            var NotesListViewModel = function () {
+                var self = this;
+                self.myNotesArray = ko.observableArray([]);
+
+            };
+
+            var notesListViewModel = new NotesListViewModel();
+            noteService.getUserNotes(function (data) {
+                notesListViewModel.myNotesArray(data);
+            })
+
+            ko.applyBindings(notesListViewModel, document.getElementById("notes-content"));
+
         },
 
         unload: function () {

@@ -11,15 +11,34 @@
     
     <script src="../../js/knockout-3.3.0.js"></script>
     <script src="../../js/knockout-winjs.js"></script>
-
+    <script src="../../scripts/App/Models/NoteModel.js"></script>
     <script src="../../scripts/App/Services/NoteService.js"></script>
 
 </head>
 <body>
-    <div class="home fragment">
+    <div class="home fragment" id="notes-content">
         <section aria-label="Main content" role="main">
              <button class="navButton">Add note</button>
         </section>
+
+        <h2>My notes</h2>
+        <div>
+            <span>Number of notes: </span><span data-bind="text: myNotesArray().length"></span>
+        </div>
+
+        <div data-bind="template: { name: 'news-template', foreach: myNotesArray }"></div>
+
     </div>
+    <script id="news-template" type="text/html">     
+        <div class="listViewItem">
+            <div>
+                <span data-bind="text: Topic"></span>
+            </div>
+            <div>
+                <span data-bind="text: Content"></span>
+            </div>
+        </div>
+
+        </script>
 </body>
 </html>

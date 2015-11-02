@@ -1,4 +1,4 @@
-﻿function NoteAddModel(data) {
+﻿function NoteModel(data) {
     var self = this;
     if (data != null) {
         this.Topic = ko.observable(data.Topic);

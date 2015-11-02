@@ -9,10 +9,10 @@
         ready: function (element, options) {
             // TODO: Initialize the page here.
 
-            document.addEventListener("backbutton", this.onBackKeyDown, false);
+          //  document.addEventListener("backbutton", this.onBackKeyDown, false);
 
-            var elem = document.querySelector("#cancelButton");
-            elem.addEventListener('click', this.onBackKeyDown);
+           // var elem = document.querySelector("#cancelButton");
+           // elem.addEventListener('click', this.onBackKeyDown);
 
             var noteService = new NoteService();
             
@@ -49,18 +49,19 @@
 
                        },
                        function () {
+                           alert("sfdee");
                            self.Topic("");
                            self.Content("");
                        });
 
                     }, function () {
-
+                        alert("sssfdee");
                     }, options);
 
                 };
 
             };
-            ko.applyBindings(new NoteAddViewModel());
+            ko.applyBindings(new NoteAddViewModel(), document.getElementById("note-form"));
 
         },
 

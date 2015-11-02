@@ -6,6 +6,6 @@ namespace CQRS.Commands
     {
         public int Id { get; private set; }
 
-        public abstract TEntity Build();
+        public abstract TEntity Build(TEntity entity, Action<TEntity> action = null);
     }
 }

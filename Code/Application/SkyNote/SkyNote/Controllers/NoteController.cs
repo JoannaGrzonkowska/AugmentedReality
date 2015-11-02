@@ -13,8 +13,6 @@ namespace SkyNote.Controllers
 
     public class NoteController : ApiController
     {
-
-
         // GET api/values
         public IEnumerable<DataAccessDenormalized.note> Get()
         {   
@@ -44,7 +42,6 @@ namespace SkyNote.Controllers
         {
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
-     
         }
 
         // POST api/values

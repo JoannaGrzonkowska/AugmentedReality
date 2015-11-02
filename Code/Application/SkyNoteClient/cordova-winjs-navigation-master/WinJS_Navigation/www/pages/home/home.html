@@ -17,26 +17,9 @@
 </head>
 <body>
     <div class="home fragment">
-        <header aria-label="Header content" role="banner">
-            <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Home!</span>
-            </h1>
-        </header>
         <section aria-label="Main content" role="main">
-            <p>On this page, use the button to go to Page 2!</p>
-            <button class="navButton">Go to Page 2</button>
+             <button class="navButton">Add note</button>
         </section>
-        <div data-win-control="WinJS.UI.Rating" data-win-options="{averageRating: 3.4}"></div>
-        <button data-bind="click: listViewUnshift">Unshift</button>
-
-        <input type="text" data-bind="textInput: newDescription" />&nbsp;<button data-bind="click: addNewItem">Add</button>
-        <div data-bind="foreach: toDoItems">
-            <input type="checkbox" data-bind="checked: done" />
-            <span data-bind="text: description"></span>
-            <a href="#" data-bind="click: $parent.removeItem.bind($parent, $data)">x</a>
-            <br />
-        </div>
-
     </div>
 </body>
 </html>

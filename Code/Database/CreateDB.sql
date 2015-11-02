@@ -29,16 +29,16 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-ALTER TABLE `skynotedb`.`note` 
+ALTER TABLE `note` 
 ADD CONSTRAINT `LocationId`
   FOREIGN KEY (`LocationId`)
-  REFERENCES `skynotedb`.`location` (`LocationId`)
+  REFERENCES `location` (`LocationId`)
   ON DELETE NO ACTION
   ON UPDATE CASCADE;
 
-ALTER TABLE `skynotedb`.`note` 
+ALTER TABLE `note` 
 ADD CONSTRAINT `UserId`
   FOREIGN KEY (`UserId`)
-  REFERENCES `skynotedb`.`user` (`UserID`)
+  REFERENCES `user` (`UserID`)
   ON DELETE NO ACTION
   ON UPDATE CASCADE;

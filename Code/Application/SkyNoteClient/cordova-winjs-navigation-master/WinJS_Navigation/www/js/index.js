@@ -17,6 +17,9 @@
     function onReady() {
         // Handle the deviceready event. 
         initialize();
+        $("#homeSection").click(new function () {
+            alert("test");
+        });
 
     }
 

@@ -28,5 +28,6 @@ namespace DataAccess
         public DbSet<location> location { get; set; }
         public DbSet<note> note { get; set; }
         public DbSet<user> user { get; set; }
+        public DbSet<group> group { get; set; }
     }
 }

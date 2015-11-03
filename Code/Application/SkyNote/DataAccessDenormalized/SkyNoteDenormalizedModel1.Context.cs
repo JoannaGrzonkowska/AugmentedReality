@@ -13,10 +13,10 @@ namespace DataAccessDenormalized
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class skynotedenormalizeddbEntities1 : DbContext
+    public partial class skynotedenormalizeddbEntities : DbContext
     {
-        public skynotedenormalizeddbEntities1()
-            : base("name=skynotedenormalizeddbEntities1")
+        public skynotedenormalizeddbEntities()
+            : base("name=skynotedenormalizeddbEntities")
         {
         }
     
@@ -26,5 +26,6 @@ namespace DataAccessDenormalized
         }
     
         public DbSet<note> note { get; set; }
+        public DbSet<group> group { get; set; }
     }
 }

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap, Version=3.1.6.186, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.3.1.6.186\lib\net40\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -48,13 +52,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapperWebConfiguration.cs" />
+    <Compile Include="CommandHandlers\CreateGroupCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateNoteCommandHandler.cs" />
+    <Compile Include="Commands\CreateGroupCommand.cs" />
     <Compile Include="Commands\CreateNoteCommand.cs" />
+    <Compile Include="EventHandlers\GroupCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteCreatedEventHandler.cs" />
+    <Compile Include="Events\GroupCreatedEvent.cs" />
     <Compile Include="Events\NoteCreatedEvent.cs" />
+    <Compile Include="Models\GroupDTO.cs" />
+    <Compile Include="Models\NoteDTO.cs" />
+    <Compile Include="Profiles\GroupProfile.cs" />
+    <Compile Include="Profiles\NoteProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GroupsForUserQuery.cs" />
+    <Compile Include="Queries\GroupsForUserQueryResult.cs" />
     <Compile Include="Queries\NotesByDateQuery.cs" />
     <Compile Include="Queries\NotesByDateQueryResult.cs" />
+    <Compile Include="QueryHandlers\GroupsForUserQueryHandler.cs" />
     <Compile Include="QueryHandlers\NotesByDateQueryHandler.cs" />
     <Compile Include="Utils\StructureMapCommandHandlerFactory.cs" />
     <Compile Include="Utils\StructureMapEventHandlerFactory.cs" />

@@ -26,7 +26,9 @@ namespace CQRS.Implementation.Utils
 
             var handlers = Assembly.Load("CQRS.Implementation").GetExportedTypes()
                 .Where(x => x.GetInterfaces()
-                    .Any(a => a.IsGenericType && a.GetGenericTypeDefinition() == typeof(IEventHandler<>))).Where(h => h.GetInterfaces().Any(ii => ii.GetGenericArguments().Any(aa => aa == typeof(T)))).ToList();
+                    .Any(a => a.IsGenericType && a.GetGenericTypeDefinition() == typeof(IEventHandler<>)))
+                    .Where(h => h.GetInterfaces().Any(ii => ii.GetGenericArguments()
+                    .Any(aa => aa == typeof(T)))).ToList();
 
 
             return handlers;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories.Implementation
 {
-    public class UserRepository : RepositoryBase<user, skynotedbEntities1>
+    public class UserRepository : RepositoryBase<user, skynotedbEntities1>, IUserRepository
     {
         public UserRepository(skynotedbEntities1 context)
             :base(context)

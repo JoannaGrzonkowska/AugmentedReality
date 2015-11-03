@@ -17,6 +17,7 @@ namespace DataAccess
         public user()
         {
             this.note = new HashSet<note>();
+            this.group = new HashSet<group>();
         }
     
         public int UserID { get; set; }
@@ -27,5 +28,6 @@ namespace DataAccess
         public string PasswordSalt { get; set; }
     
         public virtual ICollection<note> note { get; set; }
+        public virtual ICollection<group> group { get; set; }
     }
 }

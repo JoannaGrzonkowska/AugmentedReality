@@ -10,12 +10,12 @@
              type: 'POST',
              data: note,
              success: function (data) {
-                // if (data.IsSuccess) {
-                     //$("#success-message").html("OK").show();
+                 if (data.IsSuccess) {
+                     $("#success-message").html("OK").show();
                      handler();
-                /* } else {
-                     //$(".alert").html(data.ErrorsToString).show();
-                 }*/
+                 } else {
+                     $(".alert").html(data.ErrorsToString).show();
+                 }
              }
          });
     }

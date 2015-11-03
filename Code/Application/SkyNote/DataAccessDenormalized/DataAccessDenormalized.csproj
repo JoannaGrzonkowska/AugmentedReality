@@ -48,54 +48,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="group.cs">
+      <DependentUpon>SkyNoteDenormalizedModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="note.cs">
-      <DependentUpon>SkyNoteDenormalizedModel.tt</DependentUpon>
+      <DependentUpon>SkyNoteDenormalizedModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IGroupDenormalizedRepository.cs" />
+    <Compile Include="Repository\Implementation\GroupDenormalizedRepository.cs" />
     <Compile Include="Repository\INoteDenormalizedRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Implementation\NoteDenormalizedRepository.cs" />
     <Compile Include="Repository\Implementation\Repository.cs" />
-    <Compile Include="SkyNoteDenormalizedModel.Context.cs">
+    <Compile Include="SkyNoteDenormalizedModel1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SkyNoteDenormalizedModel.Context.tt</DependentUpon>
+      <DependentUpon>SkyNoteDenormalizedModel1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SkyNoteDenormalizedModel.cs">
+    <Compile Include="SkyNoteDenormalizedModel1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SkyNoteDenormalizedModel.tt</DependentUpon>
+      <DependentUpon>SkyNoteDenormalizedModel1.tt</DependentUpon>
     </Compile>
-    <Compile Include="SkyNoteDenormalizedModel.Designer.cs">
+    <Compile Include="SkyNoteDenormalizedModel1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SkyNoteDenormalizedModel.edmx</DependentUpon>
+      <DependentUpon>SkyNoteDenormalizedModel1.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="SkyNoteDenormalizedModel.edmx">
+    <EntityDeploy Include="SkyNoteDenormalizedModel1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SkyNoteDenormalizedModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SkyNoteDenormalizedModel1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="SkyNoteDenormalizedModel.edmx.diagram">
-      <DependentUpon>SkyNoteDenormalizedModel.edmx</DependentUpon>
+    <None Include="SkyNoteDenormalizedModel1.edmx.diagram">
+      <DependentUpon>SkyNoteDenormalizedModel1.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SkyNoteDenormalizedModel.Context.tt">
+    <Content Include="SkyNoteDenormalizedModel1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SkyNoteDenormalizedModel.edmx</DependentUpon>
-      <LastGenOutput>SkyNoteDenormalizedModel.Context.cs</LastGenOutput>
+      <DependentUpon>SkyNoteDenormalizedModel1.edmx</DependentUpon>
+      <LastGenOutput>SkyNoteDenormalizedModel1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="SkyNoteDenormalizedModel.tt">
+    <Content Include="SkyNoteDenormalizedModel1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SkyNoteDenormalizedModel.edmx</DependentUpon>
-      <LastGenOutput>SkyNoteDenormalizedModel.cs</LastGenOutput>
+      <DependentUpon>SkyNoteDenormalizedModel1.edmx</DependentUpon>
+      <LastGenOutput>SkyNoteDenormalizedModel1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

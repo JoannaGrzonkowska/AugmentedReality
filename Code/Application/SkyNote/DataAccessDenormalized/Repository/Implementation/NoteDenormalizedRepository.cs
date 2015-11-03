@@ -2,10 +2,10 @@
 
 namespace DataAccessDenormalized.Repository
 {
-    public class NoteDenormalizedRepository : Repository<note, skynotedenormalizeddbEntities1>, INoteDenormalizedRepository
+    public class NoteDenormalizedRepository : Repository<note, skynotedenormalizeddbEntities>, INoteDenormalizedRepository
     {
 
-        public NoteDenormalizedRepository(skynotedenormalizeddbEntities1 context)
+        public NoteDenormalizedRepository(skynotedenormalizeddbEntities context)
             :base(context)
         {
 

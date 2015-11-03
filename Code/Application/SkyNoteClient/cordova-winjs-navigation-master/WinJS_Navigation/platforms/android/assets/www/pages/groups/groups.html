@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+
+    <!-- WinJS references -->
+
+    <link href="groups.css" rel="stylesheet" />
+    <script src="groups.js"></script>
+
+    <script src="../../js/knockout-3.3.0.js"></script>
+    <script src="../../js/knockout-winjs.js"></script>
+
+    <script src="../../scripts/App/Services/GroupService.js"></script>
+
+</head>
+<body>
+    <div class="groups fragment">
+        <header aria-label="Header content" role="banner">
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle">Your groups!</span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main">
+            <button class="navButton">Go to Home</button>
+        </section>
+       
+        <button data-bind="click: listViewUnshift">Unshift</button>
+
+        <input type="text" data-bind="textInput: newGroupName" />&nbsp;<button data-bind="click: addNewItem">Add group</button>
+        <div data-bind="foreach: toDoItems">
+            <input type="checkbox" data-bind="checked: done" />
+            <span data-bind="text: groupName"></span>
+            <a href="#" data-bind="click: $parent.removeItem.bind($parent, $data)">x</a>
+            <br />
+        </div>
+
+    </div>
+</body>
+</html>

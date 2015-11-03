@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="skynotedenormalizeddbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="GroupName" Type="varchar" MaxLength="45" />
+        </EntityType>
         <EntityType Name="note">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,17 +30,17 @@
           <Property Name="Name" Type="varchar" MaxLength="45" />
           <Property Name="Login" Type="varchar" MaxLength="20" />
           <Property Name="Mail" Type="varchar" MaxLength="45" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
-          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedbdenormasia" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="skynotedenormalizeddb" store:Type="Tables" />
+          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedenormalizeddb" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="skynotedenormalizeddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="skynotedenormalizeddbEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
-        </EntityContainer>
         <EntityType Name="note">
           <Key>
             <PropertyRef Name="Id" />
@@ -48,26 +57,53 @@
           <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="note" EntityType="Self.note" />
+          <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
+        </EntityContainer>
+        <EntityType Name="group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GroupId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities1">
-        <EntitySetMapping Name="note">
+        <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities">
+          <EntitySetMapping Name="note">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
               <MappingFragment StoreEntitySet="note">
-                <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ZCord" ColumnName="ZCord" />
-                <ScalarProperty Name="YCord" ColumnName="YCord" />
-                <ScalarProperty Name="XCord" ColumnName="XCord" />
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="XCord" ColumnName="XCord" />
+                <ScalarProperty Name="YCord" ColumnName="YCord" />
+                <ScalarProperty Name="ZCord" ColumnName="ZCord" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="group">
+            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.group">
+              <MappingFragment StoreEntitySet="group">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

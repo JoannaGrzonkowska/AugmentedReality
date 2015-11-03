@@ -10,6 +10,8 @@
         <EntityTypeShape EntityType="skynotedbModel.user" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="skynotedbModel.LocationId" ManuallyRouted="false" />
         <AssociationConnector Association="skynotedbModel.UserId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="skynotedbModel.group" Width="1.5" PointX="8" PointY="1.5" />
+        <AssociationConnector Association="skynotedbModel.usergroup" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

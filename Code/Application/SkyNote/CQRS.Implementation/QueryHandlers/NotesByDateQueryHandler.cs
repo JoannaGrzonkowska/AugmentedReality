@@ -1,9 +1,7 @@
-﻿using System;
-using CQRS.Queries;
+﻿using CQRS.Implementation.Queries;
+using CQRS.QueryHandlers;
 using DataAccessDenormalized.Repository;
 using System.Linq;
-using CQRS.QueryHandlers;
-using CQRS.Implementation.Queries;
 
 namespace CQRS.Implementation.QueryHandlers
 {

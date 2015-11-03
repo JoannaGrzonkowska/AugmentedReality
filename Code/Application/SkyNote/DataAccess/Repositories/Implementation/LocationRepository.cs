@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories.Implementation
 {
-    public class LocationRepository : RepositoryBase<location, skynotedbEntities1>
+    public class LocationRepository : RepositoryBase<location, skynotedbEntities1>, ILocationRepository
     {
 
         public LocationRepository(skynotedbEntities1 context)

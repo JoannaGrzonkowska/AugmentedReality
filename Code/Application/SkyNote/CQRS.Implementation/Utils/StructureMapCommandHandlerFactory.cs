@@ -26,7 +26,7 @@ namespace CQRS.Implementation.Utils
 
         private IEnumerable<Type> GetHandlerTypes<T>() where T : ICommand
         {
-            var handlers = /*typeof(ICommandHandler<>).*/Assembly.Load("CQRS.Implementation").GetExportedTypes()
+            var handlers = Assembly.Load("CQRS.Implementation").GetExportedTypes()
                 .Where(x => x.GetInterfaces()
                     .Any(a => a.IsGenericType && a.GetGenericTypeDefinition() == typeof(ICommandHandler<>)))
                     .Where(h => h.GetInterfaces()

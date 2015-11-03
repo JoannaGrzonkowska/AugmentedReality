@@ -4,8 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cbeace13d99940149ebecbf6b794bbf5" Name="Diagram1" ZoomLevel="90">
-        <EntityTypeShape EntityType="skynotedenormalizeddbModel.note" Width="1.5" PointX="3.375" PointY="0.75" />
+      <Diagram DiagramId="7fa3d1e863a14546821a9066d5c24ec6" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="skynotedenormalizeddbModel.note" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="skynotedenormalizeddbModel.group" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

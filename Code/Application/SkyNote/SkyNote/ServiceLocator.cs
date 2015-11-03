@@ -5,6 +5,7 @@ using CQRS.Utils;
 using DataAccess.Repositories;
 using DataAccess.Repositories.Implementation;
 using DataAccessDenormalized.Repository;
+using DataAccessDenormalized.Repository.Implementation;
 using StructureMap;
 
 namespace SkyNote
@@ -62,7 +63,9 @@ namespace SkyNote
                 x.For<ICommandBus>().Use<CommandBus>();
                 x.For<IQueryBus>().Use<QueryBus>();
                 x.For<INoteRepository>().Use<NoteRepository>();
+                x.For<IGroupRepository>().Use<GroupRepository>();
                 x.For<INoteDenormalizedRepository>().Use<NoteDenormalizedRepository>();
+                x.For<IGroupDenormalizedRepository>().Use<GroupDenormalizedRepository>();
                 x.For<IEventStorage>().Use<EventStorage>();
             });
         }

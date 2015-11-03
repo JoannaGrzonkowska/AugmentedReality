@@ -13,45 +13,19 @@
             elem.addEventListener('click', this.btnHandler);
 
             var noteService = new NoteService();
-            
-            var ToDoViewModel = function () {
+
+            var NotesListViewModel = function () {
                 var self = this;
-                self.toDoItems = ko.observableArray([]);
-                self.newDescription = ko.observable("");
-                
-                self.addNewItem = function () {
-                    alert("sfd");
-                    noteService.addNote(
-                        {
-                            Content: self.newDescription()
-                        },
-                        function () {
-                            alert("ttt");
-                            self.toDoItems.push(new ToDoItem(self.newDescription()));
-                            self.newDescription("");
-                        });
+                self.myNotesArray = ko.observableArray([]);
 
-
-
-                };
-
-                self.removeItem = function (item) {
-                    self.toDoItems.remove(item);
-                };
-
-                self.listViewUnshift = function (e) {
-                    alert("test");
-                };
             };
-            var ToDoItem = (function () {
-                function ToDoItem(description) {
-                    this.description = ko.observable(description);
-                    this.done = ko.observable(false);
-                }
-                return ToDoItem;
-            })();
 
-            ko.applyBindings(new ToDoViewModel());
+            var notesListViewModel = new NotesListViewModel();
+            noteService.getUserNotes(function (data) {
+                notesListViewModel.myNotesArray(data);
+            })
+
+            ko.applyBindings(notesListViewModel, document.getElementById("notes-content"));
 
         },
 
@@ -66,7 +40,7 @@
         },
 
         btnHandler: function (args) {
-            WinJS.Navigation.navigate('pages/page2/page2.html', args);
+            WinJS.Navigation.navigate('pages/note/note.html', args);
         }
 
     });

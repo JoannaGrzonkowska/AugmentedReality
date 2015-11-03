@@ -2,10 +2,22 @@
 
 namespace CQRS.Commands
 {
-    public abstract class Command<TEntity> : ICommand
+    public class Command<TEntity> : ICommand where TEntity: new()
     {
         public int Id { get; private set; }
 
-        public abstract TEntity Build();
+        public virtual TEntity Build(TEntity entity, Action<TEntity> action = null)
+        {
+            if (entity == null)
+            {
+                entity = new TEntity();
+            }
+
+            if (action != null)
+            {
+                action(entity);
+            }
+            return entity;
+        }
     }
 }

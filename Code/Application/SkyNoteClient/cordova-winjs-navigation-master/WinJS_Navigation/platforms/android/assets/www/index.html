@@ -23,17 +23,13 @@ Copyright (c) Microsoft Corporation. All rights reserved
 
 </head>
 <body>
+  
+            <span data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Notes', location: 'pages/home/home.html' }">
 
-    <div data-win-control="WinJS.UI.NavBarContainer">
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'url(/pages/navbar/content/images/homeIcon.png)' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Notes', icon: 'delete',location: 'pages/home/home.html' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Groups', icon: 'audio', location: 'pages/groups/groups.html' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Delete', icon: 'delete',location: 'pages/page2/page2.html' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Edit', icon: 'edit' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
-    </div>
-
-    <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: 'pages/home/home.html'}"></div>
-
+            </span>
+            <span data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home',location: 'pages/page2/page2.html' }"></span>
+       <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Groups', icon: 'audio', location: 'pages/groups/groups.html' }"></div>
+        
+        <div id="contenthost" data-win-control="Application.PageControlNavigator" data-win-options="{home: 'pages/home/home.html'}"></div>
 </body>
 </html>

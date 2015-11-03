@@ -25,5 +25,9 @@ namespace CQRS.Commands
         public bool IsSuccess { get; private set; }
 
         public IEnumerable<string> Errors { get; private set; }
+
+        public string ErrorsAsString { get {
+            return string.Join("", Errors);
+        } }
     }
 }

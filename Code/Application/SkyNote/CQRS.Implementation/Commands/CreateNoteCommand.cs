@@ -7,20 +7,26 @@ namespace CQRS.Implementation.Commands
     public class CreateNoteCommand : Command<note>
     {
         public int UserId { get; set; }
-        public int LocationId { get; set; }
+        public decimal xCord { get; set; }
+        public decimal yCord { get; set; }
+        public decimal zCord { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
 
-        public override note Build()
+        public override note Build(note note = null, Action<note> additionalAction = null)
         {
-            return new note
+            Action<note> action = x =>
             {
-                Content = Content,
-                Topic = Topic,
-                UserId = UserId,
-                LocationId = LocationId,
-                Date = DateTime.Now
+                x.Content = Content;
+                x.Topic = Topic;
+                x.UserId = UserId;
+                x.Date = DateTime.Now;
+                if (additionalAction != null)
+                {
+                    additionalAction(x);
+                }
             };
+            return base.Build(note, action);
         }
     }
 }

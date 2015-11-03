@@ -66,6 +66,7 @@ namespace SkyNote
                 x.For<IGroupRepository>().Use<GroupRepository>();
                 x.For<INoteDenormalizedRepository>().Use<NoteDenormalizedRepository>();
                 x.For<IGroupDenormalizedRepository>().Use<GroupDenormalizedRepository>();
+                x.For<ILocationRepository>().Use<LocationRepository>();
                 x.For<IEventStorage>().Use<EventStorage>();
             });
         }

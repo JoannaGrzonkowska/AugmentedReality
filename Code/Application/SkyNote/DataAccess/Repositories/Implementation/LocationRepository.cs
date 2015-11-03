@@ -14,5 +14,11 @@ namespace DataAccess.Repositories.Implementation
         {
 
         }
+
+        public location GetByCord(decimal xCord, decimal yCord)
+        {
+            return Context.Set<location>()
+                .FirstOrDefault(x=>x.XCord==xCord && x.YCord==yCord);
+        }
     }
 }

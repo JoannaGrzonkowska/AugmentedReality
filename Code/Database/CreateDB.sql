@@ -44,3 +44,5 @@ CREATE TABLE `usergroup` (
     FOREIGN KEY (`GroupId`) REFERENCES `group`(Id) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `note` 
+ALTER TABLE `note` 

@@ -48,7 +48,7 @@
                 return ToDoItem;
             })();
 
-            ko.applyBindings(new ToDoViewModel());
+            ko.applyBindings(new ToDoViewModel(), document.getElementById("group-container"));
 
         },
 

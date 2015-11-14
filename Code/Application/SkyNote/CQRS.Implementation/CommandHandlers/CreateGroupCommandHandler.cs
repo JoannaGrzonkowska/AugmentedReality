@@ -25,10 +25,9 @@ namespace CQRS.Implementation.CommandHandlers
             repository.Add(group);
             repository.SaveChanges();
             eventStorage.Publish(
-                new GroupCreatedEvent(group.Id, group.Name));
+                new GroupCreatedEvent(group.Id, group.Name, "Creator"));
 
             return new CommandResult();
-
         }
     }
 }

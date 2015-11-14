@@ -7,20 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataAccessDenormalized
+namespace DataAccess
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class group
+    public partial class usergroup
     {
-        public int Id { get; set; }
-        public Nullable<int> GroupId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public string GroupName { get; set; }
-        public string Role { get; set; }
-        public string UserName { get; set; }
-        public string UserLogin { get; set; }
-        public string UserMail { get; set; }
+        public int RecordId { get; set; }
+        public int UserId { get; set; }
+        public int GroupId { get; set; }
+    
+        public virtual group group { get; set; }
+        public virtual user user { get; set; }
     }
 }

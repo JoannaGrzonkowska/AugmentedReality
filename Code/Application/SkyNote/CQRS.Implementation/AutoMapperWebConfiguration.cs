@@ -15,8 +15,7 @@ namespace CQRS.Implementation
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile(new GroupProfile());
-                cfg.AddProfile(new NoteProfile());
-                
+                cfg.AddProfile(new NoteProfile());                
             });
         }
     }

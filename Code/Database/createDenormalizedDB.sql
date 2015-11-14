@@ -4,7 +4,7 @@ CREATE TABLE `note` (
   `UserId` int(11) DEFAULT NULL,  
   `Topic` varchar(45) DEFAULT NULL,
   `Content` varchar(200) DEFAULT NULL,
-  `Date` datetime,
+  `Date` TimeStamp,
   `LocationId` int(11) NOT NULL,
   `XCord` decimal(10,8) DEFAULT NULL,
   `YCord` decimal(10,8) DEFAULT NULL,
@@ -20,7 +20,11 @@ CREATE TABLE `note` (
 CREATE TABLE `group` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `GroupId` int(11) DEFAULT NULL,  
-  `UserId` int(11) DEFAULT NULL,    
   `GroupName` varchar(45) DEFAULT NULL,
+  `Role` varchar(45) DEFAULT NULL,
+  `UserId` int(11) DEFAULT NULL,    
+  `UserName` varchar(45) DEFAULT NULL,
+  `UserLogin` varchar(20) DEFAULT NULL,
+  `UserMail` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

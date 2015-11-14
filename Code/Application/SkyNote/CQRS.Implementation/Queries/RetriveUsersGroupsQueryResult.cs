@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace CQRS.Implementation.Queries
 {
-    public class GroupsForUserQueryResult : IQueryResult
+    public class RetriveUsersGroupsQueryResult : IQueryResult
     {
-        public IEnumerable<GroupDTO> GroupsDTO { get; set; }
+        public IEnumerable<UserGroupDTO> Groups { get; set; }
     }
 }

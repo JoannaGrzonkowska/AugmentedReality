@@ -16,8 +16,8 @@ namespace CQRS.Implementation.Utils
             var handlers = GetHandlerTypes<T>().ToList();
 
             var cmdHandler = handlers.Select(handler =>
-
 #pragma warning disable CS0618 // Type or member is obsolete
+            //HERE IT FAILS!
                 (ICommandHandler<T>)ObjectFactory.GetInstance(handler)).FirstOrDefault();
 #pragma warning restore CS0618 // Type or member is obsolete
 

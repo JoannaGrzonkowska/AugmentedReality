@@ -25,9 +25,10 @@ namespace DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<location> location { get; set; }
-        public DbSet<note> note { get; set; }
-        public DbSet<user> user { get; set; }
-        public DbSet<group> group { get; set; }
+        public DbSet<group> groupSet { get; set; }
+        public DbSet<location> locationSet { get; set; }
+        public DbSet<note> noteSet { get; set; }
+        public DbSet<user> userSet { get; set; }
+        public DbSet<usergroup> usergroupSet { get; set; }
     }
 }

@@ -1,7 +1,12 @@
 ﻿using CQRS.Implementation.Commands;
 using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
+using DataAccessDenormalized;
+using DataAccessDenormalized.Repository;
+using DataAccessDenormalized.Repository.Implementation;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -19,17 +24,40 @@ namespace SkyNote.Controllers
         }
 
         // GET: api/Group/5
-        public string Get(int id)
+        [ActionName("RetriveGroupMembers")]
+        [HttpGet]
+        public IEnumerable<GroupMemberDTO> GetRetriveGroupMembers(RetriveGroupMembersCommand command)
         {
+            var members = ServiceLocator.QueryBus.Retrieve<RetriveGroupMembersQuery, RetriveGroupMembersQueryResult>(new RetriveGroupMembersQuery(1)).Users;
+            return members;
+        }
+
+        public string Get1(int id)
+        {
+            //todo - wiele metod w jednym kontrolerzes
             return "value";
         }
 
         // POST: api/Group
-        public HttpResponseMessage Post(CreateGroupCommand command)
-        {            
+        [ActionName("AddNewGroup")]
+        [HttpPost] 
+        public HttpResponseMessage PostAddNewGroup(CreateGroupCommand command)
+        {
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
+
+        /*
+        [ActionName("AddNewCoolGroup")]
+        [HttpPost]
+        public HttpResponseMessage PostAddNewCoolGroup(CreateGroupCommand command)
+        {
+            CreateGroupCommand commandCool = command;
+            commandCool.Name = commandCool.Name + "COOL";
+            var result = ServiceLocator.CommandBus.Send(commandCool);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+        */
 
         // PUT: api/Group/5
         public void Put(int id, [FromBody]string value)

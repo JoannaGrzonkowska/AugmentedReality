@@ -16,12 +16,12 @@ namespace DataAccess
     {
         public group()
         {
-            this.user = new HashSet<user>();
+            this.usergroup = new HashSet<usergroup>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<user> user { get; set; }
+        public virtual ICollection<usergroup> usergroup { get; set; }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace DataAccess.Repositories.Implementation
 {
@@ -12,7 +8,6 @@ namespace DataAccess.Repositories.Implementation
         public LocationRepository(skynotedbEntities1 context)
             :base(context)
         {
-
         }
 
         public location GetByCord(decimal xCord, decimal yCord)

@@ -1,5 +1,6 @@
 ﻿using CQRS.Commands;
 using CQRS.Implementation.Commands;
+using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
 using DataAccess;
 using DataAccessDenormalized;
@@ -14,7 +15,7 @@ namespace SkyNote.Controllers
     public class NoteController : ApiController
     {
         // GET api/values
-        public IEnumerable<DataAccessDenormalized.note> Get()
+        public IEnumerable<NoteDTO> Get()
         {   
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
             return notes;

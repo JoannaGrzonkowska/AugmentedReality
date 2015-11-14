@@ -71,6 +71,7 @@
     <Compile Include="Events\GroupCreatedEvent.cs" />
     <Compile Include="Events\NoteCreatedEvent.cs" />
     <Compile Include="Events\UserJoinGroupEvent.cs" />
+    <Compile Include="Models\BaseDTO.cs" />
     <Compile Include="Models\GroupDTO.cs" />
     <Compile Include="Models\GroupMemberDTO.cs" />
     <Compile Include="Models\NoteDTO.cs" />

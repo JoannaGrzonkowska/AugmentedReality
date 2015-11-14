@@ -18,7 +18,6 @@ namespace DataAccessDenormalized
         public Nullable<int> UserId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
         public int LocationId { get; set; }
         public Nullable<decimal> XCord { get; set; }
         public Nullable<decimal> YCord { get; set; }
@@ -28,5 +27,6 @@ namespace DataAccessDenormalized
         public string Mail { get; set; }
         public int GroupId { get; set; }
         public string GroupName { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     }
 }

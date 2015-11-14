@@ -1,4 +1,5 @@
-﻿using CQRS.Implementation.Queries;
+﻿using CQRS.Implementation.Models;
+using CQRS.Implementation.Queries;
 using CQRS.QueryHandlers;
 using DataAccessDenormalized.Repository;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace CQRS.Implementation.QueryHandlers
         public NotesByDateQueryResult Handle(NotesByDateQuery handle)
         {
             NotesByDateQueryResult result = new NotesByDateQueryResult();
-            result.Notes = noteRepository.GetAll().OrderBy(x => x.Date).ToList();
+            result.Notes = noteRepository.GetAll().OrderBy(x => x.Date).Select(x=>NoteDTO.Build(x));
             return result;
         }
     }

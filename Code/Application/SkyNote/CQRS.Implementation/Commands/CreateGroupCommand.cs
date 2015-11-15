@@ -6,6 +6,7 @@ namespace CQRS.Implementation.Commands
 {
     public class CreateGroupCommand : Command<group>
     {
+        public int UserId { get; set; }
         public int GroupId { get; set; }
         public string Name { get; set; }
 

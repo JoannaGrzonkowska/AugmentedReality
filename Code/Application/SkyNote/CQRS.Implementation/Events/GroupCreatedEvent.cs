@@ -1,18 +1,28 @@
 ﻿using CQRS.Events;
+using System;
 
 namespace CQRS.Implementation.Events
 {
     public class GroupCreatedEvent : Event
     {
-        public string Name { get; set; }
-        public int UserId { get; set; }
+        public string GroupName { get; set; }
         public string Role { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserLogin { get; set; }
+        public string UserMail { get; set; }
 
-        public GroupCreatedEvent(int groupId, string name, string role)
+        public GroupCreatedEvent(
+            int groupId, string groupName, string role,
+            int userId, string userName, string userLogin, string userMail)
         {
             AggregateId = groupId;
-            Name = name;
+            GroupName = groupName;
             Role = role;
+            UserName = userName;
+            UserLogin = userLogin;
+            UserMail = userMail;
+            UserId = userId;
         }
     }
 }

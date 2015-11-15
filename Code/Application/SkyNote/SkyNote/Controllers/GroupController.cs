@@ -34,7 +34,6 @@ namespace SkyNote.Controllers
 
         public string Get1(int id)
         {
-            //todo - wiele metod w jednym kontrolerzes
             return "value";
         }
 
@@ -46,18 +45,7 @@ namespace SkyNote.Controllers
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
-
-        /*
-        [ActionName("AddNewCoolGroup")]
-        [HttpPost]
-        public HttpResponseMessage PostAddNewCoolGroup(CreateGroupCommand command)
-        {
-            CreateGroupCommand commandCool = command;
-            commandCool.Name = commandCool.Name + "COOL";
-            var result = ServiceLocator.CommandBus.Send(commandCool);
-            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
-        }
-        */
+        
 
         // PUT: api/Group/5
         public void Put(int id, [FromBody]string value)

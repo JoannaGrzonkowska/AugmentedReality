@@ -9,23 +9,29 @@ namespace CQRS.Implementation.CommandHandlers
 {
     public class CreateGroupCommandHandler : ICommandHandler<CreateGroupCommand>
     {
-        private IGroupRepository repository;
+        private IGroupRepository groupRepository;
         private IEventStorage eventStorage;
+        private IUserRepository userRepository;
 
-        public CreateGroupCommandHandler(IGroupRepository repository, IEventStorage eventStorage)
+        public CreateGroupCommandHandler(IGroupRepository repository, IEventStorage eventStorage, IUserRepository userRepository)
         {
-            this.repository = repository;
+            this.groupRepository = repository;
             this.eventStorage = eventStorage;
+            this.userRepository = userRepository;
         }
 
         public CommandResult Execute(CreateGroupCommand command)
         {
             var group = command.Build();
 
-            repository.Add(group);
-            repository.SaveChanges();
+            groupRepository.Add(group);
+            groupRepository.SaveChanges();
+
+            var user = userRepository.GetById(command.UserId);
+
             eventStorage.Publish(
-                new GroupCreatedEvent(group.Id, group.Name, "Creator"));
+                new GroupCreatedEvent(group.Id, group.Name, "Creator",
+                user.UserID, user.Name, user.Login, user.Mail));
 
             return new CommandResult();
         }

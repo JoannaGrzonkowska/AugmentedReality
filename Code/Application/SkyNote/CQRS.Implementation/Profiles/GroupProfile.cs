@@ -20,7 +20,7 @@ namespace CQRS.Implementation.Profiles
 
             //User create Group
             Mapper.CreateMap<GroupCreatedEvent, group>()
-                .ForMember(dest => dest.GroupName, opt => opt.MapFrom(src => src.Name));
+                .ForMember(dest => dest.GroupName, opt => opt.MapFrom(src => src.GroupName));
 
             //User join Group
             Mapper.CreateMap<UserJoinGroupEvent, group>()

@@ -1,30 +1,39 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
+﻿(function () {
     "use strict";
 
     WinJS.UI.Pages.define("pages/note/note.html", {
-        // This function is called whenever a user navigates to this page. It
-        // populates the page elements with the app's data.
         ready: function (element, options) {
-            // TODO: Initialize the page here.
 
-          //  document.addEventListener("backbutton", this.onBackKeyDown, false);
+            var $noteForm = $("#note-form");
 
-           // var elem = document.querySelector("#cancelButton");
-           // elem.addEventListener('click', this.onBackKeyDown);
+            $noteForm.validate({
+                rules: {
+                    topic: "required",
+                    content: "required",
+                },
+                messages: {
+                    topic: "Please enter note topic",
+                    content: "Please enter note content",
+                }
+            });
 
             var noteService = new NoteService();
-            
+
             var NoteAddViewModel = function () {
-                alert("sfdww");
                 var self = this;
+                self.NoteId = ko.observable(options.id)
                 self.Topic = ko.observable();
                 self.Content = ko.observable();
-                
-                self.add = function () {
-                    alert("sfd");
 
+                var isNew = self.NoteId() === 0;
+                self.headerText = isNew ? 'Add new note' : 'Edit note';
+
+                self.loadNoteData = function (data) {
+                    self.Topic(data.Topic());
+                    self.Content(data.Content());
+                };
+
+                self.addNote = function () {
                     var options = {
                         enableHighAccuracy: true
                     };
@@ -47,45 +56,46 @@
                            yCord: latitude,
                            zCord: altitude
 
-                       },
-                       function () {
-                           alert("sfdee");
-                           self.Topic("");
-                           self.Content("");
                        });
 
                     }, function () {
-                        alert("sssfdee");
+                        alert("error");
                     }, options);
-
                 };
 
+                self.editNote = function () {
+                    noteService.editNote(
+                      {
+                          NoteId: self.NoteId(),
+                          Topic: self.Topic(),
+                          Content: self.Content()
+                      });
+                };
+
+                self.save = function () {
+                    if ($noteForm.valid()) {
+                        if (isNew) {
+                            self.addNote();
+                        }
+                        else {
+                            self.editNote();
+                        }
+                    }
+                };
+
+                self.back = function () {
+                    WinJS.Navigation.navigate('pages/home/home.html');
+                };
+
+                if (!isNew) {
+
+                    noteService.getNote(options.id, function (data) {
+                        self.loadNoteData(data);
+                    });
+                }
             };
-            ko.applyBindings(new NoteAddViewModel(), document.getElementById("note-form"));
-
-        },
-
-        unload: function () {
-            // TODO: Respond to navigations away from this page.
-        },
-
-        updateLayout: function (element, viewState, lastViewState) {
-            /// <param name="element" domElement="true" />
-
-            // TODO: Respond to changes in viewState.
-        },
-
-        btnHandler: function (args) {
-            WinJS.Navigation.navigate('pages/page2/page2.html', args);
-        },
-
-        onBackKeyDown: function (args) {
-            
-        if (WinJS.Navigation.canGoBack == true) {
-            WinJS.Navigation.back(1).done( /* Your success and error handlers */);
+            ko.applyBindings(new NoteAddViewModel(), document.getElementById("note-edit-container"));
 
         }
-    }
-
     });
 })();

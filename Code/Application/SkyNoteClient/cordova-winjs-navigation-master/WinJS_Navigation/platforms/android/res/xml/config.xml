@@ -21,4 +21,5 @@
     <vs:features />
     <preference name="SplashScreen" value="screen" />
     <preference name="windows-target-version" value="8.1" />
+    <vs:plugin name="org.apache.cordova.geolocation" version="0.3.12" />
 </widget>

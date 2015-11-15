@@ -30,5 +30,6 @@ namespace DataAccess
         public DbSet<note> note { get; set; }
         public DbSet<user> user { get; set; }
         public DbSet<usergroup> usergroup { get; set; }
+        public DbSet<userfriends> userfriends { get; set; }
     }
 }

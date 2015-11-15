@@ -18,6 +18,8 @@ namespace DataAccess
         {
             this.note = new HashSet<note>();
             this.usergroup = new HashSet<usergroup>();
+            this.userfriends = new HashSet<userfriends>();
+            this.userfriends1 = new HashSet<userfriends>();
         }
     
         public int UserID { get; set; }
@@ -29,5 +31,7 @@ namespace DataAccess
     
         public virtual ICollection<note> note { get; set; }
         public virtual ICollection<usergroup> usergroup { get; set; }
+        public virtual ICollection<userfriends> userfriends { get; set; }
+        public virtual ICollection<userfriends> userfriends1 { get; set; }
     }
 }

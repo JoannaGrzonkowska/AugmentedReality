@@ -32,7 +32,8 @@ namespace CQRS.Implementation.EventHandlers
                 ZCord = handle.ZCord,
                 Login = user.Login,
                 Mail = user.Mail,
-                Name = user.Name
+                Name = user.Name,
+                Identyfication = "NOTE"
             };
 
             noteDenormalizedRepository.Add(item);

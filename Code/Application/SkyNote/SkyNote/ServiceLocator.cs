@@ -62,14 +62,16 @@ namespace SkyNote
                 x.For<IQueryHandlerFactory>().Use<StructureMapQueryHandlerFactory>();
                 x.For<ICommandBus>().Use<CommandBus>();
                 x.For<IQueryBus>().Use<QueryBus>();
+                x.For<IEventStorage>().Use<EventStorage>();
+
                 x.For<INoteRepository>().Use<NoteRepository>();
+                x.For<IUserfriendsRepository>().Use<UserfriendsRepository>();
                 x.For<IUsergroupRepository>().Use<UsergroupRepository>();
                 x.For<IGroupRepository>().Use<GroupRepository>();
                 x.For<IUserRepository>().Use<UserRepository>();
                 x.For<INoteDenormalizedRepository>().Use<NoteDenormalizedRepository>();
                 x.For<IGroupDenormalizedRepository>().Use<GroupDenormalizedRepository>();
                 x.For<ILocationRepository>().Use<LocationRepository>();
-                x.For<IEventStorage>().Use<EventStorage>();
             });
         }
     }

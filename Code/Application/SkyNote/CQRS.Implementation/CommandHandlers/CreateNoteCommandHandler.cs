@@ -11,12 +11,14 @@ namespace CQRS.Implementation.CommandHandlers
 {
     public class CreateNoteCommandHandler : ICommandHandler<CreateNoteCommand>
     {
+        private IUserRepository userRepository;
         private INoteRepository noteRepository;
         private ILocationRepository locationRepository;
         private IEventStorage eventStorage;
 
-        public CreateNoteCommandHandler(INoteRepository noteRepository, ILocationRepository locationRepository, IEventStorage eventStorage)
+        public CreateNoteCommandHandler(IUserRepository userRepository, INoteRepository noteRepository, ILocationRepository locationRepository, IEventStorage eventStorage)
         {
+            this.userRepository = userRepository;
             this.noteRepository = noteRepository;
             this.locationRepository = locationRepository;
             this.eventStorage = eventStorage;
@@ -41,6 +43,10 @@ namespace CQRS.Implementation.CommandHandlers
 
             noteRepository.Add(note);
             noteRepository.SaveChanges();
+
+            //retriving user data (login, mail, name)
+            var user = userRepository.GetById(command.UserId);
+
             eventStorage.Publish(
                 new NoteCreatedEvent()
                 {
@@ -52,7 +58,10 @@ namespace CQRS.Implementation.CommandHandlers
                     Date = note.Date,
                     XCord = location.XCord,
                     YCord = location.YCord,
-                    ZCord = location.ZCord
+                    ZCord = location.ZCord,
+                    Name = user.Name,
+                    Login = user.Login,
+                    Mail = user.Login
                 });
 
             return new CommandResult();

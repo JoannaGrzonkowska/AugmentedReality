@@ -12,13 +12,13 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class usergroup
+    public partial class userfriends
     {
+        public int UserfriendsId { get; set; }
         public int UserId { get; set; }
-        public int GroupId { get; set; }
-        public int UsergroupId { get; set; }
+        public int FriendId { get; set; }
     
-        public virtual group group { get; set; }
         public virtual user user { get; set; }
+        public virtual user user1 { get; set; }
     }
 }

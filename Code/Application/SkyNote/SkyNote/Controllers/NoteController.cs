@@ -1,5 +1,6 @@
 ﻿using CQRS.Commands;
 using CQRS.Implementation.Commands;
+using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
 using DataAccess;
 using DataAccessDenormalized;
@@ -21,6 +22,16 @@ namespace SkyNote.Controllers
         }
 
         // GET api/values/5
+        [ActionName("RetrieveUsersNotes")]
+        [HttpGet]
+        public IEnumerable<UserNoteDTO> GetRetriveUsersGroups(RetrieveUsersNotesCommand command)
+        {
+            //TODO - RETRIVE COMMAND FROM AJAX CORRECTLY
+            var notes = ServiceLocator.QueryBus.Retrieve<RetrieveUsersNotesQuery, RetrieveUsersNotesQueryResult>(new RetrieveUsersNotesQuery(1)).Notes;
+            return notes;
+        }
+
+        // GET api/values/5
         //public DataAccessDenormalized.note Get(int id)
         //{
         //    if (id == -1)
@@ -38,6 +49,8 @@ namespace SkyNote.Controllers
         //}
 
 
+        [ActionName("AddNewNote")]
+        [HttpPost]
         public HttpResponseMessage Post(CreateNoteCommand command)
         {
             var result = ServiceLocator.CommandBus.Send(command);

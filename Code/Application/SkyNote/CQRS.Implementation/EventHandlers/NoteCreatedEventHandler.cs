@@ -23,7 +23,14 @@ namespace CQRS.Implementation.EventHandlers
                 Topic = handle.Topic,
                 UserId = handle.UserId,
                 LocationId = handle.LocationId,
-               // Version = handle.Version
+                XCord = handle.XCord,
+                ZCord = handle.ZCord,
+                YCord = handle.YCord,
+                Date = handle.Date,
+                Name = handle.Name,
+                Login = handle.Login,
+                Mail = handle.Mail,
+                Identyfication = "NOTE"
             };
 
             noteDenormalizedRepository.Add(item);

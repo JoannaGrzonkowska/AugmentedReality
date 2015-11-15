@@ -26,7 +26,8 @@ namespace DataAccessDenormalized
         public string Name { get; set; }
         public string Login { get; set; }
         public string Mail { get; set; }
-        public int GroupId { get; set; }
+        public Nullable<int> GroupId { get; set; } //Manualy switched "int" to "Nullable<int>"
         public string GroupName { get; set; }
+        public string Identyfication { get; set; }
     }
 }

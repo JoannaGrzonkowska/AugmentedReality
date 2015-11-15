@@ -6,21 +6,21 @@ using DataAccessDenormalized.Repository;
 
 namespace CQRS.Implementation.EventHandlers
 {
-    public class UserJoinGroupEventHandler : IEventHandler<UserJoinGroupEvent>
+    public class UserAddFriendEventHandler : IEventHandler<UserAddFriendEvent>
     {
         private readonly IGroupDenormalizedRepository groupDenormalizedRepository;
 
-        public UserJoinGroupEventHandler(IGroupDenormalizedRepository groupDenormalizedRepository)
+        public UserAddFriendEventHandler(IGroupDenormalizedRepository groupDenormalizedRepository)
         {
             this.groupDenormalizedRepository = groupDenormalizedRepository;
         }
 
-        public void Handle(UserJoinGroupEvent handle)
+        public void Handle(UserAddFriendEvent handle)
         {
             var item = Mapper.Map<group>(handle);
 
             groupDenormalizedRepository.Add(item);
-            groupDenormalizedRepository.SaveChanges();
+            groupDenormalizedRepository.SaveChanges(); 
         }
     }
 }

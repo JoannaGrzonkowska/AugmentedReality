@@ -29,6 +29,16 @@ namespace SkyNote.Controllers
             return groups;
         }
 
+        // GET api/values/5
+        [ActionName("RetrieveUsersFriends")]
+        [HttpGet]
+        public IEnumerable<FriendDTO> GetRetrieveUsersFriends(RetrieveUsersFriendsCommand command)
+        {
+            //TODO - RETRIVE COMMAND FROM AJAX CORRECTLY
+            var friends = ServiceLocator.QueryBus.Retrieve<RetrieveUsersFriendsQuery, RetrieveUsersFriendsQueryResult>(new RetrieveUsersFriendsQuery(1)).Friends;
+            return friends;
+        }
+
         // POST api/values
         //public void Post([FromBody]string value) { }
         // POST: api/Group
@@ -43,6 +53,14 @@ namespace SkyNote.Controllers
         [ActionName("JoinGroup")]
         [HttpPost]
         public HttpResponseMessage PostJoinGroup(UserJoinGroupCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+        [ActionName("AddFriend")]
+        [HttpPost]
+        public HttpResponseMessage PostAddFriend(UserAddFriendCommand command)
         {
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);

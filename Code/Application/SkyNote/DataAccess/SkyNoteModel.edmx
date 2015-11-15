@@ -43,11 +43,19 @@
           <Property Name="Password" Type="varchar" MaxLength="45" />
           <Property Name="PasswordSalt" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="userfriends">
+          <Key>
+            <PropertyRef Name="UserfriendsId" />
+          </Key>
+          <Property Name="UserfriendsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FriendId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="usergroup">
           <Key>
-            <PropertyRef Name="RecordId" />
+            <PropertyRef Name="UsergroupId" />
           </Key>
-          <Property Name="RecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsergroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="GroupId" Type="int" Nullable="false" />
         </EntityType>
@@ -72,6 +80,30 @@
             </Principal>
             <Dependent Role="note">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userfriends_ibfk_1">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userfriends" Type="Self.userfriends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriends">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userfriends_ibfk_2">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userfriends" Type="Self.userfriends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriends">
+              <PropertyRef Name="FriendId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -104,6 +136,7 @@
           <EntitySet Name="location" EntityType="Self.location" Schema="skynotedbnormal" store:Type="Tables" />
           <EntitySet Name="note" EntityType="Self.note" Schema="skynotedbnormal" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="skynotedbnormal" store:Type="Tables" />
+          <EntitySet Name="userfriends" EntityType="Self.userfriends" Schema="skynotedbnormal" store:Type="Tables" />
           <EntitySet Name="usergroup" EntityType="Self.usergroup" Schema="skynotedbnormal" store:Type="Tables" />
           <AssociationSet Name="note_ibfk_1" Association="Self.note_ibfk_1">
             <End Role="location" EntitySet="location" />
@@ -112,6 +145,14 @@
           <AssociationSet Name="note_ibfk_2" Association="Self.note_ibfk_2">
             <End Role="user" EntitySet="user" />
             <End Role="note" EntitySet="note" />
+          </AssociationSet>
+          <AssociationSet Name="userfriends_ibfk_1" Association="Self.userfriends_ibfk_1">
+            <End Role="user" EntitySet="user" />
+            <End Role="userfriends" EntitySet="userfriends" />
+          </AssociationSet>
+          <AssociationSet Name="userfriends_ibfk_2" Association="Self.userfriends_ibfk_2">
+            <End Role="user" EntitySet="user" />
+            <End Role="userfriends" EntitySet="userfriends" />
           </AssociationSet>
           <AssociationSet Name="usergroup_ibfk_1" Association="Self.usergroup_ibfk_1">
             <End Role="user" EntitySet="user" />
@@ -147,6 +188,15 @@
           <AssociationSet Name="usergroup_ibfk_1" Association="skynotedbModel.usergroup_ibfk_1">
             <End Role="user1" EntitySet="userSet" />
             <End Role="usergroup1" EntitySet="usergroupSet" />
+          </AssociationSet>
+          <EntitySet Name="userfriends" EntityType="skynotedbModel.userfriends" />
+          <AssociationSet Name="userfriends_ibfk_1" Association="skynotedbModel.userfriends_ibfk_1">
+            <End Role="user" EntitySet="userSet" />
+            <End Role="userfriends" EntitySet="userfriends" />
+          </AssociationSet>
+          <AssociationSet Name="userfriends_ibfk_2" Association="skynotedbModel.userfriends_ibfk_2">
+            <End Role="user" EntitySet="userSet" />
+            <End Role="userfriends" EntitySet="userfriends" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="group">
@@ -192,16 +242,18 @@
           <Property Name="PasswordSalt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="note" Relationship="skynotedbModel.note_ibfk_2" FromRole="user1" ToRole="note1" />
           <NavigationProperty Name="usergroup" Relationship="skynotedbModel.usergroup_ibfk_1" FromRole="user1" ToRole="usergroup1" />
+          <NavigationProperty Name="userfriends" Relationship="skynotedbModel.userfriends_ibfk_1" FromRole="user" ToRole="userfriends" />
+          <NavigationProperty Name="userfriends1" Relationship="skynotedbModel.userfriends_ibfk_2" FromRole="user" ToRole="userfriends" />
         </EntityType>
         <EntityType Name="usergroup">
           <Key>
-            <PropertyRef Name="RecordId" />
+            <PropertyRef Name="UsergroupId" />
           </Key>
-          <Property Name="RecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="group" Relationship="skynotedbModel.usergroup_ibfk_2" FromRole="usergroup1" ToRole="group1" />
           <NavigationProperty Name="user" Relationship="skynotedbModel.usergroup_ibfk_1" FromRole="usergroup1" ToRole="user1" />
+          <Property Name="UsergroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <Association Name="usergroup_ibfk_2">
           <End Type="skynotedbModel.group" Role="group1" Multiplicity="1" />
@@ -248,6 +300,40 @@
             </Principal>
             <Dependent Role="usergroup1">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="userfriends">
+          <Key>
+            <PropertyRef Name="UserfriendsId" />
+          </Key>
+          <Property Name="UserfriendsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FriendId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="skynotedbModel.userfriends_ibfk_1" FromRole="userfriends" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="skynotedbModel.userfriends_ibfk_2" FromRole="userfriends" ToRole="user" />
+        </EntityType>
+        <Association Name="userfriends_ibfk_1">
+          <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
+          <End Type="skynotedbModel.userfriends" Role="userfriends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriends">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userfriends_ibfk_2">
+          <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
+          <End Type="skynotedbModel.userfriends" Role="userfriends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriends">
+              <PropertyRef Name="FriendId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -302,9 +388,18 @@
           <EntitySetMapping Name="usergroupSet">
             <EntityTypeMapping TypeName="skynotedbModel.usergroup">
               <MappingFragment StoreEntitySet="usergroup">
+                <ScalarProperty Name="UsergroupId" ColumnName="UsergroupId" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userfriends">
+            <EntityTypeMapping TypeName="skynotedbModel.userfriends">
+              <MappingFragment StoreEntitySet="userfriends">
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserfriendsId" ColumnName="UserfriendsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

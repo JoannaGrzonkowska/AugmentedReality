@@ -71,11 +71,13 @@
     <Compile Include="Repositories\Implementation\GroupRepository.cs" />
     <Compile Include="Repositories\Implementation\LocationRepository.cs" />
     <Compile Include="Repositories\Implementation\NoteRepository.cs" />
+    <Compile Include="Repositories\Implementation\UserfriendsRepository.cs" />
     <Compile Include="Repositories\Implementation\UsergroupRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
     <Compile Include="Repositories\INoteRepository.cs" />
     <Compile Include="Repositories\IRepositoryBase.cs" />
     <Compile Include="Repositories\Implementation\RepositoryBase.cs" />
+    <Compile Include="Repositories\IUserfriendsRepository.cs" />
     <Compile Include="Repositories\IUsergroupRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="SkyNoteModel.Context.cs">
@@ -94,6 +96,9 @@
       <DependentUpon>SkyNoteModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="user.cs">
+      <DependentUpon>SkyNoteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userfriends.cs">
       <DependentUpon>SkyNoteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usergroup.cs">

@@ -15,13 +15,15 @@ namespace CQRS.Implementation.CommandHandlers
     public class UserJoinGroupCommandHandler : ICommandHandler<UserJoinGroupCommand>
     {
         private IUsergroupRepository usegroupRepository;
-        private ILocationRepository locationRepository;
+        private IUserRepository userRepository;
+        private IGroupRepository groupRepository;
         private IEventStorage eventStorage;
 
-        public UserJoinGroupCommandHandler(IUsergroupRepository usegroupRepository, ILocationRepository locationRepository, IEventStorage eventStorage)
+        public UserJoinGroupCommandHandler(IUsergroupRepository usegroupRepository, IUserRepository userRepository, IGroupRepository groupRepository, IEventStorage eventStorage)
         {
             this.usegroupRepository = usegroupRepository;
-            this.locationRepository = locationRepository;
+            this.userRepository = userRepository;
+            this.groupRepository = groupRepository;
             this.eventStorage = eventStorage;
         }
 
@@ -31,7 +33,18 @@ namespace CQRS.Implementation.CommandHandlers
 
             usegroupRepository.Add(usergroup);
             usegroupRepository.SaveChanges();
-            eventStorage.Publish(new UserJoinGroupEvent(usergroup.UserId, usergroup.GroupId, "Member"));
+
+            //Retriving user's and group's data (like : name)
+            var user = this.userRepository.GetById(usergroup.UserId);
+            var group = this.groupRepository.GetById(usergroup.GroupId);
+
+            if (user != null && group != null)
+            {
+                eventStorage.Publish(new UserJoinGroupEvent(
+                    usergroup.UserId, usergroup.GroupId, "Member",
+                    group.Name, user.Name, user.Login, user.Mail
+                    ));
+            }
 
             return new CommandResult();
         }

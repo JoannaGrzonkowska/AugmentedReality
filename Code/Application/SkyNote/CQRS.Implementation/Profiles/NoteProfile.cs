@@ -9,6 +9,7 @@ namespace CQRS.Implementation.Profiles
         protected override void Configure()
         {
             Mapper.CreateMap<note, NoteDTO>();
+            Mapper.CreateMap<note, UserNoteDTO>();
         }
     }
 }

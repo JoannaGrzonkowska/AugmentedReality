@@ -15,5 +15,11 @@ namespace DataAccess.Repositories.Implementation
             return Context.Set<user>()
                 .Where(x => UserIdList.Contains(x.UserID));
         }
+
+        public IQueryable<user> RetriveUserById(int UserId)
+        {
+            return Context.Set<user>()
+                .Where(x => x.UserID == UserId);
+        }
     }
 }

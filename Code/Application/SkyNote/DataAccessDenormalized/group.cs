@@ -22,5 +22,9 @@ namespace DataAccessDenormalized
         public string UserName { get; set; }
         public string UserLogin { get; set; }
         public string UserMail { get; set; }
+        public string FriendName { get; set; }
+        public string FriendLogin { get; set; }
+        public string FriendMail { get; set; }
+        public Nullable<int> FriendId { get; set; }
     }
 }

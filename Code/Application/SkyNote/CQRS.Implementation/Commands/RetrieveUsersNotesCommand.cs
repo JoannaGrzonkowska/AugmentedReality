@@ -8,28 +8,22 @@ using System.Threading.Tasks;
 
 namespace CQRS.Implementation.Commands
 {
-    public class UserJoinGroupCommand : Command<usergroup>
+    public class RetrieveUsersNotesCommand : Command<note>
     {
-        public int RecordId { get; set; }
         public int UserId { get; set; }
-        public int GroupId { get; set; }
 
-        public override usergroup Build(usergroup usergroup = null, Action<usergroup> additionalAction = null)
+        public override note Build(note userNotes = null, Action<note> additionalAction = null)
         {
-            Action<usergroup> action = x =>
+            Action<note> action = x =>
             {
-                x.UsergroupId = RecordId;
                 x.UserId = UserId;
-                x.GroupId = GroupId;
 
                 if (additionalAction != null)
                 {
                     additionalAction(x);
                 }
             };
-            return base.Build(usergroup, action);
+            return base.Build(userNotes, action);
         }
-
-
     }
 }

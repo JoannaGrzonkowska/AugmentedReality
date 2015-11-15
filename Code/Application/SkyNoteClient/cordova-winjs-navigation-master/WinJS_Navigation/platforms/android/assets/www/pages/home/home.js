@@ -14,7 +14,7 @@
 
                 var getNotes = function () {
                     noteService.getUserNotes(function (data) {
-                        notesListViewModel.myNotesArray(data);
+                        self.myNotesArray(data);
                         self.lastRefresh(new Date());
                     });
                 };

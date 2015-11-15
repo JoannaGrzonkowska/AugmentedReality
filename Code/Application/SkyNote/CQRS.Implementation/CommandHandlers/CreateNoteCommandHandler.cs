@@ -43,10 +43,7 @@ namespace CQRS.Implementation.CommandHandlers
 
             noteRepository.Add(note);
             noteRepository.SaveChanges();
-
-            //retriving user data (login, mail, name)
-            var user = userRepository.GetById(command.UserId);
-
+            
             eventStorage.Publish(
                 new NoteCreatedEvent()
                 {
@@ -58,10 +55,7 @@ namespace CQRS.Implementation.CommandHandlers
                     Date = note.Date,
                     XCord = location.XCord,
                     YCord = location.YCord,
-                    ZCord = location.ZCord,
-                    Name = user.Name,
-                    Login = user.Login,
-                    Mail = user.Login
+                    ZCord = location.ZCord
                 });
 
             return new CommandResult();

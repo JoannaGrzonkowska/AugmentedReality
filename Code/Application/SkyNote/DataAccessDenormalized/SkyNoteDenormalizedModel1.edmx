@@ -41,6 +41,7 @@
           <Property Name="GroupId" Type="int" />
           <Property Name="GroupName" Type="varchar" MaxLength="45" />
           <Property Name="Identyfication" Type="varchar" MaxLength="45" />
+          <Property Name="NoteId" Type="int" />
         </EntityType>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
           <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormalized" store:Type="Tables" />
@@ -87,9 +88,10 @@
           <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="true" />
           <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Identyfication" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="NoteId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -118,6 +120,7 @@
           <EntitySetMapping Name="noteSet">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
               <MappingFragment StoreEntitySet="note">
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
                 <ScalarProperty Name="Identyfication" ColumnName="Identyfication" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />

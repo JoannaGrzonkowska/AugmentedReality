@@ -18,7 +18,7 @@ namespace CQRS.Implementation.Models
         public string Name { get; set; }
         public string Login { get; set; }
         public string Mail { get; set; }
-        public int GroupId { get; set; }
+        public int? GroupId { get; set; }
         public string GroupName { get; set; }
 
         public static NoteDTO Build(note entity)

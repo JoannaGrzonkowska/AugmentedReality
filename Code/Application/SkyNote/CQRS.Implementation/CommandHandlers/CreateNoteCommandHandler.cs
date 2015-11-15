@@ -58,7 +58,10 @@ namespace CQRS.Implementation.CommandHandlers
                     Date = note.Date,
                     XCord = location.XCord,
                     YCord = location.YCord,
-                    ZCord = location.ZCord
+                    ZCord = location.ZCord,
+                    Name = user.Name,
+                    Login = user.Login,
+                    Mail = user.Login
                 });
 
             return new CommandResult();

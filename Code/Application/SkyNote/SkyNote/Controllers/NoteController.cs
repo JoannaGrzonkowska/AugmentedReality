@@ -24,10 +24,10 @@ namespace SkyNote.Controllers
         }		
 		[ActionName("RetrieveUsersNotes")]
         [HttpGet]
-        public IEnumerable<UserNoteDTO> GetRetriveUsersGroups(RetrieveUsersNotesCommand command)
+        public IEnumerable<UserNoteDTO> GetRetriveUsersGroups(int id)//(RetrieveUsersNotesCommand command)
         {
             //TODO - RETRIVE COMMAND FROM AJAX CORRECTLY
-            var notes = ServiceLocator.QueryBus.Retrieve<RetrieveUsersNotesQuery, RetrieveUsersNotesQueryResult>(new RetrieveUsersNotesQuery(1)).Notes;
+            var notes = ServiceLocator.QueryBus.Retrieve<RetrieveUsersNotesQuery, RetrieveUsersNotesQueryResult>(new RetrieveUsersNotesQuery(id)).Notes;
             return notes;
         }
 

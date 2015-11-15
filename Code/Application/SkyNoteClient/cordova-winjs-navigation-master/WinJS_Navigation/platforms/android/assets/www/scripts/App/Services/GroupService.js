@@ -6,7 +6,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/group',
+            url: 'http://localhost:59284/api/group/get',
             type: 'POST',
             data: group,
             success: function (data) {

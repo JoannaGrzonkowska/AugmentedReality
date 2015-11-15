@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace CQRS.Implementation.Queries
 {
-    public class NotesByDateQueryResult : IQueryResult
+    public class NoteByIdQueryResult : IQueryResult
     {
-        public IEnumerable<NoteDTO> Notes { get; set; }
+        public NoteDTO Note { get; set; }
     }
 }

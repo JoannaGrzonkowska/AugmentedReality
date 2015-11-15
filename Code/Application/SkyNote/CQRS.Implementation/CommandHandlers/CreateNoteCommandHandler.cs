@@ -48,11 +48,18 @@ namespace CQRS.Implementation.CommandHandlers
             var user = userRepository.GetById(command.UserId);
 
             eventStorage.Publish(
-                new NoteCreatedEvent(//TODO - ADD DATETIME
-                    note.Id, (int)note.UserId, null, 
-                    (int)note.LocationId, command.xCord, command.yCord, command.zCord, 
-                    note.Topic, note.Content,
-                    user.Name, user.Login, user.Mail));
+                new NoteCreatedEvent()
+                {
+                    NoteId = note.Id,
+                    UserId = note.UserId.Value,
+                    LocationId = note.LocationId.Value,
+                    Topic = note.Topic,
+                    Content = note.Content,
+                    Date = note.Date,
+                    XCord = location.XCord,
+                    YCord = location.YCord,
+                    ZCord = location.ZCord
+                });
 
             return new CommandResult();
 

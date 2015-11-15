@@ -18,7 +18,6 @@
         // Handle the deviceready event. 
         initialize();
         $("#homeSection").click(new function () {
-            alert("test");
         });
 
     }
@@ -32,7 +31,6 @@
     }
 
     function initialize() {
-        alert("test");
         nav.history = app.sessionState.history || {};
         nav.history.current.initialPlaceholder = true;
 

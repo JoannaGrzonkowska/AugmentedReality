@@ -25,7 +25,7 @@ namespace DataAccessDenormalized
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<group> groupSet { get; set; }
-        public DbSet<note> noteSet { get; set; }
+        public DbSet<group> group { get; set; }
+        public DbSet<note> note { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace CQRS.Commands
 {
     public class Command<TEntity> : ICommand where TEntity: new()
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         public virtual TEntity Build(TEntity entity, Action<TEntity> action = null)
         {

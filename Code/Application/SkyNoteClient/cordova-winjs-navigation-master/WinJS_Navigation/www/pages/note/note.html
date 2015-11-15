@@ -3,31 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <title>home</title>
-
-    <!-- WinJS references -->
-
     <link href="note.css" rel="stylesheet" />
     <script src="note.js"></script>
-    
-    <script src="../../js/knockout-3.3.0.js"></script>
-    <script src="../../js/knockout-winjs.js"></script>
 
     <script src="../../scripts/App/Services/NoteService.js"></script>
-
+  
 </head>
 <body>
-    <h2>Add new note</h2>
-    <form id="note-form">
-        <div class="form-group">
-            <input type="text" id="topicInput" class="form-control"
-                      placeholder="Topic"
-                      data-bind="value: Topic"/>
-            <textarea id="contentInput" class="form-control" rows="4" cols="70"
-                      placeholder="Content"
-                      data-bind="value: Content"></textarea>
+    <div id="note-edit-container">
+        <div class="row">
+            <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
+            <span style="font-size:xx-large" class="col-xs-10" data-bind="text:headerText"></span>
         </div>
-        <button class="btn btn-default pull-right" data-bind="click: add">Add</button>
-        <button id="cancelButton">Cancel</button>
-    </form>
+        <form id="note-form" class="skynote-form">
+            <div class="form-group">
+                <input type="text" name="topic" class="form-control" placeholder="Topic"
+                       data-bind="value: Topic"/ >
+                <textarea name="content" class="form-control" rows="4" cols="70" placeholder="Content"
+                          data-bind="value: Content"></textarea>
+            </div>
+            <button class="btn btn-default pull-right" data-bind="click: back"> Cancel</button>
+            <button class="btn btn-default pull-right" data-bind="click: save"> Save</button>
+        </form>
+    </div>
 </body>
 </html>

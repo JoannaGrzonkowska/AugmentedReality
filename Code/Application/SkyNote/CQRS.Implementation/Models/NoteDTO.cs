@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DataAccessDenormalized;
+using System;
 
 namespace CQRS.Implementation.Models
 {
-    public class NoteDTO
+    public class NoteDTO : BaseDTO<note>
     {
         public int Id { get; set; }
+        public int? NoteId { get; set; }
         public int? UserId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
@@ -18,5 +20,32 @@ namespace CQRS.Implementation.Models
         public string Mail { get; set; }
         public int GroupId { get; set; }
         public string GroupName { get; set; }
+
+        public static NoteDTO Build(note entity)
+        {
+            return new NoteDTO
+            {
+                Id = entity.Id,
+                NoteId = entity.NoteId,
+                UserId = entity.UserId,
+                Topic = entity.Topic,
+                Content = entity.Content,
+                Date = entity.Date,
+                LocationId = entity.LocationId,
+                XCord = entity.XCord,
+                YCord = entity.YCord,
+                ZCord = entity.ZCord,
+                Name = entity.Name,
+                Login = entity.Login,
+                Mail = entity.Mail,
+                GroupId = entity.GroupId,
+                GroupName = entity.GroupName
+            };
+        }
+
+        public override BaseDTO<note> BuildDTO(note entity)
+        {
+            return Build(entity);
+        }
     }
 }

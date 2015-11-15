@@ -28,7 +28,7 @@
                 };
 
                 self.delete = function (item) {
-                    alert(item.Topic());
+                    noteService.deleteNote(item);
                 };
 
                 self.gotoAddNote = function () {

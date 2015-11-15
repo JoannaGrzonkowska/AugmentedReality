@@ -59,4 +59,16 @@ var NoteService = function (urls) {
         });
     }
 
+    self.deleteNote = function (note) {
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: 'http://skynoteasiatest.azurewebsites.net/api/note/delete/' + note.NoteId(),
+            type: 'DELETE',
+            success: function (data) {
+                showAlertAfterAjax(data, 'Note ' + note.Topic() + ' successfuly deleted.');
+            }
+        });
+    }
+
 };

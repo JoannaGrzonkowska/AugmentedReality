@@ -1,10 +1,8 @@
 ﻿using CQRS.EventHandlers;
-using CQRS.Events;
 using CQRS.Implementation.Events;
 using DataAccess.Repositories;
 using DataAccessDenormalized;
 using DataAccessDenormalized.Repository;
-using System.Linq;
 
 namespace CQRS.Implementation.EventHandlers
 {

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AutoMapperWebConfiguration.cs" />
     <Compile Include="CommandHandlers\CreateGroupCommandHandler.cs" />
+    <Compile Include="CommandHandlers\DeleteNoteCommandHandler.cs" />
     <Compile Include="CommandHandlers\EditNoteCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateNoteCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateUserCommandHandler.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="CommandHandlers\RetriveUsersGroupsCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserJoinGroupCommandHandler.cs" />
     <Compile Include="Commands\CreateGroupCommand.cs" />
+    <Compile Include="Commands\DeleteNoteCommand.cs" />
     <Compile Include="Commands\EditNoteCommand.cs" />
     <Compile Include="Commands\CreateNoteCommand.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
@@ -68,10 +70,12 @@
     <Compile Include="Commands\RetriveUsersGroupsCommand.cs" />
     <Compile Include="Commands\UserJoinGroupCommand.cs" />
     <Compile Include="EventHandlers\GroupCreatedEventHandler.cs" />
+    <Compile Include="EventHandlers\NoteDeletedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteEditedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\UserJoinGroupEventHandler.cs" />
     <Compile Include="Events\GroupCreatedEvent.cs" />
+    <Compile Include="Events\NoteDeletedEvent.cs" />
     <Compile Include="Events\NoteEditedEvent.cs" />
     <Compile Include="Events\NoteCreatedEvent.cs" />
     <Compile Include="Events\UserJoinGroupEvent.cs" />

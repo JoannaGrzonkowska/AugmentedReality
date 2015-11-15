@@ -28,3 +28,7 @@ CREATE TABLE `group` (
   `UserMail` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `note` 
+ADD COLUMN `NoteId` INT(11) NULL;
+

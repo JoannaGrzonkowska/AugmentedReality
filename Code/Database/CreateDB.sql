@@ -39,7 +39,7 @@ CREATE TABLE `usergroup` (
   `UsergroupId` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL ,
   `GroupId` int(11) NOT NULL,
-  PRIMARY KEY (`RecordId`),
+  PRIMARY KEY (`UsergroupId`),
 	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
     FOREIGN KEY (`GroupId`) REFERENCES `group`(Id) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

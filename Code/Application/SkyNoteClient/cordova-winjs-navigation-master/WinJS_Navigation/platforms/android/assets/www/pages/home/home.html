@@ -15,12 +15,20 @@
     <div class="home fragment" id="notes-container">
 
         <section>
-            <button class="btn" data-bind="click:gotoAddNote">Add note</button>
+            <button class="btn btn-default" data-bind="click:gotoAddNote">Add note</button>
         </section>
 
         <h2>My notes</h2>
         <div>
             <span>Number of notes: </span><span data-bind="text: myNotesArray().length"></span>
+        </div>
+
+        <div class="row">
+            <span class="col-xs-8">
+                <span>Last refresh: </span>
+                <span data-bind="localizedDateTime: lastRefresh()"></span>
+            </span>
+            <button class="btn btn-default col-xs-2" data-bind="click:refresh">Refresh</button>
         </div>
 
         <div data-bind="template: { name: 'note-template', foreach: myNotesArray }"></div>

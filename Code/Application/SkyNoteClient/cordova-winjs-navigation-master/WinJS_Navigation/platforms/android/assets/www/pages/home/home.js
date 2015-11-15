@@ -10,6 +10,14 @@
             var NotesListViewModel = function () {
                 var self = this;
                 self.myNotesArray = ko.observableArray([]);
+                self.lastRefresh = ko.observable();
+
+                var getNotes = function () {
+                    noteService.getUserNotes(function (data) {
+                        notesListViewModel.myNotesArray(data);
+                        self.lastRefresh(new Date());
+                    });
+                };
                 
                 self.showOnMap = function (item) {
                     alert(item.Topic());
@@ -27,13 +35,15 @@
                     WinJS.Navigation.navigate('pages/note/note.html', { id: 0 });
                 };
 
+                self.refresh = function () {
+                    getNotes();
+                };
+
+                getNotes();
+
             };
 
             var notesListViewModel = new NotesListViewModel();
-            noteService.getUserNotes(function (data) {
-                notesListViewModel.myNotesArray(data);
-            })
-
             ko.applyBindings(notesListViewModel, document.getElementById("notes-container"));
 
         }

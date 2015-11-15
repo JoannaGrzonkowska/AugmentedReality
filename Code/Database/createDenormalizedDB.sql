@@ -29,18 +29,18 @@ CREATE TABLE `group` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `skynotedbdenormalized`.`group` 
+ALTER TABLE `group` 
 ADD COLUMN `FriendName` VARCHAR(45) NULL DEFAULT NULL AFTER `UserMail`,
 ADD COLUMN `FriendLogin` VARCHAR(20) NULL DEFAULT NULL AFTER `FriendName`,
 ADD COLUMN `FriendMail` VARCHAR(45) NULL DEFAULT NULL AFTER `FriendLogin`,
 ADD COLUMN `FriendId` INT(11) NULL DEFAULT NULL AFTER `FriendMail`;
 
-ALTER TABLE `skynotedbdenormalized`.`note` 
+ALTER TABLE `note` 
 CHANGE COLUMN `Date` `Date` TIMESTAMP NULL DEFAULT NULL ;
 
-ALTER TABLE `skynotedbdenormalized`.`note` 
+ALTER TABLE `note` 
 CHANGE COLUMN `LocationId` `LocationId` INT(11) NULL DEFAULT NULL ,
 CHANGE COLUMN `GroupId` `GroupId` INT(11) NULL DEFAULT NULL ;
 
-ALTER TABLE `skynotedbdenormalized`.`note` 
+ALTER TABLE `note` 
 ADD COLUMN `Identyfication` VARCHAR(45) NULL DEFAULT NULL AFTER `GroupName`;

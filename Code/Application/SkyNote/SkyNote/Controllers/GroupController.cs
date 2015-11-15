@@ -1,12 +1,7 @@
 ﻿using CQRS.Implementation.Commands;
 using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
-using DataAccessDenormalized;
-using DataAccessDenormalized.Repository;
-using DataAccessDenormalized.Repository.Implementation;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -26,9 +21,9 @@ namespace SkyNote.Controllers
         // GET: api/Group/5
         [ActionName("RetriveGroupMembers")]
         [HttpGet]
-        public IEnumerable<GroupMemberDTO> GetRetriveGroupMembers(RetriveGroupMembersCommand command)
+        public IEnumerable<GroupMemberDTO> GetRetriveGroupMembers(int id)
         {
-            var members = ServiceLocator.QueryBus.Retrieve<RetriveGroupMembersQuery, RetriveGroupMembersQueryResult>(new RetriveGroupMembersQuery(1)).Users;
+            var members = ServiceLocator.QueryBus.Retrieve<RetriveGroupMembersQuery, RetriveGroupMembersQueryResult>(new RetriveGroupMembersQuery(id)).Users;
             return members;
         }
 
@@ -53,8 +48,10 @@ namespace SkyNote.Controllers
         }
 
         // DELETE: api/Group/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            var result = ServiceLocator.CommandBus.Send(new DeleteGroupCommand() { GroupId = id });
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
     }
 }

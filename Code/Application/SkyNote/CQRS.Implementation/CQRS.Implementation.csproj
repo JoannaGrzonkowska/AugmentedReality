@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AutoMapperWebConfiguration.cs" />
     <Compile Include="CommandHandlers\CreateGroupCommandHandler.cs" />
+    <Compile Include="CommandHandlers\DeleteGroupCommandHandler.cs" />
     <Compile Include="CommandHandlers\DeleteNoteCommandHandler.cs" />
     <Compile Include="CommandHandlers\EditNoteCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateNoteCommandHandler.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="CommandHandlers\UserAddFriendCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserJoinGroupCommandHandler.cs" />
     <Compile Include="Commands\CreateGroupCommand.cs" />
+    <Compile Include="Commands\DeleteGroupCommand.cs" />
     <Compile Include="Commands\DeleteNoteCommand.cs" />
     <Compile Include="Commands\EditNoteCommand.cs" />
     <Compile Include="Commands\CreateNoteCommand.cs" />
@@ -75,18 +77,22 @@
     <Compile Include="Commands\UserAddFriendCommand.cs" />
     <Compile Include="Commands\UserJoinGroupCommand.cs" />
     <Compile Include="EventHandlers\GroupCreatedEventHandler.cs" />
+    <Compile Include="EventHandlers\GroupDeletedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteDeletedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteEditedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\UserAddFriendEventHandler.cs" />
     <Compile Include="EventHandlers\UserJoinGroupEventHandler.cs" />
     <Compile Include="Events\GroupCreatedEvent.cs" />
+    <Compile Include="Events\GroupDeletedEvent.cs" />
     <Compile Include="Events\NoteDeletedEvent.cs" />
     <Compile Include="Events\NoteEditedEvent.cs" />
     <Compile Include="Events\NoteCreatedEvent.cs" />
     <Compile Include="Events\UserAddFriendEvent.cs" />
     <Compile Include="Events\UserJoinGroupEvent.cs" />
-    <Compile Include="Models\BaseDTO.cs" /><Compile Include="Models\FriendDTO.cs" />    <Compile Include="Models\GroupDTO.cs" />
+    <Compile Include="Models\BaseDTO.cs" />
+    <Compile Include="Models\FriendDTO.cs" />
+    <Compile Include="Models\GroupDTO.cs" />
     <Compile Include="Models\GroupMemberDTO.cs" />
     <Compile Include="Models\NoteDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />

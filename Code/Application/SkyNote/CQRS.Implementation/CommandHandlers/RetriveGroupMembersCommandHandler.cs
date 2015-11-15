@@ -1,5 +1,4 @@
-﻿using System;
-using CQRS.CommandHandlers;
+﻿using CQRS.CommandHandlers;
 using CQRS.Commands;
 using CQRS.Implementation.Commands;
 using DataAccess.Repositories;

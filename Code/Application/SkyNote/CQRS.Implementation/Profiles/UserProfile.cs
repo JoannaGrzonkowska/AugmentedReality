@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using CQRS.Implementation.Models;
-using DataAccessDenormalized;
 
 namespace CQRS.Implementation.Profiles
 {

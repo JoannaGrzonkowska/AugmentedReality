@@ -1,5 +1,4 @@
 ﻿using CQRS.EventHandlers;
-using CQRS.Events;
 using CQRS.Implementation.Events;
 using DataAccessDenormalized;
 using DataAccessDenormalized.Repository;

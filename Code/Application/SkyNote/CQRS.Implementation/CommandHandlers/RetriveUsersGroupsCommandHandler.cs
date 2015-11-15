@@ -32,9 +32,7 @@ namespace CQRS.Implementation.CommandHandlers
 
                 IQueryable<group> userGroups = groupRepository.RetriveGroupsByIds(GroupsIdList);
             }
-
-
-            //TODO - RETURN
+            
             return new CommandResult();
         }
     }

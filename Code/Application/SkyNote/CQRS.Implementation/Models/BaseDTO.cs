@@ -1,5 +1,4 @@
-﻿
-namespace CQRS.Implementation.Models
+﻿namespace CQRS.Implementation.Models
 {
     public abstract class BaseDTO<TEntity> where TEntity : new()
     {

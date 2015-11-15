@@ -36,10 +36,28 @@ CREATE TABLE `group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `usergroup` (
-  `RecordId` int(11) NOT NULL AUTO_INCREMENT,
+  `UsergroupId` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL ,
   `GroupId` int(11) NOT NULL,
   PRIMARY KEY (`RecordId`),
 	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+    FOREIGN KEY (`GroupId`) REFERENCES `group`(Id) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `userfriends` (
+  `UserfriendsId` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) NOT NULL ,
+  `FriendId` int(11) NOT NULL,
+  PRIMARY KEY (`UserfriendsId`),
+	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+    FOREIGN KEY (`FriendId`) REFERENCES `user`(UserID) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `notesGroups` (
+  `NotesgroupsId` int(11) NOT NULL AUTO_INCREMENT,
+  `NoteId` int(11) NOT NULL ,
+  `GroupId` int(11) NOT NULL,
+  PRIMARY KEY (`NotesgroupsId`),
+	FOREIGN KEY (`NoteId`) REFERENCES `note`(Id) ON UPDATE CASCADE,  
     FOREIGN KEY (`GroupId`) REFERENCES `group`(Id) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

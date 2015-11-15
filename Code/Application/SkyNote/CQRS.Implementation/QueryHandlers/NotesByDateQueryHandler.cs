@@ -18,7 +18,7 @@ namespace CQRS.Implementation.QueryHandlers
         public NotesByDateQueryResult Handle(NotesByDateQuery handle)
         {
             NotesByDateQueryResult result = new NotesByDateQueryResult();
-            result.Notes = noteRepository.GetAll().OrderBy(x => x.Date).Select(x=>NoteDTO.Build(x));
+            result.Notes = noteRepository.GetAllQueryable().OrderByDescending(x => x.Date).ToList().Select(x=>NoteDTO.Build(x));
             return result;
         }
     }

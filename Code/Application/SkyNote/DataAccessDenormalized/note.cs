@@ -28,5 +28,6 @@ namespace DataAccessDenormalized
         public int GroupId { get; set; }
         public string GroupName { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> NoteId { get; set; }
     }
 }

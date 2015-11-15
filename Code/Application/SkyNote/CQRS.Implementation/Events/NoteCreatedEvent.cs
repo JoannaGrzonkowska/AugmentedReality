@@ -1,22 +1,20 @@
 ﻿using CQRS.Events;
+using System;
 
 namespace CQRS.Implementation.Events
 {
     public class NoteCreatedEvent : Event
     {
         public int UserId { get; set; }
+        public int NoteId { get; set; }
         public int LocationId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
+        public DateTime? Date { get; set; }
 
-        public NoteCreatedEvent(int id, int userId, int locationId, string topic,
-            string content)
-        {
-            AggregateId = id;
-            UserId = userId;
-            LocationId = locationId;
-            Topic = topic;
-            Content = content;
-        }
+        public decimal? XCord { get; set; }
+        public decimal? YCord { get; set; }
+        public decimal? ZCord { get; set; }
+       
     }
 }

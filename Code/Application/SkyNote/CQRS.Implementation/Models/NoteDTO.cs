@@ -6,6 +6,7 @@ namespace CQRS.Implementation.Models
     public class NoteDTO : BaseDTO<note>
     {
         public int Id { get; set; }
+        public int? NoteId { get; set; }
         public int? UserId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
@@ -25,6 +26,7 @@ namespace CQRS.Implementation.Models
             return new NoteDTO
             {
                 Id = entity.Id,
+                NoteId = entity.NoteId,
                 UserId = entity.UserId,
                 Topic = entity.Topic,
                 Content = entity.Content,

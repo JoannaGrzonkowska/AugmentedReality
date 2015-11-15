@@ -14,30 +14,17 @@ namespace SkyNote.Controllers
 
     public class NoteController : ApiController
     {
-        // GET api/values
         public IEnumerable<NoteDTO> Get()
         {   
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
             return notes;
         }
 
-        // GET api/values/5
-        //public DataAccessDenormalized.note Get(int id)
-        //{
-        //    if (id == -1)
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.NotFound);
-        //    }
-
-        //    var comment = new Comment
-        //    {
-        //        Id = 2,
-        //        Content = "sth 2"
-        //    };
-
-        //    return comment;
-        //}
-
+        public NoteDTO Get(int id)
+        {
+            var note = ServiceLocator.QueryBus.Retrieve<NoteByIdQuery, NoteByIdQueryResult>(new NoteByIdQuery(id)).Note;
+            return note;
+        }
 
         public HttpResponseMessage Post(CreateNoteCommand command)
         {
@@ -45,14 +32,11 @@ namespace SkyNote.Controllers
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
 
-        // POST api/values
-       /* public HttpResponseMessage Post(DataAccess.note note)
+        public HttpResponseMessage Put(EditNoteCommand command)
         {
-            //ServiceLocator.CommandBus.Send(new CreateNoteCommand(1, 1, "kasia asia", "Szymon", 1));
-
-            var r = Request.CreateResponse(HttpStatusCode.Created);
-            return r;
-        }*/
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
 
         //public HttpResponseMessage Put(Comment comment)
         //{

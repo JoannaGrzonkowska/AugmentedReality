@@ -42,7 +42,18 @@ namespace CQRS.Implementation.CommandHandlers
             noteRepository.Add(note);
             noteRepository.SaveChanges();
             eventStorage.Publish(
-                new NoteCreatedEvent(note.Id, (int)note.UserId, (int)note.LocationId, note.Topic, note.Content));
+                new NoteCreatedEvent()
+                {
+                    NoteId = note.Id,
+                    UserId = note.UserId.Value,
+                    LocationId = note.LocationId.Value,
+                    Topic = note.Topic,
+                    Content = note.Content,
+                    Date = note.Date,
+                    XCord = location.XCord,
+                    YCord = location.YCord,
+                    ZCord = location.ZCord
+                });
 
             return new CommandResult();
 

@@ -36,6 +36,7 @@
           <Property Name="GroupId" Type="int" Nullable="false" />
           <Property Name="GroupName" Type="varchar" MaxLength="45" />
           <Property Name="Date" Type="timestamp" Precision="0" />
+          <Property Name="NoteId" Type="int" />
         </EntityType>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
           <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormasia" store:Type="Tables" />
@@ -80,6 +81,7 @@
           <Property Name="GroupId" Type="Int32" Nullable="false" />
           <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" />
+          <Property Name="NoteId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -104,6 +106,7 @@
           <EntitySetMapping Name="note">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
               <MappingFragment StoreEntitySet="note">
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />

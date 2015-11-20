@@ -7,6 +7,7 @@ namespace CQRS.Implementation.Events
     {
         public int UserId { get; set; }
         public int NoteId { get; set; }
+        public int? TypeId { get; set; }
         public DateTime? Date { get; set; }
         public int LocationId { get; set; }
         public decimal? XCord { get; set; }

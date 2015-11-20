@@ -9,5 +9,6 @@ namespace CQRS.Implementation.Events
         public string Topic { get; set; }
         public string Content { get; set; }
         public DateTime Date { get; set; }
+        public int? TypeId { get; set; }
     }
 }

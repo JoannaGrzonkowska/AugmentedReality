@@ -20,8 +20,8 @@ namespace CQRS.Implementation.QueryHandlers
         public GroupsForUserQueryResult Handle(GroupsForUserQuery handle)
         {
             GroupsForUserQueryResult result = new GroupsForUserQueryResult();
-            var groups = groupRepository.GetAll().Where(x => x.UserId == handle.UserId).ToList();
-
+            var groups = groupRepository.GetAllQueryable().Where(x => x.UserId == handle.UserId).ToList();
+            
             result.GroupsDTO = Mapper.Map<IEnumerable<GroupDTO>>(groups);
             
             return result;

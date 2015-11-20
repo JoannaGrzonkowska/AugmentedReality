@@ -26,6 +26,7 @@ namespace CQRS.Implementation.CommandHandlers
             {
                 noteRepository.Delete(note);
                 noteRepository.SaveChanges();
+
                 eventStorage.Publish(new NoteDeletedEvent() { NoteId = note.Id });
 
                 return new CommandResult();

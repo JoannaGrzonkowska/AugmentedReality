@@ -1,10 +1,7 @@
 ﻿using CQRS.Implementation.Commands;
 using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
-using DataAccessDenormalized;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -22,20 +19,18 @@ namespace SkyNote.Controllers
         // GET api/values/5
         [ActionName("RetriveUsersGroups")]
         [HttpGet]
-        public IEnumerable<UserGroupDTO> GetRetriveUsersGroups(RetriveUsersGroupsCommand command)
+        public IEnumerable<UserGroupDTO> GetRetriveUsersGroups(int id)
         {
-            //TODO - RETRIVE COMMAND FROM AJAX CORRECTLY
-            var groups = ServiceLocator.QueryBus.Retrieve<RetriveUsersGroupsQuery, RetriveUsersGroupsQueryResult>(new RetriveUsersGroupsQuery(1)).Groups;
+            var groups = ServiceLocator.QueryBus.Retrieve<RetriveUsersGroupsQuery, RetriveUsersGroupsQueryResult>(new RetriveUsersGroupsQuery(id)).Groups;
             return groups;
         }
 
         // GET api/values/5
         [ActionName("RetrieveUsersFriends")]
         [HttpGet]
-        public IEnumerable<FriendDTO> GetRetrieveUsersFriends(RetrieveUsersFriendsCommand command)
+        public IEnumerable<FriendDTO> GetRetrieveUsersFriends(int id)
         {
-            //TODO - RETRIVE COMMAND FROM AJAX CORRECTLY
-            var friends = ServiceLocator.QueryBus.Retrieve<RetrieveUsersFriendsQuery, RetrieveUsersFriendsQueryResult>(new RetrieveUsersFriendsQuery(1)).Friends;
+            var friends = ServiceLocator.QueryBus.Retrieve<RetrieveUsersFriendsQuery, RetrieveUsersFriendsQueryResult>(new RetrieveUsersFriendsQuery(id)).Friends;
             return friends;
         }
 

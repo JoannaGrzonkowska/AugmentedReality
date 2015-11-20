@@ -28,8 +28,7 @@ namespace CQRS.Implementation.CommandHandlers
 
             userfriendStorage.Add(userfriend);
             userfriendStorage.SaveChanges();
-
-            //Retrive user's and his new friend's data
+            
             IQueryable<user> users = this.userStorage.RetriveUserById(command.UserId);
             IQueryable<user> friends = this.userStorage.RetriveUserById(command.FriendId);
 

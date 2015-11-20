@@ -12,6 +12,8 @@ namespace CQRS.Implementation.Commands
         public decimal zCord { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
+        public int TypeId { get; set; }
+        public int CategoryId { get; set; }
 
         public override note Build(note note = null, Action<note> additionalAction = null)
         {
@@ -21,6 +23,7 @@ namespace CQRS.Implementation.Commands
                 x.Topic = Topic;
                 x.UserId = UserId;
                 x.Date = DateTime.Now;
+                x.TypeId = TypeId;
                 if (additionalAction != null)
                 {
                     additionalAction(x);

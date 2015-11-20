@@ -6,6 +6,6 @@ namespace CQRS.Implementation.Queries
 {
     public class RetrieveUsersNotesQueryResult : IQueryResult
     {
-        public IEnumerable<UserNoteDTO> Notes { get; set; }
+        public IEnumerable<NoteDTO> Notes { get; set; }
     }
 }

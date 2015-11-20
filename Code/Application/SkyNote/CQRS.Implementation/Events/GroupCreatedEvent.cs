@@ -1,5 +1,4 @@
 ﻿using CQRS.Events;
-using System;
 
 namespace CQRS.Implementation.Events
 {

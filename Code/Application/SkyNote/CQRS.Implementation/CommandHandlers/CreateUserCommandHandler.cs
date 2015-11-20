@@ -1,13 +1,7 @@
 ﻿using CQRS.CommandHandlers;
 using CQRS.Implementation.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CQRS.Commands;
 using DataAccess.Repositories;
-using CQRS.Events;
 
 namespace CQRS.Implementation.CommandHandlers
 {
@@ -26,7 +20,6 @@ namespace CQRS.Implementation.CommandHandlers
 
             repository.Add(user);
             repository.SaveChanges();
-            //TODO : EVENT?
 
             return new CommandResult();
         }

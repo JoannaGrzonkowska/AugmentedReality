@@ -83,7 +83,7 @@ ADD COLUMN `TypeId` INT(11) NULL DEFAULT NULL AFTER `Date`,
 ADD COLUMN `CategoryId` INT(11) NULL DEFAULT NULL AFTER `TypeId`,
 ADD INDEX `note_category_idx` (`CategoryId` ASC),
 ADD INDEX `note_type_idx` (`TypeId` ASC);
-ALTER TABLE `skynotedbnormal`.`note` 
+ALTER TABLE `note` 
 ADD CONSTRAINT `note_category`
   FOREIGN KEY (`CategoryId`)
   REFERENCES `categories` (`CategoryId`)

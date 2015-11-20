@@ -14,9 +14,9 @@ namespace DataAccess
     
     public partial class usergroup
     {
+        public int UsergroupId { get; set; }
         public int UserId { get; set; }
         public int GroupId { get; set; }
-        public int UsergroupId { get; set; }
     
         public virtual group group { get; set; }
         public virtual user user { get; set; }

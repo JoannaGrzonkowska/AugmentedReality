@@ -31,7 +31,6 @@ namespace SkyNote.Controllers
             return notes;
         }
 
-        [ActionName("AddNewNote")]
         [HttpPost]
         public HttpResponseMessage Post(CreateNoteCommand command)
         {

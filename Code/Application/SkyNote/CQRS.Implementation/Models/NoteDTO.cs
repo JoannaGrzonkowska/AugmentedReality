@@ -20,6 +20,10 @@ namespace CQRS.Implementation.Models
         public string Mail { get; set; }
         public int? GroupId { get; set; }
         public string GroupName { get; set; }
+        public int? CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public int? TypeId { get; set; }
+        public string TypeName { get; set; }
 
         public static NoteDTO Build(note entity)
         {
@@ -39,7 +43,11 @@ namespace CQRS.Implementation.Models
                 Login = entity.Login,
                 Mail = entity.Mail,
                 GroupId = entity.GroupId,
-                GroupName = entity.GroupName
+                GroupName = entity.GroupName,
+                CategoryId = entity.CategoryId,
+                CategoryName = entity.CategoryName,
+                TypeId = entity.TypeId,
+                TypeName = entity.TypeName
             };
         }
 

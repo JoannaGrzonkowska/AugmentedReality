@@ -25,7 +25,12 @@ namespace CQRS.Implementation.CommandHandlers
 
             noteRepository.SaveChanges();
             eventStorage.Publish(
-                new NoteEditedEvent() { NoteId = noteEdited.Id, Topic = noteEdited.Topic, Content = noteEdited.Content, Date = noteEdited.Date.Value });
+                new NoteEditedEvent() {
+                    NoteId = noteEdited.Id,
+                    Topic = noteEdited.Topic,
+                    Content = noteEdited.Content,
+                    TypeId = noteEdited.TypeId,
+                    Date = noteEdited.Date.Value });
 
             return new CommandResult();
 

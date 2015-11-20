@@ -22,7 +22,7 @@ namespace CQRS.Implementation.QueryHandlers
             RetrieveUsersNotesQueryResult result = new RetrieveUsersNotesQueryResult();
             var notes = noteRepository.GetAllQueryable().Where(x => x.UserId == handle.UserId && x.Identyfication != null && x.Identyfication.Equals("NOTE")).ToList();
             
-            result.Notes = Mapper.Map<IEnumerable<UserNoteDTO>>(notes);
+            result.Notes = Mapper.Map<IEnumerable<NoteDTO>>(notes); 
 
             return result;
         }

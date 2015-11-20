@@ -12,18 +12,16 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class group
+    public partial class categories
     {
-        public group()
+        public categories()
         {
-            this.usergroup = new HashSet<usergroup>();
-            this.notesgroups = new HashSet<notesgroups>();
+            this.types = new HashSet<types>();
         }
     
-        public int Id { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<usergroup> usergroup { get; set; }
-        public virtual ICollection<notesgroups> notesgroups { get; set; }
+        public virtual ICollection<types> types { get; set; }
     }
 }

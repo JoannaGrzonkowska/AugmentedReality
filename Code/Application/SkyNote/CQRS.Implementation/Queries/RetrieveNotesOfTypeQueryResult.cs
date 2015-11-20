@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CQRS.Implementation.Queries
 {
-    public class RetrieveUsersNotesQueryResult : IQueryResult
+    public class RetrieveNotesOfTypeQueryResult : IQueryResult
     {
         public IEnumerable<NoteDTO> Notes { get; set; }
     }

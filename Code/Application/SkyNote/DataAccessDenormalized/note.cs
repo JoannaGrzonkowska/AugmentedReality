@@ -30,5 +30,9 @@ namespace DataAccessDenormalized
         public string GroupName { get; set; }
         public string Identyfication { get; set; }
         public Nullable<int> NoteId { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public Nullable<int> TypeId { get; set; }
+        public string TypeName { get; set; }
     }
 }

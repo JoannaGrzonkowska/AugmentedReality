@@ -9,6 +9,7 @@ namespace CQRS.Implementation.Commands
         public int NoteId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
+        public int TypeId { get; set; }
 
         public override note Build(note note = null, Action<note> additionalAction = null)
         {
@@ -17,6 +18,7 @@ namespace CQRS.Implementation.Commands
                 x.Content = Content;
                 x.Topic = Topic;
                 x.Date = DateTime.Now;
+                x.TypeId = TypeId;
             };
             return base.Build(note, action);
         }

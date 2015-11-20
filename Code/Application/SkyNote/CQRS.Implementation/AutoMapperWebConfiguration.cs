@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
 using CQRS.Implementation.Profiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CQRS.Implementation
 {
@@ -15,7 +10,9 @@ namespace CQRS.Implementation
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile(new GroupProfile());
-                cfg.AddProfile(new NoteProfile());                
+                cfg.AddProfile(new NoteProfile());
+                cfg.AddProfile(new CategoryProfile());
+                cfg.AddProfile(new TypeProfile());
             });
         }
     }

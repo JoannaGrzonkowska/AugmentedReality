@@ -21,11 +21,27 @@ namespace SkyNote.Controllers
         {
             var note = ServiceLocator.QueryBus.Retrieve<NoteByIdQuery, NoteByIdQueryResult>(new NoteByIdQuery(id)).Note;
             return note;
-        }	
-        	
-		[ActionName("RetrieveUsersNotes")]
+        }
+
+        [ActionName("RetrieveNotesOfGivenType")]
         [HttpGet]
-        public IEnumerable<UserNoteDTO> GetRetriveUsersGroups(int id)
+        public IEnumerable<NoteDTO> GetRetrieveNotesOfGivenType(int id)
+        {
+            var notes = ServiceLocator.QueryBus.Retrieve<RetrieveNotesOfTypeQuery, RetrieveNotesOfTypeQueryResult>(new RetrieveNotesOfTypeQuery(id)).Notes;
+            return notes;
+        }
+
+        [ActionName("RetrieveNotesOfGivenCategory")]
+        [HttpGet]
+        public IEnumerable<NoteDTO> GetRetrieveNotesOfGivenCategory(int id)
+        {
+            var notes = ServiceLocator.QueryBus.Retrieve<RetrieveNotesOfCategoryQuery, RetrieveNotesOfCategoryQueryResult>(new RetrieveNotesOfCategoryQuery(id)).Notes;
+            return notes;
+        }
+
+        [ActionName("RetrieveUsersNotes")]
+        [HttpGet]
+        public IEnumerable<NoteDTO> GetRetriveUsersNotes(int id)
         {
             var notes = ServiceLocator.QueryBus.Retrieve<RetrieveUsersNotesQuery, RetrieveUsersNotesQueryResult>(new RetrieveUsersNotesQuery(id)).Notes;
             return notes;

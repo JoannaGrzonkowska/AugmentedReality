@@ -42,6 +42,10 @@
           <Property Name="GroupName" Type="varchar" MaxLength="45" />
           <Property Name="Identyfication" Type="varchar" MaxLength="45" />
           <Property Name="NoteId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="45" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="TypeName" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
           <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormalized" store:Type="Tables" />
@@ -92,6 +96,10 @@
           <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Identyfication" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="NoteId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CategoryName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="TypeName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -120,6 +128,10 @@
           <EntitySetMapping Name="noteSet">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
               <MappingFragment StoreEntitySet="note">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="NoteId" ColumnName="NoteId" />
                 <ScalarProperty Name="Identyfication" ColumnName="Identyfication" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />

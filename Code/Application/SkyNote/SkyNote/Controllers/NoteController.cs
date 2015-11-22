@@ -47,6 +47,22 @@ namespace SkyNote.Controllers
             return notes;
         }
 
+        [ActionName("RetrieveGroupsNotes")]
+        [HttpGet]
+        public IEnumerable<NoteDTO> RetrieveGroupsNotes(int id)
+        {
+            var notes = ServiceLocator.QueryBus.Retrieve<RetrieveGroupsNotesQuery, RetrieveGroupsNotesQueryResult>(new RetrieveGroupsNotesQuery(id)).Notes;
+            return notes;
+        }
+
+        [ActionName("ShareNoteInGroup")]
+        [HttpPost]
+        public HttpResponseMessage Post(ShareNoteInGroupCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
         [ActionName("AddNewNote")]
         [HttpPost]
         public HttpResponseMessage Post(CreateNoteCommand command)

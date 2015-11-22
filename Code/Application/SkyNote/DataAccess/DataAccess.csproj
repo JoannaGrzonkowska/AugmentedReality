@@ -78,11 +78,13 @@
     <Compile Include="Repositories\Implementation\GroupRepository.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
     <Compile Include="Repositories\Implementation\LocationRepository.cs" />
+    <Compile Include="Repositories\Implementation\NotegroupRepository.cs" />
     <Compile Include="Repositories\Implementation\NoteRepository.cs" />
     <Compile Include="Repositories\Implementation\TypeRepository.cs" />
     <Compile Include="Repositories\Implementation\UserfriendsRepository.cs" />
     <Compile Include="Repositories\Implementation\UsergroupRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
+    <Compile Include="Repositories\INotegroupRepository.cs" />
     <Compile Include="Repositories\INoteRepository.cs" />
     <Compile Include="Repositories\IRepositoryBase.cs" />
     <Compile Include="Repositories\Implementation\RepositoryBase.cs" />

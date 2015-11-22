@@ -24,12 +24,11 @@
         <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_2" />
         <AssociationConnector Association="skynotedbModel.note_type" />
         <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_1" ManuallyRouted="true" >
-          <ConnectorPoint PointX="7.25" PointY="3.7659730360256267" />
-          <ConnectorPoint PointX="7.25" PointY="4.1812680338541659" />
-          <ConnectorPoint PointX="7.16199967230771" PointY="4.1812680338541659" />
-          <ConnectorPoint PointX="7.16199967230771" PointY="5.5115364583333317" />
-          <ConnectorPoint PointX="2.125" PointY="5.5115364583333317" />
+          <ConnectorPoint PointX="7.71875" PointY="3.6340950520833331" />
+          <ConnectorPoint PointX="7.71875" PointY="4.8651432291666659" />
+          <ConnectorPoint PointX="2.125" PointY="4.8651432291666659" />
         </AssociationConnector>
+        <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

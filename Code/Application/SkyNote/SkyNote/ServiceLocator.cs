@@ -74,6 +74,7 @@ namespace SkyNote
                 x.For<ILocationRepository>().Use<LocationRepository>();
                 x.For<ICategoryRepository>().Use<CategoryRepository>();
                 x.For<ITypeRepository>().Use<TypeRepository>();
+                x.For<INotegroupRepository>().Use<NotegroupRepository>();
             });
         }
     }

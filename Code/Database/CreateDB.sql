@@ -139,3 +139,16 @@ INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('27', '7', 'Autobus
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('28', '7', 'Tramwaj');
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('29', '7', 'Trolejbus');
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('30', '7', 'Taksówka');
+
+
+ALTER TABLE `notesgroups` 
+ADD COLUMN `UserId` INT(11) NOT NULL AFTER `GroupId`;
+
+ALTER TABLE `notesgroups` 
+ADD INDEX `notesgroups_ibfk_3_idx` (`UserId` ASC);
+ALTER TABLE `notesgroups` 
+ADD CONSTRAINT `notesgroups_ibfk_3`
+  FOREIGN KEY (`UserId`)
+  REFERENCES `skynotedbnormal`.`user` (`UserID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

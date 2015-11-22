@@ -14,12 +14,16 @@ namespace DataAccessDenormalized
     
     public partial class note
     {
-        public int Id { get; set; }
+        public int NoteId { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public Nullable<int> TypeId { get; set; }
+        public string TypeName { get; set; }
         public Nullable<int> UserId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public int LocationId { get; set; }
+        public Nullable<int> LocationId { get; set; }
         public Nullable<decimal> XCord { get; set; }
         public Nullable<decimal> YCord { get; set; }
         public Nullable<decimal> ZCord { get; set; }
@@ -29,10 +33,5 @@ namespace DataAccessDenormalized
         public Nullable<int> GroupId { get; set; }
         public string GroupName { get; set; }
         public string Identyfication { get; set; }
-        public Nullable<int> NoteId { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public Nullable<int> TypeId { get; set; }
-        public string TypeName { get; set; }
     }
 }

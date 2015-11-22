@@ -24,40 +24,39 @@
         </EntityType>
         <EntityType Name="note">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="NoteId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoteId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="45" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="TypeName" Type="varchar" MaxLength="45" />
           <Property Name="UserId" Type="int" />
           <Property Name="Topic" Type="varchar" MaxLength="45" />
           <Property Name="Content" Type="varchar" MaxLength="200" />
           <Property Name="Date" Type="timestamp" Precision="0" />
           <Property Name="LocationId" Type="int" />
-          <Property Name="XCord" Type="decimal" Precision="10" Scale="8" />
-          <Property Name="YCord" Type="decimal" Precision="10" Scale="8" />
-          <Property Name="ZCord" Type="decimal" Precision="10" Scale="8" />
+          <Property Name="XCord" Type="decimal" Precision="10" Scale="7" />
+          <Property Name="YCord" Type="decimal" Precision="10" Scale="7" />
+          <Property Name="ZCord" Type="decimal" Precision="10" Scale="7" />
           <Property Name="Name" Type="varchar" MaxLength="45" />
           <Property Name="Login" Type="varchar" MaxLength="20" />
           <Property Name="Mail" Type="varchar" MaxLength="45" />
           <Property Name="GroupId" Type="int" />
           <Property Name="GroupName" Type="varchar" MaxLength="45" />
           <Property Name="Identyfication" Type="varchar" MaxLength="45" />
-          <Property Name="NoteId" Type="int" />
-          <Property Name="CategoryId" Type="int" />
-          <Property Name="CategoryName" Type="varchar" MaxLength="45" />
-          <Property Name="TypeId" Type="int" />
-          <Property Name="TypeName" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
-          <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormalized" store:Type="Tables" />
-          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedbdenormalized" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="skynotedenormalizeddb" store:Type="Tables" />
+          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedenormalizeddb" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="skynotedenormalizeddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="groupSet" EntityType="skynotedenormalizeddbModel.group" />
-          <EntitySet Name="noteSet" EntityType="skynotedenormalizeddbModel.note" />
+          <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
+          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
         </EntityContainer>
         <EntityType Name="group">
           <Key>
@@ -65,9 +64,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GroupId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
           <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="UserLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="UserMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -78,28 +77,27 @@
         </EntityType>
         <EntityType Name="note">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="NoteId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoteId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CategoryName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="TypeName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="Topic" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" />
-          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" />
           <Property Name="XCord" Type="Decimal" />
           <Property Name="YCord" Type="Decimal" />
           <Property Name="ZCord" Type="Decimal" />
           <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="GroupId" Type="Int32" Nullable="true" />
+          <Property Name="GroupId" Type="Int32" />
           <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Identyfication" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NoteId" Type="Int32" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="CategoryName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="TypeId" Type="Int32" />
-          <Property Name="TypeName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -107,7 +105,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities">
-          <EntitySetMapping Name="groupSet">
+          <EntitySetMapping Name="group">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.group">
               <MappingFragment StoreEntitySet="group">
                 <ScalarProperty Name="FriendId" ColumnName="FriendId" />
@@ -117,22 +115,17 @@
                 <ScalarProperty Name="UserMail" ColumnName="UserMail" />
                 <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="noteSet">
+          <EntitySetMapping Name="note">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
               <MappingFragment StoreEntitySet="note">
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
                 <ScalarProperty Name="Identyfication" ColumnName="Identyfication" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
@@ -147,7 +140,11 @@
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Topic" ColumnName="Topic" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

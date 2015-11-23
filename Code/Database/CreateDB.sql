@@ -83,7 +83,7 @@ ADD COLUMN `TypeId` INT(11) NULL DEFAULT NULL AFTER `Date`,
 ADD COLUMN `CategoryId` INT(11) NULL DEFAULT NULL AFTER `TypeId`,
 ADD INDEX `note_category_idx` (`CategoryId` ASC),
 ADD INDEX `note_type_idx` (`TypeId` ASC);
-ALTER TABLE `skynotedbnormal`.`note` 
+ALTER TABLE `note` 
 ADD CONSTRAINT `note_category`
   FOREIGN KEY (`CategoryId`)
   REFERENCES `categories` (`CategoryId`)
@@ -139,3 +139,16 @@ INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('27', '7', 'Autobus
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('28', '7', 'Tramwaj');
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('29', '7', 'Trolejbus');
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('30', '7', 'Taksówka');
+
+
+ALTER TABLE `notesgroups` 
+ADD COLUMN `UserId` INT(11) NOT NULL AFTER `GroupId`;
+
+ALTER TABLE `notesgroups` 
+ADD INDEX `notesgroups_ibfk_3_idx` (`UserId` ASC);
+ALTER TABLE `notesgroups` 
+ADD CONSTRAINT `notesgroups_ibfk_3`
+  FOREIGN KEY (`UserId`)
+  REFERENCES `skynotedbnormal`.`user` (`UserID`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

@@ -28,16 +28,17 @@ namespace CQRS.Implementation.EventHandlers
             var user = _userRepository.GetById(handle.UserId);
 
             string categoryName = null, typeName = null;
-            int? categoryId=null;
-            if (handle.TypeId != null) { 
+            int? categoryId = null;
+            if (handle.TypeId != null)
+            {
                 var type = _typeRepository.GetById((int)handle.TypeId);
                 var category = _categoryRepository.GetById(type.CategoryId);
                 categoryName = category.Name;
                 typeName = type.Name;
                 categoryId = category.CategoryId;
             }
-            
-            var item = new note()
+
+            /*var item = new note()
             {
                 NoteId = handle.NoteId,
                 Content = handle.Content,
@@ -59,7 +60,29 @@ namespace CQRS.Implementation.EventHandlers
             };
 
             _noteDenormalizedRepository.Add(item);
-            _noteDenormalizedRepository.SaveChanges();
+            _noteDenormalizedRepository.SaveChanges();*/
+
+            _noteDenormalizedRepository.InsertNote(
+                handle.UserId,
+                handle.Topic,
+                handle.Content,
+                handle.LocationId,
+                handle.XCord,
+                handle.YCord,
+                handle.ZCord,
+                user.Name,
+                user.Login,
+                user.Mail,
+              0,
+              string.Empty,
+                "NOTE",
+                handle.Date,
+               handle.NoteId,
+               categoryId,
+                categoryName,
+                handle.TypeId,
+                typeName
+                );
         }
     }
 }

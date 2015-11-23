@@ -19,6 +19,40 @@ var NoteService = function (urls) {
         });
     };
 
+    self.getNotesByLocation = function (handler, xCord, yCord, radius, categoryId, typeId) {
+
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: 'http://skynoteasiatest.azurewebsites.net/api/note/NotesByLocation?xCord=' + xCord
+                + '&yCord=' + yCord
+                + '&radius=' + radius
+                + '&categoryId=' + categoryId
+                + '&typeId=' + typeId,
+            type: 'GET',
+            success: function (data) {
+                var mappedData = $.map(data, function (item) {
+                    return new NoteModel(item);
+                });
+                handler(mappedData);
+            }
+        });
+    };
+
+    self.getMyNotesViewModel = function (handler) {
+
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: 'http://skynoteasiatest.azurewebsites.net/api/note/MyNotesViewModel',
+            type: 'GET',
+            success: function (data) {
+                var mappedData = new MyNotesViewModel(data);
+                handler(mappedData);
+            }
+        });
+    };
+
     self.getNote = function (id, handler) {
 
         $.ajaxSetup({ cache: false });

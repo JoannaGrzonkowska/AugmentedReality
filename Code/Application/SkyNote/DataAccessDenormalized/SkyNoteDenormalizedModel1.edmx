@@ -22,6 +22,8 @@
           <Property Name="FriendMail" Type="varchar" MaxLength="45" />
           <Property Name="FriendId" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6005: The data type 'point' is currently not supported for the target Entity Framework version; the column 'LocationPoint' in the table 'def.skynotedbdenormasia.note' was excluded.-->
         <EntityType Name="note">
           <Key>
             <PropertyRef Name="Id" />
@@ -47,6 +49,34 @@
           <Property Name="TypeId" Type="int" />
           <Property Name="TypeName" Type="varchar" MaxLength="45" />
         </EntityType>
+        <Function Name="get_notes_in_location_range" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="skynotedbdenormasia">
+          <Parameter Name="xCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="yCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="radiusParam" Type="int" Mode="In" />
+          <Parameter Name="categoryIdParam" Type="int" Mode="In" />
+          <Parameter Name="typeIdParam" Type="int" Mode="In" />
+        </Function>
+        <Function Name="insert_note" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="skynotedbdenormasia">
+          <Parameter Name="userIdParam" Type="int" Mode="In" />
+          <Parameter Name="topicParam" Type="varchar" Mode="In" />
+          <Parameter Name="contentParam" Type="varchar" Mode="In" />
+          <Parameter Name="locationIdParam" Type="int" Mode="In" />
+          <Parameter Name="xCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="yCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="zCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="nameParam" Type="varchar" Mode="In" />
+          <Parameter Name="loginParam" Type="varchar" Mode="In" />
+          <Parameter Name="mailParam" Type="varchar" Mode="In" />
+          <Parameter Name="groupIdParam" Type="int" Mode="In" />
+          <Parameter Name="groupNameParam" Type="varchar" Mode="In" />
+          <Parameter Name="identyficationParam" Type="varchar" Mode="In" />
+          <Parameter Name="dateParam" Type="timestamp" Mode="In" />
+          <Parameter Name="noteIdParam" Type="int" Mode="In" />
+          <Parameter Name="categoryIdParam" Type="int" Mode="In" />
+          <Parameter Name="categoryNameParam" Type="varchar" Mode="In" />
+          <Parameter Name="typeIdParam" Type="int" Mode="In" />
+          <Parameter Name="typeNameParam" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
           <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormasia" store:Type="Tables" />
           <EntitySet Name="note" EntityType="Self.note" Schema="skynotedbdenormasia" store:Type="Tables" />
@@ -58,6 +88,37 @@
         <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
           <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
+          <FunctionImport Name="note_update_location_point">
+          <Parameter Name="noteIdParam" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="insert_note">
+            <Parameter Name="userIdParam" Mode="In" Type="Int32" />
+            <Parameter Name="topicParam" Mode="In" Type="String" />
+            <Parameter Name="contentParam" Mode="In" Type="String" />
+            <Parameter Name="locationIdParam" Mode="In" Type="Int32" />
+            <Parameter Name="xCordParam" Mode="In" Type="Decimal" />
+            <Parameter Name="yCordParam" Mode="In" Type="Decimal" />
+            <Parameter Name="zCordParam" Mode="In" Type="Decimal" />
+            <Parameter Name="nameParam" Mode="In" Type="String" />
+            <Parameter Name="loginParam" Mode="In" Type="String" />
+            <Parameter Name="mailParam" Mode="In" Type="String" />
+            <Parameter Name="groupIdParam" Mode="In" Type="Int32" />
+            <Parameter Name="groupNameParam" Mode="In" Type="String" />
+            <Parameter Name="identyficationParam" Mode="In" Type="String" />
+            <Parameter Name="dateParam" Mode="In" Type="DateTime" />
+            <Parameter Name="noteIdParam" Mode="In" Type="Int32" />
+            <Parameter Name="categoryIdParam" Mode="In" Type="Int32" />
+            <Parameter Name="categoryNameParam" Mode="In" Type="String" />
+            <Parameter Name="typeIdParam" Mode="In" Type="Int32" />
+            <Parameter Name="typeNameParam" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_notes_in_location_range" EntitySet="note" ReturnType="Collection(skynotedenormalizeddbModel.note)">
+            <Parameter Name="xCordParam" Mode="In" Type="Decimal" />
+            <Parameter Name="yCordParam" Mode="In" Type="Decimal" />
+            <Parameter Name="radiusParam" Mode="In" Type="Int32" />
+            <Parameter Name="categoryIdParam" Mode="In" Type="Int32" />
+            <Parameter Name="typeIdParam" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="group">
           <Key>
@@ -151,6 +212,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="insert_note" FunctionName="skynotedenormalizeddbModel.Store.insert_note" />
+          <FunctionImportMapping FunctionImportName="get_notes_in_location_range" FunctionName="skynotedenormalizeddbModel.Store.get_notes_in_location_range" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

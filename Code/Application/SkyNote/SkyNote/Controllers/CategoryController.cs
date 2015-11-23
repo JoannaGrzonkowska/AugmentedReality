@@ -1,31 +1,27 @@
 ﻿using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
+using System.Linq;
 
 namespace SkyNote.Controllers
 {
     public class CategoryController : ApiController
     {
-        [ActionName("RetrieveAllCategories")]
+        [ActionName("Categories")]
         [HttpGet]
-        public IEnumerable<CategoryDTO> GetRetrieveAllCategories()
+        public IEnumerable<CategoryDTO> GetCategories()
         {
             var categories = ServiceLocator.QueryBus.Retrieve<RetrieveAllCategoriesQuery, RetrieveAllCategoriesQueryResult>(new RetrieveAllCategoriesQuery()).Categories;
             return categories;
         }
 
-     /*   [ActionName("RetrieveTypesOfCategoryGiven")]
+        [ActionName("CategoriesSelectList")]
         [HttpGet]
-        public IEnumerable<CategoryDTO> GetRetrieveTypesOfCategory()
+        public IEnumerable<CategoryDTO> GetCategoriesSelectList()
         {
-            var categories = ServiceLocator.QueryBus.Retrieve<GetRetrieveTypesOfCategoryGivenQuery, GetRetrieveTypesOfCategoryGivenQueryResult>(new GetRetrieveTypesOfCategoryGivenQuery()).Types;
+            var categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories.ToList();
             return categories;
-        }*/
-
+        }
     }
 }

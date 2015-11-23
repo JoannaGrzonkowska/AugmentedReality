@@ -109,10 +109,14 @@
     <Compile Include="Queries\GroupsForUserQuery.cs" />
     <Compile Include="Queries\GroupsForUserQueryResult.cs" />
     <Compile Include="Queries\NoteByIdQuery.cs" />
+    <Compile Include="Queries\NotesByLocationQuery.cs" />
     <Compile Include="Queries\NotesByDateQuery.cs" />
     <Compile Include="Queries\NoteByIdQueryResult.cs" />
+    <Compile Include="Queries\NotesByLocationQueryResult.cs" />
     <Compile Include="Queries\NotesByDateQueryResult.cs" />
+    <Compile Include="Queries\CategoriesForSelectQuery.cs" />
     <Compile Include="Queries\RetrieveAllCategoriesQuery.cs" />
+    <Compile Include="Queries\CategoriesForSelectQueryResult.cs" />
     <Compile Include="Queries\RetrieveAllCategoriesQueryResult.cs" />
     <Compile Include="Queries\RetrieveNotesOfCategoryQuery.cs" />
     <Compile Include="Queries\RetrieveNotesOfCategoryQueryResult.cs" />
@@ -128,7 +132,9 @@
     <Compile Include="Queries\RetriveUsersGroupsQueryResult.cs" />
     <Compile Include="QueryHandlers\GroupsForUserQueryHandler.cs" />
     <Compile Include="QueryHandlers\NoteByIdQueryHandler.cs" />
+    <Compile Include="QueryHandlers\NotesByLocationQueryHandler.cs" />
     <Compile Include="QueryHandlers\NotesByDateQueryHandler.cs" />
+    <Compile Include="QueryHandlers\CategoriesForSelectQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveAllCategoriesQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveNotesOfCategoryQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveNotesOfTypeQueryHandler.cs" />

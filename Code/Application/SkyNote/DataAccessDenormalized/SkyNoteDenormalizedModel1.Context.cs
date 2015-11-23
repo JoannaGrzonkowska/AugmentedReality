@@ -12,6 +12,9 @@ namespace DataAccessDenormalized
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class skynotedenormalizeddbEntities : DbContext
     {
@@ -27,5 +30,145 @@ namespace DataAccessDenormalized
     
         public DbSet<group> group { get; set; }
         public DbSet<note> note { get; set; }
+    
+        public virtual int note_update_location_point(Nullable<int> noteIdParam)
+        {
+            var noteIdParamParameter = noteIdParam.HasValue ?
+                new ObjectParameter("noteIdParam", noteIdParam) :
+                new ObjectParameter("noteIdParam", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("note_update_location_point", noteIdParamParameter);
+        }
+    
+        public virtual int insert_note(Nullable<int> userIdParam, string topicParam, string contentParam, Nullable<int> locationIdParam, Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<decimal> zCordParam, string nameParam, string loginParam, string mailParam, Nullable<int> groupIdParam, string groupNameParam, string identyficationParam, Nullable<System.DateTime> dateParam, Nullable<int> noteIdParam, Nullable<int> categoryIdParam, string categoryNameParam, Nullable<int> typeIdParam, string typeNameParam)
+        {
+            var userIdParamParameter = userIdParam.HasValue ?
+                new ObjectParameter("userIdParam", userIdParam) :
+                new ObjectParameter("userIdParam", typeof(int));
+    
+            var topicParamParameter = topicParam != null ?
+                new ObjectParameter("topicParam", topicParam) :
+                new ObjectParameter("topicParam", typeof(string));
+    
+            var contentParamParameter = contentParam != null ?
+                new ObjectParameter("contentParam", contentParam) :
+                new ObjectParameter("contentParam", typeof(string));
+    
+            var locationIdParamParameter = locationIdParam.HasValue ?
+                new ObjectParameter("locationIdParam", locationIdParam) :
+                new ObjectParameter("locationIdParam", typeof(int));
+    
+            var xCordParamParameter = xCordParam.HasValue ?
+                new ObjectParameter("xCordParam", xCordParam) :
+                new ObjectParameter("xCordParam", typeof(decimal));
+    
+            var yCordParamParameter = yCordParam.HasValue ?
+                new ObjectParameter("yCordParam", yCordParam) :
+                new ObjectParameter("yCordParam", typeof(decimal));
+    
+            var zCordParamParameter = zCordParam.HasValue ?
+                new ObjectParameter("zCordParam", zCordParam) :
+                new ObjectParameter("zCordParam", typeof(decimal));
+    
+            var nameParamParameter = nameParam != null ?
+                new ObjectParameter("nameParam", nameParam) :
+                new ObjectParameter("nameParam", typeof(string));
+    
+            var loginParamParameter = loginParam != null ?
+                new ObjectParameter("loginParam", loginParam) :
+                new ObjectParameter("loginParam", typeof(string));
+    
+            var mailParamParameter = mailParam != null ?
+                new ObjectParameter("mailParam", mailParam) :
+                new ObjectParameter("mailParam", typeof(string));
+    
+            var groupIdParamParameter = groupIdParam.HasValue ?
+                new ObjectParameter("groupIdParam", groupIdParam) :
+                new ObjectParameter("groupIdParam", typeof(int));
+    
+            var groupNameParamParameter = groupNameParam != null ?
+                new ObjectParameter("groupNameParam", groupNameParam) :
+                new ObjectParameter("groupNameParam", typeof(string));
+    
+            var identyficationParamParameter = identyficationParam != null ?
+                new ObjectParameter("identyficationParam", identyficationParam) :
+                new ObjectParameter("identyficationParam", typeof(string));
+    
+            var dateParamParameter = dateParam.HasValue ?
+                new ObjectParameter("dateParam", dateParam) :
+                new ObjectParameter("dateParam", typeof(System.DateTime));
+    
+            var noteIdParamParameter = noteIdParam.HasValue ?
+                new ObjectParameter("noteIdParam", noteIdParam) :
+                new ObjectParameter("noteIdParam", typeof(int));
+    
+            var categoryIdParamParameter = categoryIdParam.HasValue ?
+                new ObjectParameter("categoryIdParam", categoryIdParam) :
+                new ObjectParameter("categoryIdParam", typeof(int));
+    
+            var categoryNameParamParameter = categoryNameParam != null ?
+                new ObjectParameter("categoryNameParam", categoryNameParam) :
+                new ObjectParameter("categoryNameParam", typeof(string));
+    
+            var typeIdParamParameter = typeIdParam.HasValue ?
+                new ObjectParameter("typeIdParam", typeIdParam) :
+                new ObjectParameter("typeIdParam", typeof(int));
+    
+            var typeNameParamParameter = typeNameParam != null ?
+                new ObjectParameter("typeNameParam", typeNameParam) :
+                new ObjectParameter("typeNameParam", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_note", userIdParamParameter, topicParamParameter, contentParamParameter, locationIdParamParameter, xCordParamParameter, yCordParamParameter, zCordParamParameter, nameParamParameter, loginParamParameter, mailParamParameter, groupIdParamParameter, groupNameParamParameter, identyficationParamParameter, dateParamParameter, noteIdParamParameter, categoryIdParamParameter, categoryNameParamParameter, typeIdParamParameter, typeNameParamParameter);
+        }
+    
+        public virtual ObjectResult<note> get_notes_in_location_range(Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<int> radiusParam, Nullable<int> categoryIdParam, Nullable<int> typeIdParam)
+        {
+            var xCordParamParameter = xCordParam.HasValue ?
+                new ObjectParameter("xCordParam", xCordParam) :
+                new ObjectParameter("xCordParam", typeof(decimal));
+    
+            var yCordParamParameter = yCordParam.HasValue ?
+                new ObjectParameter("yCordParam", yCordParam) :
+                new ObjectParameter("yCordParam", typeof(decimal));
+    
+            var radiusParamParameter = radiusParam.HasValue ?
+                new ObjectParameter("radiusParam", radiusParam) :
+                new ObjectParameter("radiusParam", typeof(int));
+    
+            var categoryIdParamParameter = categoryIdParam.HasValue ?
+                new ObjectParameter("categoryIdParam", categoryIdParam) :
+                new ObjectParameter("categoryIdParam", typeof(int));
+    
+            var typeIdParamParameter = typeIdParam.HasValue ?
+                new ObjectParameter("typeIdParam", typeIdParam) :
+                new ObjectParameter("typeIdParam", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<note>("get_notes_in_location_range", xCordParamParameter, yCordParamParameter, radiusParamParameter, categoryIdParamParameter, typeIdParamParameter);
+        }
+    
+        public virtual ObjectResult<note> get_notes_in_location_range(Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<int> radiusParam, Nullable<int> categoryIdParam, Nullable<int> typeIdParam, MergeOption mergeOption)
+        {
+            var xCordParamParameter = xCordParam.HasValue ?
+                new ObjectParameter("xCordParam", xCordParam) :
+                new ObjectParameter("xCordParam", typeof(decimal));
+    
+            var yCordParamParameter = yCordParam.HasValue ?
+                new ObjectParameter("yCordParam", yCordParam) :
+                new ObjectParameter("yCordParam", typeof(decimal));
+    
+            var radiusParamParameter = radiusParam.HasValue ?
+                new ObjectParameter("radiusParam", radiusParam) :
+                new ObjectParameter("radiusParam", typeof(int));
+    
+            var categoryIdParamParameter = categoryIdParam.HasValue ?
+                new ObjectParameter("categoryIdParam", categoryIdParam) :
+                new ObjectParameter("categoryIdParam", typeof(int));
+    
+            var typeIdParamParameter = typeIdParam.HasValue ?
+                new ObjectParameter("typeIdParam", typeIdParam) :
+                new ObjectParameter("typeIdParam", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<note>("get_notes_in_location_range", mergeOption, xCordParamParameter, yCordParamParameter, radiusParamParameter, categoryIdParamParameter, typeIdParamParameter);
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace CQRS.Implementation.CommandHandlers
                     Topic = noteEdited.Topic,
                     Content = noteEdited.Content,
                     TypeId = noteEdited.TypeId,
-                    Date = noteEdited.Date.Value });
+                    Date = noteEdited.Date });
 
             return new CommandResult();
 

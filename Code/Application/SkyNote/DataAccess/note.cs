@@ -24,12 +24,12 @@ namespace DataAccess
         public Nullable<int> LocationId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
         public Nullable<int> TypeId { get; set; }
     
         public virtual location location { get; set; }
         public virtual user user { get; set; }
-        public virtual ICollection<notesgroups> notesgroups { get; set; }
         public virtual types types { get; set; }
+        public virtual ICollection<notesgroups> notesgroups { get; set; }
     }
 }

@@ -51,3 +51,87 @@ ADD COLUMN `CategoryId` INT(11) NULL DEFAULT NULL AFTER `NoteId`,
 ADD COLUMN `CategoryName` VARCHAR(45) NULL DEFAULT NULL AFTER `CategoryId`,
 ADD COLUMN `TypeId` INT(11) NULL DEFAULT NULL AFTER `CategoryName`,
 ADD COLUMN `TypeName` VARCHAR(45) NULL DEFAULT NULL AFTER `TypeId`;
+
+ALTER TABLE `note` 
+ADD COLUMN `LocationPoint` POINT NULL;
+
+ALTER TABLE `note` 
+ENGINE = MyISAM ;
+
+
+UPDATE `note`
+ SET 
+`LocationPoint` = POINT(XCord, YCord);
+
+ALTER TABLE `note` 
+CHANGE COLUMN `LocationPoint` `LocationPoint` POINT NOT NULL;
+
+
+ALTER TABLE note ADD SPATIAL INDEX(LocationPoint);
+
+PROCEDURE `insert_note`(
+userIdParam INT(11),
+topicParam VARCHAR(45),
+contentParam VARCHAR(200),
+locationIdParam INT(11),
+xCordParam INT(11),
+yCordParam INT(11),
+zCordParam INT(11),
+nameParam VARCHAR(45),
+loginParam VARCHAR(20),
+mailParam VARCHAR(45),
+groupIdParam INT(11),
+groupNameParam VARCHAR(45),
+identyficationParam VARCHAR(45),
+dateParam TIMESTAMP,
+noteIdParam INT(11),
+categoryIdParam INT(11),
+categoryNameParam VARCHAR(45),
+typeIdParam INT(11),
+typeNameParam VARCHAR(45)
+)
+BEGIN
+INSERT INTO `note`
+(`UserId`,
+`Topic`,
+`Content`,
+`LocationId`,
+`XCord`,
+`YCord`,
+`ZCord`,
+`Name`,
+`Login`,
+`Mail`,
+`GroupId`,
+`GroupName`,
+`Identyfication`,
+`Date`,
+`NoteId`,
+`CategoryId`,
+`CategoryName`,
+`TypeId`,
+`TypeName`,
+`LocationPoint`)
+VALUES
+(userIdParam,
+topicParam,
+contentParam,
+locationIdParam,
+xCordParam,
+yCordParam,
+zCordParam,
+nameParam,
+loginParam,
+mailParam,
+groupIdParam,
+groupNameParam,
+identyficationParam,
+dateParam,
+noteIdParam,
+categoryIdParam,
+categoryNameParam,
+typeIdParam,
+typeNameParam,
+POINT(xCordParam, yCordParam));
+
+END

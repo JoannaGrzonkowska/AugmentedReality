@@ -20,7 +20,9 @@ namespace CQRS.Implementation.QueryHandlers
         public RetriveUsersGroupsQueryResult Handle(RetriveUsersGroupsQuery handle)
         {
             RetriveUsersGroupsQueryResult result = new RetriveUsersGroupsQueryResult();
-            var groups = groupRepository.GetAllQueryable().Where(x => x.UserId == handle.UserId).ToList();
+            var groups = groupRepository.GetAllQueryable().Where(x => x.UserId == handle.UserId
+                                                                 && (x.Role == "Member" || x.Role == "Creator")
+                                                                 ).ToList();
             
             result.Groups = Mapper.Map<IEnumerable<UserGroupDTO>>(groups);
 

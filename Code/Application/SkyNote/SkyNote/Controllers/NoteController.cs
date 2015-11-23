@@ -73,6 +73,14 @@ namespace SkyNote.Controllers
             return notes;
         }
 
+        [ActionName("RetrieveNotesAvaliableForUser")]
+        [HttpGet]
+        public IEnumerable<NoteDTO> GetRetrieveNotesAvaliableForUser(int id)
+        {
+            var notes = ServiceLocator.QueryBus.Retrieve<RetrieveNotesAvaliableForUserQuery, RetrieveNotesAvaliableForUserQueryResult>(new RetrieveNotesAvaliableForUserQuery(id)).Notes;
+            return notes;
+        }
+
         [ActionName("RetrieveGroupsNotes")]
         [HttpGet]
         public IEnumerable<NoteDTO> RetrieveGroupsNotes(int id)

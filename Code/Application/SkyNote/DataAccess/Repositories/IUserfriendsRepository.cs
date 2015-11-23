@@ -8,5 +8,6 @@ namespace DataAccess.Repositories
 {
     public interface IUserfriendsRepository : IRepositoryBase<userfriends>
     {
+        userfriends RetriveUserFriendsPairsByUserId(int UserId);
     }
 }

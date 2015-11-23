@@ -65,6 +65,7 @@
     <Compile Include="CommandHandlers\ShareNoteInGroupCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserAddFriendCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserJoinGroupCommandHandler.cs" />
+    <Compile Include="CommandHandlers\UserRemoveFriendCommandHandler.cs" />
     <Compile Include="Commands\CreateGroupCommand.cs" />
     <Compile Include="Commands\DeleteGroupCommand.cs" />
     <Compile Include="Commands\DeleteNoteCommand.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Commands\ShareNoteInGroupCommand.cs" />
     <Compile Include="Commands\UserAddFriendCommand.cs" />
     <Compile Include="Commands\UserJoinGroupCommand.cs" />
+    <Compile Include="Commands\UserRemoveFriendCommand.cs" />
     <Compile Include="EventHandlers\GroupCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\GroupDeletedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteDeletedEventHandler.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="EventHandlers\ShareNoteInGroupEventHandler.cs" />
     <Compile Include="EventHandlers\UserAddFriendEventHandler.cs" />
     <Compile Include="EventHandlers\UserJoinGroupEventHandler.cs" />
+    <Compile Include="EventHandlers\UserRemoveFriendEventHandler.cs" />
     <Compile Include="Events\GroupCreatedEvent.cs" />
     <Compile Include="Events\GroupDeletedEvent.cs" />
     <Compile Include="Events\NoteDeletedEvent.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Events\ShareNoteInGroupEvent.cs" />
     <Compile Include="Events\UserAddFriendEvent.cs" />
     <Compile Include="Events\UserJoinGroupEvent.cs" />
+    <Compile Include="Events\UserRemoveFriendEvent.cs" />
     <Compile Include="Models\BaseDTO.cs" />
     <Compile Include="Models\CategoryDTO.cs" />
     <Compile Include="Models\FriendDTO.cs" />
@@ -124,6 +128,8 @@
     <Compile Include="Queries\RetrieveAllCategoriesQueryResult.cs" />
     <Compile Include="Queries\RetrieveGroupsNotesQuery.cs" />
     <Compile Include="Queries\RetrieveGroupsNotesQueryResult.cs" />
+    <Compile Include="Queries\RetrieveNotesAvaliableForUserQuery.cs" />
+    <Compile Include="Queries\RetrieveNotesAvaliableForUserQueryResult.cs" />
     <Compile Include="Queries\RetrieveNotesOfCategoryQuery.cs" />
     <Compile Include="Queries\RetrieveNotesOfCategoryQueryResult.cs" />
     <Compile Include="Queries\RetrieveNotesOfTypeQuery.cs" />
@@ -143,6 +149,7 @@
     <Compile Include="QueryHandlers\CategoriesForSelectQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveAllCategoriesQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveGroupsNotesQueryHandler.cs" />
+    <Compile Include="QueryHandlers\RetrieveNotesAvaliableForUserQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveNotesOfCategoryQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveNotesOfTypeQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveUsersFriendsQueryHandler.cs" />

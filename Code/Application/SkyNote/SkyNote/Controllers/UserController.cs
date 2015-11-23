@@ -61,6 +61,14 @@ namespace SkyNote.Controllers
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
 
+        [ActionName("RemoveFriend")]
+        [HttpPost]
+        public HttpResponseMessage PostRemoveFriend(UserRemoveFriendCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
         // PUT api/values/5
         public void Put(int id, [FromBody]string value)
         {

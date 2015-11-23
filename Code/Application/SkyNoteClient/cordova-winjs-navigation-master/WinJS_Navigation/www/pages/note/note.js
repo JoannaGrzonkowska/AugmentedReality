@@ -52,6 +52,7 @@
                             if (status === google.maps.GeocoderStatus.OK) {
                                 if (results[0]) {
                                     var address = results[0].formatted_address;
+                                    alert(address);
                                     noteService.addNote(
                                     {
                                         Topic: self.Topic(),

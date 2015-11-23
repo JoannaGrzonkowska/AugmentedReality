@@ -47,6 +47,7 @@
           <Property Name="NotesgroupsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NoteId" Type="int" Nullable="false" />
           <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="types">
           <Key>
@@ -143,6 +144,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="notesgroups_ibfk_3">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="notesgroups" Type="Self.notesgroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="notesgroups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="types_ibfk_1">
           <End Role="categories" Type="Self.categories" Multiplicity="1" />
           <End Role="types" Type="Self.types" Multiplicity="*" />
@@ -233,6 +246,10 @@
             <End Role="group" EntitySet="group" />
             <End Role="notesgroups" EntitySet="notesgroups" />
           </AssociationSet>
+          <AssociationSet Name="notesgroups_ibfk_3" Association="Self.notesgroups_ibfk_3">
+            <End Role="user" EntitySet="user" />
+            <End Role="notesgroups" EntitySet="notesgroups" />
+          </AssociationSet>
           <AssociationSet Name="types_ibfk_1" Association="Self.types_ibfk_1">
             <End Role="categories" EntitySet="categories" />
             <End Role="types" EntitySet="types" />
@@ -294,6 +311,10 @@
           </AssociationSet>
           <AssociationSet Name="notesgroups_ibfk_1" Association="skynotedbModel.notesgroups_ibfk_1">
             <End Role="note" EntitySet="note" />
+            <End Role="notesgroups" EntitySet="notesgroups" />
+          </AssociationSet>
+          <AssociationSet Name="notesgroups_ibfk_3" Association="skynotedbModel.notesgroups_ibfk_3">
+            <End Role="user" EntitySet="user" />
             <End Role="notesgroups" EntitySet="notesgroups" />
           </AssociationSet>
           <AssociationSet Name="userfriends_ibfk_1" Association="skynotedbModel.userfriends_ibfk_1">
@@ -359,8 +380,10 @@
           <Property Name="NotesgroupsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NoteId" Type="Int32" Nullable="false" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="group" Relationship="skynotedbModel.notesgroups_ibfk_2" FromRole="notesgroups" ToRole="group" />
           <NavigationProperty Name="note" Relationship="skynotedbModel.notesgroups_ibfk_1" FromRole="notesgroups" ToRole="note" />
+          <NavigationProperty Name="user" Relationship="skynotedbModel.notesgroups_ibfk_3" FromRole="notesgroups" ToRole="user" />
         </EntityType>
         <EntityType Name="types">
           <Key>
@@ -383,6 +406,7 @@
           <Property Name="Password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="PasswordSalt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="note" Relationship="skynotedbModel.note_ibfk_2" FromRole="user" ToRole="note" />
+          <NavigationProperty Name="notesgroups" Relationship="skynotedbModel.notesgroups_ibfk_3" FromRole="user" ToRole="notesgroups" />
           <NavigationProperty Name="userfriends" Relationship="skynotedbModel.userfriends_ibfk_1" FromRole="user" ToRole="userfriends" />
           <NavigationProperty Name="userfriends1" Relationship="skynotedbModel.userfriends_ibfk_2" FromRole="user" ToRole="userfriends" />
           <NavigationProperty Name="usergroup" Relationship="skynotedbModel.usergroup_ibfk_1" FromRole="user" ToRole="usergroup" />
@@ -491,6 +515,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="notesgroups_ibfk_3">
+          <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
+          <End Type="skynotedbModel.notesgroups" Role="notesgroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="notesgroups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="userfriends_ibfk_1">
           <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
           <End Type="skynotedbModel.userfriends" Role="userfriends" Multiplicity="*" />
@@ -575,6 +611,7 @@
           <EntitySetMapping Name="notesgroups">
             <EntityTypeMapping TypeName="skynotedbModel.notesgroups">
               <MappingFragment StoreEntitySet="notesgroups">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="NoteId" ColumnName="NoteId" />
                 <ScalarProperty Name="NotesgroupsId" ColumnName="NotesgroupsId" />

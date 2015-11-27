@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperWebConfiguration.cs" />
+    <Compile Include="CommandHandlers\UpdateUserAvatarCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateGroupCommandHandler.cs" />
     <Compile Include="CommandHandlers\DeleteGroupCommandHandler.cs" />
     <Compile Include="CommandHandlers\DeleteNoteCommandHandler.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="CommandHandlers\UserAddFriendCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserJoinGroupCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserRemoveFriendCommandHandler.cs" />
+    <Compile Include="Commands\UpdateUserAvatarCommand.cs" />
     <Compile Include="Commands\CreateGroupCommand.cs" />
     <Compile Include="Commands\DeleteGroupCommand.cs" />
     <Compile Include="Commands\DeleteNoteCommand.cs" />

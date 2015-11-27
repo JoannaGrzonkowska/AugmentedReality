@@ -1,4 +1,4 @@
-
+﻿
 CREATE TABLE `location` (
   `LocationId` int(11) NOT NULL AUTO_INCREMENT,
   `XCord` decimal(10,0) DEFAULT NULL,
@@ -152,3 +152,7 @@ ADD CONSTRAINT `notesgroups_ibfk_3`
   REFERENCES `skynotedbnormal`.`user` (`UserID`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+
+ALTER TABLE `user` 
+ADD COLUMN `Avatar` VARCHAR(45) NULL DEFAULT 'defaultAvatar';

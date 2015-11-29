@@ -12,29 +12,44 @@
     <script src="../../js/knockout-3.3.0.js"></script>
     <script src="../../js/knockout-winjs.js"></script>
 
+    <script src="../../scripts/App/Models/GroupModel.js"></script>
     <script src="../../scripts/App/Services/GroupService.js"></script>
 
 </head>
 <body>
-    <div class="groups fragment" id="group-container">
-        <header aria-label="Header content" role="banner">
-            <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Your groups!</span>
-            </h1>
-        </header>
-        <section aria-label="Main content" role="main">
-            <button class="navButton">Go to Home</button>
-        </section>
-       
-        <button data-bind="click: listViewUnshift">Unshift</button>
+    <div class="home fragment" id="groups-container">
 
-        <input type="text" data-bind="textInput: newGroupName" />&nbsp;<button data-bind="click: addNewItem">Add group</button>
-        <div data-bind="foreach: toDoItems">
-            <input type="checkbox" data-bind="checked: done" />
-            <span data-bind="text: groupName"></span>
-            <a href="#" data-bind="click: $parent.removeItem.bind($parent, $data)">x</a>
-            <br />
+        <section>
+            <button class="btn btn-default" data-bind="click:gotoAddGroup">Add group</button>
+        </section>
+
+        <h2>My groups</h2>
+        <div>
+            <span>Number of groups: </span><span data-bind="text: myGroupsArray().length"></span>
         </div>
+
+        <div class="row">            
+            <button class="btn btn-default col-xs-2" data-bind="click:refresh">Refresh</button>
+        </div>
+
+        <div data-bind="template: { name: 'group-template', foreach: myGroupsArray }"></div>
+
+        <script id="group-template" type="text/html">
+            <div class="panel panel-primary" >
+                <div class="panel-heading" data-bind="click: $parent.viewGroupNotes">
+                    <div style="background-color:white;font-size:medium" class="pull-right">                        
+                        <a>
+                            <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.edit"></span>
+                        </a>
+                        <a>
+                            <span class="glyphicon glyphicon-minus" data-bind="click: $parent.delete"></span>
+                        </a>
+                    </div>
+                    <div data-bind="text: GroupName"></div>
+                </div>
+                
+            </div>
+        </script>
 
     </div>
 </body>

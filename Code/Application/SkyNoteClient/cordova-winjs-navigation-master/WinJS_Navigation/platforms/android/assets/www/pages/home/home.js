@@ -4,16 +4,21 @@
     WinJS.UI.Pages.define("pages/home/home.html", {
 
         ready: function (element, options) {
-        
+
+            if (typeof options === "undefined")
+            {
+                var options = { id: 1 };
+            }
+            options.id = (typeof options.id === "undefined") ? "1" : options.id;
             var noteService = new NoteService();
 
             var NotesListViewModel = function () {
                 var self = this;
                 self.myNotesArray = ko.observableArray([]);
-                self.lastRefresh = ko.observable();
+                self.lastRefresh = ko.observable(); 
 
-                var getNotes = function () {
-                    noteService.getUserNotes(function (data) {
+                var getNotes = function (id) {
+                    noteService.getUserNotes(id, function (data) {
                         self.myNotesArray(data);
                         self.lastRefresh(new Date());
                     });
@@ -36,10 +41,10 @@
                 };
 
                 self.refresh = function () {
-                    getNotes();
+                    getNotes(1); // wstawic current user id
                 };
 
-                getNotes();
+                getNotes(options.id);
 
             };
 

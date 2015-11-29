@@ -43,10 +43,7 @@
                         var latitude = position.coords.latitude;
                         var altitude = position.coords.altitude;
 
-                        alert("longitude " + longitude);
-                        alert("latitude " + latitude);
-                        alert("altitude " + altitude);
-
+                        
                         noteService.addNote(
                        {
                            Topic: self.Topic(),

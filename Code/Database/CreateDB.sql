@@ -100,6 +100,7 @@ DROP FOREIGN KEY `note_category`;
 ALTER TABLE `note` 
 DROP COLUMN `CategoryId`,
 DROP INDEX `note_category_idx` ;
+
   
 INSERT INTO `categories` (`CategoryId`, `Name`) VALUES ('1', 'Gastronomia');
 INSERT INTO `categories` (`CategoryId`, `Name`) VALUES ('2', 'Zabytki');
@@ -139,7 +140,6 @@ INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('27', '7', 'Autobus
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('28', '7', 'Tramwaj');
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('29', '7', 'Trolejbus');
 INSERT INTO `types` (`TypeId`, `CategoryId`, `Name`) VALUES ('30', '7', 'Taksówka');
-
 
 ALTER TABLE `notesgroups` 
 ADD COLUMN `UserId` INT(11) NOT NULL AFTER `GroupId`;

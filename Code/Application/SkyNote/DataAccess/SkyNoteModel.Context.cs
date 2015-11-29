@@ -25,16 +25,16 @@ namespace DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<group> groupSet { get; set; }
-        public DbSet<location> locationSet { get; set; }
-        public DbSet<note> noteSet { get; set; }
-        public DbSet<user> userSet { get; set; }
-        public DbSet<usergroup> usergroupSet { get; set; }
-        public DbSet<userfriends> userfriends { get; set; }
         public DbSet<categories> categories { get; set; }
+        public DbSet<group> group { get; set; }
+        public DbSet<location> location { get; set; }
+        public DbSet<note> note { get; set; }
         public DbSet<notesgroups> notesgroups { get; set; }
         public DbSet<types> types { get; set; }
-        public DbSet<userfriendsinvites> userfriendsinvites { get; set; }
-        public DbSet<usergroupinvites> usergroupinvites { get; set; }
+ }
+        public DbSet<userfriendsinvites> userfriendsinvites { get; set; }        public DbSet<usergroupinvites> usergroupinvites { get; set; }
+        public DbSet<user> user { get; set; }
+        public DbSet<userfriends> userfriends { get; set; }
+        public DbSet<usergroup> usergroup { get; set; }
     }
 }

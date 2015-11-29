@@ -13,6 +13,7 @@ namespace CQRS.Implementation
                 cfg.AddProfile(new NoteProfile());
                 cfg.AddProfile(new CategoryProfile());
                 cfg.AddProfile(new TypeProfile());
+                cfg.AddProfile(new InviteProfile());
             });
         }
     }

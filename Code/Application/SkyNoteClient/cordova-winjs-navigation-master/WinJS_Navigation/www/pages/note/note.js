@@ -33,6 +33,9 @@
                     self.Content(data.Content());
                 };
 
+                var geocoder = new google.maps.Geocoder;
+
+
                 self.addNote = function () {
                     var options = {
                         enableHighAccuracy: true
@@ -44,16 +47,25 @@
                         var altitude = position.coords.altitude;
 
                         
-                        noteService.addNote(
-                       {
-                           Topic: self.Topic(),
-                           Content: self.Content(),
-                           UserId: 1,
-                           xCord: longitude,
-                           yCord: latitude,
-                           zCord: altitude
-
-                       });
+                        
+                        geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, function (results, status) {
+                            if (status === google.maps.GeocoderStatus.OK) {
+                                if (results[0]) {
+                                    var address = results[0].formatted_address;
+                                    alert(address);
+                                    noteService.addNote(
+                                    {
+                                        Topic: self.Topic(),
+                                        Content: self.Content(),
+                                        UserId: 1,
+                                        xCord: longitude,
+                                        yCord: latitude,
+                                        zCord: altitude,
+                                        TypeId: 1
+                                    });
+                                }
+                            }
+                        });
 
                     }, function () {
                         alert("error");

@@ -53,6 +53,31 @@ namespace SkyNote.Controllers
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
 
+        [ActionName("InviteFriend")]
+        [HttpPost]
+        public HttpResponseMessage PostInviteFriend(UserInviteFriendCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+        [ActionName("GetFriendInvites")]
+        [HttpGet]
+        public IEnumerable<FriendInviteDTO> GetRetrieveFriendInvites(int id)
+        {
+            var friendsInvites = ServiceLocator.QueryBus.Retrieve<RetrieveFriendInvitesQuery, RetrieveFriendInvitesQueryResult>(new RetrieveFriendInvitesQuery(id)).FriendInvites;
+            return friendsInvites;
+        }
+
+        [ActionName("DecideFriendInvite")]
+        [HttpPost]
+        public HttpResponseMessage AcceptFriendInvite(DecideFriendInviteCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+
         [ActionName("AddFriend")]
         [HttpPost]
         public HttpResponseMessage PostAddFriend(UserAddFriendCommand command)
@@ -61,14 +86,20 @@ namespace SkyNote.Controllers
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        [ActionName("RemoveFriend")]
+        [HttpPost]
+        public HttpResponseMessage PostRemoveFriend(UserRemoveFriendCommand command)
         {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
-
-        // DELETE api/values/5
-        public void Delete(int id)
+        
+        [ActionName("SignIn")]
+        [HttpPost]
+        public LoginResultDTO Login(LoginCommand command)
         {
+            var loginResult = ServiceLocator.QueryBus.Retrieve<UserLoginQuery, UserLoginQueryResult>(new UserLoginQuery(command.UserName, command.Password)).loginResult;
+            return loginResult;
         }
     }
 }

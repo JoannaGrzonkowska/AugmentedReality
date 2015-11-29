@@ -17,13 +17,13 @@ namespace DataAccess
         public group()
         {
             this.usergroup = new HashSet<usergroup>();
-            this.notesgroups = new HashSet<notesgroups>();
+            this.usergroupinvites = new HashSet<usergroupinvites>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<usergroup> usergroup { get; set; }
-        public virtual ICollection<notesgroups> notesgroups { get; set; }
+        public virtual ICollection<usergroupinvites> usergroupinvites { get; set; }
     }
 }

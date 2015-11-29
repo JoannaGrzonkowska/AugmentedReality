@@ -76,12 +76,31 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="FriendId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="userfriendsinvites">
+          <Key>
+            <PropertyRef Name="UserfriendsinviteId" />
+          </Key>
+          <Property Name="UserfriendsinviteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="45" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FriendId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="usergroup">
           <Key>
             <PropertyRef Name="UsergroupId" />
           </Key>
           <Property Name="UsergroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usergroupinvites">
+          <Key>
+            <PropertyRef Name="UsergroupinviteId" />
+          </Key>
+          <Property Name="UsergroupinviteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="45" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="InvitingUserId" Type="int" Nullable="false" />
           <Property Name="GroupId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="note_ibfk_1">
@@ -192,6 +211,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="userfriendsinvites_ibfk_1">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userfriendsinvites" Type="Self.userfriendsinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriendsinvites">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userfriendsinvites_ibfk_2">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userfriendsinvites" Type="Self.userfriendsinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriendsinvites">
+              <PropertyRef Name="FriendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="usergroup_ibfk_1">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="usergroup" Type="Self.usergroup" Multiplicity="*" />
@@ -216,6 +259,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="usergroupinvites_ibfk_1">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="usergroupinvites" Type="Self.usergroupinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="usergroupinvites">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usergroupinvites_ibfk_2">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="usergroupinvites" Type="Self.usergroupinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="usergroupinvites">
+              <PropertyRef Name="InvitingUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usergroupinvites_ibfk_3">
+          <End Role="group" Type="Self.group" Multiplicity="1" />
+          <End Role="usergroupinvites" Type="Self.usergroupinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="usergroupinvites">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="skynotedbModelStoreContainer">
           <EntitySet Name="categories" EntityType="Self.categories" Schema="skynotedbnormal" store:Type="Tables" />
           <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbnormal" store:Type="Tables" />
@@ -225,7 +304,9 @@
           <EntitySet Name="types" EntityType="Self.types" Schema="skynotedbnormal" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="skynotedbnormal" store:Type="Tables" />
           <EntitySet Name="userfriends" EntityType="Self.userfriends" Schema="skynotedbnormal" store:Type="Tables" />
+          <EntitySet Name="userfriendsinvites" EntityType="Self.userfriendsinvites" Schema="skynotedbnormal" store:Type="Tables" />
           <EntitySet Name="usergroup" EntityType="Self.usergroup" Schema="skynotedbnormal" store:Type="Tables" />
+          <EntitySet Name="usergroupinvites" EntityType="Self.usergroupinvites" Schema="skynotedbnormal" store:Type="Tables" />
           <AssociationSet Name="note_ibfk_1" Association="Self.note_ibfk_1">
             <End Role="location" EntitySet="location" />
             <End Role="note" EntitySet="note" />
@@ -262,6 +343,14 @@
             <End Role="user" EntitySet="user" />
             <End Role="userfriends" EntitySet="userfriends" />
           </AssociationSet>
+          <AssociationSet Name="userfriendsinvites_ibfk_1" Association="Self.userfriendsinvites_ibfk_1">
+            <End Role="user" EntitySet="user" />
+            <End Role="userfriendsinvites" EntitySet="userfriendsinvites" />
+          </AssociationSet>
+          <AssociationSet Name="userfriendsinvites_ibfk_2" Association="Self.userfriendsinvites_ibfk_2">
+            <End Role="user" EntitySet="user" />
+            <End Role="userfriendsinvites" EntitySet="userfriendsinvites" />
+          </AssociationSet>
           <AssociationSet Name="usergroup_ibfk_1" Association="Self.usergroup_ibfk_1">
             <End Role="user" EntitySet="user" />
             <End Role="usergroup" EntitySet="usergroup" />
@@ -269,6 +358,18 @@
           <AssociationSet Name="usergroup_ibfk_2" Association="Self.usergroup_ibfk_2">
             <End Role="group" EntitySet="group" />
             <End Role="usergroup" EntitySet="usergroup" />
+          </AssociationSet>
+          <AssociationSet Name="usergroupinvites_ibfk_1" Association="Self.usergroupinvites_ibfk_1">
+            <End Role="user" EntitySet="user" />
+            <End Role="usergroupinvites" EntitySet="usergroupinvites" />
+          </AssociationSet>
+          <AssociationSet Name="usergroupinvites_ibfk_2" Association="Self.usergroupinvites_ibfk_2">
+            <End Role="user" EntitySet="user" />
+            <End Role="usergroupinvites" EntitySet="usergroupinvites" />
+          </AssociationSet>
+          <AssociationSet Name="usergroupinvites_ibfk_3" Association="Self.usergroupinvites_ibfk_3">
+            <End Role="group" EntitySet="group" />
+            <End Role="usergroupinvites" EntitySet="usergroupinvites" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -329,6 +430,28 @@
             <End Role="user" EntitySet="userSet" />
             <End Role="notesgroups" EntitySet="notesgroups" />
           </AssociationSet>
+          <EntitySet Name="userfriendsinvites" EntityType="skynotedbModel.userfriendsinvites" />
+          <EntitySet Name="usergroupinvites" EntityType="skynotedbModel.usergroupinvites" />
+          <AssociationSet Name="usergroupinvites_ibfk_3" Association="skynotedbModel.usergroupinvites_ibfk_3">
+            <End Role="group" EntitySet="groupSet" />
+            <End Role="usergroupinvites" EntitySet="usergroupinvites" />
+          </AssociationSet>
+          <AssociationSet Name="userfriendsinvites_ibfk_1" Association="skynotedbModel.userfriendsinvites_ibfk_1">
+            <End Role="user" EntitySet="userSet" />
+            <End Role="userfriendsinvites" EntitySet="userfriendsinvites" />
+          </AssociationSet>
+          <AssociationSet Name="userfriendsinvites_ibfk_2" Association="skynotedbModel.userfriendsinvites_ibfk_2">
+            <End Role="user" EntitySet="userSet" />
+            <End Role="userfriendsinvites" EntitySet="userfriendsinvites" />
+          </AssociationSet>
+          <AssociationSet Name="usergroupinvites_ibfk_1" Association="skynotedbModel.usergroupinvites_ibfk_1">
+            <End Role="user" EntitySet="userSet" />
+            <End Role="usergroupinvites" EntitySet="usergroupinvites" />
+          </AssociationSet>
+          <AssociationSet Name="usergroupinvites_ibfk_2" Association="skynotedbModel.usergroupinvites_ibfk_2">
+            <End Role="user" EntitySet="userSet" />
+            <End Role="usergroupinvites" EntitySet="usergroupinvites" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="group">
           <Key>
@@ -338,6 +461,7 @@
           <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="usergroup" Relationship="skynotedbModel.usergroup_ibfk_2" FromRole="group1" ToRole="usergroup1" />
           <NavigationProperty Name="notesgroups" Relationship="skynotedbModel.notesgroups_ibfk_2" FromRole="group" ToRole="notesgroups" />
+          <NavigationProperty Name="usergroupinvites" Relationship="skynotedbModel.usergroupinvites_ibfk_3" FromRole="group" ToRole="usergroupinvites" />
         </EntityType>
         <EntityType Name="location">
           <Key>
@@ -378,8 +502,9 @@
           <NavigationProperty Name="note" Relationship="skynotedbModel.note_ibfk_2" FromRole="user1" ToRole="note1" />
           <NavigationProperty Name="usergroup" Relationship="skynotedbModel.usergroup_ibfk_1" FromRole="user1" ToRole="usergroup1" />
           <NavigationProperty Name="userfriends" Relationship="skynotedbModel.userfriends_ibfk_1" FromRole="user" ToRole="userfriends" />
-          <NavigationProperty Name="userfriends1" Relationship="skynotedbModel.userfriends_ibfk_2" FromRole="user" ToRole="userfriends" />
           <NavigationProperty Name="notesgroups" Relationship="skynotedbModel.notesgroups_ibfk_3" FromRole="user" ToRole="notesgroups" />
+          <NavigationProperty Name="userfriendsinvites" Relationship="skynotedbModel.userfriendsinvites_ibfk_1" FromRole="user" ToRole="userfriendsinvites" />
+          <NavigationProperty Name="usergroupinvites" Relationship="skynotedbModel.usergroupinvites_ibfk_1" FromRole="user" ToRole="usergroupinvites" />
         </EntityType>
         <EntityType Name="usergroup">
           <Key>
@@ -563,6 +688,88 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="userfriendsinvites">
+          <Key>
+            <PropertyRef Name="UserfriendsinviteId" />
+          </Key>
+          <Property Name="UserfriendsinviteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FriendId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="skynotedbModel.userfriendsinvites_ibfk_1" FromRole="userfriendsinvites" ToRole="user" />
+        </EntityType>
+        <EntityType Name="usergroupinvites">
+          <Key>
+            <PropertyRef Name="UsergroupinviteId" />
+          </Key>
+          <Property Name="UsergroupinviteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="InvitingUserId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="group" Relationship="skynotedbModel.usergroupinvites_ibfk_3" FromRole="usergroupinvites" ToRole="group" />
+          <NavigationProperty Name="user" Relationship="skynotedbModel.usergroupinvites_ibfk_1" FromRole="usergroupinvites" ToRole="user" />
+        </EntityType>
+        <Association Name="usergroupinvites_ibfk_3">
+          <End Type="skynotedbModel.group" Role="group" Multiplicity="1" />
+          <End Type="skynotedbModel.usergroupinvites" Role="usergroupinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="usergroupinvites">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userfriendsinvites_ibfk_1">
+          <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
+          <End Type="skynotedbModel.userfriendsinvites" Role="userfriendsinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriendsinvites">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userfriendsinvites_ibfk_2">
+          <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
+          <End Type="skynotedbModel.userfriendsinvites" Role="userfriendsinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userfriendsinvites">
+              <PropertyRef Name="FriendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usergroupinvites_ibfk_1">
+          <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
+          <End Type="skynotedbModel.usergroupinvites" Role="usergroupinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="usergroupinvites">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usergroupinvites_ibfk_2">
+          <End Type="skynotedbModel.user" Role="user" Multiplicity="1" />
+          <End Type="skynotedbModel.usergroupinvites" Role="usergroupinvites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="usergroupinvites">
+              <PropertyRef Name="InvitingUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -654,6 +861,27 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userfriendsinvites">
+            <EntityTypeMapping TypeName="skynotedbModel.userfriendsinvites">
+              <MappingFragment StoreEntitySet="userfriendsinvites">
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="UserfriendsinviteId" ColumnName="UserfriendsinviteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usergroupinvites">
+            <EntityTypeMapping TypeName="skynotedbModel.usergroupinvites">
+              <MappingFragment StoreEntitySet="usergroupinvites">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="InvitingUserId" ColumnName="InvitingUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="UsergroupinviteId" ColumnName="UsergroupinviteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

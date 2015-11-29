@@ -12,5 +12,11 @@ namespace DataAccess.Repositories.Implementation
             :base(context)
         {
         }
+
+        public userfriends RetriveUserFriendsPairsByUserId(int UserId)
+        {
+            return Context.Set<userfriends>()
+                .FirstOrDefault(x => x.UserId == UserId);
+        }
     }
 }

@@ -152,3 +152,26 @@ ADD CONSTRAINT `notesgroups_ibfk_3`
   REFERENCES `skynotedbnormal`.`user` (`UserID`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  
+  
+CREATE TABLE `usergroupinvites` (
+  `UsergroupinviteId` int(11) NOT NULL AUTO_INCREMENT,
+  `State` varchar(45) DEFAULT NULL,
+  `UserId` int(11) NOT NULL ,
+  `InvitingUserId` int(11) NOT NULL,
+  `GroupId` int(11) NOT NULL,
+  PRIMARY KEY (`UsergroupinviteId`),
+	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+	FOREIGN KEY (`InvitingUserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+    FOREIGN KEY (`GroupId`) REFERENCES `group`(Id) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `userfriendsinvites` (
+  `UserfriendsinviteId` int(11) NOT NULL AUTO_INCREMENT,
+  `State` varchar(45) DEFAULT NULL,
+  `UserId` int(11) NOT NULL ,
+  `FriendId` int(11) NOT NULL,
+  PRIMARY KEY (`UserfriendsinviteId`),
+	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+    FOREIGN KEY (`FriendId`) REFERENCES `user`(UserID) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

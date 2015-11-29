@@ -75,6 +75,9 @@ namespace SkyNote
                 x.For<ICategoryRepository>().Use<CategoryRepository>();
                 x.For<ITypeRepository>().Use<TypeRepository>();
                 x.For<INotegroupRepository>().Use<NotegroupRepository>();
+                x.For<IUserGroupInvitesRepository>().Use<UserGroupInvitesRepository>();
+                x.For<IUserFriendInvitesRepository>().Use<UserFriendInvitesRepository>();
+                x.For<IInvitesDenormalizedRepository>().Use<InvitesDenormalizedRepository>();
             });
         }
     }

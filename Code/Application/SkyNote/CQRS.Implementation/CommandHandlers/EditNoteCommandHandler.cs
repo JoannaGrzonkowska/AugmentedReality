@@ -22,8 +22,8 @@ namespace CQRS.Implementation.CommandHandlers
         {
             var note = noteRepository.GetById(command.NoteId);
             var noteEdited = command.Build(note);
-
             noteRepository.SaveChanges();
+
             eventStorage.Publish(
                 new NoteEditedEvent() {
                     NoteId = noteEdited.Id,
@@ -33,7 +33,6 @@ namespace CQRS.Implementation.CommandHandlers
                     Date = noteEdited.Date.Value });
 
             return new CommandResult();
-
         }
     }
 }

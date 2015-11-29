@@ -7,6 +7,7 @@
       <Diagram DiagramId="7fa3d1e863a14546821a9066d5c24ec6" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="skynotedenormalizeddbModel.group" Width="1.5" PointX="3.375" PointY="0.875" />
         <EntityTypeShape EntityType="skynotedenormalizeddbModel.note" Width="1.5" PointX="0.875" PointY="0.625" />
+        <EntityTypeShape EntityType="skynotedenormalizeddbModel.invites" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

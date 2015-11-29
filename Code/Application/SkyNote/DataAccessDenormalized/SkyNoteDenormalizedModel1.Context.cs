@@ -27,5 +27,6 @@ namespace DataAccessDenormalized
     
         public DbSet<group> groupSet { get; set; }
         public DbSet<note> noteSet { get; set; }
+        public DbSet<invites> invites { get; set; }
     }
 }

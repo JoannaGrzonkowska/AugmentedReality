@@ -34,5 +34,7 @@ namespace DataAccess
         public DbSet<categories> categories { get; set; }
         public DbSet<notesgroups> notesgroups { get; set; }
         public DbSet<types> types { get; set; }
+        public DbSet<userfriendsinvites> userfriendsinvites { get; set; }
+        public DbSet<usergroupinvites> usergroupinvites { get; set; }
     }
 }

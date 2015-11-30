@@ -42,10 +42,6 @@ namespace CQRS.Implementation.CommandHandlers
                     currentFriend.UserID, currentFriend.Name, currentFriend.Login, currentFriend.Mail
                     ));
             }
-
-
-
-
             return new CommandResult();
         }
     }

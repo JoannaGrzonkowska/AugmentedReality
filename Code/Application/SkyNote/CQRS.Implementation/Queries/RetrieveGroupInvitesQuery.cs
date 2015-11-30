@@ -2,11 +2,11 @@
 
 namespace CQRS.Implementation.Queries
 {
-    public class RetrieveFriendInvitesQuery : IQuery
+    public class RetrieveGroupInvitesQuery : IQuery
     {
         public int InvitedUserId { get; set; }
 
-        public RetrieveFriendInvitesQuery(int userId)
+        public RetrieveGroupInvitesQuery(int userId)
         {
             InvitedUserId = userId;
         }

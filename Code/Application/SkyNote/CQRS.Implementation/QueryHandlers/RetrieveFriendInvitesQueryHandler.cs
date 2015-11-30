@@ -23,7 +23,7 @@ namespace CQRS.Implementation.QueryHandlers
         public RetrieveFriendInvitesQueryResult Handle(RetrieveFriendInvitesQuery handle)
         {
             RetrieveFriendInvitesQueryResult result = new RetrieveFriendInvitesQueryResult();
-            var friendInvites = invitesRepository.GetAllQueryable().Where(x => x.FriendId == handle.InvitedUserId && x.GroupId == null).ToList(); //CHANGE ! x.UserId == handle.UserId && x.FriendId != null
+            var friendInvites = invitesRepository.GetAllQueryable().Where(x => x.FriendId == handle.InvitedUserId && x.GroupId == null && x.State == "PENDING").ToList(); //CHANGE ! x.UserId == handle.UserId && x.FriendId != null
 
             result.FriendInvites = Mapper.Map<IEnumerable<FriendInviteDTO>>(friendInvites);
 

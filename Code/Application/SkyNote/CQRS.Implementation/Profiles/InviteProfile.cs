@@ -17,8 +17,11 @@ namespace CQRS.Implementation.Profiles
         {
             Mapper.CreateMap<UserFriendInviteEvent, invites>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId));
+            Mapper.CreateMap<UserGroupInviteEvent, invites>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId));
 
             Mapper.CreateMap<invites, FriendInviteDTO>();
+            Mapper.CreateMap<invites, GroupInviteDTO>();
         }
     }
 }

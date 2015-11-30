@@ -6,6 +6,7 @@ using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
 using DataAccess;
 using DataAccess.Repositories;
+using System.Linq;
 
 namespace CQRS.Implementation.CommandHandlers
 {
@@ -22,11 +23,17 @@ namespace CQRS.Implementation.CommandHandlers
 
         public CommandResult Execute(ShareNoteInGroupCommand command)
         {
-            var notessgroups = command.Build();
-            _notegroupRepository.Add(notessgroups);
-            _notegroupRepository.SaveChanges();
-            
-            _eventStorage.Publish(new ShareNoteInGroupEvent(command.NoteId, command.GroupId, command.UserId));
+            int[] GroupIdsArray = command.GroupIds.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
+
+            foreach (int groupId in GroupIdsArray)
+            {
+                var notessgroups = command.Build();
+                notessgroups.GroupId = groupId;
+                _notegroupRepository.Add(notessgroups);
+                _notegroupRepository.SaveChanges();
+
+                _eventStorage.Publish(new ShareNoteInGroupEvent(command.NoteId, groupId, command.UserId));
+            }
         
             return new CommandResult();
         }

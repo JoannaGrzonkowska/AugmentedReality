@@ -1,15 +1,10 @@
 ﻿using CQRS.CommandHandlers;
 using CQRS.Implementation.Commands;
-using System;
 using DataAccess.Repositories;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CQRS.Commands;
 using CQRS.Events;
 using CQRS.Implementation.Events;
-using StructureMap.AutoMocking;
 using DataAccess;
 
 namespace CQRS.Implementation.CommandHandlers

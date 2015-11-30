@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="skynotedbModel.group" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="skynotedbModel.location" Width="1.5" PointX="9.5" PointY="0.75" />
         <EntityTypeShape EntityType="skynotedbModel.note" Width="1.5" PointX="7.25" PointY="0.5" />
-        <EntityTypeShape EntityType="skynotedbModel.user" Width="1.5" PointX="5.125" PointY="0.75" />
+        <EntityTypeShape EntityType="skynotedbModel.user" Width="1.5" PointX="0.75" PointY="3.625" />
         <EntityTypeShape EntityType="skynotedbModel.usergroup" Width="1.5" PointX="3" PointY="0.5" />
         <AssociationConnector Association="skynotedbModel.usergroup_ibfk_2" />
         <AssociationConnector Association="skynotedbModel.note_ibfk_1" />
@@ -18,7 +18,7 @@
         <AssociationConnector Association="skynotedbModel.userfriends_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.userfriends_ibfk_2" />
         <EntityTypeShape EntityType="skynotedbModel.categories" Width="1.5" PointX="10.375" PointY="3.25" />
-        <EntityTypeShape EntityType="skynotedbModel.notesgroups" Width="1.5" PointX="0.5" PointY="4.125" />
+        <EntityTypeShape EntityType="skynotedbModel.notesgroups" Width="1.5" PointX="10.5" PointY="5.625" />
         <EntityTypeShape EntityType="skynotedbModel.types" Width="1.5" PointX="8.25" PointY="5" />
         <AssociationConnector Association="skynotedbModel.types_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_2" />
@@ -26,11 +26,11 @@
         <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_1" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_3" />
-        <EntityTypeShape EntityType="skynotedbModel.userfriendsinvites" Width="1.5" PointX="6.125" PointY="5.625" />
-        <EntityTypeShape EntityType="skynotedbModel.usergroupinvites" Width="1.5" PointX="3.625" PointY="5.375" />
-        <AssociationConnector Association="skynotedbModel.usergroupinvites_ibfk_3" />
+        <EntityTypeShape EntityType="skynotedbModel.userfriendsinvites" Width="1.5" PointX="3" PointY="6.375" />
         <AssociationConnector Association="skynotedbModel.userfriendsinvites_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.userfriendsinvites_ibfk_2" />
+        <EntityTypeShape EntityType="skynotedbModel.usergroupinvites" Width="1.5" PointX="6" PointY="4.625" />
+        <AssociationConnector Association="skynotedbModel.usergroupinvites_ibfk_3" />
         <AssociationConnector Association="skynotedbModel.usergroupinvites_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.usergroupinvites_ibfk_2" />
       </Diagram>

@@ -158,11 +158,11 @@ CREATE TABLE `usergroupinvites` (
   `UsergroupinviteId` int(11) NOT NULL AUTO_INCREMENT,
   `State` varchar(45) DEFAULT NULL,
   `UserId` int(11) NOT NULL ,
-  `InvitingUserId` int(11) NOT NULL,
+  `InvatedId` int(11) NOT NULL,
   `GroupId` int(11) NOT NULL,
   PRIMARY KEY (`UsergroupinviteId`),
 	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
-	FOREIGN KEY (`InvitingUserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+	FOREIGN KEY (`InvatedId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
     FOREIGN KEY (`GroupId`) REFERENCES `group`(Id) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

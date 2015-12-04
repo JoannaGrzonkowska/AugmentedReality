@@ -61,7 +61,7 @@ var NoteService = function (urls) {
             url: 'http://skynoteasiatest.azurewebsites.net/api/note/get/' + id,
             type: 'GET',
             success: function (data) {
-                var mappedData = new NoteModel(data);
+                var mappedData = new NoteDetailsViewModel(data);
                 handler(mappedData);
             }
         });
@@ -71,11 +71,12 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/note/post',
+            url: 'http://skynoteasiatest.azurewebsites.net/api/note/AddNewNote',
             type: 'POST',
             data: note,
+            contentType: 'application/json',
             success: function (data) {
-                showAlertAfterAjax(data, 'Note ' + note.Topic + ' successfuly added.');
+                showAlertAfterAjax(data, 'Note ' + JSON.parse(note).Topic + ' successfuly added.');
             }
         });
     }
@@ -87,8 +88,9 @@ var NoteService = function (urls) {
             url: 'http://skynoteasiatest.azurewebsites.net/api/note/put',
             type: 'PUT',
             data: note,
+            contentType: 'application/json',
             success: function (data) {
-                showAlertAfterAjax(data, 'Note ' + note.Topic + ' successfuly edited.');
+                showAlertAfterAjax(data, 'Note ' + JSON.parse(note).Topic + ' successfuly edited.');
             }
         });
     }

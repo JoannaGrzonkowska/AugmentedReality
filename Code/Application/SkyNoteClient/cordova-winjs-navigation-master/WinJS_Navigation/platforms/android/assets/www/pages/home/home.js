@@ -18,6 +18,7 @@
                 self.categories = ko.observableArray([]);
                 self.types = ko.computed(function () {
                     self.selectedTypeId(null);
+                    $('#typeSelect').trigger('change');
                     if (self.selectedCategoryId()) {
                         var selectedCategoryItem = $.grep(self.categories(), function (n, i) {
                             return n.CategoryId() == self.selectedCategoryId();
@@ -71,7 +72,8 @@
                 };
 
                 self.showOnMap = function (item) {
-                    alert(item.Topic());
+                    item.IsSelected(true);
+                    gotoMap();
                 };
 
                 self.edit = function (item) {
@@ -94,11 +96,15 @@
                     searchNotes();
                 };
 
-                self.showNotesOnMap = function () {
+                var gotoMap = function () {
                     WinJS.Navigation.navigate('pages/map/map.html', {
                         Notes: self.myNotesArray(),
                         BackLink: 'pages/home/home.html'
                     });
+                };
+
+                self.showNotesOnMap = function () {
+                    gotoMap();
                 };
 
                 getMyNotesViewModel();

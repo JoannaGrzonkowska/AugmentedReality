@@ -18,23 +18,74 @@
             });
 
             var noteService = new NoteService();
+            var categoriesService = new CategoriesService();
 
             var NoteAddViewModel = function () {
                 var self = this;
                 self.NoteId = ko.observable(options.id)
                 self.Topic = ko.observable();
                 self.Content = ko.observable();
+                self.Images = ko.observableArray([]);
+                self.ImageName = ko.observable();
+                self.LocationAddress = ko.observable();
 
-                var isNew = self.NoteId() === 0;
-                self.headerText = isNew ? 'Add new note' : 'Edit note';
+                self.selectedCategoryId = ko.observable();
+                self.selectedTypeId = ko.observable();
+
+                self.categories = ko.observableArray([]);
+                self.types = ko.computed(function () {
+                    self.selectedTypeId(null);
+                    $('#typeSelect').trigger('change');
+                    if (self.selectedCategoryId()) {
+                        var selectedCategoryItem = $.grep(self.categories(), function (n, i) {
+                            return n.CategoryId() == self.selectedCategoryId();
+                        });
+
+                        if (selectedCategoryItem.length > 0) {
+                            return selectedCategoryItem[0].Types();
+                        }
+                    }
+                    return null;
+                });
+
+                self.isNew = self.NoteId() === 0;
+                self.headerText = self.isNew ? 'Add new note' : 'Edit note';
+
+                var getImagesList = function () {
+                    var noteImages = [];
+                    self.Images().forEach(function (item) {
+                        noteImages.push({
+                            ImageBase64: item.ImageBase64(),
+                            Filename: item.Filename()
+                        });
+                    });
+                    return noteImages;
+                }
 
                 self.loadNoteData = function (data) {
                     self.Topic(data.Topic());
                     self.Content(data.Content());
+                    self.Images(data.Images());
+                    self.LocationAddress(data.LocationAddress);
+
+                    self.selectedCategoryId(data.CategoryId());
+                    self.selectedTypeId(data.TypeId());
+
+                    $('#categorySelect').trigger('change');
+                    $('#typeSelect').trigger('change');
+
+                    $('#slider').rhinoslider();
+                };
+
+                var cropBoxHelper = new CropBoxHelper(null, $("#note-image-edit-container"), function (img) {
+                    self.Images.push(new NoteImageModel({ ImageBase64: img }));
+                });
+
+                this.DeleteImage = function (item) {
+                    self.Images.remove(item);
                 };
 
                 var geocoder = new google.maps.Geocoder;
-
 
                 self.addNote = function () {
                     var options = {
@@ -50,10 +101,8 @@
 
                         geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, function (results, status) {
                             if (status === google.maps.GeocoderStatus.OK) {
-                                if (results[0]) {
-                                    var address = results[0].formatted_address;
-                                    alert(address);
-                                    noteService.addNote(
+                                if (results[0]) {                                    
+                                    noteService.addNote(JSON.stringify(
                                     {
                                         Topic: self.Topic(),
                                         Content: self.Content(),
@@ -61,8 +110,10 @@
                                         xCord: longitude,
                                         yCord: latitude,
                                         zCord: altitude,
-                                        TypeId: 1
-                                    });
+                                        TypeId: self.selectedTypeId(),
+                                        Images: getImagesList(),
+                                        Address: results[0].formatted_address
+                                    }));
                                 }
                             }
                         });
@@ -73,17 +124,19 @@
                 };
 
                 self.editNote = function () {
-                    noteService.editNote(
+                    noteService.editNote(JSON.stringify(
                       {
                           NoteId: self.NoteId(),
                           Topic: self.Topic(),
-                          Content: self.Content()
-                      });
+                          Content: self.Content(),
+                          TypeId: self.selectedTypeId(),
+                          Images: getImagesList()
+                      }));
                 };
 
                 self.save = function () {
                     if ($noteForm.valid()) {
-                        if (isNew) {
+                        if (self.isNew) {
                             self.addNote();
                         }
                         else {
@@ -96,10 +149,16 @@
                     WinJS.Navigation.navigate('pages/home/home.html');
                 };
 
-                if (!isNew) {
+                if (!self.isNew) {
 
                     noteService.getNote(options.id, function (data) {
-                        self.loadNoteData(data);
+                        self.categories(data.Categories());
+                        self.loadNoteData(data.Note);
+                    });
+                }
+                else {
+                    categoriesService.getCategoriesSelectList(function (data) {
+                        self.categories(data);
                     });
                 }
             };

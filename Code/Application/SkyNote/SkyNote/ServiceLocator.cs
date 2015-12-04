@@ -1,4 +1,6 @@
 ﻿using CQRS.Events;
+using CQRS.Implementation.Services;
+using CQRS.Implementation.Services.Implementation;
 using CQRS.Implementation.Utils;
 using CQRS.Messaging;
 using CQRS.Utils;
@@ -75,6 +77,9 @@ namespace SkyNote
                 x.For<ICategoryRepository>().Use<CategoryRepository>();
                 x.For<ITypeRepository>().Use<TypeRepository>();
                 x.For<INotegroupRepository>().Use<NotegroupRepository>();
+
+                x.For<IImageFileService>().Use<ImageFileService>();
+
             });
         }
     }

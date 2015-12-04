@@ -156,3 +156,7 @@ ADD CONSTRAINT `notesgroups_ibfk_3`
 
 ALTER TABLE `user` 
 ADD COLUMN `Avatar` VARCHAR(45) NULL DEFAULT 'defaultAvatar';
+
+
+ALTER TABLE `location` 
+ADD COLUMN `Address` VARCHAR(100) NULL;

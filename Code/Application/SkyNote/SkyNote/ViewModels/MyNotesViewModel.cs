@@ -1,8 +1,5 @@
-﻿using System;
+﻿using CQRS.Implementation.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using CQRS.Implementation.Models;
 
 namespace SkyNote.ViewModels
 {

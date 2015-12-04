@@ -1,7 +1,6 @@
-﻿using CQRS.Implementation.Commands;
-using CQRS.Implementation.Models;
-using CQRS.Implementation.Queries;
-using System.Collections.Generic;
+﻿using CQRS.Implementation.Queries;
+using CQRS.Implementation.Static;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -12,30 +11,40 @@ namespace SkyNote.Controllers
 {
     public class FileController : ApiController
     {
-        // GET: api/Group
-        public IEnumerable<GroupDTO> Get()
+        private string filesDirPath = HttpContext.Current.Server.MapPath("~/App_Data");
+
+        [ActionName("GetUserAvatar")]
+        [HttpGet]
+        public HttpResponseMessage GetUserAvatar(int userId)
         {
-            var groups = ServiceLocator.QueryBus.Retrieve<GroupsForUserQuery, GroupsForUserQueryResult>
-                (new GroupsForUserQuery(1)).GroupsDTO;
-            return groups;
+            var filename = ServiceLocator.QueryBus.Retrieve<AvatarByUserIdQuery, AvatarByUserIdQueryResult>( new AvatarByUserIdQuery() { UserId = userId }).AvatarFileName;
+            return GetFile(StaticData.UserAvatarsDirectory, filename);
         }
 
-        [ActionName("File")]
+        [ActionName("GetNoteImage")]
         [HttpGet]
-        public HttpResponseMessage File()
+        public HttpResponseMessage GetNoteImage(int noteId, string filename)
         {
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            var destinationDirPath = HttpContext.Current.Server.MapPath("~/App_Data/Avatars");
+           return GetFile(Path.Combine(StaticData.NotesDirectory, noteId.ToString()), filename);
+        }
 
+        private HttpResponseMessage GetFile(string dir, string filename)
+        {
+            try
+            {
+                var filePath = Path.Combine(filesDirPath, dir, filename);
+                var stream = new FileStream(filePath, FileMode.Open);
 
-            var filename = "asia.jpg";
-            var serverPath = Path.Combine(destinationDirPath, filename);
+                var response = new HttpResponseMessage(HttpStatusCode.OK);
+                response.Content = new StreamContent(stream);
+                response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
 
-            var stream = new FileStream(serverPath, System.IO.FileMode.Open);
-            response.Content = new StreamContent(stream);
-            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
-
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

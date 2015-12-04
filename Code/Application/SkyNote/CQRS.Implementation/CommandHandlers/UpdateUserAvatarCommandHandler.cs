@@ -3,6 +3,8 @@ using CQRS.Commands;
 using CQRS.Events;
 using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
+using CQRS.Implementation.Services;
+using CQRS.Implementation.Static;
 using DataAccess.Repositories;
 using System.IO;
 
@@ -12,58 +14,27 @@ namespace CQRS.Implementation.CommandHandlers
     {
         private IEventStorage eventStorage;
         private IUserRepository userRepository;
+        private IImageFileService imageFileService;
 
-        public UpdateUserAvatarCommandHandler(IEventStorage eventStorage, IUserRepository userRepository)
+        public UpdateUserAvatarCommandHandler(IEventStorage eventStorage, IUserRepository userRepository, IImageFileService imageFileService)
         {
             this.eventStorage = eventStorage;
             this.userRepository = userRepository;
+            this.imageFileService = imageFileService;
         }
 
         public CommandResult Execute(UpdateUserAvatarCommand command)
         {
+           var user = userRepository.GetById(command.UserId);
 
-         //   var geek = _geekRepository.GetById(command.GeekId);
+           var filename = user.Login + StaticData.FilesExtension;
+           var serverPath = Path.Combine(command.DestinationDirPath, filename);
+           imageFileService.SaveFile(command.ImageBytes, serverPath);
 
-            var filename = "asia.jpg";// _assetsHelper.GetGeekPhotoFilename(geek.ExternalId) + command.ImageExtension;
-            var serverPath = Path.Combine(command.DestinationDirPath, filename);
-            var imageFileService = new ImageFileService();
-            imageFileService.SaveFile(command.ImageBytes, serverPath);
-
-         /*   geek.AvatarFilename = filename;
-            _geekRepository.Update(geek);
-            _unitOfWork.SaveChanges();*/
+            user.Avatar = filename;
+            userRepository.SaveChanges();
 
             return new CommandResult();
-        }
-    }
-
-    public class ImageFileService //: IImageFileService
-    {
-        public FileStream Get(string fileName, string destinationPath)
-        {
-            if (!Directory.Exists(destinationPath))
-            {
-                throw new DirectoryNotFoundException("Missing directory for keeping files");
-            }
-
-            var serverPath = Path.Combine(destinationPath, fileName);
-
-            return File.OpenRead(serverPath);
-        }
-
-        public void SaveFile(byte[] bytes, string filePath)
-        {
-            CreateDirIfNotExsists(filePath);
-            File.WriteAllBytes(filePath, bytes);
-        }
-
-        private void CreateDirIfNotExsists(string filePath)
-        {
-            var dir = Path.GetDirectoryName(filePath);
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
         }
     }
 }

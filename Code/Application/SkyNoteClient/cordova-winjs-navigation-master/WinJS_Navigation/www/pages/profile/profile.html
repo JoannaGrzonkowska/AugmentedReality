@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Profile</title>
+
+    <link href="../../css/cropbox.css" rel="stylesheet" />
+    <link href="profile.css" rel="stylesheet" />
+    <script src="profile.js"></script>
+    <script src="../../js/cropbox.js"></script>
+    
+    <script src="../../scripts/App/Services/UserService.js"></script>
+    <script src="../../scripts/App/CropBoxHelper.js"></script>
+</head>
+<body>
+    <div class="home fragment" id="profile-container">
+
+        <img data-bind="attr: { src: avatarPath() }" style="width:50px; height:50px;" />
+
+        <div class="row">
+            <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
+        </div>
+
+        <div class="container" id="avatar-edit-container">
+            <div class="imageBox">
+                <div class="thumbBox"></div>
+                <div class="spinner" style="display: none">Loading...</div>
+            </div>
+
+            <div class="action">
+                <input type="file" id="file" style="float:left; width: 250px">
+                <input type="button" id="btnPhoto" value="Take photo">
+                <input type="button" id="btnCrop" value="Crop">
+                <input type="button" id="btnZoomIn" value="+">
+                <input type="button" id="btnZoomOut" value="-">
+            </div>
+            <div class="cropped">
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

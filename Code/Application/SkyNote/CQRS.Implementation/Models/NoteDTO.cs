@@ -1,5 +1,9 @@
-﻿using DataAccessDenormalized;
+﻿using CQRS.Implementation.Static;
+using DataAccessDenormalized;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace CQRS.Implementation.Models
 {
@@ -24,6 +28,8 @@ namespace CQRS.Implementation.Models
         public string CategoryName { get; set; }
         public int? TypeId { get; set; }
         public string TypeName { get; set; }
+        public IEnumerable<string> ImagesFilenames { get; set; }
+        public string LocationAddress { get; set; }
 
         public static NoteDTO Build(note entity)
         {
@@ -47,8 +53,21 @@ namespace CQRS.Implementation.Models
                 CategoryId = entity.CategoryId,
                 CategoryName = entity.CategoryName,
                 TypeId = entity.TypeId,
-                TypeName = entity.TypeName
+                TypeName = entity.TypeName,
+                ImagesFilenames = Enumerable.Empty<string>(),
+                LocationAddress = entity.LocationAddress
             };
+        }
+
+        public void GetImagesFilenames(string filesDirPath)
+        {
+            var noteImagesDirectory = Path.Combine(filesDirPath, StaticData.NotesDirectory, NoteId.ToString());
+            IEnumerable<string> imagesFilenames = Enumerable.Empty<string>();
+            if (Directory.Exists(noteImagesDirectory))
+            {
+                imagesFilenames = Directory.GetFiles(noteImagesDirectory).Select(x => Path.GetFileName(x));
+            }
+            ImagesFilenames = imagesFilenames;
         }
 
         public override BaseDTO<note> BuildDTO(note entity)

@@ -1,6 +1,8 @@
 ﻿using CQRS.Commands;
+using CQRS.Implementation.Commands.Models;
 using DataAccess;
 using System;
+using System.Collections.Generic;
 
 namespace CQRS.Implementation.Commands
 {
@@ -10,6 +12,9 @@ namespace CQRS.Implementation.Commands
         public string Topic { get; set; }
         public string Content { get; set; }
         public int TypeId { get; set; }
+
+        public string DestinationDirPath { get; set; }
+        public IList<SaveImageModel> Images { get; set; }
 
         public override note Build(note note = null, Action<note> additionalAction = null)
         {

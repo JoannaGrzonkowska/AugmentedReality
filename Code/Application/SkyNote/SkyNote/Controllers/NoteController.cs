@@ -1,10 +1,15 @@
 ﻿using CQRS.Implementation.Commands;
+using CQRS.Implementation.Commands.Models;
 using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
+using CQRS.Implementation.Static;
 using SkyNote.ViewModels;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace SkyNote.Controllers
@@ -12,16 +17,24 @@ namespace SkyNote.Controllers
 
     public class NoteController : ApiController
     {
+        private string filesDirPath = HttpContext.Current.Server.MapPath("~/App_Data");
+
         public IEnumerable<NoteDTO> Get()
         {
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
             return notes;
         }
 
-        public NoteDTO Get(int id)
+        public NoteDetailsViewModel Get(int id)
         {
             var note = ServiceLocator.QueryBus.Retrieve<NoteByIdQuery, NoteByIdQueryResult>(new NoteByIdQuery(id)).Note;
-            return note;
+            note.GetImagesFilenames(filesDirPath);
+
+            var noteDetailsViewModel = new NoteDetailsViewModel();
+            noteDetailsViewModel.Note = note;
+            noteDetailsViewModel.Categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
+           
+            return noteDetailsViewModel;
         }
 
         [ActionName("NotesByLocation")]
@@ -101,12 +114,18 @@ namespace SkyNote.Controllers
         [HttpPost]
         public HttpResponseMessage Post(CreateNoteCommand command)
         {
+            command.DestinationDirPath = Path.Combine(filesDirPath, StaticData.NotesDirectory);
+            ConvertNoteImagesToByte(command.Images);
+
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
 
         public HttpResponseMessage Put(EditNoteCommand command)
         {
+            command.DestinationDirPath = Path.Combine(filesDirPath, StaticData.NotesDirectory);
+            ConvertNoteImagesToByte(command.Images);
+
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
@@ -115,6 +134,16 @@ namespace SkyNote.Controllers
         {
             var result = ServiceLocator.CommandBus.Send(new DeleteNoteCommand() { NoteId = id });
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+        private void ConvertNoteImagesToByte(IList<SaveImageModel> images)
+        {
+            images.Where(x=>!string.IsNullOrEmpty(x.ImageBase64)).ToList().ForEach(image =>
+            {
+                var imageData = ImageHelper.GetBase64ImageDataFromCropboxLib(image.ImageBase64);
+                image.ImageBytes = imageData.Bytes;
+            });
+
         }
     }
 }

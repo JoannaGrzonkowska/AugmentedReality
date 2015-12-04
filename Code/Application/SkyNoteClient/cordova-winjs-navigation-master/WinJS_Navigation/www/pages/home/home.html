@@ -7,10 +7,10 @@
     <link href="home.css" rel="stylesheet" />
     <script src="home.js"></script>
 
+    <script src="../../scripts/App/Models/MyNotesViewModel.js"></script>
     <script src="../../scripts/App/Models/NoteModel.js"></script>
     <script src="../../scripts/App/Models/TypeModel.js"></script>
     <script src="../../scripts/App/Models/CategoryModel.js"></script>
-    <script src="../../scripts/App/Models/MyNotesViewModel.js"></script>
     <script src="../../scripts/App/Services/NoteService.js"></script>
 
 </head>
@@ -26,11 +26,11 @@
             <span>Number of notes: </span><span data-bind="text: myNotesArray().length"></span>
         </div>
 
-        <select class="form-control input-lg" data-bind="foreach: categories, value: selectedCategoryId, select2: { width: '100%', placeholder: 'select category' }">
+        <select id="categorySelect" class="form-control input-lg" data-bind="foreach: categories, value: selectedCategoryId, select2: { width: '100%', placeholder: 'select category' }">
             <option data-bind="text: Name(), value: CategoryId"></option>
         </select>
 
-        <select class="form-control input-lg" data-bind="foreach: types, value: selectedTypeId, select2: { width: '100%', placeholder: 'select category' }">
+        <select id="typeSelect" class="form-control input-lg" data-bind="foreach: types, value: selectedTypeId, select2: { width: '100%', placeholder: 'select type' }">
             <option data-bind="text: Name(), value: TypeId"></option>
         </select>
 
@@ -51,7 +51,7 @@
                 <div class="panel-heading">
                     <div style="background-color:white;font-size:medium" class="pull-right">
                         <a>
-                            <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.showOnMap" data-toggle="tooltip" title="Show on map"></span>
+                            <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.showOnMap"></span>
                         </a>
                         <a>
                             <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.edit"></span>

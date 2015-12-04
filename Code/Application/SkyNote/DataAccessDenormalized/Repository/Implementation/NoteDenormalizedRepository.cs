@@ -16,12 +16,12 @@ namespace DataAccessDenormalized.Repository
         public void InsertNote(int userIdParam, string topicParam, string contentParam, int locationIdParam, decimal? xCordParam, decimal? yCordParam,
             decimal? zCordParam, string nameParam, string loginParam, string mailParam, int groupIdParam, string groupNameParam,
             string identyficationParam, DateTime? dateParam, int noteIdParam, int? categoryIdParam,
-            string categoryNameParam, int? typeIdParam, string typeNameParam)
+            string categoryNameParam, int? typeIdParam, string typeNameParam, string locationAddress)
         {
             base.Context.insert_note(userIdParam, topicParam, contentParam, locationIdParam, xCordParam, yCordParam,
              zCordParam, nameParam, loginParam, mailParam, groupIdParam, groupNameParam,
              identyficationParam, dateParam, noteIdParam, categoryIdParam,
-             categoryNameParam, typeIdParam, typeNameParam);
+             categoryNameParam, typeIdParam, typeNameParam, locationAddress);
         }
 
         public IEnumerable<note> NotesInLocationRange(decimal? xCordParam, decimal? yCordParam, int radiusParam,int? categoryIdParam, int? typeIdParam)

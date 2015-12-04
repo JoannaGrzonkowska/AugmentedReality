@@ -15,7 +15,7 @@ namespace CQRS.Implementation.Events
         public decimal? ZCord { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
+        public string Address { get; set; }
 
-        public NoteCreatedEvent() { }
     }
 }

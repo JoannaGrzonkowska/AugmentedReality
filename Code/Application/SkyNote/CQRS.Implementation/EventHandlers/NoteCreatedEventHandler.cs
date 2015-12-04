@@ -38,30 +38,6 @@ namespace CQRS.Implementation.EventHandlers
                 categoryId = category.CategoryId;
             }
 
-            /*var item = new note()
-            {
-                NoteId = handle.NoteId,
-                Content = handle.Content,
-                Topic = handle.Topic,
-                UserId = handle.UserId,
-                LocationId = handle.LocationId,
-                Date = handle.Date,
-                XCord = handle.XCord,
-                YCord = handle.YCord,
-                ZCord = handle.ZCord,
-                Login = user.Login,
-                Mail = user.Mail,
-                Name = user.Name,
-                Identyfication = "NOTE",
-                TypeId = handle.TypeId,
-                TypeName = typeName,
-                CategoryId = categoryId,
-                CategoryName = categoryName
-            };
-
-            _noteDenormalizedRepository.Add(item);
-            _noteDenormalizedRepository.SaveChanges();*/
-
             _noteDenormalizedRepository.InsertNote(
                 handle.UserId,
                 handle.Topic,
@@ -81,7 +57,8 @@ namespace CQRS.Implementation.EventHandlers
                categoryId,
                 categoryName,
                 handle.TypeId,
-                typeName
+                typeName,
+                handle.Address
                 );
         }
     }

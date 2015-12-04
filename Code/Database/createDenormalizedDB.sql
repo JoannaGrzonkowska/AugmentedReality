@@ -135,3 +135,87 @@ typeNameParam,
 POINT(xCordParam, yCordParam));
 
 END
+
+
+ALTER TABLE `note` 
+ADD COLUMN `LocationAddress` VARCHAR(100) NULL;
+
+
+
+DROP procedure IF EXISTS `insert_note`;
+
+
+DELIMITER $$
+$$
+CREATE DEFINER=`ba477d07940f80`@`%` PROCEDURE `insert_note`(
+userIdParam INT(11),
+topicParam VARCHAR(45),
+contentParam VARCHAR(200),
+locationIdParam INT(11),
+xCordParam DECIMAL(10,7),
+yCordParam DECIMAL(10,7),
+zCordParam DECIMAL(10,7),
+nameParam VARCHAR(45),
+loginParam VARCHAR(20),
+mailParam VARCHAR(45),
+groupIdParam INT(11),
+groupNameParam VARCHAR(45),
+identyficationParam VARCHAR(45),
+dateParam TIMESTAMP,
+noteIdParam INT(11),
+categoryIdParam INT(11),
+categoryNameParam VARCHAR(45),
+typeIdParam INT(11),
+typeNameParam VARCHAR(45),
+locationAddressParam VARCHAR(100)
+)
+BEGIN
+INSERT INTO `note`
+(`UserId`,
+`Topic`,
+`Content`,
+`LocationId`,
+`XCord`,
+`YCord`,
+`ZCord`,
+`Name`,
+`Login`,
+`Mail`,
+`GroupId`,
+`GroupName`,
+`Identyfication`,
+`Date`,
+`NoteId`,
+`CategoryId`,
+`CategoryName`,
+`TypeId`,
+`TypeName`,
+`LocationPoint`,
+`locationAddress`)
+VALUES
+(userIdParam,
+topicParam,
+contentParam,
+locationIdParam,
+xCordParam,
+yCordParam,
+zCordParam,
+nameParam,
+loginParam,
+mailParam,
+groupIdParam,
+groupNameParam,
+identyficationParam,
+dateParam,
+noteIdParam,
+categoryIdParam,
+categoryNameParam,
+typeIdParam,
+typeNameParam,
+POINT(xCordParam, yCordParam),
+locationAddressParam);
+
+END$$
+
+DELIMITER ;
+

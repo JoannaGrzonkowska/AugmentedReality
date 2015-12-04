@@ -27,6 +27,7 @@
           <Property Name="XCord" Type="decimal" Precision="10" Scale="7" />
           <Property Name="YCord" Type="decimal" Precision="10" Scale="7" />
           <Property Name="ZCord" Type="decimal" Precision="10" Scale="7" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="note">
           <Key>
@@ -67,6 +68,7 @@
           <Property Name="Mail" Type="varchar" MaxLength="45" />
           <Property Name="Password" Type="varchar" MaxLength="45" />
           <Property Name="PasswordSalt" Type="varchar" MaxLength="100" />
+          <Property Name="Avatar" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="userfriends">
           <Key>
@@ -356,6 +358,7 @@
           <Property Name="YCord" Type="Decimal" />
           <Property Name="ZCord" Type="Decimal" />
           <NavigationProperty Name="note" Relationship="skynotedbModel.note_ibfk_1" FromRole="location" ToRole="note" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="note">
           <Key>
@@ -410,6 +413,7 @@
           <NavigationProperty Name="userfriends" Relationship="skynotedbModel.userfriends_ibfk_1" FromRole="user" ToRole="userfriends" />
           <NavigationProperty Name="userfriends1" Relationship="skynotedbModel.userfriends_ibfk_2" FromRole="user" ToRole="userfriends" />
           <NavigationProperty Name="usergroup" Relationship="skynotedbModel.usergroup_ibfk_1" FromRole="user" ToRole="usergroup" />
+          <Property Name="Avatar" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="userfriends">
           <Key>
@@ -588,6 +592,7 @@
           <EntitySetMapping Name="location">
             <EntityTypeMapping TypeName="skynotedbModel.location">
               <MappingFragment StoreEntitySet="location">
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ZCord" ColumnName="ZCord" />
                 <ScalarProperty Name="YCord" ColumnName="YCord" />
                 <ScalarProperty Name="XCord" ColumnName="XCord" />
@@ -630,6 +635,7 @@
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="skynotedbModel.user">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
                 <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Mail" ColumnName="Mail" />

@@ -3,8 +3,10 @@ using CQRS.Commands;
 using CQRS.Events;
 using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
+using CQRS.Implementation.Services;
 using DataAccess;
 using DataAccess.Repositories;
+using System.IO;
 
 namespace CQRS.Implementation.CommandHandlers
 {
@@ -14,13 +16,15 @@ namespace CQRS.Implementation.CommandHandlers
         private INoteRepository noteRepository;
         private ILocationRepository locationRepository;
         private IEventStorage eventStorage;
+        private IImageFileService imageFileService;
 
-        public CreateNoteCommandHandler(IUserRepository userRepository, INoteRepository noteRepository, ILocationRepository locationRepository, IEventStorage eventStorage)
+        public CreateNoteCommandHandler(IUserRepository userRepository, INoteRepository noteRepository, ILocationRepository locationRepository, IEventStorage eventStorage, IImageFileService imageFileService)
         {
             this.userRepository = userRepository;
             this.noteRepository = noteRepository;
             this.locationRepository = locationRepository;
             this.eventStorage = eventStorage;
+            this.imageFileService = imageFileService;
         }
 
         public CommandResult Execute(CreateNoteCommand command)
@@ -32,7 +36,8 @@ namespace CQRS.Implementation.CommandHandlers
                 {
                     XCord = command.xCord,
                     YCord = command.yCord,
-                    ZCord = command.zCord
+                    ZCord = command.zCord,
+                    Address = command.Address
                 };
                 locationRepository.Add(location);
                 locationRepository.SaveChanges();
@@ -42,6 +47,9 @@ namespace CQRS.Implementation.CommandHandlers
 
             noteRepository.Add(note);
             noteRepository.SaveChanges();
+
+            var destinationDirPath = Path.Combine(command.DestinationDirPath, note.Id.ToString());
+            imageFileService.SaveFilesList(command.Images, destinationDirPath);
 
             eventStorage.Publish(
                 new NoteCreatedEvent()
@@ -55,11 +63,11 @@ namespace CQRS.Implementation.CommandHandlers
                     XCord = location.XCord,
                     YCord = location.YCord,
                     ZCord = location.ZCord,
-                    TypeId = note.TypeId
+                    TypeId = note.TypeId,
+                    Address = note.location.Address
                 });
 
             return new CommandResult();
-
         }
     }
 }

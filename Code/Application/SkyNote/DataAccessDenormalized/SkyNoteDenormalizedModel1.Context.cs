@@ -40,7 +40,7 @@ namespace DataAccessDenormalized
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("note_update_location_point", noteIdParamParameter);
         }
     
-        public virtual int insert_note(Nullable<int> userIdParam, string topicParam, string contentParam, Nullable<int> locationIdParam, Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<decimal> zCordParam, string nameParam, string loginParam, string mailParam, Nullable<int> groupIdParam, string groupNameParam, string identyficationParam, Nullable<System.DateTime> dateParam, Nullable<int> noteIdParam, Nullable<int> categoryIdParam, string categoryNameParam, Nullable<int> typeIdParam, string typeNameParam)
+        public virtual int insert_note(Nullable<int> userIdParam, string topicParam, string contentParam, Nullable<int> locationIdParam, Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<decimal> zCordParam, string nameParam, string loginParam, string mailParam, Nullable<int> groupIdParam, string groupNameParam, string identyficationParam, Nullable<System.DateTime> dateParam, Nullable<int> noteIdParam, Nullable<int> categoryIdParam, string categoryNameParam, Nullable<int> typeIdParam, string typeNameParam, string locationAddressParam)
         {
             var userIdParamParameter = userIdParam.HasValue ?
                 new ObjectParameter("userIdParam", userIdParam) :
@@ -118,7 +118,11 @@ namespace DataAccessDenormalized
                 new ObjectParameter("typeNameParam", typeNameParam) :
                 new ObjectParameter("typeNameParam", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_note", userIdParamParameter, topicParamParameter, contentParamParameter, locationIdParamParameter, xCordParamParameter, yCordParamParameter, zCordParamParameter, nameParamParameter, loginParamParameter, mailParamParameter, groupIdParamParameter, groupNameParamParameter, identyficationParamParameter, dateParamParameter, noteIdParamParameter, categoryIdParamParameter, categoryNameParamParameter, typeIdParamParameter, typeNameParamParameter);
+            var locationAddressParamParameter = locationAddressParam != null ?
+                new ObjectParameter("locationAddressParam", locationAddressParam) :
+                new ObjectParameter("locationAddressParam", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_note", userIdParamParameter, topicParamParameter, contentParamParameter, locationIdParamParameter, xCordParamParameter, yCordParamParameter, zCordParamParameter, nameParamParameter, loginParamParameter, mailParamParameter, groupIdParamParameter, groupNameParamParameter, identyficationParamParameter, dateParamParameter, noteIdParamParameter, categoryIdParamParameter, categoryNameParamParameter, typeIdParamParameter, typeNameParamParameter, locationAddressParamParameter);
         }
     
         public virtual ObjectResult<note> get_notes_in_location_range(Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<int> radiusParam, Nullable<int> categoryIdParam, Nullable<int> typeIdParam)

@@ -3,112 +3,31 @@
 <head>
     <meta charset="utf-8" />
     <title>home</title>
+
     <link href="note.css" rel="stylesheet" />
+    <link href="../../css/rhinoslider-1.05.css" rel="stylesheet" />
+
+    <script src="../../js/easing.js"></script>
+    <script src="../../js/mousewheel.js"></script>
+    <script src="../../js/rhinoslider-1.05.min.js"></script>
     <script src="note.js"></script>
 
+    <script src="../../scripts/App/Models/NoteImageModel.js"></script>
+    <script src="../../scripts/App/Models/NoteModel.js"></script>
+    <script src="../../scripts/App/Models/TypeModel.js"></script>
+    <script src="../../scripts/App/Models/CategoryModel.js"></script>
+    <script src="../../scripts/App/Models/NoteDetailsViewModel.js"></script>
+
     <script src="../../scripts/App/Services/NoteService.js"></script>
+    <script src="../../scripts/App/Services/CategoriesService.js"></script>
 
     <script src="http://maps.googleapis.com/maps/api/js"></script>
-  
-    <script type="text/javascript" charset="utf-8">
-
-    var pictureSource;   // picture source
-    var destinationType; // sets the format of returned value
-
-    // Wait for device API libraries to load
-    //
-    document.addEventListener("deviceready",onDeviceReady,false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
-    }
-
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoDataSuccess(imageData) {
-      // Uncomment to view the base64-encoded image data
-      // console.log(imageData);
-
-      // Get image handle
-      //
-      var smallImage = document.getElementById('smallImage');
-
-      // Unhide image elements
-      //
-      smallImage.style.display = 'block';
-
-      // Show the captured photo
-      // The in-line CSS rules are used to resize the image
-      //
-      smallImage.src = "data:image/jpeg;base64," + imageData;
-    }
-
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoURISuccess(imageURI) {
-      // Uncomment to view the image file URI
-      // console.log(imageURI);
-
-      // Get image handle
-      //
-      var largeImage = document.getElementById('largeImage');
-
-      // Unhide image elements
-      //
-      largeImage.style.display = 'block';
-
-      // Show the captured photo
-      // The in-line CSS rules are used to resize the image
-      //
-      largeImage.src = imageURI;
-    }
-
-    // A button will call this function
-    //
-    function capturePhoto() {
-      // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
-        destinationType: destinationType.DATA_URL });
-    }
-
-    // A button will call this function
-    //
-    function capturePhotoEdit() {
-      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
-        destinationType: destinationType.DATA_URL });
-    }
-
-    // A button will call this function
-    //
-    function getPhoto(source) {
-      // Retrieve image file location from specified source
-      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-        destinationType: destinationType.FILE_URI,
-        sourceType: source });
-    }
-
-    // Called if something bad happens.
-    //
-    function onFail(message) {
-      alert('Failed because: ' + message);
-    }
-
-    </script>
+    <script src="../../js/cropbox.js"></script>
+    <script src="../../scripts/App/CropBoxHelper.js"></script>
 
 </head>
 <body>
     <div id="note-edit-container">
-
-        <button onclick="capturePhoto();">Capture Photo</button> <br>
-        <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
-        <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-        <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
-        <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-        <img style="display:none;" id="largeImage" src="" />
 
         <div class="row">
             <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
@@ -117,9 +36,50 @@
         <form id="note-form" class="skynote-form">
             <div class="form-group">
                 <input type="text" name="topic" class="form-control" placeholder="Topic"
-                       data-bind="value: Topic"/ >
+                       data-bind="value: Topic" />
                 <textarea name="content" class="form-control" rows="4" cols="70" placeholder="Content"
                           data-bind="value: Content"></textarea>
+            </div>
+
+            <div data-bind="visible: !isNew">
+                <span data-bind="text:LocationAddress()"></span>
+            </div>
+
+            <select id="categorySelect" class="form-control input-lg" data-bind="foreach: categories, value: selectedCategoryId, select2: { width: '100%', placeholder: 'select category' }">
+                <option data-bind="text: Name(), value: CategoryId"></option>
+            </select>
+
+            <select id="typeSelect" class="form-control input-lg" data-bind="foreach: types, value: selectedTypeId, select2: { width: '100%', placeholder: 'select type' }">
+                <option data-bind="text: Name(), value: TypeId"></option>
+            </select>
+
+            <div class="container" id="note-image-edit-container">
+                <div class="imageBox">
+                    <div class="thumbBox"></div>
+                    <div class="spinner" style="display: none">Loading...</div>
+                </div>
+
+                <div class="action">
+                    <input type="file" id="file" style="float:left; width: 250px">
+                    <input type="button" id="btnPhoto" value="Take photo">
+                    <input type="button" id="btnCrop" value="Crop">
+                    <input type="button" id="btnZoomIn" value="+">
+                    <input type="button" id="btnZoomOut" value="-">
+                </div>
+            </div>
+
+            <div>
+                <!-- ko foreach: Images -->
+                <div class="row">
+                    <div class="col-xs-8">
+                        <img data-bind="attr: { src: Path() }" style="width:50px; height:50px;" />
+                    </div>
+
+                    <div class="col-xs-4">
+                        <button data-bind="click: $parent.DeleteImage">X</button>
+                    </div>
+                </div>
+                <!-- /ko -->
             </div>
             <button class="btn btn-default pull-right" data-bind="click: back"> Cancel</button>
             <button class="btn btn-default pull-right" data-bind="click: save"> Save</button>

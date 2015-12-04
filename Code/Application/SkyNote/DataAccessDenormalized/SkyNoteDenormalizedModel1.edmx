@@ -48,6 +48,7 @@ warning 6005: The data type 'point' is currently not supported for the target En
           <Property Name="CategoryName" Type="varchar" MaxLength="45" />
           <Property Name="TypeId" Type="int" />
           <Property Name="TypeName" Type="varchar" MaxLength="45" />
+          <Property Name="LocationAddress" Type="varchar" MaxLength="100" />
         </EntityType>
         <Function Name="get_notes_in_location_range" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="skynotedbdenormasia">
           <Parameter Name="xCordParam" Type="decimal" Mode="In" />
@@ -76,6 +77,7 @@ warning 6005: The data type 'point' is currently not supported for the target En
           <Parameter Name="categoryNameParam" Type="varchar" Mode="In" />
           <Parameter Name="typeIdParam" Type="int" Mode="In" />
           <Parameter Name="typeNameParam" Type="varchar" Mode="In" />
+          <Parameter Name="locationAddressParam" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
           <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormasia" store:Type="Tables" />
@@ -109,6 +111,7 @@ warning 6005: The data type 'point' is currently not supported for the target En
             <Parameter Name="categoryNameParam" Mode="In" Type="String" />
             <Parameter Name="typeIdParam" Mode="In" Type="Int32" />
             <Parameter Name="typeNameParam" Mode="In" Type="String" />
+            <Parameter Name="locationAddressParam" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="get_notes_in_location_range" EntitySet="note" ReturnType="Collection(skynotedenormalizeddbModel.note)">
             <Parameter Name="xCordParam" Mode="In" Type="Decimal" />
@@ -161,6 +164,7 @@ warning 6005: The data type 'point' is currently not supported for the target En
           <Property Name="CategoryName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="TypeId" Type="Int32" />
           <Property Name="TypeName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="LocationAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -191,6 +195,7 @@ warning 6005: The data type 'point' is currently not supported for the target En
           <EntitySetMapping Name="note">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
               <MappingFragment StoreEntitySet="note">
+                <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />

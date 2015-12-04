@@ -67,6 +67,7 @@
     <Compile Include="CommandHandlers\UserAddFriendCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserJoinGroupCommandHandler.cs" />
     <Compile Include="CommandHandlers\UserRemoveFriendCommandHandler.cs" />
+    <Compile Include="Commands\Models\SaveImageModel.cs" />
     <Compile Include="Commands\UpdateUserAvatarCommand.cs" />
     <Compile Include="Commands\CreateGroupCommand.cs" />
     <Compile Include="Commands\DeleteGroupCommand.cs" />
@@ -116,6 +117,8 @@
     <Compile Include="Profiles\TypeProfile.cs" />
     <Compile Include="Profiles\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\AvatarByUserIdQuery.cs" />
+    <Compile Include="Queries\AvatarByUserIdQueryResult.cs" />
     <Compile Include="Queries\GroupsForUserQuery.cs" />
     <Compile Include="Queries\GroupsForUserQueryResult.cs" />
     <Compile Include="Queries\NoteByIdQuery.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Queries\RetriveGroupMembersQueryResult.cs" />
     <Compile Include="Queries\RetriveUsersGroupsQuery.cs" />
     <Compile Include="Queries\RetriveUsersGroupsQueryResult.cs" />
+    <Compile Include="QueryHandlers\AvatarByUserIdQueryHandler.cs" />
     <Compile Include="QueryHandlers\GroupsForUserQueryHandler.cs" />
     <Compile Include="QueryHandlers\NoteByIdQueryHandler.cs" />
     <Compile Include="QueryHandlers\NotesByLocationQueryHandler.cs" />
@@ -158,6 +162,9 @@
     <Compile Include="QueryHandlers\RetrieveUsersNotesQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetriveGroupMembersQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetriveUsersGroupsQueryHandler.cs" />
+    <Compile Include="Services\IImageFileService.cs" />
+    <Compile Include="Services\Implementation\ImageFileService.cs" />
+    <Compile Include="Static\StaticData.cs" />
     <Compile Include="Utils\StructureMapCommandHandlerFactory.cs" />
     <Compile Include="Utils\StructureMapEventHandlerFactory.cs" />
     <Compile Include="Utils\StructureMapQueryHandlerFactory.cs" />
@@ -183,6 +190,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

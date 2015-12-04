@@ -23,6 +23,7 @@ namespace DataAccess
         public Nullable<decimal> XCord { get; set; }
         public Nullable<decimal> YCord { get; set; }
         public Nullable<decimal> ZCord { get; set; }
+        public string Address { get; set; }
     
         public virtual ICollection<note> note { get; set; }
     }

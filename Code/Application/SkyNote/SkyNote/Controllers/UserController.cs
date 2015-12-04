@@ -102,11 +102,10 @@ namespace SkyNote.Controllers
             }
 
             command.DestinationDirPath = HttpContext.Current.Server.MapPath("~/App_Data/Avatars");
-                command.ImageBytes = imageData.Bytes;
-                command.ImageExtension = imageData.ImageType;
+            command.ImageBytes = imageData.Bytes;
 
             var result = ServiceLocator.CommandBus.Send(command);
-     
+
             return new CommandResult();
         }
    }

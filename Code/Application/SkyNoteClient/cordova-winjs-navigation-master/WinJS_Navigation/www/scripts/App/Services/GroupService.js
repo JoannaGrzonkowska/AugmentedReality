@@ -6,7 +6,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/group/get',
+            url: 'http://skynoteasiatest.azurewebsites.net/api/group/get',
             type: 'POST',
             data: group,
             success: function (data) {

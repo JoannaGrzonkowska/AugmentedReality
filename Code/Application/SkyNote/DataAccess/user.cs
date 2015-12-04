@@ -29,6 +29,7 @@ namespace DataAccess
         public string Mail { get; set; }
         public string Password { get; set; }
         public string PasswordSalt { get; set; }
+        public string Avatar { get; set; }
     
         public virtual ICollection<note> note { get; set; }
         public virtual ICollection<notesgroups> notesgroups { get; set; }

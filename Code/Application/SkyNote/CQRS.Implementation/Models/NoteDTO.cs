@@ -35,13 +35,13 @@ namespace CQRS.Implementation.Models
         {
             return new NoteDTO
             {
-                Id = entity.Id,
+                Id = entity.NoteId,
                 NoteId = entity.NoteId,
                 UserId = entity.UserId,
                 Topic = entity.Topic,
                 Content = entity.Content,
                 Date = entity.Date,
-                LocationId = entity.LocationId,
+                LocationId = (int)entity.LocationId,
                 XCord = entity.XCord,
                 YCord = entity.YCord,
                 ZCord = entity.ZCord,

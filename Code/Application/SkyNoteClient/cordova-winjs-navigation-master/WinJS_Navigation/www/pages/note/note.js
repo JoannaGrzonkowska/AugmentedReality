@@ -7,7 +7,7 @@
             var $noteForm = $("#note-form");
 
             $noteForm.validate({
-                rules: {
+                rules: { 
                     topic: "required",
                     content: "required",
                 },
@@ -19,10 +19,13 @@
 
             var noteService = new NoteService();
             var categoriesService = new CategoriesService();
+            var groupService = new GroupService();
 
             var NoteAddViewModel = function () {
                 var self = this;
-                self.NoteId = ko.observable(options.id)
+                self.myGroupsArray = ko.observableArray([]);
+                self.selectedGroup= ko.observableArray([1]);
+                self.NoteId = ko.observable(options.id);
                 self.Topic = ko.observable();
                 self.Content = ko.observable();
                 self.Images = ko.observableArray([]);
@@ -62,6 +65,12 @@
                     return noteImages;
                 }
 
+                var getUserGroups = function () {
+                    groupService.getUserGroups(options.userId, function (data) {
+                        self.myGroupsArray(data);
+                    });
+                };
+
                 self.loadNoteData = function (data) {
                     self.Topic(data.Topic());
                     self.Content(data.Content());
@@ -88,6 +97,7 @@
                 var geocoder = new google.maps.Geocoder;
 
                 self.addNote = function () {
+                    var a = selectedGroup;
                     var options = {
                         enableHighAccuracy: true
                     };
@@ -97,7 +107,7 @@
                         var latitude = position.coords.latitude;
                         var altitude = position.coords.altitude;
 
-                        alert("longitude " + longitude + " latitude " + latitude + " altitude " + altitude);
+
 
                         geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, function (results, status) {
                             if (status === google.maps.GeocoderStatus.OK) {
@@ -156,11 +166,8 @@
                         self.loadNoteData(data.Note);
                     });
                 }
-                else {
-                    categoriesService.getCategoriesSelectList(function (data) {
-                        self.categories(data);
-                    });
-                }
+
+                getUserGroups();
             };
             ko.applyBindings(new NoteAddViewModel(), document.getElementById("note-edit-container"));
 

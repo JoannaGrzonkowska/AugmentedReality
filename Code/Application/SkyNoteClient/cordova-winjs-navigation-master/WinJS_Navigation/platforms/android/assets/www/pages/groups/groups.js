@@ -1,70 +1,60 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
+﻿(function () {
     "use strict";
 
     WinJS.UI.Pages.define("pages/groups/groups.html", {
-        // This function is called whenever a user navigates to this page. It
-        // populates the page elements with the app's data.
-        ready: function (element, options) {
-            // TODO: Initialize the page here.
 
-            var elem = document.querySelector(".navButton");
-            elem.addEventListener('click', this.btnHandler);
+        ready: function (element, options) {
 
             var groupService = new GroupService();
 
-            var ToDoViewModel = function () {
+            var GroupsListViewModel = function () {
                 var self = this;
-                self.toDoItems = ko.observableArray([]);
-                self.newGroupName = ko.observable("");
-
-                self.addNewItem = function () {
-                    alert("Dodaję nową grupę");
-                    groupService.addGroup(
-                        {
-                            Content: self.newGroupName()
-                        },
-                        function () {
-                            alert("Dodano pomyślnie");
-                            self.toDoItems.push(new ToDoItem(self.newGroupName()));
-                            self.newGroupName("");
-                        });
+                self.myGroupsArray = ko.observableArray([]);
+                
+                var getGroups = function () {
+                    groupService.getUserGroups(options.id, function (data) {
+                        self.myGroupsArray(data);
+                    });
                 };
-
-                self.removeItem = function (item) {
-                    self.toDoItems.remove(item);
-                };
-
-                self.listViewUnshift = function (e) {
-                    alert("test");
-                };
-            };
-            var ToDoItem = (function () {
-                function ToDoItem(groupName) {
-                    this.groupName = ko.observable(groupName);
-                    this.done = ko.observable(false);
+                self.viewGroupNotes = function (item) {
+                    WinJS.Navigation.navigate('pages/groupNotes/groupNotes.html', { id: item.Id() });
                 }
-                return ToDoItem;
-            })();
 
-            ko.applyBindings(new ToDoViewModel(), document.getElementById("group-container"));
+                self.edit = function (item) {
+                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: item.Id() });
+                };
 
-        },
+                self.delete = function (item) {
+                    groupService.deleteGroup(item);
+                };
 
-        unload: function () {
-            // TODO: Respond to navigations away from this page.
-        },
+                self.gotoAddGroup = function () {
+                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: 0 });
+                };
 
-        updateLayout: function (element, viewState, lastViewState) {
-            /// <param name="element" domElement="true" />
+                self.refresh = function () {
+                    getGroups();
+                };
 
-            // TODO: Respond to changes in viewState.
-        },
+                getGroups();
 
-        btnHandler: function (args) {
-            WinJS.Navigation.navigate('pages/home/home.html', args);
+                self.gotoGroups = function () {
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });
+                };
+
+                self.gotoFriends = function () {
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.id });
+                };
+
+                self.gotoNotes = function () {
+                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.id });
+                };
+
+            };
+
+            var groupsListViewModel = new GroupsListViewModel();
+            ko.applyBindings(groupsListViewModel, document.getElementById("groups-container"));
+
         }
-
     });
 })();

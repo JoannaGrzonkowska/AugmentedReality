@@ -25,7 +25,7 @@ CREATE TABLE `group` (
   `UserId` int(11) DEFAULT NULL,    
   `UserName` varchar(45) DEFAULT NULL,
   `UserLogin` varchar(20) DEFAULT NULL,
-  `UserMail` varchar(45) DEFAULT NULL
+  `UserMail` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -44,7 +44,7 @@ CHANGE COLUMN `GroupId` `GroupId` INT(11) NULL DEFAULT NULL ;
 
 ALTER TABLE `note` 
 ADD COLUMN `Identyfication` VARCHAR(45) NULL DEFAULT NULL AFTER `GroupName`;
-
+ALTER TABLE `note` change  `Id` `NoteId` VARCHAR(45);
 
 ALTER TABLE `note` 
 ADD COLUMN `CategoryId` INT(11) NULL DEFAULT NULL AFTER `NoteId`,

@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+    <link href="register.css" rel="stylesheet" />
+    <script src="register.js"></script>
+    <script src="register.js"></script>
+    <script src="../../scripts/App/Services/UserService.js"></script>
+    <script src="../../scripts/App/Models/SignInModel.js"></script>
+    <script src="../../scripts/App/Models/UserAddModel.js"></script>
+
+</head>
+<body>
+    <div id="register-container">
+        <div class="row">
+            <span style="font-size:xx-large" class="col-xs-10">
+                Already have an account?
+                <a data-bind="click: signIn">Sign in!</a>
+            </span>
+        </div>
+        <form id="register-form" class="skynote-form">
+            <div class="form-group">
+                <input type="text" name="login" class="form-control" placeholder="Login" data-bind="value: Login" />
+                <input type="text" name="name" class="form-control" placeholder="Name" data-bind="value: Name" />
+                <input type="text" name="email" class="form-control" placeholder="E-mail" data-bind="value: Email" />
+                <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" data-bind="value: Password" />
+                <input type="password" name="confpass" class="form-control" placeholder="Confirm Password"  />
+            </div>
+            <button class="btn btn-default pull-right" data-bind="click: registerUser">Confirm</button>
+        </form>
+    </div>
+</body>
+</html>

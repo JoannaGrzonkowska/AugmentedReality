@@ -11,6 +11,7 @@
     <script src="../../js/mousewheel.js"></script>
     <script src="../../js/rhinoslider-1.05.min.js"></script>
     <script src="note.js"></script>
+    <script src="../../scripts/App/Models/GroupModel.js"></script>
 
     <script src="../../scripts/App/Models/NoteImageModel.js"></script>
     <script src="../../scripts/App/Models/NoteModel.js"></script>
@@ -20,6 +21,7 @@
 
     <script src="../../scripts/App/Services/NoteService.js"></script>
     <script src="../../scripts/App/Services/CategoriesService.js"></script>
+    <script src="../../scripts/App/Services/GroupService.js"></script>
 
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="../../js/cropbox.js"></script>
@@ -33,12 +35,20 @@
             <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
             <span style="font-size:xx-large" class="col-xs-10" data-bind="text:headerText"></span>
         </div>
+
         <form id="note-form" class="skynote-form">
             <div class="form-group">
                 <input type="text" name="topic" class="form-control" placeholder="Topic"
                        data-bind="value: Topic" />
                 <textarea name="content" class="form-control" rows="4" cols="70" placeholder="Content"
                           data-bind="value: Content"></textarea>
+                
+                <div id="fiddle" data-bind="foreach: myGroupsArray">
+                    <label>
+                        <input type="checkbox" data-bind="checkedValue: GroupId, checked: $parent.selectedGroup"/>
+                        <span data-bind="text: GroupName"></span>
+                    </label>
+                </div>
             </div>
 
             <div data-bind="visible: !isNew">

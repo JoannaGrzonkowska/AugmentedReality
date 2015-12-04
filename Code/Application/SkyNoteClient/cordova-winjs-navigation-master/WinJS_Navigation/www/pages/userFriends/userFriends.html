@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+
+    <script src="userFriends.js"></script>
+    <link href="userFriends.css" rel="stylesheet" />
+    <script src="../../scripts/App/Models/UserModel.js"></script>
+    <script src="../../scripts/App/Services/UserService.js"></script>
+
+</head>
+<body>
+    <nav>
+        <button class="btn btn-default" data-bind="click:gotoGroups">Groups</button>
+        <button class="btn btn-default" data-bind="click:gotoFriends">Friends</button>
+        <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
+    </nav>
+
+    <div class="home fragment" id="user-friends-container">
+        <h2>My Invitations</h2>
+        <div data-bind="template: { name: 'invite-template', foreach: invitationsArray }"></div>
+        <script id="invite-template" type="text/html">
+            <div class="remove">
+                <span class="label label-default" data-bind="text: Login"></span>
+                <button class="btn btn-default" data-bind="click: $parent.accept">accept</button>
+                <button class="btn btn-default" data-bind="click: $parent.decline">decline</button>
+            </div>
+
+        </script>
+
+        <h2>My friends</h2>
+        <div>
+            <span>Number of members: </span><span data-bind="text: userFriendsArray().length"></span>
+        </div>
+
+        <div class="row">
+            <span class="col-xs-8">
+            </span>
+            <button class="btn btn-default col-xs-2" data-bind="click:refresh">Refresh</button>
+            <button class="btn btn-default col-xs-2" data-bind="click:search">Search for friend</button>
+        </div>
+
+        <div data-bind="template: { name: 'friend-template', foreach: userFriendsArray }"></div>
+
+        <script id="friend-template" type="text/html">
+            <div class="panel panel-primary" dta-bind="click: $parent.getFriendsNotes">
+                <div class="panel-heading">
+                    <div style="background-color:white;font-size:medium" class="pull-right">
+                        <a>
+                            <span class="glyphicon glyphicon-minus" data-bind="click: $parent.delete"></span>
+                        </a>
+                    </div>
+                    <div data-bind="text: Login"></div>
+                </div>
+                <div class="panel-body">f</div>
+            </div>
+        </script>
+
+        <button class="btn btn-default pull-left" data-bind="click: back"> Back</button>
+    </div>
+</body>
+</html>

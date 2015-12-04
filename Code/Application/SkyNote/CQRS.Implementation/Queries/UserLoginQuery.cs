@@ -10,11 +10,11 @@ namespace CQRS.Implementation.Queries
     public class UserLoginQuery : IQuery
     {
         public string Password { get; set; }
-        public string UserName { get; set; }
+        public string Login { get; set; }
 
-        public UserLoginQuery(string UserName, string Password)
+        public UserLoginQuery(string Login, string Password)
         {
-            this.UserName = UserName;
+            this.Login = Login;
             this.Password = Password;
         }
     }

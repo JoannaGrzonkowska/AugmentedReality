@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+
+    <script src="groupNotes.js"></script>
+    <link href="groupNotes.css" rel="stylesheet" />
+
+    <script src="../../scripts/App/Models/NoteInGroupModel.js"></script>
+    <script src="../../scripts/App/Services/NoteService.js"></script>
+
+</head>
+<body>
+    <div class="home fragment" id="group-notes-container">        
+
+        <h2>Group notes</h2>
+        <div>
+            <span>Number of notes: </span><span data-bind="text: myNotesArray().length"></span>
+        </div>
+
+        <div class="row">
+            <span class="col-xs-8">
+            </span>
+            <button class="btn btn-default col-xs-2" data-bind="click:showGroupMembers">Show Members</button>
+            <button class="btn btn-default col-xs-2" data-bind="click:refresh">Refresh</button>
+        </div>
+
+        <div data-bind="template: { name: 'note-template', foreach: myNotesArray }"></div>
+
+        <script id="note-template" type="text/html">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div style="background-color:white;font-size:medium" class="pull-right">
+                        <a>
+                            <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.showOnMap" data-toggle="tooltip" title="Show on map"></span>
+                        </a>
+                        <a>
+                            <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.edit"></span>
+                        </a>
+                        <a>
+                            <span class="glyphicon glyphicon-minus" data-bind="click: $parent.delete"></span>
+                        </a>
+                    </div>
+                    <div>
+                        <div data-bind="text: Login"></div>: 
+                        <div data-bind="text: Topic"></div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-right" data-bind="localizedDateWithDescription: Date()"></div>
+                    <div data-bind="text: Content"></div>
+                </div>
+            </div>
+        </script>
+
+        <button class="btn btn-default pull-left" data-bind="click: back"> Back</button>
+    </div>
+</body>
+</html>

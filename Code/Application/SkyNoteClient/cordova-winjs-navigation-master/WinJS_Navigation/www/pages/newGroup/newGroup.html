@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+    <link href="newGroup.css" rel="stylesheet" />
+    <script src="newGroup.js"></script>
+    <script src="../../scripts/App/Models/GroupModel.js"></script>
+    <script src="../../scripts/App/Services/GroupService.js"></script>
+
+</head>
+<body>
+    <div id="group-edit-container">
+        <div class="row">
+            <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
+            <span style="font-size:xx-large" class="col-xs-10" data-bind="text:headerText"></span>
+        </div>
+        <form id="group-form" class="skynote-form">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="Name"
+                       data-bind="value: Name" />
+                
+            </div>
+            <button class="btn btn-default pull-right" data-bind="click: back"> Cancel</button>
+            <button class="btn btn-default pull-right" data-bind="click: save"> Save</button>
+        </form>
+    </div>
+</body>
+</html>

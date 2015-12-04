@@ -1,10 +1,8 @@
-﻿using System;
-using CQRS.CommandHandlers;
+﻿using CQRS.CommandHandlers;
 using CQRS.Commands;
 using CQRS.Events;
 using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
-using DataAccess;
 using DataAccess.Repositories;
 using System.Linq;
 

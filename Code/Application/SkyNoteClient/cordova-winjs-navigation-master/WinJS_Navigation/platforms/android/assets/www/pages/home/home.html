@@ -15,10 +15,15 @@
 
 </head>
 <body>
+    
     <div class="home fragment" id="notes-container">
-
+        <nav>
+            <button class="btn btn-default" data-bind="click:gotoGroups">Groups</button>
+            <button class="btn btn-default" data-bind="click:gotoFriends">Friends</button>
+            <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
+        </nav>
         <section>
-            <button class="btn btn-default" data-bind="click:gotoAddNote">Add note</button>
+            <button class="btn btn-default" data-bind="click: gotoAddNote">Add note</button>
         </section>
 
         <h2>My notes</h2>

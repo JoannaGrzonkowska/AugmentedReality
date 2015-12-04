@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
+using System.Web.Security;
 
 namespace SkyNote.Controllers
 {
@@ -58,6 +59,54 @@ namespace SkyNote.Controllers
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
 
+        [ActionName("InviteFriend")]
+        [HttpPost]
+        public HttpResponseMessage PostInviteFriend(UserInviteFriendCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+        [ActionName("GetFriendInvites")]
+        [HttpGet]
+        public IEnumerable<FriendInviteDTO> GetRetrieveFriendInvites(int id)
+        {
+            var friendsInvites = ServiceLocator.QueryBus.Retrieve<RetrieveFriendInvitesQuery, RetrieveFriendInvitesQueryResult>(new RetrieveFriendInvitesQuery(id)).FriendInvites;
+            return friendsInvites;
+        }
+
+        [ActionName("DecideFriendInvite")]
+        [HttpPost]
+        public HttpResponseMessage DecideFriendInvite(DecideFriendInviteCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+        [ActionName("InviteToGroup")]
+        [HttpPost]
+        public HttpResponseMessage PostInviteToGroup(InviteToGroupCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+        [ActionName("GetGroupInvites")]
+        [HttpGet]
+        public IEnumerable<GroupInviteDTO> GetRetrieveGroupInvites(int id)
+        {
+            var groupInvites = ServiceLocator.QueryBus.Retrieve<RetrieveGroupInvitesQuery, RetrieveGroupInvitesQueryResult>(new RetrieveGroupInvitesQuery(id)).GroupInvates;
+            return groupInvites;
+        }
+
+        [ActionName("DecideGroupInvite")]
+        [HttpPost]
+        public HttpResponseMessage DecideGroupInvite(DecideGroupInviteCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
         [ActionName("AddFriend")]
         [HttpPost]
         public HttpResponseMessage PostAddFriend(UserAddFriendCommand command)
@@ -73,15 +122,14 @@ namespace SkyNote.Controllers
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        
+        [ActionName("SignIn")]
+        [HttpPost]
+        [AllowAnonymous]
+        public LoginResultDTO Login(LoginCommand command)
         {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
+            var loginResult = ServiceLocator.QueryBus.Retrieve<UserLoginQuery, UserLoginQueryResult>(new UserLoginQuery(command.UserName, command.Password)).loginResult;
+            return loginResult;
         }
 
         [HttpPost]

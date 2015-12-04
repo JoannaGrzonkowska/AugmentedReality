@@ -33,6 +33,8 @@ namespace DataAccess
         public DbSet<types> types { get; set; }
         public DbSet<user> user { get; set; }
         public DbSet<userfriends> userfriends { get; set; }
+        public DbSet<userfriendsinvites> userfriendsinvites { get; set; }
         public DbSet<usergroup> usergroup { get; set; }
+        public DbSet<usergroupinvites> usergroupinvites { get; set; }
     }
 }

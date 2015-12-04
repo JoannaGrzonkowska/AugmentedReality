@@ -81,7 +81,9 @@
     <Compile Include="Repositories\Implementation\NotegroupRepository.cs" />
     <Compile Include="Repositories\Implementation\NoteRepository.cs" />
     <Compile Include="Repositories\Implementation\TypeRepository.cs" />
+    <Compile Include="Repositories\Implementation\UserFriendInvitesRepository.cs" />
     <Compile Include="Repositories\Implementation\UserfriendsRepository.cs" />
+    <Compile Include="Repositories\Implementation\UserGroupInvitesRepository.cs" />
     <Compile Include="Repositories\Implementation\UsergroupRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
     <Compile Include="Repositories\INotegroupRepository.cs" />
@@ -89,7 +91,9 @@
     <Compile Include="Repositories\IRepositoryBase.cs" />
     <Compile Include="Repositories\Implementation\RepositoryBase.cs" />
     <Compile Include="Repositories\ITypeRepository.cs" />
-    <Compile Include="Repositories\IUserfriendsRepository.cs" />
+    <Compile Include="Repositories\IUserFriendInvitesRepository.cs" />
+    <Compile Include="Repositories\IUserFriendsRepository.cs" />
+    <Compile Include="Repositories\IUserGroupInvitesRepository.cs" />
     <Compile Include="Repositories\IUsergroupRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="SkyNoteModel.Context.cs">
@@ -116,7 +120,13 @@
     <Compile Include="userfriends.cs">
       <DependentUpon>SkyNoteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="userfriendsinvites.cs">
+      <DependentUpon>SkyNoteModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usergroup.cs">
+      <DependentUpon>SkyNoteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usergroupinvites.cs">
       <DependentUpon>SkyNoteModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

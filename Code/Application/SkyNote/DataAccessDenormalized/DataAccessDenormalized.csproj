@@ -51,12 +51,17 @@
     <Compile Include="group.cs">
       <DependentUpon>SkyNoteDenormalizedModel1.tt</DependentUpon>
     </Compile>
+    <Compile Include="invites.cs">
+      <DependentUpon>SkyNoteDenormalizedModel1.tt</DependentUpon>
+    </Compile>
     <Compile Include="note.cs">
       <DependentUpon>SkyNoteDenormalizedModel1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IGroupDenormalizedRepository.cs" />
+    <Compile Include="Repository\IInvitesDenormalizedRepository.cs" />
     <Compile Include="Repository\Implementation\GroupDenormalizedRepository.cs" />
+    <Compile Include="Repository\Implementation\InvitesDenormalizedRepository.cs" />
     <Compile Include="Repository\INoteDenormalizedRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Implementation\NoteDenormalizedRepository.cs" />

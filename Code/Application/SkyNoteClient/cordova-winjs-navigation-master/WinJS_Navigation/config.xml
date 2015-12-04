@@ -91,4 +91,5 @@
   </platform>
   <vs:plugin name="org.apache.cordova.geolocation" version="0.3.12" />
   <vs:plugin name="org.apache.cordova.camera" version="0.3.6" />
+  <vs:plugin name="uk.co.workingedge.phonegap.plugin.LaunchNavigator" version="2.9.6" src="https://github.com/dpa99c/phonegap-launch-navigator.git" />
 </widget>

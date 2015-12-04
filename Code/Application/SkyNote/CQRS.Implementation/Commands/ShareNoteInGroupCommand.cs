@@ -7,6 +7,7 @@ namespace CQRS.Implementation.Commands
     public class ShareNoteInGroupCommand : Command<notesgroups>
     {
         public int GroupId { get; set; }
+        public string GroupIds { get; set; }
         public int NoteId { get; set; }
         public int UserId { get; set; }
 

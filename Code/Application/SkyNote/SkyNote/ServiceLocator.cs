@@ -80,6 +80,9 @@ namespace SkyNote
 
                 x.For<IImageFileService>().Use<ImageFileService>();
 
+                x.For<IUserGroupInvitesRepository>().Use<UserGroupInvitesRepository>();
+                x.For<IUserFriendInvitesRepository>().Use<UserFriendInvitesRepository>();
+                x.For<IInvitesDenormalizedRepository>().Use<InvitesDenormalizedRepository>();
             });
         }
     }

@@ -1,4 +1,4 @@
-﻿
+
 CREATE TABLE `location` (
   `LocationId` int(11) NOT NULL AUTO_INCREMENT,
   `XCord` decimal(10,0) DEFAULT NULL,
@@ -160,3 +160,27 @@ ADD COLUMN `Avatar` VARCHAR(45) NULL DEFAULT 'defaultAvatar';
 
 ALTER TABLE `location` 
 ADD COLUMN `Address` VARCHAR(100) NULL;
+  ON UPDATE NO ACTION;
+  
+  
+CREATE TABLE `usergroupinvites` (
+  `UsergroupinviteId` int(11) NOT NULL AUTO_INCREMENT,
+  `State` varchar(45) DEFAULT NULL,
+  `UserId` int(11) NOT NULL ,
+  `InvatedId` int(11) NOT NULL,
+  `GroupId` int(11) NOT NULL,
+  PRIMARY KEY (`UsergroupinviteId`),
+	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+	FOREIGN KEY (`InvatedId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+    FOREIGN KEY (`GroupId`) REFERENCES `group`(Id) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `userfriendsinvites` (
+  `UserfriendsinviteId` int(11) NOT NULL AUTO_INCREMENT,
+  `State` varchar(45) DEFAULT NULL,
+  `UserId` int(11) NOT NULL ,
+  `FriendId` int(11) NOT NULL,
+  PRIMARY KEY (`UserfriendsinviteId`),
+	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
+    FOREIGN KEY (`FriendId`) REFERENCES `user`(UserID) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -8,8 +8,8 @@ namespace CQRS.Implementation.Models
 {
     public class TypeDTO
     {
-        public int? TypeId { get; set; }
-        public int? CategoryId { get; set; }
+        public int TypeId { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
     }
 }

@@ -28,9 +28,8 @@ namespace CQRS.Implementation.EventHandlers
             var user = _userRepository.GetById(handle.UserId);
 
             string categoryName = null, typeName = null;
-            int? categoryId = null;
-            if (handle.TypeId != null)
-            {
+            int? categoryId=null;
+            if (handle.TypeId != null) { 
                 var type = _typeRepository.GetById((int)handle.TypeId);
                 var category = _categoryRepository.GetById(type.CategoryId);
                 categoryName = category.Name;

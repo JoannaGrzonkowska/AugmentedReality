@@ -7,6 +7,8 @@ using CQRS.Implementation.Services;
 using DataAccess;
 using DataAccess.Repositories;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CQRS.Implementation.CommandHandlers
 {
@@ -29,24 +31,28 @@ namespace CQRS.Implementation.CommandHandlers
 
         public CommandResult Execute(CreateNoteCommand command)
         {
-            var location = locationRepository.GetByCord(command.xCord, command.yCord);
-            if (location == null)
+            IQueryable<user> auth_users = userRepository.RetriveUserById(command.Authentication_UserId);
+            if (auth_users != null)
             {
-                location = new location()
+                if (auth_users.First().Name == command.Authentication_UserName)
                 {
-                    XCord = command.xCord,
-                    YCord = command.yCord,
-                    ZCord = command.zCord,
-                    Address = command.Address
-                };
-                locationRepository.Add(location);
-                locationRepository.SaveChanges();
-            }
+                    var location = locationRepository.GetByCord(command.xCord, command.yCord);
+                    if (location == null)
+                    {
+                        location = new location()
+                        {
+                            XCord = command.xCord,
+                            YCord = command.yCord,
+                            ZCord = command.zCord
+                        };
+                        locationRepository.Add(location);
+                        locationRepository.SaveChanges();
+                    }
 
-            var note = command.Build(additionalAction: x => x.LocationId = location.LocationId);
+                    var note = command.Build(additionalAction: x => x.LocationId = location.LocationId);
 
-            noteRepository.Add(note);
-            noteRepository.SaveChanges();
+                    noteRepository.Add(note);
+                    noteRepository.SaveChanges();
 
             var destinationDirPath = Path.Combine(command.DestinationDirPath, note.Id.ToString());
             imageFileService.SaveFilesList(command.Images, destinationDirPath);
@@ -67,7 +73,10 @@ namespace CQRS.Implementation.CommandHandlers
                     Address = note.location.Address
                 });
 
-            return new CommandResult();
+                    return new CommandResult();
+                }
+            }
+            return new CommandResult(new List<string>() { "Unable to authenticate user" });
         }
     }
 }

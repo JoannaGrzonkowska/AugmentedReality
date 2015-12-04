@@ -27,8 +27,8 @@ namespace CQRS.Implementation.CommandHandlers
         {
             var note = noteRepository.GetById(command.NoteId);
             var noteEdited = command.Build(note);
-
             noteRepository.SaveChanges();
+
 
             var destinationDirPath = Path.Combine(command.DestinationDirPath, note.Id.ToString());
             var usedFiles = command.Images.Where(x => !string.IsNullOrEmpty(x.Filename)).Select(x => x.Filename).ToList();
@@ -45,7 +45,6 @@ namespace CQRS.Implementation.CommandHandlers
                     Date = noteEdited.Date });
 
             return new CommandResult();
-
         }
     }
 }

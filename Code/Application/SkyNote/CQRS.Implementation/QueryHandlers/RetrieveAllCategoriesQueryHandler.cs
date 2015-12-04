@@ -23,7 +23,7 @@ namespace CQRS.Implementation.QueryHandlers
         public RetrieveAllCategoriesQueryResult Handle(RetrieveAllCategoriesQuery handle)
         {
             var result = new RetrieveAllCategoriesQueryResult();
-            var categories = _categoryRepostory.GetAllQueryable().OrderBy(x => x.Name).ToList();
+            var categories = _categoryRepostory.GetAllQueryable().OrderByDescending(x => x.CategoryId).ToList();
 
             result.Categories = Mapper.Map<IEnumerable<CategoryDTO>>(categories);
 

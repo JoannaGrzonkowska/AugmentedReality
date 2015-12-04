@@ -15,13 +15,13 @@ namespace SkyNote.Controllers
             return categories;
         }
 
-     /*   [ActionName("RetrieveTypesOfCategoryGiven")]
+        [ActionName("CategoriesSelectList")]
         [HttpGet]
-        public IEnumerable<CategoryDTO> GetRetrieveTypesOfCategory()
+        public IEnumerable<CategoryDTO> GetCategoriesSelectList()
         {
-            var categories = ServiceLocator.QueryBus.Retrieve<GetRetrieveTypesOfCategoryGivenQuery, GetRetrieveTypesOfCategoryGivenQueryResult>(new GetRetrieveTypesOfCategoryGivenQuery()).Types;
+            var categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
             return categories;
-        }*/
+        }
 
     }
 }

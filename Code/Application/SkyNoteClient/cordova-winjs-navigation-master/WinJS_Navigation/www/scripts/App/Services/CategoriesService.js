@@ -7,7 +7,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/Category/CategoriesSelectList',
+            url: 'http://localhost:59284/api/Category/CategoriesSelectList',
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {

@@ -19,6 +19,32 @@ namespace SkyNote.Controllers
     {
         private string filesDirPath = HttpContext.Current.Server.MapPath("~/App_Data");
 
+
+        [ActionName("NotesByLocation")]
+        [HttpGet]
+        public IEnumerable<NoteDTO> GetNotesByLocation(decimal? xCord, decimal? yCord, int radius = 20, int? categoryId = null, int? typeId = null)
+        {
+            var notes = ServiceLocator.QueryBus.Retrieve<NotesByLocationQuery, NotesByLocationQueryResult>(new NotesByLocationQuery()
+            {
+                XCord = xCord,
+                YCord = yCord,
+                Radius = radius,
+                CategoryId = categoryId,
+                TypeId = typeId
+            }).Notes;
+            return notes;
+        }
+
+        [ActionName("MyNotesViewModel")]
+        [HttpGet]
+        public MyNotesViewModel GetMyNotesViewModel(int id)
+        {
+            var myNotesViewModel = new MyNotesViewModel();
+            myNotesViewModel.Categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
+            myNotesViewModel.Notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
+            return myNotesViewModel;
+        }
+
         public IEnumerable<NoteDTO> Get()
         {
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
@@ -90,12 +116,12 @@ namespace SkyNote.Controllers
         public HttpResponseMessage Post(CreateNoteCommand command)
         {
             if (command.CanBeAuthenticated())
-            { 
-                  command.DestinationDirPath = Path.Combine(filesDirPath, StaticData.NotesDirectory);
-            ConvertNoteImagesToByte(command.Images);
+            {
+                command.DestinationDirPath = Path.Combine(filesDirPath, StaticData.NotesDirectory);
+                ConvertNoteImagesToByte(command.Images);
 
-            var result = ServiceLocator.CommandBus.Send(command);
-            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+                var result = ServiceLocator.CommandBus.Send(command);
+                return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
 
             }
             else

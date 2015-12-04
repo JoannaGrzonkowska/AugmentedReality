@@ -61,8 +61,8 @@
                     }, options);
                 };
 
-                var getMyNotesViewModel = function () {
-                    noteService.getMyNotesViewModel(function (data) {
+                var getMyNotesViewModel = function (id) {
+                    noteService.getMyNotesViewModel(id,function (data) {
                         self.categories(data.Categories());
                         self.myNotesArray(data.Notes());
                         self.lastRefresh(new Date());
@@ -94,8 +94,6 @@
                     searchNotes();
                 };
 
-                getNotes(options.id);
-
                 self.showNotesOnMap = function () {
                     WinJS.Navigation.navigate('pages/map/map.html', {
                         Notes: self.myNotesArray(),
@@ -108,7 +106,7 @@
                     gotoMap();
                 };
 
-                getMyNotesViewModel();
+                getMyNotesViewModel(1);
 
                 self.gotoGroups = function () {
                     WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });

@@ -42,7 +42,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/note/NotesByLocation?xCord=' + xCord
+            url: 'http://localhost:59284/api/note/NotesByLocation?xCord=' + xCord
                 + '&yCord=' + yCord
                 + '&radius=' + radius
                 + '&categoryId=' + categoryId
@@ -57,12 +57,12 @@ var NoteService = function (urls) {
         });
     };
 
-    self.getMyNotesViewModel = function (handler) {
+    self.getMyNotesViewModel = function (id, handler) {
 
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/note/MyNotesViewModel',
+            url: 'http://localhost:59284/api/note/MyNotesViewModel/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = new MyNotesViewModel(data);
@@ -76,7 +76,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/note/get/' + id,
+            url: 'http://localhost:59284/api/note/get/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = new NoteDetailsViewModel(data);
@@ -103,7 +103,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/note/put',
+            url: 'http://localhost:59284/api/note/put',
             type: 'PUT',
             data: note,
             contentType: 'application/json',
@@ -117,7 +117,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/note/delete/' + note.NoteId(),
+            url: 'http://localhost:59284/api/note/delete/' + note.NoteId(),
             type: 'DELETE',
             success: function (data) {
                 showAlertAfterAjax(data, 'Note ' + note.Topic() + ' successfuly deleted.');

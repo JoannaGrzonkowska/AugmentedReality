@@ -106,9 +106,6 @@ warning 6005: The data type 'point' is currently not supported for the target En
     <edmx:ConceptualModels>
       <Schema Namespace="skynotedenormalizeddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
-          <EntitySet Name="invites" EntityType="skynotedenormalizeddbModel.invites" />
-          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
           <FunctionImport Name="get_notes_in_location_range" EntitySet="note" ReturnType="Collection(skynotedenormalizeddbModel.note)">
             <Parameter Name="xCordParam" Mode="In" Type="Decimal" />
             <Parameter Name="yCordParam" Mode="In" Type="Decimal" />
@@ -138,6 +135,9 @@ warning 6005: The data type 'point' is currently not supported for the target En
             <Parameter Name="typeNameParam" Mode="In" Type="String" />
             <Parameter Name="locationAddressParam" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
+          <EntitySet Name="invites" EntityType="skynotedenormalizeddbModel.invites" />
+          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
         </EntityContainer>
         <EntityType Name="group">
           <Key>
@@ -205,6 +205,8 @@ warning 6005: The data type 'point' is currently not supported for the target En
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities">
+          <FunctionImportMapping FunctionImportName="get_notes_in_location_range" FunctionName="skynotedenormalizeddbModel.Store.get_notes_in_location_range" />
+          <FunctionImportMapping FunctionImportName="insert_note" FunctionName="skynotedenormalizeddbModel.Store.insert_note" />
           <EntitySetMapping Name="group">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.group">
               <MappingFragment StoreEntitySet="group">
@@ -268,8 +270,6 @@ warning 6005: The data type 'point' is currently not supported for the target En
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="get_notes_in_location_range" FunctionName="skynotedenormalizeddbModel.Store.get_notes_in_location_range" />
-          <FunctionImportMapping FunctionImportName="insert_note" FunctionName="skynotedenormalizeddbModel.Store.insert_note" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

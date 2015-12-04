@@ -7,7 +7,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/user/updateAvatar',
+            url: 'http://localhost:59284/api/user/updateAvatar',
             type: 'POST',
             data: updateUserAvatarCommand,
             success: function (data) {

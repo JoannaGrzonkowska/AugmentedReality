@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2f4893d76a374c6aaacaf581ab0b6dba" Name="Diagram1" ZoomLevel="87">
-        <EntityTypeShape EntityType="skynotedbModel.categories" Width="1.5" PointX="1.5" PointY="15.625" />
-        <EntityTypeShape EntityType="skynotedbModel.group" Width="1.5" PointX="3.75" PointY="3" />
-        <EntityTypeShape EntityType="skynotedbModel.location" Width="1.5" PointX="0.75" PointY="3.5" />
-        <EntityTypeShape EntityType="skynotedbModel.note" Width="1.5" PointX="3" PointY="6.375" />
-        <EntityTypeShape EntityType="skynotedbModel.notesgroups" Width="1.5" PointX="8.25" PointY="7.5" />
-        <EntityTypeShape EntityType="skynotedbModel.types" Width="1.5" PointX="0.75" PointY="12.5" />
-        <EntityTypeShape EntityType="skynotedbModel.user" Width="1.5" PointX="0.75" PointY="6.875" />
-        <EntityTypeShape EntityType="skynotedbModel.userfriends" Width="1.5" PointX="3" PointY="10.375" />
-        <EntityTypeShape EntityType="skynotedbModel.userfriendsinvites" Width="1.5" PointX="3" PointY="19.125" />
-        <EntityTypeShape EntityType="skynotedbModel.usergroup" Width="1.5" PointX="6" PointY="8" />
-        <EntityTypeShape EntityType="skynotedbModel.usergroupinvites" Width="1.5" PointX="6" PointY="4.75" />
+        <EntityTypeShape EntityType="skynotedbModel.categories" Width="1.5" PointX="1.5" PointY="1.125" />
+        <EntityTypeShape EntityType="skynotedbModel.group" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="skynotedbModel.location" Width="1.5" PointX="3.75" PointY="11.5" />
+        <EntityTypeShape EntityType="skynotedbModel.note" Width="1.5" PointX="6" PointY="7.625" />
+        <EntityTypeShape EntityType="skynotedbModel.notesgroups" Width="1.5" PointX="8.25" PointY="8" />
+        <EntityTypeShape EntityType="skynotedbModel.types" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="skynotedbModel.user" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="skynotedbModel.userfriends" Width="1.5" PointX="3" PointY="16.625" />
+        <EntityTypeShape EntityType="skynotedbModel.userfriendsinvites" Width="1.5" PointX="3" PointY="19.375" />
+        <EntityTypeShape EntityType="skynotedbModel.usergroup" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="skynotedbModel.usergroupinvites" Width="1.5" PointX="3" PointY="4.875" />
         <AssociationConnector Association="skynotedbModel.types_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_2" />
         <AssociationConnector Association="skynotedbModel.usergroup_ibfk_2" />

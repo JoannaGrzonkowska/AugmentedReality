@@ -97,7 +97,7 @@
                 var geocoder = new google.maps.Geocoder;
 
                 self.addNote = function () {
-                    var a = selectedGroup;
+                   // var a = selectedGroup;
                     var options = {
                         enableHighAccuracy: true
                     };
@@ -164,6 +164,10 @@
                     noteService.getNote(options.id, function (data) {
                         self.categories(data.Categories());
                         self.loadNoteData(data.Note);
+                    });
+                } else {
+                    categoriesService.getCategoriesSelectList(function (data) {
+                        self.categories(data);
                     });
                 }
 

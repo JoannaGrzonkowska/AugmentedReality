@@ -29,7 +29,7 @@ namespace CQRS.Implementation.Commands
                 x.Topic = Topic;
                 x.UserId = UserId;
                 x.Date = DateTime.Now;
-                x.TypeId = 1;//TypeId;
+                x.TypeId = TypeId;
                 if (additionalAction != null)
                 {
                     additionalAction(x);

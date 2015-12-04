@@ -4,6 +4,7 @@ using CQRS.Events;
 using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
 using DataAccess.Repositories;
+using System;
 using System.Linq;
 
 namespace CQRS.Implementation.CommandHandlers

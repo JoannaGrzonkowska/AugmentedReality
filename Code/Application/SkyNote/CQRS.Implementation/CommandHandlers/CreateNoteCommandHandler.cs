@@ -54,24 +54,24 @@ namespace CQRS.Implementation.CommandHandlers
                     noteRepository.Add(note);
                     noteRepository.SaveChanges();
 
-            var destinationDirPath = Path.Combine(command.DestinationDirPath, note.Id.ToString());
-            imageFileService.SaveFilesList(command.Images, destinationDirPath);
+                    var destinationDirPath = Path.Combine(command.DestinationDirPath, note.Id.ToString());
+                    imageFileService.SaveFilesList(command.Images, destinationDirPath);
 
-            eventStorage.Publish(
-                new NoteCreatedEvent()
-                {
-                    NoteId = note.Id,
-                    UserId = note.UserId.Value,
-                    LocationId = note.LocationId.Value,
-                    Topic = note.Topic,
-                    Content = note.Content,
-                    Date = note.Date,
-                    XCord = location.XCord,
-                    YCord = location.YCord,
-                    ZCord = location.ZCord,
-                    TypeId = note.TypeId,
-                    Address = note.location.Address
-                });
+                    eventStorage.Publish(
+                        new NoteCreatedEvent()
+                        {
+                            NoteId = note.Id,
+                            UserId = note.UserId.Value,
+                            LocationId = note.LocationId.Value,
+                            Topic = note.Topic,
+                            Content = note.Content,
+                            Date = note.Date,
+                            XCord = location.XCord,
+                            YCord = location.YCord,
+                            ZCord = location.ZCord,
+                            TypeId = note.TypeId,
+                            Address = note.location.Address
+                        });
 
                     return new CommandResult();
                 }

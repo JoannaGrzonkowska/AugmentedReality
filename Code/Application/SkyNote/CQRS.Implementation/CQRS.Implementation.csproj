@@ -148,6 +148,8 @@
     <Compile Include="Queries\NotesByDateQuery.cs" />
     <Compile Include="Queries\NoteByIdQueryResult.cs" />
     <Compile Include="Queries\NotesByDateQueryResult.cs" />
+    <Compile Include="Queries\NotesByLocationQuery.cs" />
+    <Compile Include="Queries\NotesByLocationQueryResult.cs" />
     <Compile Include="Queries\RetrieveAllCategoriesQuery.cs" />
     <Compile Include="Queries\RetrieveAllCategoriesQueryResult.cs" />
     <Compile Include="Queries\RetrieveFriendInvitesQuery.cs" />
@@ -177,6 +179,7 @@
     <Compile Include="QueryHandlers\GroupsForUserQueryHandler.cs" />
     <Compile Include="QueryHandlers\NoteByIdQueryHandler.cs" />
     <Compile Include="QueryHandlers\NotesByDateQueryHandler.cs" />
+    <Compile Include="QueryHandlers\NotesByLocationQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveAllCategoriesQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveFriendInvitesQueryHandler.cs" />
     <Compile Include="QueryHandlers\RetrieveGroupInvitesQueryHandler.cs" />

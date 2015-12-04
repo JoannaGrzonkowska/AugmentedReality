@@ -64,9 +64,9 @@
           <Property Name="Identyfication" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
-          <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormalized" store:Type="Tables" />
-          <EntitySet Name="invites" EntityType="Self.invites" Schema="skynotedbdenormalized" store:Type="Tables" />
-          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedbdenormalized" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="skynotedenormalizeddb" store:Type="Tables" />
+          <EntitySet Name="invites" EntityType="Self.invites" Schema="skynotedenormalizeddb" store:Type="Tables" />
+          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedenormalizeddb" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -74,8 +74,8 @@
       <Schema Namespace="skynotedenormalizeddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
-          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
           <EntitySet Name="invites" EntityType="skynotedenormalizeddbModel.invites" />
+          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
         </EntityContainer>
         <EntityType Name="group">
           <Key>
@@ -93,6 +93,23 @@
           <Property Name="FriendLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="FriendMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="FriendId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="invites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="FriendId" Type="Int32" />
+          <Property Name="FriendName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="FriendLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FriendMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="note">
           <Key>
@@ -118,24 +135,7 @@
           <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Identyfication" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="invites">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="State" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="GroupId" Type="Int32" />
-          <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="UserLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="UserMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="FriendId" Type="Int32" />
-          <Property Name="FriendName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="FriendLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FriendMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -155,6 +155,24 @@
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invites">
+            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.invites">
+              <MappingFragment StoreEntitySet="invites">
+                <ScalarProperty Name="FriendMail" ColumnName="FriendMail" />
+                <ScalarProperty Name="FriendLogin" ColumnName="FriendLogin" />
+                <ScalarProperty Name="FriendName" ColumnName="FriendName" />
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+                <ScalarProperty Name="UserMail" ColumnName="UserMail" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -181,24 +199,6 @@
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="NoteId" ColumnName="NoteId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="invites">
-            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.invites">
-              <MappingFragment StoreEntitySet="invites">
-                <ScalarProperty Name="FriendMail" ColumnName="FriendMail" />
-                <ScalarProperty Name="FriendLogin" ColumnName="FriendLogin" />
-                <ScalarProperty Name="FriendName" ColumnName="FriendName" />
-                <ScalarProperty Name="FriendId" ColumnName="FriendId" />
-                <ScalarProperty Name="UserMail" ColumnName="UserMail" />
-                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

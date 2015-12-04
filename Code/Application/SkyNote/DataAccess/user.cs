@@ -17,12 +17,13 @@ namespace DataAccess
         public user()
         {
             this.note = new HashSet<note>();
-            this.notesgroups = new HashSet<notesgroups>();
             this.userfriends = new HashSet<userfriends>();
-            
-            this.usergroup = new HashSet<usergroup>();
+            this.userfriends1 = new HashSet<userfriends>();
             this.userfriendsinvites = new HashSet<userfriendsinvites>();
+            this.userfriendsinvites1 = new HashSet<userfriendsinvites>();
+            this.usergroup = new HashSet<usergroup>();
             this.usergroupinvites = new HashSet<usergroupinvites>();
+            this.usergroupinvites1 = new HashSet<usergroupinvites>();
         }
     
         public int UserID { get; set; }
@@ -33,12 +34,12 @@ namespace DataAccess
         public string PasswordSalt { get; set; }
     
         public virtual ICollection<note> note { get; set; }
-        public virtual ICollection<notesgroups> notesgroups { get; set; }
         public virtual ICollection<userfriends> userfriends { get; set; }
-
-
-
+        public virtual ICollection<userfriends> userfriends1 { get; set; }
         public virtual ICollection<userfriendsinvites> userfriendsinvites { get; set; }
+        public virtual ICollection<userfriendsinvites> userfriendsinvites1 { get; set; }
+        public virtual ICollection<usergroup> usergroup { get; set; }
         public virtual ICollection<usergroupinvites> usergroupinvites { get; set; }
+        public virtual ICollection<usergroupinvites> usergroupinvites1 { get; set; }
     }
 }

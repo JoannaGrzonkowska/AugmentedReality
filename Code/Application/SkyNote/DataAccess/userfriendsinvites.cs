@@ -20,5 +20,6 @@ namespace DataAccess
         public int FriendId { get; set; }
     
         public virtual user user { get; set; }
+        public virtual user user1 { get; set; }
     }
 }

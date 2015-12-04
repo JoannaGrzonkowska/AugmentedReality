@@ -216,7 +216,9 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\SkyNote001 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\SkyNote001 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\skynotepg - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\skynotepg - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\skynotepg - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\skynotepg - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

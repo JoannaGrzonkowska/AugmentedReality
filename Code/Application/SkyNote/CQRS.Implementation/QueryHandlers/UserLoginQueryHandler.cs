@@ -22,7 +22,7 @@ namespace CQRS.Implementation.QueryHandlers
         public UserLoginQueryResult Handle(UserLoginQuery handle)
         {
             UserLoginQueryResult result = new UserLoginQueryResult();
-            var user = userRepository.GetAllQueryable().FirstOrDefault(x => x.Login == handle.UserName);
+            var user = userRepository.GetAllQueryable().FirstOrDefault(x => x.Login == handle.Login);
 
             if(user != null)
             {

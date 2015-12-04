@@ -98,7 +98,7 @@ namespace SkyNote.Controllers
         [HttpPost]
         public LoginResultDTO Login(LoginCommand command)
         {
-            var loginResult = ServiceLocator.QueryBus.Retrieve<UserLoginQuery, UserLoginQueryResult>(new UserLoginQuery(command.UserName, command.Password)).loginResult;
+            var loginResult = ServiceLocator.QueryBus.Retrieve<UserLoginQuery, UserLoginQueryResult>(new UserLoginQuery(command.Login, command.Password)).loginResult;
             return loginResult;
         }
     }

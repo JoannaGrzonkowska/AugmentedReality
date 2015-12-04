@@ -1,16 +1,11 @@
 ﻿using CQRS.CommandHandlers;
-using CQRS.Implementation.Commands;
-using System;
-using DataAccess.Repositories;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CQRS.Commands;
 using CQRS.Events;
+using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
-using StructureMap.AutoMocking;
 using DataAccess;
+using DataAccess.Repositories;
+using System.Linq;
 
 namespace CQRS.Implementation.CommandHandlers
 {
@@ -43,8 +38,8 @@ namespace CQRS.Implementation.CommandHandlers
                 userfriendStorage.Add(friendship2);
                 userfriendStorage.SaveChanges();
 
-                IQueryable<user> users = this.userStorage.RetriveUserById(command.InvatingUserId);
-                IQueryable<user> friends= this.userStorage.RetriveUserById(command.InvatedUserId);
+                IQueryable<user> users = userStorage.RetriveUserById(command.InvatingUserId);
+                IQueryable<user> friends= userStorage.RetriveUserById(command.InvatedUserId);
 
                 if (users != null && friends != null)
                 {

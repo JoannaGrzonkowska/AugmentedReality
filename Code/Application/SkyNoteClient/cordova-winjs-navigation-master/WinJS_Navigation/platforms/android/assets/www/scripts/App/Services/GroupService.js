@@ -19,7 +19,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/group/RetriveUsersGroups',//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: 'http://localhost:59284/api/user/RetriveUsersGroups/' +id,//localhost:59284 skynoteasiatest.azurewebsites.net
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {

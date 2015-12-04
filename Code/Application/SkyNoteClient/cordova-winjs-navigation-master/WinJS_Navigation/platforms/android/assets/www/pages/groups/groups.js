@@ -12,7 +12,7 @@
                 self.myGroupsArray = ko.observableArray([]);
                 
                 var getGroups = function () {
-                    groupService.getUserGroups(1, function (data) {
+                    groupService.getUserGroups(options.id, function (data) {
                         self.myGroupsArray(data);
                     });
                 };
@@ -37,6 +37,18 @@
                 };
 
                 getGroups();
+
+                self.gotoGroups = function () {
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });
+                };
+
+                self.gotoFriends = function () {
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.id });
+                };
+
+                self.gotoNotes = function () {
+                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.id });
+                };
 
             };
 

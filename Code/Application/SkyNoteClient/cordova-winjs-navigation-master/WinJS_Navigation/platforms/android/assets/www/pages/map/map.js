@@ -11,6 +11,7 @@
                 var self = this;
                 self.notesArray = ko.observableArray(options.Notes);
                 self.backLink = ko.observable(options.BackLink);
+                self.userId = ko.observable(options.UserId);
                 self.lastRefresh = ko.observable(new Date());
 
                 var loadMarkersToMap = function () {
@@ -68,7 +69,7 @@
                 };
 
                 self.back = function () {
-                    WinJS.Navigation.navigate(self.backLink());
+                    WinJS.Navigation.navigate(self.backLink(), { id: self.userId() });
                 };
                 loadMarkersToMap();
             };

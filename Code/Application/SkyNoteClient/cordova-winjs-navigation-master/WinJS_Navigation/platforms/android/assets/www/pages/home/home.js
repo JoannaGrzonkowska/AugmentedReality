@@ -4,12 +4,7 @@
     WinJS.UI.Pages.define("pages/home/home.html", {
 
         ready: function (element, options) {
-
-            if (typeof options === "undefined")
-            {
-                var options = { id: 1 };
-            }
-            options.id = (typeof options.id === "undefined") ? "1" : options.id;
+                                   
             var noteService = new NoteService();
 
             var NotesListViewModel = function () {
@@ -35,8 +30,8 @@
                         return null;
                 });
 
-                var getNotes = function () {
-                    noteService.getUserNotes(function (data) {
+                var getNotes = function (id) {
+                    noteService.getUserNotes(id, function (data) {
                         self.myNotesArray(data);
                         self.lastRefresh(new Date());
                     });
@@ -78,7 +73,7 @@
                 };
 
                 self.edit = function (item) {
-                    WinJS.Navigation.navigate('pages/note/note.html', { id: item.NoteId() });
+                    WinJS.Navigation.navigate('pages/note/note.html', { id: item.NoteId(), userId: options.id });
                 };
 
                 self.delete = function (item) {
@@ -86,11 +81,11 @@
                 };
 
                 self.gotoAddNote = function () {
-                    WinJS.Navigation.navigate('pages/note/note.html', { id: 0 });
+                    WinJS.Navigation.navigate('pages/note/note.html', { id: 0, userId: options.id });
                 };
 
                 self.refresh = function () {
-                    getNotes(1); // wstawic current user id
+                    getNotes(options.id); 
                 };
 
                 self.search = function () {
@@ -102,11 +97,24 @@
                 self.showNotesOnMap = function () {
                     WinJS.Navigation.navigate('pages/map/map.html', {
                         Notes: self.myNotesArray(),
-                        BackLink: 'pages/home/home.html'
+                        BackLink: 'pages/home/home.html',
+                        UserId: options.id
                     });
                 };
 
-                getMyNotesViewModel();
+                //getMyNotesViewModel();
+
+                self.gotoGroups = function () {
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });
+                };
+
+                self.gotoFriends = function () {
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.id });
+                };
+
+                self.gotoNotes = function () {
+                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.id });
+                };
 
             };
 

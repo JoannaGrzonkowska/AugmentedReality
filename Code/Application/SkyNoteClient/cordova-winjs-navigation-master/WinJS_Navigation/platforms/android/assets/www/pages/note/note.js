@@ -7,7 +7,7 @@
             var $noteForm = $("#note-form");
 
             $noteForm.validate({
-                rules: {
+                rules: { 
                     topic: "required",
                     content: "required",
                 },
@@ -18,15 +18,24 @@
             });
 
             var noteService = new NoteService();
+            var groupService = new GroupService();
 
             var NoteAddViewModel = function () {
                 var self = this;
-                self.NoteId = ko.observable(options.id)
+                self.myGroupsArray = ko.observableArray([]);
+                self.selectedGroup= ko.observableArray([1]);
+                self.NoteId = ko.observable(options.id);
                 self.Topic = ko.observable();
                 self.Content = ko.observable();
 
                 var isNew = self.NoteId() === 0;
                 self.headerText = isNew ? 'Add new note' : 'Edit note';
+
+                var getUserGroups = function () {
+                    groupService.getUserGroups(options.userId, function (data) {
+                        self.myGroupsArray(data);
+                    });
+                };
 
                 self.loadNoteData = function (data) {
                     self.Topic(data.Topic());
@@ -37,6 +46,7 @@
 
 
                 self.addNote = function () {
+                    var a = selectedGroup;
                     var options = {
                         enableHighAccuracy: true
                     };
@@ -46,8 +56,8 @@
                         var latitude = position.coords.latitude;
                         var altitude = position.coords.altitude;
 
-                        
-                        
+
+
                         geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, function (results, status) {
                             if (status === google.maps.GeocoderStatus.OK) {
                                 if (results[0]) {
@@ -102,6 +112,8 @@
                         self.loadNoteData(data);
                     });
                 }
+
+                getUserGroups();
             };
             ko.applyBindings(new NoteAddViewModel(), document.getElementById("note-edit-container"));
 

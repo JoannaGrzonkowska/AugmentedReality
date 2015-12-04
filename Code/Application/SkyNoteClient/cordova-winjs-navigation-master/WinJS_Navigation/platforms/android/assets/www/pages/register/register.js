@@ -13,7 +13,7 @@
                     pass: "required",
                     email: "required",
                     confpass: {
-                        equalTo: pass,
+                        equalTo: "#pass",
                         required: true
                     }
                 },
@@ -35,16 +35,16 @@
                 self.Email = ko.observable();
                 self.Name = ko.observable();
 
-                self.register = function () {
+                self.registerUser = function () {
                     if ($registerForm.valid()) {
 
                         userService.addNewUser(
-                            {
-                                Login: self.Login,
-                                Password: self.Password,
-                                Email: self.Email,
-                                Name: self.Name
-                            });
+                        {
+                            Login: self.Login,
+                            Password: self.Password,
+                            Mail: self.Email,
+                            Name: self.Name
+                        });
                     }
                 };
 
@@ -53,7 +53,7 @@
                 }
             };
 
-            ko.applyBindings(new UserSignInViewModel(), document.getElementById("register-container"));
+            ko.applyBindings(new RegisterViewModel(), document.getElementById("register-container"));
 
         }
     });

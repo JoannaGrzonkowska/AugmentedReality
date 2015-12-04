@@ -1,7 +1,7 @@
 ﻿function UserModel(data) {
     var self = this;
     if (data != null) {
-        this.UserId = ko.observable(data.Id);
+        this.UserId = ko.observable(data.UserId);
         this.Login = ko.observable(data.UserName);
     }
     else {

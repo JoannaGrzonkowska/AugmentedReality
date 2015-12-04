@@ -26,9 +26,21 @@
         <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.userfriends_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.userfriends_ibfk_2" />
+        <EntityTypeShape EntityType="skynotedbModel.categories" Width="1.5" PointX="10.375" PointY="3.25" />
+        <EntityTypeShape EntityType="skynotedbModel.notesgroups" Width="1.5" PointX="10.5" PointY="5.625" />
+        <EntityTypeShape EntityType="skynotedbModel.types" Width="1.5" PointX="8.25" PointY="5" />
+        <AssociationConnector Association="skynotedbModel.types_ibfk_1" />
+        <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_2" />
+        <AssociationConnector Association="skynotedbModel.note_type" />
+        <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_1" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="skynotedbModel.notesgroups_ibfk_3" />
+        <EntityTypeShape EntityType="skynotedbModel.userfriendsinvites" Width="1.5" PointX="3" PointY="6.375" />
         <AssociationConnector Association="skynotedbModel.userfriendsinvites_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.userfriendsinvites_ibfk_2" />
         <AssociationConnector Association="skynotedbModel.usergroup_ibfk_1" />
+        <EntityTypeShape EntityType="skynotedbModel.usergroupinvites" Width="1.5" PointX="6" PointY="4.625" />
+        <AssociationConnector Association="skynotedbModel.usergroupinvites_ibfk_3" />
         <AssociationConnector Association="skynotedbModel.usergroupinvites_ibfk_1" />
         <AssociationConnector Association="skynotedbModel.usergroupinvites_ibfk_2" />
       </Diagram>

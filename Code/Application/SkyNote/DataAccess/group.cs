@@ -18,6 +18,7 @@ namespace DataAccess
         {
             this.notesgroups = new HashSet<notesgroups>();
             this.usergroup = new HashSet<usergroup>();
+            this.notesgroups = new HashSet<notesgroups>();
             this.usergroupinvites = new HashSet<usergroupinvites>();
         }
     
@@ -26,6 +27,7 @@ namespace DataAccess
     
         public virtual ICollection<notesgroups> notesgroups { get; set; }
         public virtual ICollection<usergroup> usergroup { get; set; }
+        public virtual ICollection<notesgroups> notesgroups { get; set; }
         public virtual ICollection<usergroupinvites> usergroupinvites { get; set; }
     }
 }

@@ -5,6 +5,8 @@ using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
 using DataAccess;
 using DataAccess.Repositories;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CQRS.Implementation.CommandHandlers
 {
@@ -25,41 +27,48 @@ namespace CQRS.Implementation.CommandHandlers
 
         public CommandResult Execute(CreateNoteCommand command)
         {
-            var location = locationRepository.GetByCord(command.xCord, command.yCord);
-            if (location == null)
+            IQueryable<user> auth_users = userRepository.RetriveUserById(command.Authentication_UserId);
+            if (auth_users != null)
             {
-                location = new location()
+                if (auth_users.First().Name == command.Authentication_UserName)
                 {
-                    XCord = command.xCord,
-                    YCord = command.yCord,
-                    ZCord = command.zCord
-                };
-                locationRepository.Add(location);
-                locationRepository.SaveChanges();
+                    var location = locationRepository.GetByCord(command.xCord, command.yCord);
+                    if (location == null)
+                    {
+                        location = new location()
+                        {
+                            XCord = command.xCord,
+                            YCord = command.yCord,
+                            ZCord = command.zCord
+                        };
+                        locationRepository.Add(location);
+                        locationRepository.SaveChanges();
+                    }
+
+                    var note = command.Build(additionalAction: x => x.LocationId = location.LocationId);
+
+                    noteRepository.Add(note);
+                    noteRepository.SaveChanges();
+
+                    eventStorage.Publish(
+                        new NoteCreatedEvent()
+                        {
+                            NoteId = note.Id,
+                            UserId = note.UserId.Value,
+                            LocationId = note.LocationId.Value,
+                            Topic = note.Topic,
+                            Content = note.Content,
+                            Date = note.Date,
+                            XCord = location.XCord,
+                            YCord = location.YCord,
+                            ZCord = location.ZCord,
+                            TypeId = note.TypeId
+                        });
+
+                    return new CommandResult();
+                }
             }
-
-            var note = command.Build(additionalAction: x => x.LocationId = location.LocationId);
-
-            noteRepository.Add(note);
-            noteRepository.SaveChanges();
-
-            eventStorage.Publish(
-                new NoteCreatedEvent()
-                {
-                    NoteId = note.Id,
-                    UserId = note.UserId.Value,
-                    LocationId = note.LocationId.Value,
-                    Topic = note.Topic,
-                    Content = note.Content,
-                    Date = note.Date,
-                    XCord = location.XCord,
-                    YCord = location.YCord,
-                    ZCord = location.ZCord,
-                    TypeId = note.TypeId
-                });
-
-            return new CommandResult();
-
+            return new CommandResult(new List<string>() { "Unable to authenticate user" });
         }
     }
 }

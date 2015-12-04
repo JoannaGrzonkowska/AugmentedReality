@@ -75,8 +75,13 @@ namespace SkyNote.Controllers
         [HttpPost]
         public HttpResponseMessage Post(CreateNoteCommand command)
         {
-            var result = ServiceLocator.CommandBus.Send(command);
-            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+            if (command.CanBeAuthenticated())
+            { 
+                var result = ServiceLocator.CommandBus.Send(command);
+                return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+            }
+            else
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
         public HttpResponseMessage Put(EditNoteCommand command)

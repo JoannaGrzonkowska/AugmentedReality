@@ -17,7 +17,7 @@ namespace DataAccess
         public int UsergroupinviteId { get; set; }
         public string State { get; set; }
         public int UserId { get; set; }
-        public int InvitingUserId { get; set; }
+        public int InvatedId { get; set; }
         public int GroupId { get; set; }
     
         public virtual group group { get; set; }

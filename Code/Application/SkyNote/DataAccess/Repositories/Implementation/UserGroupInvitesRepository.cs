@@ -18,5 +18,11 @@ namespace DataAccess.Repositories.Implementation
             return Context.Set<usergroupinvites>()
                 .FirstOrDefault(x => x.UserId == UserId && x.State == "PENDING");
         }
+
+        public usergroupinvites GetParticularInvite(int InvitedId, int InvitingId, int GroupId)
+        {
+            return Context.Set<usergroupinvites>()
+                .FirstOrDefault(x => x.UserId == InvitingId && x.InvatedId == InvitedId && x.GroupId == GroupId && x.State == "PENDING");
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Security;
 
 namespace SkyNote.Controllers
 {
@@ -71,12 +72,35 @@ namespace SkyNote.Controllers
 
         [ActionName("DecideFriendInvite")]
         [HttpPost]
-        public HttpResponseMessage AcceptFriendInvite(DecideFriendInviteCommand command)
+        public HttpResponseMessage DecideFriendInvite(DecideFriendInviteCommand command)
         {
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }
 
+        [ActionName("InviteToGroup")]
+        [HttpPost]
+        public HttpResponseMessage PostInviteToGroup(InviteToGroupCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
+
+        [ActionName("GetGroupInvites")]
+        [HttpGet]
+        public IEnumerable<GroupInviteDTO> GetRetrieveGroupInvites(int id)
+        {
+            var groupInvites = ServiceLocator.QueryBus.Retrieve<RetrieveGroupInvitesQuery, RetrieveGroupInvitesQueryResult>(new RetrieveGroupInvitesQuery(id)).GroupInvates;
+            return groupInvites;
+        }
+
+        [ActionName("DecideGroupInvite")]
+        [HttpPost]
+        public HttpResponseMessage DecideGroupInvite(DecideGroupInviteCommand command)
+        {
+            var result = ServiceLocator.CommandBus.Send(command);
+            return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
+        }
 
         [ActionName("AddFriend")]
         [HttpPost]
@@ -96,6 +120,7 @@ namespace SkyNote.Controllers
         
         [ActionName("SignIn")]
         [HttpPost]
+        [AllowAnonymous]
         public LoginResultDTO Login(LoginCommand command)
         {
             var loginResult = ServiceLocator.QueryBus.Retrieve<UserLoginQuery, UserLoginQueryResult>(new UserLoginQuery(command.Login, command.Password)).loginResult;

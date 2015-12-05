@@ -22,9 +22,9 @@ namespace DataAccessDenormalized.Repository
              categoryNameParam, typeIdParam, typeNameParam, locationAddress);
         }
 
-        public IEnumerable<note> NotesInLocationRange(decimal? xCordParam, decimal? yCordParam, int radiusParam, int? categoryIdParam, int? typeIdParam)
+        public IEnumerable<note> NotesInLocationRange(decimal? xCordParam, decimal? yCordParam, int radiusParam, int? categoryIdParam, int? typeIdParam, string groupIds)
         {
-            var notes = base.Context.get_notes_in_location_range(xCordParam, yCordParam, radiusParam, categoryIdParam, typeIdParam);
+            var notes = base.Context.get_notes_in_location_range(xCordParam, yCordParam, radiusParam, categoryIdParam, typeIdParam, groupIds);
             return notes;
         }
     }

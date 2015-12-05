@@ -18,7 +18,7 @@ namespace CQRS.Implementation.QueryHandlers
         public NotesByLocationQueryResult Handle(NotesByLocationQuery handle)
         {
             var result = new NotesByLocationQueryResult();
-            result.Notes = noteRepository.NotesInLocationRange(handle.XCord, handle.YCord, handle.Radius, handle.CategoryId, handle.TypeId).Select(x => NoteDTO.Build(x));
+            result.Notes = noteRepository.NotesInLocationRange(handle.XCord, handle.YCord, handle.Radius, handle.CategoryId, handle.TypeId, handle.GroupIds).Select(x => NoteDTO.Build(x));
             return result;
         }
     }

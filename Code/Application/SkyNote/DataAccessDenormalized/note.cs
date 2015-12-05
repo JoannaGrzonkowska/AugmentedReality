@@ -35,5 +35,6 @@ namespace DataAccessDenormalized
         public Nullable<int> TypeId { get; set; }
         public string TypeName { get; set; }
         public string LocationAddress { get; set; }
+        public string GroupIds { get; set; }
     }
 }

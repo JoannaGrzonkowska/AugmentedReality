@@ -9,5 +9,6 @@ namespace CQRS.Implementation.Queries
         public int Radius { get; set; }
         public int? CategoryId { get; set; }
         public int? TypeId { get; set; }
+        public string GroupIds { get; set; }
     }
 }

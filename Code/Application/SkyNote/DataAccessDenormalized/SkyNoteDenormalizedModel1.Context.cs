@@ -32,7 +32,7 @@ namespace DataAccessDenormalized
         public DbSet<invites> invites { get; set; }
         public DbSet<note> note { get; set; }
     
-        public virtual ObjectResult<note> get_notes_in_location_range(Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<int> radiusParam, Nullable<int> categoryIdParam, Nullable<int> typeIdParam)
+        public virtual ObjectResult<note> get_notes_in_location_range(Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<int> radiusParam, Nullable<int> categoryIdParam, Nullable<int> typeIdParam, string groupIdsParam)
         {
             var xCordParamParameter = xCordParam.HasValue ?
                 new ObjectParameter("xCordParam", xCordParam) :
@@ -54,10 +54,14 @@ namespace DataAccessDenormalized
                 new ObjectParameter("typeIdParam", typeIdParam) :
                 new ObjectParameter("typeIdParam", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<note>("get_notes_in_location_range", xCordParamParameter, yCordParamParameter, radiusParamParameter, categoryIdParamParameter, typeIdParamParameter);
+            var groupIdsParamParameter = groupIdsParam != null ?
+                new ObjectParameter("groupIdsParam", groupIdsParam) :
+                new ObjectParameter("groupIdsParam", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<note>("get_notes_in_location_range", xCordParamParameter, yCordParamParameter, radiusParamParameter, categoryIdParamParameter, typeIdParamParameter, groupIdsParamParameter);
         }
     
-        public virtual ObjectResult<note> get_notes_in_location_range(Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<int> radiusParam, Nullable<int> categoryIdParam, Nullable<int> typeIdParam, MergeOption mergeOption)
+        public virtual ObjectResult<note> get_notes_in_location_range(Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<int> radiusParam, Nullable<int> categoryIdParam, Nullable<int> typeIdParam, string groupIdsParam, MergeOption mergeOption)
         {
             var xCordParamParameter = xCordParam.HasValue ?
                 new ObjectParameter("xCordParam", xCordParam) :
@@ -79,7 +83,11 @@ namespace DataAccessDenormalized
                 new ObjectParameter("typeIdParam", typeIdParam) :
                 new ObjectParameter("typeIdParam", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<note>("get_notes_in_location_range", mergeOption, xCordParamParameter, yCordParamParameter, radiusParamParameter, categoryIdParamParameter, typeIdParamParameter);
+            var groupIdsParamParameter = groupIdsParam != null ?
+                new ObjectParameter("groupIdsParam", groupIdsParam) :
+                new ObjectParameter("groupIdsParam", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<note>("get_notes_in_location_range", mergeOption, xCordParamParameter, yCordParamParameter, radiusParamParameter, categoryIdParamParameter, typeIdParamParameter, groupIdsParamParameter);
         }
     
         public virtual int insert_note(Nullable<int> userIdParam, string topicParam, string contentParam, Nullable<int> locationIdParam, Nullable<decimal> xCordParam, Nullable<decimal> yCordParam, Nullable<decimal> zCordParam, string nameParam, string loginParam, string mailParam, Nullable<int> groupIdParam, string groupNameParam, string identyficationParam, Nullable<System.DateTime> dateParam, Nullable<int> noteIdParam, Nullable<int> categoryIdParam, string categoryNameParam, Nullable<int> typeIdParam, string typeNameParam, string locationAddressParam)

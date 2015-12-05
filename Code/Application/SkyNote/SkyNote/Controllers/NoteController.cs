@@ -22,7 +22,7 @@ namespace SkyNote.Controllers
 
         [ActionName("NotesByLocation")]
         [HttpGet]
-        public IEnumerable<NoteDTO> GetNotesByLocation(decimal? xCord, decimal? yCord, int radius = 20, int? categoryId = null, int? typeId = null)
+        public IEnumerable<NoteDTO> GetNotesByLocation(decimal? xCord, decimal? yCord, int radius = 20, int? categoryId = null, int? typeId = null, string groupIds=null)
         {
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByLocationQuery, NotesByLocationQueryResult>(new NotesByLocationQuery()
             {
@@ -30,7 +30,8 @@ namespace SkyNote.Controllers
                 YCord = yCord,
                 Radius = radius,
                 CategoryId = categoryId,
-                TypeId = typeId
+                TypeId = typeId,
+                GroupIds = groupIds
             }).Notes;
             return notes;
         }
@@ -40,9 +41,29 @@ namespace SkyNote.Controllers
         public MyNotesViewModel GetMyNotesViewModel(int id)
         {
             var myNotesViewModel = new MyNotesViewModel();
+            myNotesViewModel.Groups = ServiceLocator.QueryBus.Retrieve<RetriveUsersGroupsQuery, RetriveUsersGroupsQueryResult>(new RetriveUsersGroupsQuery(id)).Groups;           
             myNotesViewModel.Categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
             myNotesViewModel.Notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
             return myNotesViewModel;
+        }
+
+        [ActionName("NotesByLocationViewModel")]
+        [HttpGet]
+        public NotesByLocationViewModel GetNotesByLocationViewModel(int userId, decimal? xCord, decimal? yCord, int radius = 20, int? categoryId = null, int? typeId = null, string groupIds = null)
+        {
+            var viewModel = new NotesByLocationViewModel();
+            viewModel.Groups = ServiceLocator.QueryBus.Retrieve<RetriveUsersGroupsQuery, RetriveUsersGroupsQueryResult>(new RetriveUsersGroupsQuery(userId)).Groups;           
+            viewModel.Categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
+            viewModel.Notes = ServiceLocator.QueryBus.Retrieve<NotesByLocationQuery, NotesByLocationQueryResult>(new NotesByLocationQuery()
+            {
+                XCord = xCord,
+                YCord = yCord,
+                Radius = radius,
+                CategoryId = categoryId,
+                TypeId = typeId,
+                GroupIds = groupIds
+            }).Notes;
+            return viewModel;
         }
 
         public IEnumerable<NoteDTO> Get()

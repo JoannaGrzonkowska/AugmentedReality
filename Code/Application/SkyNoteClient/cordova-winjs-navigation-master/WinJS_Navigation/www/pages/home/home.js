@@ -4,13 +4,13 @@
     WinJS.UI.Pages.define("pages/home/home.html", {
 
         ready: function (element, options) {
-                                   
+
             var noteService = new NoteService();
 
             var NotesListViewModel = function () {
                 var self = this;
                 self.myNotesArray = ko.observableArray([]);
-                self.lastRefresh = ko.observable(); 
+                self.lastRefresh = ko.observable();
 
                 self.selectedCategoryId = ko.observable();
                 self.selectedTypeId = ko.observable();
@@ -28,7 +28,7 @@
                             return selectedCategoryItem[0].Types();
                         }
                     }
-                        return null;
+                    return null;
                 });
 
                 var getNotes = function (id) {
@@ -49,8 +49,6 @@
                         var latitude = position.coords.latitude;
                         var altitude = position.coords.altitude;
 
-                        
-
                         noteService.getNotesByLocation(function (data) {
                             self.myNotesArray(data);
                             self.lastRefresh(new Date());
@@ -62,7 +60,7 @@
                 };
 
                 var getMyNotesViewModel = function (id) {
-                    noteService.getMyNotesViewModel(id,function (data) {
+                    noteService.getMyNotesViewModel(id, function (data) {
                         self.categories(data.Categories());
                         self.myNotesArray(data.Notes());
                         self.lastRefresh(new Date());
@@ -87,7 +85,7 @@
                 };
 
                 self.refresh = function () {
-                    getNotes(options.id); 
+                    getNotes(options.id);
                 };
 
                 self.search = function () {
@@ -103,10 +101,21 @@
                 };
 
                 self.showNotesOnMap = function () {
-                    gotoMap();
+                    //gotoMap();
+
+                    launchnavigator.navigate(
+ [50.279306, -5.163158],
+  [50.342847, -4.749904],
+  function () {
+      alert("Plugin success");
+  },
+  function (error) {
+      alert("Plugin error: " + error);
+  });
+
                 };
 
-                getMyNotesViewModel(1);
+                getMyNotesViewModel(options.userId);
 
                 self.gotoGroups = function () {
                     WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });

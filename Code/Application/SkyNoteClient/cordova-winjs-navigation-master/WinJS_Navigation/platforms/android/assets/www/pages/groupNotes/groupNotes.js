@@ -11,7 +11,7 @@
                 self.myNotesArray = ko.observableArray([]);
 
                 var getGroupNotes = function () {
-                    noteService.getGroupNotes(options.groupId, function (data) {
+                    noteService.getGroupNotes(options.id, function (data) {
                         self.myNotesArray(data);
                     });
                 };
@@ -33,14 +33,14 @@
                 };
 
                 self.showGroupMembers = function () {
-                    WinJS.Navigation.navigate('pages/groupMembers/groupMembers.html', { groupId: options.groupId, userId: options.userId });
+                    WinJS.Navigation.navigate('pages/groupMembers/groupMembers.html', { id: options.id });
                 }
 
                 getGroupNotes();
                                               
 
                 self.back = function () {
-                    WinJS.Navigation.navigate('pages/groups/groups.html', { groupId: options.groupId, id: options.userId});
+                    WinJS.Navigation.navigate('pages/groups/groups.html');
                 };
                                 
             };

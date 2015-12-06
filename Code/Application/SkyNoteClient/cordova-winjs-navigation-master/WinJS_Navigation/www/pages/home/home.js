@@ -12,9 +12,19 @@
                 self.myNotesArray = ko.observableArray([]);
                 self.lastRefresh = ko.observable();
 
+                self.range = ko.observable(20);
                 self.selectedCategoryId = ko.observable();
                 self.selectedTypeId = ko.observable();
+                self.selectedGroupIds = ko.observableArray([]);
+                self.selectedGroupIdsString = ko.computed(function () {
+                    return self.selectedGroupIds().join("|");
+                });
 
+                var currentPositionOptions = {
+                    enableHighAccuracy: true
+                };
+
+                self.groups = ko.observableArray([]);
                 self.categories = ko.observableArray([]);
                 self.types = ko.computed(function () {
                     self.selectedTypeId(null);
@@ -31,45 +41,71 @@
                     return null;
                 });
 
-                var getNotes = function (id) {
-                    noteService.getUserNotes(id, function (data) {
-                        self.myNotesArray(data);
-                        self.lastRefresh(new Date());
-                    });
-                };
-
                 var searchNotes = function () {
 
-                    var options = {
-                        enableHighAccuracy: true
-                    };
-
                     navigator.geolocation.getCurrentPosition(function (position) {
-                        var longitude = position.coords.longitude;
-                        var latitude = position.coords.latitude;
-                        var altitude = position.coords.altitude;
-
                         noteService.getNotesByLocation(function (data) {
-                            self.myNotesArray(data);
+
+                            var notesToRemove = $.grep(self.myNotesArray(), function (n, i) {
+                                return data.NotesToDelete().indexOf(n.NoteId()) >= 0;
+                            });
+
+                            notesToRemove.forEach(function (item) {
+                                self.myNotesArray.remove(item);
+                            });
+
+                            if (data.Notes != null) {
+                                data.Notes().forEach(function (item) {
+                                    self.myNotesArray.push(item);
+                                });
+                            };
+
                             self.lastRefresh(new Date());
-                        }, longitude, latitude, 20, self.selectedCategoryId(), self.selectedTypeId());
+                        }, options.id, position.coords.longitude, position.coords.latitude, self.range(), self.selectedCategoryId(), self.selectedTypeId(), self.selectedGroupIdsString());
 
                     }, function () {
                         alert("error");
-                    }, options);
+                    }, currentPositionOptions);
                 };
 
-                var getMyNotesViewModel = function (id) {
-                    noteService.getMyNotesViewModel(id, function (data) {
-                        self.categories(data.Categories());
-                        self.myNotesArray(data.Notes());
-                        self.lastRefresh(new Date());
-                    });
+                var getNotesByLocationViewModel = function (id) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+
+                          noteService.getNotesByLocationViewModel(function (data) {
+                            self.groups(data.Groups());
+                            self.categories(data.Categories());
+                            self.myNotesArray(data.Notes());
+                            self.lastRefresh(new Date());
+                        },
+                        id, position.coords.longitude, position.coords.latitude, self.range(), self.selectedCategoryId(), self.selectedTypeId(), self.selectedGroupIdsString());
+          
+                            }, function () {
+                        alert("error");
+                    }, currentPositionOptions);
                 };
 
                 self.showOnMap = function (item) {
                     item.IsSelected(true);
                     gotoMap();
+                };
+
+
+                self.navigateTo = function (item) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+
+                        launchnavigator.navigate(
+                         [item.Latitude(), item.Longitude()],
+                          [position.coords.latitude, position.coords.longitude],
+                          function () {
+                              alert("Plugin success");
+                          },
+                          function (error) {
+                              alert("Plugin error: " + error);
+                          });
+                    }, function () {
+                        alert("error");
+                    }, currentPositionOptions);
+
                 };
 
                 self.edit = function (item) {
@@ -101,21 +137,11 @@
                 };
 
                 self.showNotesOnMap = function () {
-                    //gotoMap();
-
-                    launchnavigator.navigate(
-                     [50.279306, -5.163158],
-                      [50.342847, -4.749904],
-                      function () {
-                          alert("Plugin success");
-                      },
-                      function (error) {
-                          alert("Plugin error: " + error);
-                      });
-
+                   
+                    gotoMap();
                 };
 
-                getMyNotesViewModel(options.id);
+                getNotesByLocationViewModel(options.id);
 
                 self.gotoGroups = function () {
                     WinJS.Navigation.navigate('pages/groups/groups.html', { userId: options.id });
@@ -137,7 +163,6 @@
 
             var notesListViewModel = new NotesListViewModel();
             ko.applyBindings(notesListViewModel, document.getElementById("notes-container"));
-
         }
     });
 })();

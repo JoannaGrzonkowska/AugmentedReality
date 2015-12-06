@@ -11,7 +11,7 @@
                 self.groupMembersArray = ko.observableArray([]);
 
                 var getGroupMembers = function () {
-                    groupService.getGroupMembers(options.groupId, function (data) {
+                    groupService.getGroupMembers(options.id, function (data) {
                         self.groupMembersArray(data);
                     });
                 };
@@ -27,7 +27,7 @@
                 getGroupMembers();
 
                 self.back = function () {
-                    WinJS.Navigation.navigate('pages/groupNotes/groupNotes.html', { groupId: options.groupId, userId: options.userId });
+                    WinJS.Navigation.navigate('pages/groups/groups.html');
                 };
 
             };

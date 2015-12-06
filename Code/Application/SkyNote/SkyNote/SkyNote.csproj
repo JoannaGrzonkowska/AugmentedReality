@@ -185,6 +185,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="ViewModels\NotesByLocationModel.cs" />
+    <Compile Include="ViewModels\NotesByLocationViewModel.cs" />
     <Compile Include="ViewModels\NoteDetailsViewModel.cs" />
     <Compile Include="ViewModels\MyNotesViewModel.cs" />
   </ItemGroup>

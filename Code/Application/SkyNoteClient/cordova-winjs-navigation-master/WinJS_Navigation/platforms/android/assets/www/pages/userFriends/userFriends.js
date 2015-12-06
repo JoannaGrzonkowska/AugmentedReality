@@ -12,20 +12,19 @@
                 self.invitationsArray = ko.observableArray([]);
 
                 var getUserInvites = function () {
-                    userService.getUserInvites(options.userId, function (data) {
+                    userService.getUserInvites(options.id, function (data) {
                         self.invitationsArray(data);
                     })
                 }
                 var getUserFriends = function () {
-                    userService.getUserFriends(options.userId, function (data) {
+                    userService.getUserFriends(options.id, function (data) {
                         self.userFriendsArray(data);
                     });
                 };
 
                 self.getFriendsNotes = function(item)
                 {
-                    WinJS.Navigation.navigate('pages/userNotes/userNotes.html',
-                        { id: item.FriendId(), name: item.FriendName(), userId: options.userId });
+                    WinJS.Navigation.navigate('pages/home/home.html', { id: item.Id() });
                 }
 
                 self.delete = function (item) {
@@ -37,7 +36,7 @@
 
                 self.accept = function (item) {
                     userService.decide({
-                        InvatedUserId: options.userId,
+                        InvatedUserId: options.id,
                         InvatingUserId: item.UserId(),
                         State: "ACCEPT"
                     }, function () {
@@ -47,11 +46,11 @@
 
                 self.decline = function (item) {
                     userService.decide({
-                        InvatedUserId: options.userId,
-                        InvatingUserId: item.UserId(),
+                        InvatedUserId: options.id,
+                        InvatingUserId: item.UserId,
                         State: "DECLINE"
                     }, function () {
-                        self.invitationsArray.remove(item);
+                        $(self).closest('.remove').remove();
                     });
                 };
 
@@ -64,23 +63,19 @@
                 getUserInvites();
 
                 self.back = function () {
-                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.userId });
-                };
-
-                self.search = function () {
-                    WinJS.Navigation.navigate('pages/viewUsers/viewUsers.html', { userId: options.userId });
+                    WinJS.Navigation.navigate('pages/home/home.html');
                 };
 
                 self.gotoGroups = function () {
-                    WinJS.Navigation.navigate('pages/groups/groups.html', { userId: options.userId });
-                };                               
-
-                self.gotoNotes = function () {
-                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.userId });
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });
                 };
 
-                self.logout = function () {
-                    WinJS.Navigation.navigate('pages/signIn/signIn.html');
+                self.gotoFriends = function () {
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.id });
+                };
+
+                self.gotoNotes = function () {
+                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.id });
                 };
 
             };

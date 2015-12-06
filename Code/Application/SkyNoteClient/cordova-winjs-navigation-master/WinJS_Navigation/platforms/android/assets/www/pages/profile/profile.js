@@ -8,18 +8,17 @@
 
             var ProfileViewModel = function () {
                 var self = this;
-                self.avatarPath = ko.observable('http://skynoteasiatest.azurewebsites.net/api/File/GetUserAvatar?userid=' + options.userId);
+                self.avatarPath = ko.observable('http://skynoteasiatest.azurewebsites.net/api/File/GetUserAvatar?userid=1');
 
                 var userService = new UserService();
                 var cropBoxHelper = new CropBoxHelper(self.avatarPath(), $("#avatar-edit-container"), function (img) {
                     $('.cropped').append('<img src="' + img + '">');
-                    userService.updateAvatar({ ImageBase64: img, UserId: options.userId }, function (data) {
+                    userService.updateAvatar({ ImageBase64: img, UserId: 1 }, function (data) {
                         //self.refreshAvatar();
                     });
                 });
 
                 self.back = function () {
-                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.userId });
                 };
 
             };

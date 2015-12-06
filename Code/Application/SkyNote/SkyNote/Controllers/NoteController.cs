@@ -152,17 +152,17 @@ namespace SkyNote.Controllers
         [HttpPost]
         public HttpResponseMessage Post(CreateNoteCommand command)
         {
-            if (command.CanBeAuthenticated())
-            {
+            /*if (command.CanBeAuthenticated())
+            {*/
                 command.DestinationDirPath = Path.Combine(filesDirPath, StaticData.NotesDirectory);
                 ConvertNoteImagesToByte(command.Images);
 
                 var result = ServiceLocator.CommandBus.Send(command);
                 return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
 
-            }
+           /* }
             else
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);*/
         }
 
         public HttpResponseMessage Put(EditNoteCommand command)

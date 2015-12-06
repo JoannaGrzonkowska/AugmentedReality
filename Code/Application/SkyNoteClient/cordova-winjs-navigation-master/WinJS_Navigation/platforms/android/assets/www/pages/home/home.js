@@ -61,7 +61,7 @@
                             };
 
                             self.lastRefresh(new Date());
-                        }, 21, position.coords.longitude, position.coords.latitude, self.range(), self.selectedCategoryId(), self.selectedTypeId(), self.selectedGroupIdsString());
+                        }, options.id, position.coords.longitude, position.coords.latitude, self.range(), self.selectedCategoryId(), self.selectedTypeId(), self.selectedGroupIdsString());
 
                     }, function () {
                         alert("error");
@@ -77,7 +77,7 @@
                             self.myNotesArray(data.Notes());
                             self.lastRefresh(new Date());
                         },
-                        21, position.coords.longitude, position.coords.latitude, self.range(), self.selectedCategoryId(), self.selectedTypeId(), self.selectedGroupIdsString());
+                        id, position.coords.longitude, position.coords.latitude, self.range(), self.selectedCategoryId(), self.selectedTypeId(), self.selectedGroupIdsString());
           
                             }, function () {
                         alert("error");
@@ -136,7 +136,7 @@
                     gotoMap();
                 };
 
-                getNotesByLocationViewModel(options.userId);
+                getNotesByLocationViewModel(options.id);
 
                 self.gotoGroups = function () {
                     WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });

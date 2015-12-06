@@ -30,6 +30,7 @@ namespace CQRS.Implementation.Models
         public string TypeName { get; set; }
         public IEnumerable<string> ImagesFilenames { get; set; }
         public string LocationAddress { get; set; }
+        public string GroupIds { get; set; }
 
         public static NoteDTO Build(note entity)
         {
@@ -55,7 +56,8 @@ namespace CQRS.Implementation.Models
                 TypeId = entity.TypeId,
                 TypeName = entity.TypeName,
                 ImagesFilenames = Enumerable.Empty<string>(),
-                LocationAddress = entity.LocationAddress
+                LocationAddress = entity.LocationAddress,
+                GroupIds = entity.GroupIds
             };
         }
 

@@ -9,6 +9,7 @@
         this.Latitude = ko.observable(data.YCord);
         this.Images = ko.observableArray([]);
         this.LocationAddress = ko.observable(data.LocationAddress);
+        this.GroupIds = ko.observable(data.GroupIds);
 
         this.CategoryId = ko.observable(data.CategoryId);
         this.TypeId = ko.observable(data.TypeId);

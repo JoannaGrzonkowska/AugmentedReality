@@ -22,7 +22,7 @@ namespace SkyNote.Controllers
 
         [ActionName("NotesByLocation")]
         [HttpGet]
-        public IEnumerable<NoteDTO> GetNotesByLocation(decimal? xCord, decimal? yCord, int radius = 20, int? categoryId = null, int? typeId = null, string groupIds=null)
+        public NotesByLocationModel GetNotesByLocation(int userId, decimal? xCord, decimal? yCord, int radius = 20, int? categoryId = null, int? typeId = null, string groupIds = null)
         {
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByLocationQuery, NotesByLocationQueryResult>(new NotesByLocationQuery()
             {
@@ -30,10 +30,22 @@ namespace SkyNote.Controllers
                 YCord = yCord,
                 Radius = radius,
                 CategoryId = categoryId,
-                TypeId = typeId,
+                TypeId = typeId==0?null:typeId,
                 GroupIds = groupIds
-            }).Notes;
-            return notes;
+            }).Notes.ToList();
+            
+            var notedInClient = HttpContext.Current.Cache[userId.ToString()] as IList<int>;
+            var notesByLocationModel = new NotesByLocationModel();
+            notesByLocationModel.Notes = notes.Where(x => !notedInClient.Contains(x.NoteId.Value)).Select(x=>x).ToList();
+
+            var notesIds = notes.Select(x => x.NoteId).ToList();
+            notesByLocationModel.NotesToDelete = notedInClient.Where(x => !notesIds.Contains(x));
+
+            var currentNotesInClient = notedInClient.Where(x => notesIds.Contains(x)).ToList();
+            currentNotesInClient.AddRange(notesByLocationModel.Notes.Select(x => x.NoteId.Value));
+            HttpContext.Current.Cache[userId.ToString()] = currentNotesInClient;
+
+            return notesByLocationModel;
         }
 
         [ActionName("MyNotesViewModel")]
@@ -43,7 +55,7 @@ namespace SkyNote.Controllers
             var myNotesViewModel = new MyNotesViewModel();
             myNotesViewModel.Groups = ServiceLocator.QueryBus.Retrieve<RetriveUsersGroupsQuery, RetriveUsersGroupsQueryResult>(new RetriveUsersGroupsQuery(id)).Groups;           
             myNotesViewModel.Categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
-            myNotesViewModel.Notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
+           // myNotesViewModel.Notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
             return myNotesViewModel;
         }
 
@@ -61,8 +73,12 @@ namespace SkyNote.Controllers
                 Radius = radius,
                 CategoryId = categoryId,
                 TypeId = typeId,
-                GroupIds = groupIds
-            }).Notes;
+                GroupIds = null
+            }).Notes.ToList();
+            var userNotes = viewModel.Notes.Select(x => {
+                return x.NoteId.Value;
+            }).ToList();
+            HttpContext.Current.Cache[userId.ToString()] = userNotes;
             return viewModel;
         }
 

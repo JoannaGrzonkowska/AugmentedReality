@@ -37,21 +37,41 @@ var NoteService = function (urls) {
 
 
 
-    self.getNotesByLocation = function (handler, xCord, yCord, radius, categoryId, typeId) {
+    self.getNotesByLocation = function (handler, userId, xCord, yCord, radius, categoryId, typeId, groupIds) {
 
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/NotesByLocation?xCord=' + xCord
+            url: 'http://localhost:59284/api/note/NotesByLocation?userId=' + userId
+                + '&xCord=' + xCord
                 + '&yCord=' + yCord
                 + '&radius=' + radius
                 + '&categoryId=' + categoryId
-                + '&typeId=' + typeId,
+                + '&typeId=' + typeId
+                + '&groupIds=' + groupIds,
             type: 'GET',
             success: function (data) {
-                var mappedData = $.map(data, function (item) {
-                    return new NoteModel(item);
-                });
+                var mappedData = new NotesByLocationModel(data);
+                handler(mappedData);
+            }
+        });
+    };
+
+    self.getNotesByLocationViewModel = function (handler, userId, xCord, yCord, radius, categoryId, typeId, groupIds) {
+
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: 'http://localhost:59284/api/note/NotesByLocationViewModel?userId=' + userId
+                + '&xCord=' + xCord
+                + '&yCord=' + yCord
+                + '&radius=' + radius
+                + '&categoryId=' + categoryId
+                + '&typeId=' + typeId
+                + '&groupIds=' + groupIds,
+            type: 'GET',
+            success: function (data) {
+                var mappedData = new NotesByLocationViewModel(data);
                 handler(mappedData);
             }
         });

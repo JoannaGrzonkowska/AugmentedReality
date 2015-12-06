@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccessDenormalized.Repository
 {
@@ -22,10 +23,16 @@ namespace DataAccessDenormalized.Repository
              categoryNameParam, typeIdParam, typeNameParam, locationAddress);
         }
 
-        public IEnumerable<note> NotesInLocationRange(decimal? xCordParam, decimal? yCordParam, int radiusParam, int? categoryIdParam, int? typeIdParam, string groupIds)
+        //public IEnumerable<note> NotesInLocationRange(decimal? xCordParam, decimal? yCordParam, int radiusParam, int? categoryIdParam, int? typeIdParam, string groupIds)
+        //{
+        //    var notes = base.Context.get_notes_in_location_range(xCordParam, yCordParam, radiusParam, categoryIdParam, typeIdParam, groupIds);
+        //    return notes;
+        //}
+
+		public IQueryable<note> GetNoteById(int NoteId)
         {
-            var notes = base.Context.get_notes_in_location_range(xCordParam, yCordParam, radiusParam, categoryIdParam, typeIdParam, groupIds);
-            return notes;
+            return Context.Set<note>()
+                .Where(x => x.NoteId == NoteId);
         }
     }
 }

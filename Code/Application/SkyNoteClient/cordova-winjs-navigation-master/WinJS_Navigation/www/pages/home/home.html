@@ -21,9 +21,11 @@
 
     <div class="home fragment" id="notes-container">
         <nav>
-            <button class="btn btn-default" data-bind="click:gotoGroups">Groups</button>
-            <button class="btn btn-default" data-bind="click:gotoFriends">Friends</button>
-            <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
+            <button class="btn btn-default" data-bind="click: gotoGroups">Groups</button>
+            <button class="btn btn-default" data-bind="click: gotoFriends">Friends</button>
+            <button class="btn btn-default" data-bind="click: refresh">Notes</button>
+            <button class="btn btn-default" data-bind="click: logout">Log out</button>
+            <button class="btn btn-default" data-bind="click: gotoProfile">My Profile</button>
         </nav>
         <section>
             <button class="btn btn-default" data-bind="click: gotoAddNote">Add note</button>
@@ -33,32 +35,27 @@
         <div>
             <span>Number of notes: </span><span data-bind="text: myNotesArray().length"></span>
         </div>
-        <div class="row">
-            <select id="categorySelect" class="form-control input-lg" data-bind="foreach: categories, value: selectedCategoryId, select2: { width: '100%', placeholder: 'select category' }">
-                <option data-bind="text: Name(), value: CategoryId"></option>
-            </select>
 
-            <select id="typeSelect" class="form-control input-lg" data-bind="foreach: types, value: selectedTypeId, select2: { width: '100%', placeholder: 'select type' }">
-                <option data-bind="text: Name(), value: TypeId"></option>
-            </select>
+        </select>
 
             <select multiple="multiple" id="groupSelect" class="form-control input-lg" data-bind="foreach: groups, selectedOptions: selectedGroupIds, select2: { width: '100%', placeholder: 'select groups' }">
                 <option data-bind="text: GroupName(), value: GroupId"></option>
             </select>
 
+        
+        <div class="row">
+            <span class="col-xs-6">
+                <span>Last refresh: </span>
+                <span data-bind="localizedDateTime: lastRefresh()"></span>
+            </span>
+            <button class="btn btn-default col-xs-2" data-bind="click:search">Search</button>
+            <button class="btn btn-default col-xs-2" data-bind="click:showNotesOnMap">Show on Map</button>
             Range: <input data-bind="textInput: range" />
         </div>
 
-        <div class="row">
-            <div class="row">
-                <span class="col-xs-6">
-                    <span>Last refresh: </span>
-                    <span data-bind="localizedDateTime: lastRefresh()"></span>
-                </span>
-                <button class="btn btn-default col-xs-2" data-bind="click:search">Search</button>
-                <button class="btn btn-default col-xs-2" data-bind="click:showNotesOnMap">Show on Map</button>
-            </div>
+        
 
+        
             <div data-bind="template: { name: 'note-template', foreach: myNotesArray }"></div>
 
             <script id="note-template" type="text/html">
@@ -77,6 +74,7 @@
                         <div data-bind="text: Content"></div>
                     </div>
                 </div>
+
             </script>
 
         </div>

@@ -81,6 +81,7 @@
     <Compile Include="Repositories\Implementation\NotegroupRepository.cs" />
     <Compile Include="Repositories\Implementation\NoteRepository.cs" />
     <Compile Include="Repositories\Implementation\TypeRepository.cs" />
+    <Compile Include="Repositories\Implementation\UserfriendgroupRepository.cs" />
     <Compile Include="Repositories\Implementation\UserFriendInvitesRepository.cs" />
     <Compile Include="Repositories\Implementation\UserfriendsRepository.cs" />
     <Compile Include="Repositories\Implementation\UserGroupInvitesRepository.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Repositories\IRepositoryBase.cs" />
     <Compile Include="Repositories\Implementation\RepositoryBase.cs" />
     <Compile Include="Repositories\ITypeRepository.cs" />
+    <Compile Include="Repositories\IUserfriendgroupRepository.cs" />
     <Compile Include="Repositories\IUserFriendInvitesRepository.cs" />
     <Compile Include="Repositories\IUserFriendsRepository.cs" />
     <Compile Include="Repositories\IUserGroupInvitesRepository.cs" />
@@ -118,6 +120,9 @@
       <DependentUpon>SkyNoteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="userfriends.cs">
+      <DependentUpon>SkyNoteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userfriendsgroup.cs">
       <DependentUpon>SkyNoteModel.tt</DependentUpon>
     </Compile>
     <Compile Include="userfriendsinvites.cs">

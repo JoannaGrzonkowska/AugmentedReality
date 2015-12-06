@@ -30,10 +30,11 @@ namespace CQRS.Implementation.CommandHandlers
                 notessgroups.GroupId = groupId;
                 _notegroupRepository.Add(notessgroups);
                 _notegroupRepository.SaveChanges();
-
-                _eventStorage.Publish(new ShareNoteInGroupEvent(command.NoteId, groupId, command.UserId));
+               
             }
         
+ 			//NEW WAY : 1 Record = 1 Note + Multiple Shares
+            _eventStorage.Publish(new ShareNoteInMultipleGroupsEvent(command.NoteId, command.GroupIds, command.UserId));
             return new CommandResult();
         }
     }

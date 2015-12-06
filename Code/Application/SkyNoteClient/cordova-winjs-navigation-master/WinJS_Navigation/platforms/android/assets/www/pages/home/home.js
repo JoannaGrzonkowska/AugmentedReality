@@ -109,7 +109,7 @@
                 };
 
                 self.edit = function (item) {
-                    WinJS.Navigation.navigate('pages/note/note.html', { id: item.NoteId(), userId: options.id });
+                    WinJS.Navigation.navigate('pages/note/note.html', { id: item.NoteId(), userId: options.id, userName: options.userName });
                 };
 
                 self.delete = function (item) {
@@ -117,7 +117,7 @@
                 };
 
                 self.gotoAddNote = function () {
-                    WinJS.Navigation.navigate('pages/note/note.html', { id: 0, userId: options.id });
+                    WinJS.Navigation.navigate('pages/note/note.html', { id: 0, userId: options.id, userName: options.userName });
                 };
 
                 self.search = function () {

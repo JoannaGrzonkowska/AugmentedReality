@@ -53,9 +53,8 @@ namespace SkyNote.Controllers
         public MyNotesViewModel GetMyNotesViewModel(int id)
         {
             var myNotesViewModel = new MyNotesViewModel();
-            myNotesViewModel.Groups = ServiceLocator.QueryBus.Retrieve<RetriveUsersGroupsQuery, RetriveUsersGroupsQueryResult>(new RetriveUsersGroupsQuery(id)).Groups;           
             myNotesViewModel.Categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
-           // myNotesViewModel.Notes = ServiceLocator.QueryBus.Retrieve<NotesByDateQuery, NotesByDateQueryResult>(new NotesByDateQuery()).Notes;
+            myNotesViewModel.Notes = ServiceLocator.QueryBus.Retrieve<RetrieveUsersNotesQuery, RetrieveUsersNotesQueryResult>(new RetrieveUsersNotesQuery(id)).Notes;
             return myNotesViewModel;
         }
 

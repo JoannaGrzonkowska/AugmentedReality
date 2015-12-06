@@ -36,7 +36,7 @@
                                 //self.userFriendsArray(data);
                                 if(data.IsSignedIn() === true)
                                 {
-                                    WinJS.Navigation.navigate('pages/home/home.html', { id: data.UserId() });
+                                    WinJS.Navigation.navigate('pages/home/home.html', { id: data.UserId(), userName: data.UserName()});
                                 }
                                 else
                                 {

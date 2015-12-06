@@ -68,6 +68,7 @@ namespace SkyNote
 
                 x.For<INoteRepository>().Use<NoteRepository>();
                 x.For<IUserfriendsRepository>().Use<UserfriendsRepository>();
+                x.For<IUserfriendgroupRepository>().Use<UserfriendgroupRepository>();
                 x.For<IUsergroupRepository>().Use<UsergroupRepository>();
                 x.For<IGroupRepository>().Use<GroupRepository>();
                 x.For<IUserRepository>().Use<UserRepository>();

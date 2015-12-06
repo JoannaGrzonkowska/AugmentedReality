@@ -24,7 +24,7 @@ namespace DataAccess
         public Nullable<int> LocationId { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
-        public System.DateTime Date { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> TypeId { get; set; }
     
         public virtual location location { get; set; }

@@ -21,9 +21,11 @@
 
     <div class="home fragment" id="notes-container">
         <nav>
-            <button class="btn btn-default" data-bind="click:gotoGroups">Groups</button>
-            <button class="btn btn-default" data-bind="click:gotoFriends">Friends</button>
-            <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
+            <button class="btn btn-default" data-bind="click: gotoGroups">Groups</button>
+            <button class="btn btn-default" data-bind="click: gotoFriends">Friends</button>
+            <button class="btn btn-default" data-bind="click: refresh">Notes</button>
+            <button class="btn btn-default" data-bind="click: logout">Log out</button>
+            <button class="btn btn-default" data-bind="click: gotoProfile">My Profile</button>
         </nav>
         <section>
             <button class="btn btn-default" data-bind="click: gotoAddNote">Add note</button>
@@ -46,7 +48,17 @@
                 <option data-bind="text: GroupName(), value: GroupId"></option>
             </select>
 
+<<<<<<< HEAD
+        <div class="row">
+            <span class="col-xs-6">
+                <span>Last refresh: </span>
+                <span data-bind="localizedDateTime: lastRefresh()"></span>
+            </span>
+            <button class="btn btn-default col-xs-2" data-bind="click:search">Search</button>
+            <button class="btn btn-default col-xs-2" data-bind="click:showNotesOnMap">Show on Map</button>
+=======
             Range: <input data-bind="textInput: range" />
+>>>>>>> f940f84692c59c9da8855a8a5bb581ccf5690c5f
         </div>
 
         <div class="row">

@@ -184,3 +184,22 @@ CREATE TABLE `userfriendsinvites` (
 	FOREIGN KEY (`UserId`) REFERENCES `user`(UserID) ON UPDATE CASCADE,  
     FOREIGN KEY (`FriendId`) REFERENCES `user`(UserID) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `userfriendsgroup` (
+  `UserfriendsgroupId` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL,
+  `GroupId` INT(11) NOT NULL,
+  PRIMARY KEY (`UserfriendsgroupId`),
+  INDEX `u1_idx` (`UserId` ASC),
+  INDEX `g1_idx` (`GroupId` ASC),
+  CONSTRAINT `u1`
+    FOREIGN KEY (`UserId`)
+    REFERENCES `user` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `g1`
+    FOREIGN KEY (`GroupId`)
+    REFERENCES `group` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+

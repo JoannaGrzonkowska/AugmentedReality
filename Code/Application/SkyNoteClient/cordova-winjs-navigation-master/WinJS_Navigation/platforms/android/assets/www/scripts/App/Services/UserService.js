@@ -45,7 +45,7 @@
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {
-                    return new UserModel(item);
+                    return new FriendModel(item);
                 });
                 handler(mappedData);
             }
@@ -111,7 +111,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/user/AddNewUser/',//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: 'http://localhost:59284/api/user/AddNewUser/',//localhost:59284 skynoteasiatest.azurewebsites.net
             type: 'POST',
             data: user,
             success: function (data) {
@@ -124,7 +124,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://skynoteasiatest.azurewebsites.net/api/user/SignIn/',//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: 'http://localhost:59284/api/user/SignIn/',//localhost:59284 skynoteasiatest.azurewebsites.net
             type: 'Post',
             data: user,
             success: function (data) {

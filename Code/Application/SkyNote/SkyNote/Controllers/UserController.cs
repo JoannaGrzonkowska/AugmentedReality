@@ -132,6 +132,15 @@ namespace SkyNote.Controllers
             return loginResult;
         }
 
+        // GET api/values/5
+        [ActionName("GetAllPotentialFriends")]
+        [HttpGet]
+        public IEnumerable<PotentialFriendDTO> GetAllPotentialFriends(int id)
+        {
+            var Users = ServiceLocator.QueryBus.Retrieve<GetAllPotentialFriendsQuery, GetAllPotentialFriendsQueryResult>(new GetAllPotentialFriendsQuery(id)).Users;
+            return Users;
+        }
+
         [HttpPost]
         public CommandResult UpdateAvatar(UpdateUserAvatarCommand command)
         {
@@ -140,11 +149,11 @@ namespace SkyNote.Controllers
             {
                 imageData = ImageHelper.GetBase64ImageDataFromCropboxLib(command.ImageBase64);
             }
-            catch (System.ArgumentNullException ex)
+            catch (ArgumentNullException ex)
             {
                 return new CommandResult(new[] { "Base 64 string is null." });
             }
-            catch (System.FormatException ex)
+            catch (FormatException ex)
             {
                 return new CommandResult(new[] { "Base 64 string length is not 4 or is not an even multiple of 4." });
             }

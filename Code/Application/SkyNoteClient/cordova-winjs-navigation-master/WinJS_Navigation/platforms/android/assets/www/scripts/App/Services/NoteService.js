@@ -105,7 +105,7 @@ var NoteService = function (urls) {
         });
     };
 
-    self.addNote = function (note) {
+    self.addNote = function (note, handler) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
@@ -115,11 +115,12 @@ var NoteService = function (urls) {
             contentType: 'application/json',
             success: function (data) {
                 showAlertAfterAjax(data, 'Note ' + JSON.parse(note).Topic + ' successfuly added.');
+                handler(data);
             }
         });
     }
 
-    self.editNote = function (note) {
+    self.editNote = function (note, handler) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
@@ -129,6 +130,7 @@ var NoteService = function (urls) {
             contentType: 'application/json',
             success: function (data) {
                 showAlertAfterAjax(data, 'Note ' + JSON.parse(note).Topic + ' successfuly edited.');
+                handler(data);
             }
         });
     }
@@ -141,6 +143,19 @@ var NoteService = function (urls) {
             type: 'DELETE',
             success: function (data) {
                 showAlertAfterAjax(data, 'Note ' + note.Topic() + ' successfuly deleted.');
+            }
+        });
+    }
+
+    self.shareNote = function (note) {
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: 'http://localhost:59284/api/note/ShareNoteInGroup/',
+            type: 'POST',
+            data: note,
+            success: function (data) {
+                var i = data;
             }
         });
     }

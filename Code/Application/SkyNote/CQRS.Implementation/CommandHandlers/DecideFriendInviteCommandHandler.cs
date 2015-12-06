@@ -11,13 +11,19 @@ namespace CQRS.Implementation.CommandHandlers
 {
     public class DecideFriendInviteCommandHandler : ICommandHandler<DecideFriendInviteCommand>
     {
+        private IUsergroupRepository userGroupStorage;
+        private IGroupRepository groupRepository;
+        private IUserfriendgroupRepository userfriendgroupRepository;
         private IUserFriendInvitesRepository friendInvitesRepository;
         private IUserfriendsRepository userfriendStorage;
         private IUserRepository userStorage;
         private IEventStorage eventStorage;
 
-        public DecideFriendInviteCommandHandler(IUserFriendInvitesRepository friendInvitesRepository, IUserfriendsRepository userfriendStorage, IUserRepository userStorage, IEventStorage eventStorage)
+        public DecideFriendInviteCommandHandler(IUsergroupRepository userGroupStorage , IGroupRepository groupRepository, IUserfriendgroupRepository userfriendgroupRepository, IUserFriendInvitesRepository friendInvitesRepository, IUserfriendsRepository userfriendStorage, IUserRepository userStorage, IEventStorage eventStorage)
         {
+            this.userGroupStorage = userGroupStorage;
+            this.groupRepository = groupRepository;
+            this.userfriendgroupRepository = userfriendgroupRepository;
             this.friendInvitesRepository = friendInvitesRepository;
             this.userfriendStorage = userfriendStorage;
             this.eventStorage = eventStorage;
@@ -32,28 +38,38 @@ namespace CQRS.Implementation.CommandHandlers
 
             if(command.State == "ACCEPT")
             {
-                userfriends friendship1 = new userfriends() { UserId = command.InvatingUserId, FriendId = command.InvatedUserId };
-                userfriends friendship2 = new userfriends() { UserId = command.InvatedUserId, FriendId = command.InvatingUserId };
-                userfriendStorage.Add(friendship1);
-                userfriendStorage.Add(friendship2);
-                userfriendStorage.SaveChanges();
 
-                IQueryable<user> users = userStorage.RetriveUserById(command.InvatingUserId);
-                IQueryable<user> friends= userStorage.RetriveUserById(command.InvatedUserId);
-
-                if (users != null && friends != null)
+                //NEW-WAY
+                var userfriendgroupPair1 = userfriendgroupRepository.GetAllQueryable().FirstOrDefault
+                                        (x => x.UserId == command.InvatingUserId);
+                var userfriendgroupPair2 = userfriendgroupRepository.GetAllQueryable().FirstOrDefault
+                                        (x => x.UserId == command.InvatedUserId);
+                if (userfriendgroupPair1 != null && userfriendgroupPair2 != null)
                 {
-                    user currentUser = users.First();
-                    user currentFriend = friends.First();
+                    userGroupStorage.Add(new usergroup() { UserId = command.InvatedUserId, GroupId = userfriendgroupPair1.GroupId });
+                    userGroupStorage.Add(new usergroup() { UserId = command.InvatingUserId, GroupId = userfriendgroupPair2.GroupId });
+                    userGroupStorage.SaveChanges();
 
-                    eventStorage.Publish(new UserAddFriendEvent(
-                        currentUser.UserID, currentUser.Name, currentUser.Login, currentUser.Mail,
-                        currentFriend.UserID, currentFriend.Name, currentFriend.Login, currentFriend.Mail
-                        ));
-                    eventStorage.Publish(new UserAddFriendEvent(
-                        currentFriend.UserID, currentFriend.Name, currentFriend.Login, currentFriend.Mail,
-                        currentUser.UserID, currentUser.Name, currentUser.Login, currentUser.Mail
-                        ));
+                    IQueryable<user> users = userStorage.RetriveUserById(command.InvatingUserId);
+                    IQueryable<user> friends = userStorage.RetriveUserById(command.InvatedUserId);
+                    group usersFriendGroup = groupRepository.GetAllQueryable().FirstOrDefault
+                                            (x => x.Id == userfriendgroupPair1.GroupId);
+                    group friendFriendGroup = groupRepository.GetAllQueryable().FirstOrDefault
+                                            (x => x.Id == userfriendgroupPair2.GroupId);
+
+
+                    if (users != null && friends != null && usersFriendGroup != null && friendFriendGroup != null)
+                    {
+                        user currentUser = users.First();
+                        user currentFriend = friends.First();
+                       
+
+                        //NEW-WAY
+                        eventStorage.Publish(new UserJoinGroupEvent(currentUser.UserID, friendFriendGroup.Id, "MEMBER",
+                        friendFriendGroup.Name, currentUser.Name, currentUser.Login, currentUser.Mail));
+                        eventStorage.Publish(new UserJoinGroupEvent(currentFriend.UserID, usersFriendGroup.Id, "MEMBER",
+                        usersFriendGroup.Name, currentFriend.Name, currentFriend.Login, currentFriend.Mail));
+                    }
                 }
             }
 

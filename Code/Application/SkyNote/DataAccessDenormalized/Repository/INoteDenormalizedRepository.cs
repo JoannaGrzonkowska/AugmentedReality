@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace DataAccessDenormalized.Repository
 {
     public interface INoteDenormalizedRepository : IRepository<note>
@@ -9,6 +11,7 @@ namespace DataAccessDenormalized.Repository
             string identyficationParam, DateTime? dateParam, int noteIdParam, int? categoryIdParam,
             string categoryNameParam, int? typeIdParam, string typeNameParam, string locationAddress);
 
-       IEnumerable<note> NotesInLocationRange(decimal? xCordParam, decimal? yCordParam, int radiusParam, int? categoryIdParam, int? typeIdParam, string groupIds);
+        //IEnumerable<note> NotesInLocationRange(decimal? xCordParam, decimal? yCordParam, int radiusParam, int? categoryIdParam, int? typeIdParam);
+        IQueryable<note> GetNoteById(int NoteId);
     }
 }

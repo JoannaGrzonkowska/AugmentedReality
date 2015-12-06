@@ -10,13 +10,15 @@ namespace CQRS.Implementation.Models
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public int UserFriendGroupId { get; set; }
         public bool IsSignedIn { get; set; }
         public string ErrorMessage { get; set; }
 
-        public LoginResultDTO(int UserId, string UserName)
+        public LoginResultDTO(int UserId, string UserName, int UserFriendGroupId)
         {
             this.UserId = UserId;
             this.UserName = UserName;
+            this.UserFriendGroupId = UserFriendGroupId;
             IsSignedIn = true;
             ErrorMessage = "";
         }
@@ -24,6 +26,7 @@ namespace CQRS.Implementation.Models
         {
             UserId = -1;
             UserName = "";
+            UserFriendGroupId = -1;
             IsSignedIn = false;
             this.ErrorMessage = ErrorMessage;
         }

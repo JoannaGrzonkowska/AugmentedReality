@@ -1,13 +1,9 @@
-﻿using CQRS.Implementation.Queries;
-using CQRS.QueryHandlers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccess.Repositories;
-using AutoMapper;
+﻿using AutoMapper;
 using CQRS.Implementation.Models;
+using CQRS.Implementation.Queries;
+using CQRS.QueryHandlers;
+using DataAccess.Repositories;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CQRS.Implementation.QueryHandlers

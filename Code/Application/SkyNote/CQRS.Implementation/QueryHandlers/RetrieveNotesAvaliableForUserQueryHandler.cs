@@ -3,11 +3,8 @@ using CQRS.Implementation.Models;
 using CQRS.Implementation.Queries;
 using CQRS.QueryHandlers;
 using DataAccessDenormalized.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CQRS.Implementation.QueryHandlers
 {
@@ -45,24 +42,24 @@ namespace CQRS.Implementation.QueryHandlers
                         FriendsIds.Add((int)friend.FriendId);
 
             /*var notes_ofUserAndFriends = noteRepository.GetAllQueryable().Where(
-                                                                (x =>
-                                                                    (
-                                                                        x.Identyfication == "NOTE"
-                                                                        &&
-                                                                        (
-                                                                            x.UserId == handle.UserId
-                                                                            || 
-                                                                            FriendsIds.Contains((int)x.UserId)
-                                                                        )
-                                                                    )
-                                                                    ||
-                                                                    (
-                                                                        x.Identyfication == "NOTE_SHARED_IN_GROUP"
-                                                                        &&
-                                                                        (GroupsIds.Contains((int)x.GroupId))
-                                                                    )
-                                                                )
-                                                            ).ToList();*/
+                    (x =>
+                        (
+                            x.Identyfication == "NOTE"
+                            &&
+                            (
+                                x.UserId == handle.UserId
+                                || 
+                                FriendsIds.Contains((int)x.UserId)
+                            )
+                        )
+                        ||
+                        (
+                            x.Identyfication == "NOTE_SHARED_IN_GROUP"
+                            &&
+                            (GroupsIds.Contains((int)x.GroupId))
+                        )
+                    )
+                ).ToList();*/
             var notes_ofUserAndFriends = noteRepository.GetAllQueryable().Where(
                                                                             x => x.Identyfication == "NOTE"
                                                                             &&

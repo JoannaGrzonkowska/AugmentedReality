@@ -97,7 +97,6 @@
                 var geocoder = new google.maps.Geocoder;
 
                 self.addNote = function () {
-                   // var a = selectedGroup;
                     var options = {
                         enableHighAccuracy: true
                     };
@@ -116,7 +115,7 @@
                                     {
                                         Topic: self.Topic(),
                                         Content: self.Content(),
-                                        UserId: 1,
+                                        UserId: options.userId,
                                         xCord: longitude,
                                         yCord: latitude,
                                         zCord: altitude,
@@ -156,7 +155,7 @@
                 };
 
                 self.back = function () {
-                    WinJS.Navigation.navigate('pages/home/home.html');
+                    WinJS.Navigation.navigate('pages/home/home.html', {id: options.userId});
                 };
 
                 if (!self.isNew) {

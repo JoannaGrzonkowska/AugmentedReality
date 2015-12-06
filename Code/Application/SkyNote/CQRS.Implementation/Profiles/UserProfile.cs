@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CQRS.Implementation.Models;
+using DataAccess;
 
 namespace CQRS.Implementation.Profiles
 {
@@ -6,7 +8,7 @@ namespace CQRS.Implementation.Profiles
     {
         protected override void Configure()
         {
-           // Mapper.CreateMap<user, UserDTO>();// TODO
+            // Mapper.CreateMap<user, UserDTO>();// TODO
         }
     }
 }

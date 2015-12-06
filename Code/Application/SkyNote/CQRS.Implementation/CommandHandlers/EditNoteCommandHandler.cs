@@ -5,6 +5,7 @@ using CQRS.Implementation.Commands;
 using CQRS.Implementation.Events;
 using CQRS.Implementation.Services;
 using DataAccess.Repositories;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -42,7 +43,7 @@ namespace CQRS.Implementation.CommandHandlers
                     Topic = noteEdited.Topic,
                     Content = noteEdited.Content,
                     TypeId = noteEdited.TypeId,
-                    Date = noteEdited.Date });
+                    Date = (DateTime)noteEdited.Date });
 
             return new CommandResult();
         }

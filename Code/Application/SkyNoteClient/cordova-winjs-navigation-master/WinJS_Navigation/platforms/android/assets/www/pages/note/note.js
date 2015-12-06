@@ -97,10 +97,9 @@
                 var geocoder = new google.maps.Geocoder;
 
                 self.addNote = function () {
-                    var options = {
+                    var generalOptions = {
                         enableHighAccuracy: true
                     };
-
                     navigator.geolocation.getCurrentPosition(function (position) {
                         var longitude = position.coords.longitude;
                         var latitude = position.coords.latitude;
@@ -121,15 +120,26 @@
                                         zCord: altitude,
                                         TypeId: self.selectedTypeId(),
                                         Images: getImagesList(),
-                                        Address: results[0].formatted_address
-                                    }));
+                                        Address: results[0].formatted_address,
+                                        Authentication_UserId: options.userId,
+                                        Authentication_UserName: options.userName
+                                    }), function (data) {
+                                        
+                                        noteService.shareNote(
+                                        {
+                                            GroupIds: self.selectedGroup().join(),
+                                            NoteId: data.noteId, //tu jest id zwracany przez rezultat
+                                            UserId: options.userId
+                                        });
+                                    });
+                                    
                                 }
                             }
                         });
 
                     }, function () {
                         alert("error");
-                    }, options);
+                    }, generalOptions);
                 };
 
                 self.editNote = function () {
@@ -140,7 +150,15 @@
                           Content: self.Content(),
                           TypeId: self.selectedTypeId(),
                           Images: getImagesList()
-                      }));
+                      }), function (data) {
+
+                          noteService.shareNote(
+                            {
+                                GroupIds: self.selectedGroup().join(),
+                                NoteId: self.NoteId(), //tu jest id zwracany przez rezultat
+                                UserId: options.userId
+                            });
+                      });
                 };
 
                 self.save = function () {

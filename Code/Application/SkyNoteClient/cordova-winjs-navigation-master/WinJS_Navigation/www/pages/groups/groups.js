@@ -12,16 +12,16 @@
                 self.myGroupsArray = ko.observableArray([]);
                 
                 var getGroups = function () {
-                    groupService.getUserGroups(options.id, function (data) {
+                    groupService.getUserGroups(options.userId, function (data) {
                         self.myGroupsArray(data);
                     });
                 };
                 self.viewGroupNotes = function (item) {
-                    WinJS.Navigation.navigate('pages/groupNotes/groupNotes.html', { id: item.Id() });
+                    WinJS.Navigation.navigate('pages/groupNotes/groupNotes.html', { groupId: item.GroupId(), userId: options.userId });
                 }
 
                 self.edit = function (item) {
-                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: item.Id() });
+                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: item.GroupId() });
                 };
 
                 self.delete = function (item) {
@@ -38,16 +38,16 @@
 
                 getGroups();
 
-                self.gotoGroups = function () {
-                    WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });
-                };
-
                 self.gotoFriends = function () {
-                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.id });
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.userId });
                 };
 
                 self.gotoNotes = function () {
-                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.id });
+                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.userId });
+                };
+
+                self.logout = function () {
+                    WinJS.Navigation.navigate('pages/signIn/signIn.html');
                 };
 
             };

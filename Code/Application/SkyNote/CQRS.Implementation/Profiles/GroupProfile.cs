@@ -14,6 +14,7 @@ namespace CQRS.Implementation.Profiles
             Mapper.CreateMap<group, UserGroupDTO>();
             Mapper.CreateMap<group, GroupMemberDTO>();
             Mapper.CreateMap<group, FriendDTO>();
+            Mapper.CreateMap<DataAccess.user, PotentialFriendDTO>();
             Mapper.CreateMap<Event, group>()
                 .Include<GroupCreatedEvent, group>()
                 .ForMember(dest => dest.GroupId, opt => opt.MapFrom(src => src.AggregateId));

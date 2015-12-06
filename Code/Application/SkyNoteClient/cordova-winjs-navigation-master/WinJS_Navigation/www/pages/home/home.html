@@ -18,9 +18,11 @@
     
     <div class="home fragment" id="notes-container">
         <nav>
-            <button class="btn btn-default" data-bind="click:gotoGroups">Groups</button>
-            <button class="btn btn-default" data-bind="click:gotoFriends">Friends</button>
-            <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
+            <button class="btn btn-default" data-bind="click: gotoGroups">Groups</button>
+            <button class="btn btn-default" data-bind="click: gotoFriends">Friends</button>
+            <button class="btn btn-default" data-bind="click: refresh">Notes</button>
+            <button class="btn btn-default" data-bind="click: logout">Log out</button>
+            <button class="btn btn-default" data-bind="click: gotoProfile">My Profile</button>
         </nav>
         <section>
             <button class="btn btn-default" data-bind="click: gotoAddNote">Add note</button>
@@ -44,7 +46,6 @@
                 <span>Last refresh: </span>
                 <span data-bind="localizedDateTime: lastRefresh()"></span>
             </span>
-            <button class="btn btn-default col-xs-2" data-bind="click:refresh">Refresh</button>
             <button class="btn btn-default col-xs-2" data-bind="click:search">Search</button>
             <button class="btn btn-default col-xs-2" data-bind="click:showNotesOnMap">Show on Map</button>
         </div>

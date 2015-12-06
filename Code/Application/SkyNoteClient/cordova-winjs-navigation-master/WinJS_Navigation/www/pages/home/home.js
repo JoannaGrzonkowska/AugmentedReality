@@ -73,7 +73,7 @@
                 };
 
                 self.edit = function (item) {
-                    WinJS.Navigation.navigate('pages/note/note.html', { id: item.NoteId(), userId: options.id });
+                    WinJS.Navigation.navigate('pages/note/note.html', { id: item.NoteId(), userId: options.id, userName: options.userName });
                 };
 
                 self.delete = function (item) {
@@ -81,11 +81,11 @@
                 };
 
                 self.gotoAddNote = function () {
-                    WinJS.Navigation.navigate('pages/note/note.html', { id: 0, userId: options.id });
+                    WinJS.Navigation.navigate('pages/note/note.html', { id: 0, userId: options.id, userName: options.userName });
                 };
 
                 self.refresh = function () {
-                    getNotes(options.id);
+                    getMyNotesViewModel(options.id);
                 };
 
                 self.search = function () {
@@ -104,29 +104,33 @@
                     //gotoMap();
 
                     launchnavigator.navigate(
- [50.279306, -5.163158],
-  [50.342847, -4.749904],
-  function () {
-      alert("Plugin success");
-  },
-  function (error) {
-      alert("Plugin error: " + error);
-  });
+                     [50.279306, -5.163158],
+                      [50.342847, -4.749904],
+                      function () {
+                          alert("Plugin success");
+                      },
+                      function (error) {
+                          alert("Plugin error: " + error);
+                      });
 
                 };
 
-                getMyNotesViewModel(options.userId);
+                getMyNotesViewModel(options.id);
 
                 self.gotoGroups = function () {
-                    WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { userId: options.id });
                 };
 
                 self.gotoFriends = function () {
-                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.id });
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { userId: options.id });
                 };
 
-                self.gotoNotes = function () {
-                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.id });
+                self.gotoProfile = function () {
+                    WinJS.Navigation.navigate('pages/profile/profile.html', { userId: options.id });
+                };
+
+                self.logout = function () {
+                    WinJS.Navigation.navigate('pages/signIn/signIn.html');
                 };
 
             };

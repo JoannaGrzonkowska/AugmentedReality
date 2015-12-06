@@ -36,5 +36,6 @@ namespace DataAccess
         public DbSet<userfriendsinvites> userfriendsinvites { get; set; }
         public DbSet<usergroup> usergroup { get; set; }
         public DbSet<usergroupinvites> usergroupinvites { get; set; }
+        public DbSet<userfriendsgroup> userfriendsgroup { get; set; }
     }
 }

@@ -100,6 +100,7 @@
     <Compile Include="EventHandlers\NoteEditedEventHandler.cs" />
     <Compile Include="EventHandlers\NoteCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\ShareNoteInGroupEventHandler.cs" />
+    <Compile Include="EventHandlers\ShareNoteInMultipleGroupsEventHandler.cs" />
     <Compile Include="EventHandlers\UserAddFriendEventHandler.cs" />
     <Compile Include="EventHandlers\UserFriendInviteEventHandler.cs" />
     <Compile Include="EventHandlers\UserGroupInviteEventHandler.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Events\NoteEditedEvent.cs" />
     <Compile Include="Events\NoteCreatedEvent.cs" />
     <Compile Include="Events\ShareNoteInGroupEvent.cs" />
+    <Compile Include="Events\ShareNoteInMultipleGroupsEvent.cs" />
     <Compile Include="Events\UserAddFriendEvent.cs" />
     <Compile Include="Events\UserFriendInviteEvent.cs" />
     <Compile Include="Events\UserGroupInviteEvent.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Models\GroupMemberDTO.cs" />
     <Compile Include="Models\LoginResultDTO.cs" />
     <Compile Include="Models\NoteDTO.cs" />
+    <Compile Include="Models\PotentialFriendDTO.cs" />
     <Compile Include="Models\TypeDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\UserGroupDTO.cs" />
@@ -142,6 +145,8 @@
     <Compile Include="Queries\AvatarByUserIdQueryResult.cs" />
     <Compile Include="Queries\CategoriesForSelectQuery.cs" />
     <Compile Include="Queries\CategoriesForSelectQueryResult.cs" />
+    <Compile Include="Queries\GetAllPotentialFriendsQuery.cs" />
+    <Compile Include="Queries\GetAllPotentialFriendsQueryResult.cs" />
     <Compile Include="Queries\GroupsForUserQuery.cs" />
     <Compile Include="Queries\GroupsForUserQueryResult.cs" />
     <Compile Include="Queries\NoteByIdQuery.cs" />
@@ -176,6 +181,7 @@
     <Compile Include="Queries\UserLoginQuery.cs" />
     <Compile Include="Queries\UserLoginQueryResult.cs" />
     <Compile Include="QueryHandlers\CategoriesForSelectQueryHandler.cs" />
+    <Compile Include="QueryHandlers\GetAllPotentialFriendsQueryHandler.cs" />
     <Compile Include="QueryHandlers\GroupsForUserQueryHandler.cs" />
     <Compile Include="QueryHandlers\NoteByIdQueryHandler.cs" />
     <Compile Include="QueryHandlers\NotesByDateQueryHandler.cs" />

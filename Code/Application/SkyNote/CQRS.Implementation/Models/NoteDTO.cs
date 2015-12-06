@@ -35,7 +35,7 @@ namespace CQRS.Implementation.Models
         {
             return new NoteDTO
             {
-                Id = entity.NoteId.Value,
+                //Id = entity.NoteId.Value,
                 NoteId = entity.NoteId,
                 UserId = entity.UserId,
                 Topic = entity.Topic,

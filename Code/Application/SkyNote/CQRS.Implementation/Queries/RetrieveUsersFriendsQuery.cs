@@ -8,7 +8,7 @@ namespace CQRS.Implementation.Queries
 
         public RetrieveUsersFriendsQuery(int userId)
         {
-            this.UserId = userId;
+            UserId = userId;
         }
     }
 }

@@ -16,9 +16,9 @@ namespace DataAccessDenormalized
     {
         public int Id { get; set; }
         public Nullable<int> GroupId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public string GroupName { get; set; }
         public string Role { get; set; }
-        public Nullable<int> UserId { get; set; }
         public string UserName { get; set; }
         public string UserLogin { get; set; }
         public string UserMail { get; set; }

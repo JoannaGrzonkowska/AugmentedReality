@@ -4,8 +4,6 @@
     <meta charset="utf-8" />
     <title>home</title>
 
-    <!-- WinJS references -->
-
     <link href="groups.css" rel="stylesheet" />
     <script src="groups.js"></script>
 
@@ -17,13 +15,14 @@
 
 </head>
 <body>
-    <nav>
-        <button class="btn btn-default" data-bind="click:gotoGroups">Groups</button>
-        <button class="btn btn-default" data-bind="click:gotoFriends">Friends</button>
-        <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
-    </nav>
+    
     <div class="home fragment" id="groups-container">
-
+        <nav>
+            <button class="btn btn-default" data-bind="click:refresh">Groups</button>
+            <button class="btn btn-default" data-bind="click:gotoFriends">Friends</button>
+            <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
+            <button class="btn btn-default" data-bind="click:logout">Log out</button>
+        </nav>
         <section>
             <button class="btn btn-default" data-bind="click:gotoAddGroup">Add group</button>
         </section>
@@ -32,11 +31,7 @@
         <div>
             <span>Number of groups: </span><span data-bind="text: myGroupsArray().length"></span>
         </div>
-
-        <div class="row">            
-            <button class="btn btn-default col-xs-2" data-bind="click:refresh">Refresh</button>
-        </div>
-
+        
         <div data-bind="template: { name: 'group-template', foreach: myGroupsArray }"></div>
 
         <script id="group-template" type="text/html">
@@ -51,11 +46,9 @@
                         </a>
                     </div>
                     <div data-bind="text: GroupName"></div>
-                </div>
-                
+                </div>                
             </div>
         </script>
-
     </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿function NotesByLocationViewModel(data) {
+﻿function NotesByLocationViewModel(data, xCord, yCord) {
     var self = this;
 
     this.Groups = ko.observableArray([]);
@@ -21,7 +21,7 @@
 
     if (data.Notes != null) {
         data.Notes.forEach(function (item) {
-            self.Notes.push(new NoteModel(item));
+            self.Notes.push(new NoteModel(item, xCord, yCord));
         });
     };
 };

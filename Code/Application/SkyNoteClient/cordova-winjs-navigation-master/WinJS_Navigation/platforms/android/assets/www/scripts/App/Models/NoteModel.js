@@ -1,4 +1,4 @@
-﻿function NoteModel(data) {
+﻿function NoteModel(data, userLongitude, userLatitude) {
     var self = this;
     if (data != null) {
         this.NoteId = ko.observable(data.NoteId);
@@ -31,4 +31,13 @@
         this.Images = ko.observableArray([]);
     }
     this.IsSelected = ko.observable(false);
+
+    self.CalcDistance = function (otherLongitude, otherLatitude) {
+        return calcDistance(self.Longitude(), self.Latitude(), otherLongitude, otherLatitude);
+    };
+
+    this.DistanceToUser = ko.observable()
+    if (userLongitude != null && userLatitude != null) {
+        this.DistanceToUser(self.CalcDistance(userLongitude, userLatitude));
+    };
 };

@@ -71,7 +71,7 @@ var NoteService = function (urls) {
                 + '&groupIds=' + groupIds,
             type: 'GET',
             success: function (data) {
-                var mappedData = new NotesByLocationViewModel(data);
+                var mappedData = new NotesByLocationViewModel(data, xCord, yCord);
                 handler(mappedData);
             }
         });

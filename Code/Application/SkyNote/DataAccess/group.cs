@@ -16,18 +16,18 @@ namespace DataAccess
     {
         public group()
         {
+            this.userfriendsgroup = new HashSet<userfriendsgroup>();
             this.notesgroups = new HashSet<notesgroups>();
             this.usergroup = new HashSet<usergroup>();
             this.usergroupinvites = new HashSet<usergroupinvites>();
-            this.userfriendsgroup = new HashSet<userfriendsgroup>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
+        public virtual ICollection<userfriendsgroup> userfriendsgroup { get; set; }
         public virtual ICollection<notesgroups> notesgroups { get; set; }
         public virtual ICollection<usergroup> usergroup { get; set; }
         public virtual ICollection<usergroupinvites> usergroupinvites { get; set; }
-        public virtual ICollection<userfriendsgroup> userfriendsgroup { get; set; }
     }
 }

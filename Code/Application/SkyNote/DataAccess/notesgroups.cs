@@ -21,5 +21,6 @@ namespace DataAccess
     
         public virtual group group { get; set; }
         public virtual note note { get; set; }
+        public virtual user user { get; set; }
     }
 }

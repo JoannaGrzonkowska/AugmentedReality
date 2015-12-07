@@ -120,6 +120,10 @@
                     WinJS.Navigation.navigate('pages/note/note.html', { id: 0, userId: options.id, userName: options.userName });
                 };
 
+                self.refresh = function () {
+                    getMyNotesViewModel(options.id);
+                };
+
                 self.search = function () {
                     searchNotes();
                 };
@@ -133,21 +137,26 @@
                 };
 
                 self.showNotesOnMap = function () {
+                   
                     gotoMap();
                 };
 
                 getNotesByLocationViewModel(options.id);
 
                 self.gotoGroups = function () {
-                    WinJS.Navigation.navigate('pages/groups/groups.html', { id: options.id });
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { userId: options.id });
                 };
 
                 self.gotoFriends = function () {
-                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.id });
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { userId: options.id });
                 };
 
-                self.gotoNotes = function () {
-                    WinJS.Navigation.navigate('pages/home/home.html', { id: options.id });
+                self.gotoProfile = function () {
+                    WinJS.Navigation.navigate('pages/profile/profile.html', { userId: options.id });
+                };
+
+                self.logout = function () {
+                    WinJS.Navigation.navigate('pages/signIn/signIn.html');
                 };
 
             };

@@ -11,9 +11,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GroupId" Type="int" />
+          <Property Name="UserId" Type="int" />
           <Property Name="GroupName" Type="varchar" MaxLength="45" />
           <Property Name="Role" Type="varchar" MaxLength="45" />
-          <Property Name="UserId" Type="int" />
           <Property Name="UserName" Type="varchar" MaxLength="45" />
           <Property Name="UserLogin" Type="varchar" MaxLength="20" />
           <Property Name="UserMail" Type="varchar" MaxLength="45" />
@@ -40,44 +40,78 @@
           <Property Name="FriendMail" Type="varchar" MaxLength="45" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type 'point' is currently not supported for the target Entity Framework version; the column 'LocationPoint' in the table 'def.skynotedenormalizeddb.note' was excluded.-->
+warning 6005: The data type 'point' is currently not supported for the target Entity Framework version; the column 'LocationPoint' in the table 'def.skynotedbdenormasia.note' was excluded.-->
         <EntityType Name="note">
           <Key>
-            <PropertyRef Name="NoteId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="NoteId" Type="int" Nullable="false" />
-          <Property Name="CategoryId" Type="int" />
-          <Property Name="CategoryName" Type="varchar" MaxLength="45" />
-          <Property Name="TypeId" Type="int" />
-          <Property Name="TypeName" Type="varchar" MaxLength="45" />
-          <Property Name="GroupIds" Type="varchar" MaxLength="100" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="Topic" Type="varchar" MaxLength="45" />
           <Property Name="Content" Type="varchar" MaxLength="200" />
-          <Property Name="Date" Type="timestamp" Precision="0" />
-          <Property Name="LocationId" Type="int" />
+          <Property Name="LocationId" Type="int" Nullable="false" />
           <Property Name="XCord" Type="decimal" Precision="10" Scale="7" />
           <Property Name="YCord" Type="decimal" Precision="10" Scale="7" />
           <Property Name="ZCord" Type="decimal" Precision="10" Scale="7" />
           <Property Name="Name" Type="varchar" MaxLength="45" />
           <Property Name="Login" Type="varchar" MaxLength="20" />
           <Property Name="Mail" Type="varchar" MaxLength="45" />
-          <Property Name="GroupId" Type="int" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
           <Property Name="GroupName" Type="varchar" MaxLength="45" />
           <Property Name="Identyfication" Type="varchar" MaxLength="45" />
+          <Property Name="Date" Type="timestamp" Precision="0" />
+          <Property Name="NoteId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="45" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="TypeName" Type="varchar" MaxLength="45" />
           <Property Name="LocationAddress" Type="varchar" MaxLength="100" />
+          <Property Name="GroupIds" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Function Name="get_notes_in_location_range" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="skynotedbdenormasia">
+          <Parameter Name="xCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="yCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="radiusParam" Type="int" Mode="In" />
+          <Parameter Name="categoryIdParam" Type="int" Mode="In" />
+          <Parameter Name="typeIdParam" Type="int" Mode="In" />
+          <Parameter Name="groupIdsParam" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="insert_note" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="skynotedbdenormasia">
+          <Parameter Name="userIdParam" Type="int" Mode="In" />
+          <Parameter Name="topicParam" Type="varchar" Mode="In" />
+          <Parameter Name="contentParam" Type="varchar" Mode="In" />
+          <Parameter Name="locationIdParam" Type="int" Mode="In" />
+          <Parameter Name="xCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="yCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="zCordParam" Type="decimal" Mode="In" />
+          <Parameter Name="nameParam" Type="varchar" Mode="In" />
+          <Parameter Name="loginParam" Type="varchar" Mode="In" />
+          <Parameter Name="mailParam" Type="varchar" Mode="In" />
+          <Parameter Name="groupIdParam" Type="int" Mode="In" />
+          <Parameter Name="groupNameParam" Type="varchar" Mode="In" />
+          <Parameter Name="identyficationParam" Type="varchar" Mode="In" />
+          <Parameter Name="dateParam" Type="timestamp" Mode="In" />
+          <Parameter Name="noteIdParam" Type="int" Mode="In" />
+          <Parameter Name="categoryIdParam" Type="int" Mode="In" />
+          <Parameter Name="categoryNameParam" Type="varchar" Mode="In" />
+          <Parameter Name="typeIdParam" Type="int" Mode="In" />
+          <Parameter Name="typeNameParam" Type="varchar" Mode="In" />
+          <Parameter Name="locationAddressParam" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="skynotedenormalizeddbModelStoreContainer">
-          <EntitySet Name="group" EntityType="Self.group" Schema="skynotedenormalizeddb" store:Type="Tables" />
-          <EntitySet Name="invites" EntityType="Self.invites" Schema="skynotedenormalizeddb" store:Type="Tables" />
-          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedenormalizeddb" store:Type="Tables" />
+          <EntitySet Name="group" EntityType="Self.group" Schema="skynotedbdenormasia" store:Type="Tables" />
+          <EntitySet Name="invites" EntityType="Self.invites" Schema="skynotedbdenormasia" store:Type="Tables" />
+          <EntitySet Name="note" EntityType="Self.note" Schema="skynotedbdenormasia" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="skynotedenormalizeddbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="skynotedenormalizeddbEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="get_notes_in_location_range">
+          <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
+          <EntitySet Name="invites" EntityType="skynotedenormalizeddbModel.invites" />
+          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
+          <FunctionImport Name="get_notes_in_location_range" EntitySet="note" ReturnType="Collection(skynotedenormalizeddbModel.note)">
             <Parameter Name="xCordParam" Mode="In" Type="Decimal" />
             <Parameter Name="yCordParam" Mode="In" Type="Decimal" />
             <Parameter Name="radiusParam" Mode="In" Type="Int32" />
@@ -85,7 +119,7 @@ warning 6005: The data type 'point' is currently not supported for the target En
             <Parameter Name="typeIdParam" Mode="In" Type="Int32" />
             <Parameter Name="groupIdsParam" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="insert_note">
+          <FunctionImport Name="insert_note" ReturnType="Collection(Int32)">
             <Parameter Name="userIdParam" Mode="In" Type="Int32" />
             <Parameter Name="topicParam" Mode="In" Type="String" />
             <Parameter Name="contentParam" Mode="In" Type="String" />
@@ -107,45 +141,16 @@ warning 6005: The data type 'point' is currently not supported for the target En
             <Parameter Name="typeNameParam" Mode="In" Type="String" />
             <Parameter Name="locationAddressParam" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="note" EntityType="skynotedenormalizeddbModel.note" />
-          <EntitySet Name="group" EntityType="skynotedenormalizeddbModel.group" />
-          <EntitySet Name="invites" EntityType="skynotedenormalizeddbModel.invites" />
-          </EntityContainer>
-        <EntityType Name="note">
-          <Key>
-            <PropertyRef Name="NoteId" />
-          </Key>
-          <Property Name="NoteId" Type="Int32" Nullable="false" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="CategoryName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="TypeId" Type="Int32" />
-          <Property Name="TypeName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="GroupIds" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="Topic" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Date" Type="DateTime" />
-          <Property Name="LocationId" Type="Int32" />
-          <Property Name="XCord" Type="Decimal" />
-          <Property Name="YCord" Type="Decimal" />
-          <Property Name="ZCord" Type="Decimal" />
-          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="GroupId" Type="Int32" />
-          <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="Identyfication" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="LocationAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
+        </EntityContainer>
         <EntityType Name="group">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GroupId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
           <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="UserId" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="UserLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="UserMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -171,39 +176,39 @@ warning 6005: The data type 'point' is currently not supported for the target En
           <Property Name="FriendLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="FriendMail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Topic" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="XCord" Type="Decimal" />
+          <Property Name="YCord" Type="Decimal" />
+          <Property Name="ZCord" Type="Decimal" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Identyfication" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="NoteId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CategoryName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="TypeName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="LocationAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GroupIds" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="skynotedenormalizeddbModelStoreContainer" CdmEntityContainer="skynotedenormalizeddbEntities">
-          <EntitySetMapping Name="note">
-            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
-              <MappingFragment StoreEntitySet="note">
-                <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
-                <ScalarProperty Name="Identyfication" ColumnName="Identyfication" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ZCord" ColumnName="ZCord" />
-                <ScalarProperty Name="YCord" ColumnName="YCord" />
-                <ScalarProperty Name="XCord" ColumnName="XCord" />
-                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Topic" ColumnName="Topic" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="GroupIds" ColumnName="GroupIds" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="group">
             <EntityTypeMapping TypeName="skynotedenormalizeddbModel.group">
               <MappingFragment StoreEntitySet="group">
@@ -214,9 +219,9 @@ warning 6005: The data type 'point' is currently not supported for the target En
                 <ScalarProperty Name="UserMail" ColumnName="UserMail" />
                 <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -240,6 +245,36 @@ warning 6005: The data type 'point' is currently not supported for the target En
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="note">
+            <EntityTypeMapping TypeName="skynotedenormalizeddbModel.note">
+              <MappingFragment StoreEntitySet="note">
+                <ScalarProperty Name="GroupIds" ColumnName="GroupIds" />
+                <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Identyfication" ColumnName="Identyfication" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ZCord" ColumnName="ZCord" />
+                <ScalarProperty Name="YCord" ColumnName="YCord" />
+                <ScalarProperty Name="XCord" ColumnName="XCord" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="get_notes_in_location_range" FunctionName="skynotedenormalizeddbModel.Store.get_notes_in_location_range" />
+          <FunctionImportMapping FunctionImportName="insert_note" FunctionName="skynotedenormalizeddbModel.Store.insert_note" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

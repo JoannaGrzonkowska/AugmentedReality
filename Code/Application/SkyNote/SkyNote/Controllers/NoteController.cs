@@ -26,22 +26,24 @@ namespace SkyNote.Controllers
         {
             var notes = ServiceLocator.QueryBus.Retrieve<NotesByLocationQuery, NotesByLocationQueryResult>(new NotesByLocationQuery()
             {
+                UserId = userId,
                 XCord = xCord,
                 YCord = yCord,
                 Radius = radius,
-                CategoryId = categoryId,
+                CategoryId = categoryId == 0 ? null : categoryId,
                 TypeId = typeId==0?null:typeId,
                 GroupIds = groupIds
             }).Notes.ToList();
+            notes.ForEach(x => x.GetImagesFilenames(filesDirPath));
             
-            var notedInClient = HttpContext.Current.Cache[userId.ToString()] as IList<int>;
+            var notesInClient = HttpContext.Current.Cache[userId.ToString()] as IList<int>;
             var notesByLocationModel = new NotesByLocationModel();
-            notesByLocationModel.Notes = notes.Where(x => !notedInClient.Contains(x.NoteId.Value)).Select(x=>x).ToList();
+            notesByLocationModel.Notes = notes.Where(x => !notesInClient.Contains(x.NoteId.Value)).Select(x=>x).ToList();
 
             var notesIds = notes.Select(x => x.NoteId).ToList();
-            notesByLocationModel.NotesToDelete = notedInClient.Where(x => !notesIds.Contains(x));
+            notesByLocationModel.NotesToDelete = notesInClient.Where(x => !notesIds.Contains(x));
 
-            var currentNotesInClient = notedInClient.Where(x => notesIds.Contains(x)).ToList();
+            var currentNotesInClient = notesInClient.Where(x => notesIds.Contains(x)).ToList();
             currentNotesInClient.AddRange(notesByLocationModel.Notes.Select(x => x.NoteId.Value));
             HttpContext.Current.Cache[userId.ToString()] = currentNotesInClient;
 
@@ -67,16 +69,17 @@ namespace SkyNote.Controllers
             viewModel.Categories = ServiceLocator.QueryBus.Retrieve<CategoriesForSelectQuery, CategoriesForSelectQueryResult>(new CategoriesForSelectQuery()).Categories;
             viewModel.Notes = ServiceLocator.QueryBus.Retrieve<NotesByLocationQuery, NotesByLocationQueryResult>(new NotesByLocationQuery()
             {
+                UserId = userId,
                 XCord = xCord,
                 YCord = yCord,
                 Radius = radius,
                 CategoryId = categoryId,
                 TypeId = typeId,
-                GroupIds = null
+                GroupIds = groupIds
             }).Notes.ToList();
-            var userNotes = viewModel.Notes.Select(x => {
-                return x.NoteId.Value;
-            }).ToList();
+            viewModel.Notes.ToList().ForEach(x=> x.GetImagesFilenames(filesDirPath));
+
+            var userNotes = viewModel.Notes.Select(x=>x.NoteId.Value).ToList();
             HttpContext.Current.Cache[userId.ToString()] = userNotes;
             return viewModel;
         }

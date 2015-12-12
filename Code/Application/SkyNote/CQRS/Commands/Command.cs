@@ -10,7 +10,7 @@ namespace CQRS.Commands
 
         public bool CanBeAuthenticated()
         {
-            if (Authentication_UserId != null && Authentication_UserName != null)
+            if (Authentication_UserId>0 || Authentication_UserName != null)
                 return true;
             return false;
         }

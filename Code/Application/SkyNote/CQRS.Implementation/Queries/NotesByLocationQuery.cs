@@ -10,5 +10,6 @@ namespace CQRS.Implementation.Queries
         public int? CategoryId { get; set; }
         public int? TypeId { get; set; }
         public string GroupIds { get; set; }
+        public int UserId { get; set; }
     }
 }

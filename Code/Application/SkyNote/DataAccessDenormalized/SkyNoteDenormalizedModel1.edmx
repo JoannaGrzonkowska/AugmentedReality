@@ -75,6 +75,7 @@ warning 6005: The data type 'point' is currently not supported for the target En
           <Parameter Name="categoryIdParam" Type="int" Mode="In" />
           <Parameter Name="typeIdParam" Type="int" Mode="In" />
           <Parameter Name="groupIdsParam" Type="varchar" Mode="In" />
+          <Parameter Name="userIdParam" Type="int" Mode="In" />
         </Function>
         <Function Name="insert_note" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="skynotedbdenormasia">
           <Parameter Name="userIdParam" Type="int" Mode="In" />
@@ -118,8 +119,9 @@ warning 6005: The data type 'point' is currently not supported for the target En
             <Parameter Name="categoryIdParam" Mode="In" Type="Int32" />
             <Parameter Name="typeIdParam" Mode="In" Type="Int32" />
             <Parameter Name="groupIdsParam" Mode="In" Type="String" />
+            <Parameter Name="userIdParam" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="insert_note" ReturnType="Collection(Int32)">
+          <FunctionImport Name="insert_note">
             <Parameter Name="userIdParam" Mode="In" Type="Int32" />
             <Parameter Name="topicParam" Mode="In" Type="String" />
             <Parameter Name="contentParam" Mode="In" Type="String" />

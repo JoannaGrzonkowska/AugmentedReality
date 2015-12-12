@@ -1,6 +1,8 @@
 ﻿using CQRS.EventHandlers;
 using CQRS.Implementation.Events;
+using DataAccessDenormalized;
 using DataAccessDenormalized.Repository;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CQRS.Implementation.EventHandlers
@@ -16,10 +18,11 @@ namespace CQRS.Implementation.EventHandlers
 
         public void Handle(GroupDeletedEvent handle)
         {
-            var group = this.groupDenormalizedRepository.
-                GetAllQueryable().FirstOrDefault(x => x.GroupId == handle.GroupId);
+            List<group> groups = this.groupDenormalizedRepository.
+                GetAllQueryable().Where(x => x.GroupId == handle.GroupId).ToList();
 
-            this.groupDenormalizedRepository.Delete(group);
+            foreach (group group in groups)
+                this.groupDenormalizedRepository.Delete(group);
             this.groupDenormalizedRepository.SaveChanges();
         }
     }

@@ -24,8 +24,8 @@ namespace CQRS.Implementation.QueryHandlers
         public AvatarByUserIdQueryResult Handle(AvatarByUserIdQuery handle)
         {
             var result = new AvatarByUserIdQueryResult();
-
-            result.AvatarFileName = userRepository.GetById(handle.UserId).Avatar;
+            var user = userRepository.GetById(handle.UserId);
+            result.AvatarFileName =user!=null?user.Avatar:string.Empty;
             return result;
         }
     }

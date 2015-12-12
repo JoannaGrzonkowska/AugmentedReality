@@ -32,10 +32,10 @@ namespace CQRS.Implementation.CommandHandlers
         public CommandResult Execute(CreateNoteCommand command)
         {
             IQueryable<user> auth_users = userRepository.RetriveUserById(command.Authentication_UserId);
-            if (auth_users != null)
+            /*if (auth_users != null)
             {
                 if (auth_users.First().Name == command.Authentication_UserName)
-                {
+                {*/
                     var location = locationRepository.GetByCord(command.xCord, command.yCord);
                     if (location == null)
                     {
@@ -43,7 +43,8 @@ namespace CQRS.Implementation.CommandHandlers
                         {
                             XCord = command.xCord,
                             YCord = command.yCord,
-                            ZCord = command.zCord
+                            ZCord = command.zCord,
+                            Address = command.Address,
                         };
                         locationRepository.Add(location);
                         locationRepository.SaveChanges();
@@ -74,9 +75,9 @@ namespace CQRS.Implementation.CommandHandlers
                         });
 
                     return new CommandResult<int>(note.Id);
-                }
+               /* }
             }
-            return new CommandResult(new List<string>() { "Unable to authenticate user" });
+            return new CommandResult(new List<string>() { "Unable to authenticate user" });*/
         }
     }
 }

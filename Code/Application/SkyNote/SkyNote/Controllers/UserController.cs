@@ -16,13 +16,11 @@ namespace SkyNote.Controllers
 {
     public class UserController : ApiController
     {
-        // GET api/values
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
         [ActionName("RetriveUsersGroups")]
         [HttpGet]
         public IEnumerable<UserGroupDTO> GetRetriveUsersGroups(int id)
@@ -31,7 +29,6 @@ namespace SkyNote.Controllers
             return groups;
         }
 
-        // GET api/values/5
         [ActionName("RetrieveUsersFriends")]
         [HttpGet]
         public IEnumerable<FriendDTO> GetRetrieveUsersFriends(int id)
@@ -40,9 +37,6 @@ namespace SkyNote.Controllers
             return friends;
         }
 
-        // POST api/values
-        //public void Post([FromBody]string value) { }
-        // POST: api/Group
         [ActionName("AddNewUser")]
         [HttpPost]
         public HttpResponseMessage PostAddNewUser(CreateUserCommand command)
@@ -99,6 +93,14 @@ namespace SkyNote.Controllers
             return groupInvites;
         }
 
+        [ActionName("GetUserById")]
+        [HttpGet]
+        public UserDTO GetUserById(int id)
+        {
+            var user = ServiceLocator.QueryBus.Retrieve<GetUserByIdQuery, GetUserByIdQueryResult>(new GetUserByIdQuery {UserId=id }).User;
+            return user;
+        }
+
         [ActionName("DecideGroupInvite")]
         [HttpPost]
         public HttpResponseMessage DecideGroupInvite(DecideGroupInviteCommand command)
@@ -132,7 +134,6 @@ namespace SkyNote.Controllers
             return loginResult;
         }
 
-        // GET api/values/5
         [ActionName("GetAllPotentialFriends")]
         [HttpGet]
         public IEnumerable<PotentialFriendDTO> GetAllPotentialFriends(int id)
@@ -144,26 +145,23 @@ namespace SkyNote.Controllers
         [HttpPost]
         public CommandResult UpdateAvatar(UpdateUserAvatarCommand command)
         {
-            ImageData imageData;
-            try
-            {
-                imageData = ImageHelper.GetBase64ImageDataFromCropboxLib(command.ImageBase64);
-            }
-            catch (ArgumentNullException ex)
-            {
-                return new CommandResult(new[] { "Base 64 string is null." });
-            }
-            catch (FormatException ex)
-            {
-                return new CommandResult(new[] { "Base 64 string length is not 4 or is not an even multiple of 4." });
-            }
-
+            ImageData imageData = ImageHelper.GetBase64ImageDataFromCropboxLib(command.ImageBase64);
+           
             command.DestinationDirPath = HttpContext.Current.Server.MapPath("~/App_Data/Avatars");
             command.ImageBytes = imageData.Bytes;
 
             var result = ServiceLocator.CommandBus.Send(command);
-
             return new CommandResult();
+        }
+
+        [ActionName("GetPotentialGroupMembers")]
+        [HttpGet]
+        public IEnumerable<FriendDTO> GetPotentialGroupMembers(int userId, int groupId)
+        {
+            var potentialMembers = ServiceLocator
+                .QueryBus.Retrieve<GetPotentialGroupMembersQuery, GetPotentialGroupMembersQueryResult>
+                (new GetPotentialGroupMembersQuery(userId, groupId)).Friends;
+            return potentialMembers;
         }
    }
 

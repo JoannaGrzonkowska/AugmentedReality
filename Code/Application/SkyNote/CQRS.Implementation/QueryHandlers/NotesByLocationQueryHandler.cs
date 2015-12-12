@@ -9,16 +9,19 @@ namespace CQRS.Implementation.QueryHandlers
     public class NotesByLocationQueryHandler : IQueryHandler<NotesByLocationQuery, NotesByLocationQueryResult>
     {
         private readonly INoteDenormalizedRepository noteRepository;
+        private readonly IGroupDenormalizedRepository groupRepository;
 
-        public NotesByLocationQueryHandler(INoteDenormalizedRepository noteRepository)
+        public NotesByLocationQueryHandler(INoteDenormalizedRepository noteRepository,
+            IGroupDenormalizedRepository groupRepository)
         {
             this.noteRepository = noteRepository;
+            this.groupRepository = groupRepository;
         }
                 
         public NotesByLocationQueryResult Handle(NotesByLocationQuery handle)
         {
             var result = new NotesByLocationQueryResult();
-            result.Notes = noteRepository.NotesInLocationRange(handle.XCord, handle.YCord, handle.Radius, handle.CategoryId, handle.TypeId, handle.GroupIds).Select(x => NoteDTO.Build(x));
+            result.Notes = noteRepository.NotesInLocationRange(handle.UserId, handle.XCord, handle.YCord, handle.Radius, handle.CategoryId, handle.TypeId, handle.GroupIds).Select(x => NoteDTO.Build(x));
             return result;
         }
     }

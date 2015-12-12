@@ -22,19 +22,22 @@ namespace CQRS.Implementation.CommandHandlers
 
         public CommandResult Execute(ShareNoteInGroupCommand command)
         {
-            int[] GroupIdsArray = command.GroupIds.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
-
-            foreach (int groupId in GroupIdsArray)
+            if (command.GroupIds != null)
             {
-                var notessgroups = command.Build();
-                notessgroups.GroupId = groupId;
-                _notegroupRepository.Add(notessgroups);
-                _notegroupRepository.SaveChanges();
-               
+                int[] GroupIdsArray = command.GroupIds.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
+
+                foreach (int groupId in GroupIdsArray)
+                {
+                    var notessgroups = command.Build();
+                    notessgroups.GroupId = groupId;
+                    _notegroupRepository.Add(notessgroups);
+                    _notegroupRepository.SaveChanges();
+
+                }
+
+                //NEW WAY : 1 Record = 1 Note + Multiple Shares
+                _eventStorage.Publish(new ShareNoteInMultipleGroupsEvent(command.NoteId, command.GroupIds, command.UserId));
             }
-        
- 			//NEW WAY : 1 Record = 1 Note + Multiple Shares
-            _eventStorage.Publish(new ShareNoteInMultipleGroupsEvent(command.NoteId, command.GroupIds, command.UserId));
             return new CommandResult();
         }
     }

@@ -10,7 +10,6 @@ namespace SkyNote.Controllers
 {
     public class GroupController : ApiController
     {
-        // GET: api/Group
         public IEnumerable<GroupDTO> Get()
         {
             var groups = ServiceLocator.QueryBus.Retrieve<GroupsForUserQuery, GroupsForUserQueryResult>
@@ -18,7 +17,6 @@ namespace SkyNote.Controllers
             return groups;
         }
 
-        // GET: api/Group/5
         [ActionName("RetriveGroupMembers")]
         [HttpGet]
         public IEnumerable<GroupMemberDTO> GetRetriveGroupMembers(int id)

@@ -10,6 +10,7 @@
     <script src="../../js/knockout-3.3.0.js"></script>
     <script src="../../js/knockout-winjs.js"></script>
 
+    <script src="../../scripts/App/Models/UserModel.js"></script>
     <script src="../../scripts/App/Models/FriendModel.js"></script>
     <script src="../../scripts/App/Services/UserService.js"></script>
 
@@ -45,13 +46,14 @@
 
         <script id="friend-template" type="text/html">
             <div class="panel panel-primary">
-                <div class="panel-heading" data-bind="click: $parent.getFriendsNotes">
+                <div class="panel-body" data-bind="click: $parent.getFriendsNotes">
                     <div style="background-color:white; font-size:medium" class="pull-right">
                         <a>
                             <span class="glyphicon glyphicon-minus" data-bind="click: $parent.delete"></span>
                         </a>
                     </div>
-                    <div data-bind="text: FriendName"></div>
+                    <img data-bind="attr: { src: AvatarPath() }" style="width:50px; height:50px;" />
+                    <span data-bind="text: FriendName"></span>
                 </div>
             </div>
         </script>

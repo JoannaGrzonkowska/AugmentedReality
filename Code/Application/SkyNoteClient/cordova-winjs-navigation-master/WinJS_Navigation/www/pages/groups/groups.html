@@ -36,15 +36,7 @@
 
         <script id="group-template" type="text/html">
             <div class="panel panel-primary" >
-                <div class="panel-heading" data-bind="click: $parent.viewGroupNotes">
-                    <div style="background-color:white;font-size:medium" class="pull-right">                        
-                        <a>
-                            <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.edit"></span>
-                        </a>
-                        <a>
-                            <span class="glyphicon glyphicon-minus" data-bind="click: $parent.delete"></span>
-                        </a>
-                    </div>
+                <div class="panel-heading" data-bind="click: $parent.viewGroupNotes">                    
                     <div data-bind="text: GroupName"></div>
                 </div>                
             </div>

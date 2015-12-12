@@ -24,7 +24,7 @@
             var NoteAddViewModel = function () {
                 var self = this;
                 self.myGroupsArray = ko.observableArray([]);
-                self.selectedGroup= ko.observableArray([1]);
+                self.selectedGroup= ko.observableArray([]);
                 self.NoteId = ko.observable(options.id);
                 self.Topic = ko.observable();
                 self.Content = ko.observable();
@@ -123,15 +123,7 @@
                                         Address: results[0].formatted_address,
                                         Authentication_UserId: options.userId,
                                         Authentication_UserName: options.userName
-                                    }), function (data) {
-                                        
-                                        noteService.shareNote(
-                                        {
-                                            GroupIds: self.selectedGroup().join(),
-                                            NoteId: data.noteId, //tu jest id zwracany przez rezultat
-                                            UserId: options.userId
-                                        });
-                                    });
+                                    }));
                                     
                                 }
                             }
@@ -154,8 +146,8 @@
 
                           noteService.shareNote(
                             {
-                                GroupIds: self.selectedGroup().join(),
-                                NoteId: self.NoteId(), //tu jest id zwracany przez rezultat
+                                GroupIds: self.selectedGroup().join(';'),
+                                NoteId: self.NoteId(), 
                                 UserId: options.userId
                             });
                       });

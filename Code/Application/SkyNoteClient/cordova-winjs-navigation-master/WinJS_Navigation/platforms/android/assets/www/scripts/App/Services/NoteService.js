@@ -1,14 +1,12 @@
-﻿
-var NoteService = function (urls) {
+﻿var NoteService = function () {
     var self = this;
-    self.urls = urls;
 
     self.getUserNotes = function (id, handler) {
 
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/RetrieveUsersNotes/' + id,//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'note/RetrieveUsersNotes/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {
@@ -24,7 +22,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/RetrieveGroupsNotes/' + id,//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'note/RetrieveGroupsNotes/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {
@@ -42,7 +40,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/NotesByLocation?userId=' + userId
+            url: Paths.serverUrl + 'note/NotesByLocation?userId=' + userId
                 + '&xCord=' + xCord
                 + '&yCord=' + yCord
                 + '&radius=' + radius
@@ -62,7 +60,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/NotesByLocationViewModel?userId=' + userId
+            url: Paths.serverUrl + 'note/NotesByLocationViewModel?userId=' + userId
                 + '&xCord=' + xCord
                 + '&yCord=' + yCord
                 + '&radius=' + radius
@@ -82,7 +80,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/MyNotesViewModel/' + id,
+            url: Paths.serverUrl + 'note/MyNotesViewModel/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = new MyNotesViewModel(data);
@@ -96,7 +94,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/get/' + id,
+            url: Paths.serverUrl + 'note/get/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = new NoteDetailsViewModel(data);
@@ -109,7 +107,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/addnewnote',
+            url: Paths.serverUrl + 'note/addnewnote',
             type: 'POST',
             data: note,
             contentType: 'application/json',
@@ -124,7 +122,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/put',
+            url: Paths.serverUrl + 'note/put',
             type: 'PUT',
             data: note,
             contentType: 'application/json',
@@ -139,7 +137,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/delete/' + note.NoteId(),
+            url: Paths.serverUrl + 'note/delete/' + note.NoteId(),
             type: 'DELETE',
             success: function (data) {
                 showAlertAfterAjax(data, 'Note ' + note.Topic() + ' successfuly deleted.');
@@ -151,7 +149,7 @@ var NoteService = function (urls) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/note/ShareNoteInGroup/',
+            url: Paths.serverUrl + 'note/ShareNoteInGroup/',
             type: 'POST',
             data: note,
             success: function (data) {

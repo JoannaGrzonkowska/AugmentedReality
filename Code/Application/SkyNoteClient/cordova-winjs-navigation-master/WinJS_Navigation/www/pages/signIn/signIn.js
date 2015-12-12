@@ -40,7 +40,7 @@
                                 }
                                 else
                                 {
-                                    WinJS.Navigation.navigate('pages/signIn/signIn.html');
+                                    showAlert('Wrong password or user ' + self.Login() + ' does not exist.', false);
                                 }
                             });
                     }

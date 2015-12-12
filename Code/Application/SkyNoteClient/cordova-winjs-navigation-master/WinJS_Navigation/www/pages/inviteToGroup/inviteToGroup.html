@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+
+    <script src="inviteToGroup.js"></script>
+    <link href="inviteToGroup.css" rel="stylesheet" />
+
+    <script src="../../js/knockout-3.3.0.js"></script>
+    <script src="../../js/knockout-winjs.js"></script>
+    <script src="../../scripts/App/Models/PotentialFriendModel.js"></script>
+    <script src="../../scripts/App/Models/FriendModel.js"></script>
+    <script src="../../scripts/App/Services/UserService.js"></script>
+
+</head>
+<body>
+    <div class="home fragment" id="user-friends-container">
+        <nav>
+            <button class="btn btn-default" data-bind="click:gotoGroups">Groups</button>
+            <button class="btn btn-default" data-bind="click:refresh">Friends</button>
+            <button class="btn btn-default" data-bind="click:gotoNotes">Notes</button>
+            <button class="btn btn-default" data-bind="click:logout">Log out</button>
+        </nav>
+
+        <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
+
+        <h3>My Invitations</h3>
+        <div data-bind="template: { name: 'invite-template', foreach: friendsArray }"></div>
+
+        <script id="invite-template" type="text/html">
+            <div class="remove">
+                <span class="label label-default" data-bind="text: FriendName"></span>
+                <button class="btn btn-default" data-bind="click: $parent.invite">invite</button>
+            </div>
+        </script>       
+      
+    </div>
+</body>
+</html>

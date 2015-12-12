@@ -17,14 +17,13 @@ var rad = function (x) {
 };
 
 function calcDistance(longitude, latitude, otherLongitude, otherLatitude) {
+    var R = 6367;
+    var distance = R * Math.acos(Math.cos(rad(latitude)) * Math.cos(rad(otherLatitude)) *
+         Math.cos(rad(otherLongitude) - rad(longitude)) +
+         Math.sin(rad(latitude)) * Math.sin(rad(otherLatitude)));
+    return distance.toFixed(3); //  distance in km
+};
 
-    var R = 6378137; // Earth’s mean radius in meter
-    var dLat = rad(otherLatitude - latitude);
-    var dLong = rad(otherLongitude - longitude);
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(rad(latitude)) * Math.cos(rad(otherLatitude)) *
-      Math.sin(dLong / 2) * Math.sin(dLong / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-    return d/1000; // returns the distance in km
+var Paths = {
+    serverUrl: 'http://skynoteasiatest.azurewebsites.net/api/' //'http://localhost:59284/api/'
 };

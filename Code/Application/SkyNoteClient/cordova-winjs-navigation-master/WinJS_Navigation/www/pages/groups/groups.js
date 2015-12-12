@@ -21,7 +21,7 @@
                 }
 
                 self.edit = function (item) {
-                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: item.GroupId() });
+                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: item.GroupId(), userId: options.userId });
                 };
 
                 self.delete = function (item) {
@@ -29,7 +29,7 @@
                 };
 
                 self.gotoAddGroup = function () {
-                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: 0 });
+                    WinJS.Navigation.navigate('pages/newGroup/newGroup.html', { id: 0, userId: options.userId });
                 };
 
                 self.refresh = function () {

@@ -17,6 +17,7 @@
         <h2>Group members</h2>
         <div>
             <span>Number of members: </span><span data-bind="text: groupMembersArray().length"></span>
+            <button class="btn btn-default" data-bind="click:inviteFriend">Invite friend</button>
         </div>
 
         <div class="row">
@@ -25,9 +26,9 @@
             <button class="btn btn-default col-xs-2" data-bind="click:refresh">Refresh</button>
         </div>
 
-        <div data-bind="template: { name: 'note-template', foreach: groupMembersArray }"></div>
+        <div data-bind="template: { name: 'group-members-template', foreach: groupMembersArray }"></div>
 
-        <script id="note-template" type="text/html">
+        <script id="group-members-template" type="text/html">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div style="background-color:white;font-size:medium" class="pull-right">

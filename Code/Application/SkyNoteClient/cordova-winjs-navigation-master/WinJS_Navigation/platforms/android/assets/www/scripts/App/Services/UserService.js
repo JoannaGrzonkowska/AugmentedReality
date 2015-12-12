@@ -1,47 +1,55 @@
-﻿var UserService = function (urls) {
+﻿var UserService = function () {
     var self = this;
-    self.urls = urls;
 
-    
- self.updateAvatar = function (updateUserAvatarCommand, handler) {
+    self.updateAvatar = function (updateUserAvatarCommand, handler) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/updateAvatar',
+            url: Paths.serverUrl + 'user/updateAvatar',
             type: 'POST',
             data: updateUserAvatarCommand,
             success: function (data) {
                 if (data.IsSuccess) {
-                   // $("#success-message").html("OK").show();
                     handler();
-                } else {
-                  //  $(".alert").html(data.ErrorsToString).show();
                 }
             }
         });
     };
 
-    self.getAllUsers = function (handler) {
+    self.getUserById = function (id, handler) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/get',//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'user/GetUserById/' + id,
             type: 'GET',
             success: function (data) {
-                var mappedData = $.map(data, function (item) {
-                    return new GroupModel(item);
-                });
+                mappedData = new UserDetailsModel(data);
                 handler(mappedData);
             }
         });
     };
 
+    self.getAllUsers = function (id, handler) {
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: Paths.serverUrl + 'user/GetAllPotentialFriends/' + id,
+            type: 'GET',
+            success: function (data) {
+                var mappedData = $.map(data, function (item) {
+                    return new PotentialFriendModel(item);
+                });
+                handler(mappedData);
+            }
+        });
+    };
+    
     self.getUserFriends = function (id, handler) {
 
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/RetrieveUsersFriends/' + id,
+            url: Paths.serverUrl + 'user/RetrieveUsersFriends/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {
@@ -57,7 +65,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/GetFriendInvites/' + id,
+            url: Paths.serverUrl + 'user/GetFriendInvites/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {
@@ -73,10 +81,10 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/DecideFriendInvite/',
+            url: Paths.serverUrl + 'user/DecideFriendInvite/',
             type: 'POST',
             data: decision,
-            success: function (data) {                
+            success: function (data) {
                 handler();
             }
         });
@@ -87,8 +95,9 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/AddFriend/',//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'user/AddFriend/',
             type: 'Post',
+            data:user,
             success: function (data) {
                 showAlertAfterAjax(data, 'Friend ' + user.Name + ' successfuly added.');
             }
@@ -99,7 +108,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/remove/',//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'user/remove/',
             type: 'Post',
             success: function (data) {
                 handler();
@@ -111,7 +120,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/AddNewUser/',//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'user/AddNewUser/',
             type: 'POST',
             data: user,
             success: function (data) {
@@ -124,12 +133,54 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/SignIn/',//localhost:59284 skynoteasiatest.azurewebsites.net
-            type: 'Post',
+            url: Paths.serverUrl + 'user/SignIn',
+            type: 'POST',
             data: user,
             success: function (data) {
                 var mappedData = new SignInModel(data);
                 handler(mappedData);
+            }
+        });
+    };
+
+    self.inviteFriend = function (user) {
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: Paths.serverUrl + 'user/InviteFriend/',
+            type: 'Post',
+            data:user,
+            success: function (data) {
+                showAlertAfterAjax(data, 'Friend ' + user.Name + ' invited. Wait for his anwser');
+            }
+        });
+    };
+
+    self.getFriends = function (groupId, userId, handler) {
+
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: Paths.serverUrl + 'user/GetPotentialGroupMembers?groupId=' + groupId + '&userId=' + userId,
+            type: 'GET',
+            success: function (data) {
+                var mappedData = $.map(data, function (item) {
+                    return new FriendModel(item);
+                });
+                handler(mappedData);
+            }
+        });
+    };
+
+    self.inviteToGroup = function (invitation) {
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: Paths.serverUrl + 'user/InviteFriend/',
+            type: 'Post',
+            data: invitation,
+            success: function (data) {
+                showAlertAfterAjax(data, 'Friend ' + invitation.Name + ' invited.');
             }
         });
     };

@@ -5,11 +5,7 @@
     <title>home</title>
 
     <link href="note.css" rel="stylesheet" />
-    <link href="../../css/rhinoslider-1.05.css" rel="stylesheet" />
 
-    <script src="../../js/easing.js"></script>
-    <script src="../../js/mousewheel.js"></script>
-    <script src="../../js/rhinoslider-1.05.min.js"></script>
     <script src="note.js"></script>
     <script src="../../scripts/App/Models/GroupModel.js"></script>
 
@@ -43,11 +39,13 @@
                 <textarea name="content" class="form-control" rows="4" cols="70" placeholder="Content"
                           data-bind="value: Content"></textarea>
 
-                <div id="fiddle" data-bind="foreach: myGroupsArray">
-                    <label>
-                        <input type="checkbox" data-bind="checkedValue: GroupId, checked: $parent.selectedGroup" />
-                        <span data-bind="text: GroupName"></span>
-                    </label>
+                <div data-bind="visible: !isNew">
+                    <div id="fiddle" data-bind="foreach: myGroupsArray">
+                        <label>
+                            <input type="checkbox" data-bind="checkedValue: GroupId, checked: $parent.selectedGroup" />
+                            <span data-bind="text: GroupName"></span>
+                        </label>
+                    </div>
                 </div>
             </div>
 

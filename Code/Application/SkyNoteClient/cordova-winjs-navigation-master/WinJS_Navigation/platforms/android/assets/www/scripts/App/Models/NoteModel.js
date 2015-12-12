@@ -2,6 +2,7 @@
     var self = this;
     if (data != null) {
         this.NoteId = ko.observable(data.NoteId);
+        this.UserId = ko.observable(data.UserId);
         this.Topic = ko.observable(data.Topic);
         this.Content = ko.observable(data.Content);
         this.Date = ko.observable(data.Date);
@@ -18,7 +19,7 @@
             data.ImagesFilenames.forEach(function (item) {
                 self.Images.push(new NoteImageModel({
                     Filename: item,
-                    ServerPath: 'http://skynoteasiatest.azurewebsites.net/api/File/GetNoteImage?noteId=' + self.NoteId() + '&filename='
+                    ServerPath: Paths.serverUrl + 'File/GetNoteImage?noteId=' + self.NoteId() + '&filename='
                 }));
             });
         };
@@ -32,12 +33,13 @@
     }
     this.IsSelected = ko.observable(false);
 
+    this.DistanceToUser = ko.observable()
+
     self.CalcDistance = function (otherLongitude, otherLatitude) {
-        return calcDistance(self.Longitude(), self.Latitude(), otherLongitude, otherLatitude);
+        self.DistanceToUser(calcDistance(self.Longitude(), self.Latitude(), otherLongitude, otherLatitude) + " km");
     };
 
-    this.DistanceToUser = ko.observable()
     if (userLongitude != null && userLatitude != null) {
-        this.DistanceToUser(self.CalcDistance(userLongitude, userLatitude));
+        self.CalcDistance(userLongitude, userLatitude);
     };
 };

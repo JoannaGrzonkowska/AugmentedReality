@@ -1,14 +1,14 @@
-﻿var GroupService = function (urls) {
+﻿var GroupService = function () {
     var self = this;
-    self.urls = urls;
 
     self.addGroup = function (group) {
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/group/addnewgroup',
+            url: Paths.serverUrl + 'group/addnewgroup',
             type: 'POST',
-            data: group,
+            data: JSON.stringify(group),
+            contentType: 'application/json',
             success: function (data) {
                 showAlertAfterAjax(data, 'Group ' + group.Name + ' successfuly added.');
             }
@@ -19,7 +19,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/user/RetriveUsersGroups/' +id,//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'user/RetriveUsersGroups/' +id,
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {
@@ -35,7 +35,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/group/get/' + id,
+            url: Paths.serverUrl + 'group/get/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = new GroupModel(data);
@@ -49,7 +49,7 @@
         $.ajaxSetup({ cache: false });
 
         $.ajax({
-            url: 'http://localhost:59284/api/group/RetriveGroupMembers/' + id,//localhost:59284 skynoteasiatest.azurewebsites.net
+            url: Paths.serverUrl + 'group/RetriveGroupMembers/' + id,
             type: 'GET',
             success: function (data) {
                 var mappedData = $.map(data, function (item) {

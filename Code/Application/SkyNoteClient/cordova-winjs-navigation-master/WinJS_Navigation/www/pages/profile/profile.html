@@ -8,18 +8,27 @@
     <link href="profile.css" rel="stylesheet" />
     <script src="profile.js"></script>
     <script src="../../js/cropbox.js"></script>
-    
+
+    <script src="../../scripts/App/Models/UserDetailsModel.js"></script>
     <script src="../../scripts/App/Services/UserService.js"></script>
     <script src="../../scripts/App/CropBoxHelper.js"></script>
 </head>
 <body>
     <div class="home fragment" id="profile-container">
 
-        <img data-bind="attr: { src: avatarPath() }" style="width:50px; height:50px;" />
-
         <div class="row">
             <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
         </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <img id="user-avatar" data-bind="attr: { src: Avatar() }" style="width:50px; height:50px;" />
+                <div>Login:<span data-bind="text:Login"></span></div>
+                <div>Name:<span data-bind="text:Name"></span></div>
+                <div>Mail:<span data-bind="text:Mail"></span></div>
+            </div>
+        </div>
+
 
         <div class="container" id="avatar-edit-container">
             <div class="imageBox">
@@ -30,11 +39,9 @@
             <div class="action">
                 <input type="file" id="file" style="float:left; width: 250px">
                 <input type="button" id="btnPhoto" value="Take photo">
-                <input type="button" id="btnCrop" value="Crop">
+                <input type="button" id="btnCrop" value="Save">
                 <input type="button" id="btnZoomIn" value="+">
                 <input type="button" id="btnZoomOut" value="-">
-            </div>
-            <div class="cropped">
             </div>
         </div>
 

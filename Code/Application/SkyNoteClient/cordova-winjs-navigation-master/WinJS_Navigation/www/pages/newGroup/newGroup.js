@@ -30,14 +30,11 @@
                 };
 
                 self.addGroup = function () {
-                    var options = {
-                        enableHighAccuracy: true
-                    };
-
+                  
                     groupService.addGroup(
                        {
                            Name: self.Name(),                           
-                           UserId: 1
+                           UserId: options.userId
                        });
                 };
 
@@ -61,7 +58,7 @@
                 };
 
                 self.back = function () {
-                    WinJS.Navigation.navigate('pages/groups/groups.html');
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { userId: options.userId });
                 };
 
                 if (!isNew) {

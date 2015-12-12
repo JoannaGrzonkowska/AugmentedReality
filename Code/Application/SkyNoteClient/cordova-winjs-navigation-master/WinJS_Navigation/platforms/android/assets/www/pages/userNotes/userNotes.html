@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+
+    <link href="userNotes.css" rel="stylesheet" />
+    <script src="userNotes.js"></script>
+
+    <script src="../../scripts/App/Models/MyNotesViewModel.js"></script>
+    <script src="../../scripts/App/Models/NoteModel.js"></script>
+    <script src="../../scripts/App/Models/TypeModel.js"></script>
+    <script src="../../scripts/App/Models/CategoryModel.js"></script>
+    <script src="../../scripts/App/Services/NoteService.js"></script>
+
+</head>
+<body>
+
+    <div class="home fragment" id="notes-container">
+        <nav>
+            <button class="btn btn-default" data-bind="click: gotoGroups">Groups</button>
+            <button class="btn btn-default" data-bind="click: gotoFriends">Friends</button>
+            <button class="btn btn-default" data-bind="click: gotoNotes">Notes</button>
+            <button class="btn btn-default" data-bind="click: logout">Log out</button>
+            <button class="btn btn-default" data-bind="click: gotoProfile">My Profile</button>
+        </nav>
+        <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
+
+        <h2><span data-bind="text: userName()"></span> notes</h2>
+        <div>
+            <span>Number of notes: </span><span data-bind="text: userNotesArray().length"></span>
+        </div>
+
+        <select id="categorySelect" class="form-control input-lg" data-bind="foreach: categories, value: selectedCategoryId, select2: { width: '100%', placeholder: 'select category' }">
+            <option data-bind="text: Name(), value: CategoryId"></option>
+        </select>
+
+        <select id="typeSelect" class="form-control input-lg" data-bind="foreach: types, value: selectedTypeId, select2: { width: '100%', placeholder: 'select type' }">
+            <option data-bind="text: Name(), value: TypeId"></option>
+        </select>
+
+        <div class="row">
+            <span class="col-xs-6">
+                <span>Last refresh: </span>
+                <span data-bind="localizedDateTime: lastRefresh()"></span>
+            </span>
+            <button class="btn btn-default col-xs-2" data-bind="click:search">Search</button>
+            <button class="btn btn-default col-xs-2" data-bind="click:showNotesOnMap">Show on Map</button>
+        </div>
+
+        <div data-bind="template: { name: 'note-template', foreach: userNotesArray }"></div>
+
+        <script id="note-template" type="text/html">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div style="background-color:white;font-size:medium" class="pull-right">
+                        <a>
+                            <span class="glyphicon glyphicon-pencil" data-bind="click: $parent.showOnMap"></span>
+                        </a>                        
+                    </div>
+                    <div data-bind="text: Topic"></div>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-right" data-bind="localizedDateWithDescription: Date()"></div>
+                    <div data-bind="text: Content"></div>
+                </div>
+            </div>
+        </script>
+
+    </div>
+</body>
+</html>

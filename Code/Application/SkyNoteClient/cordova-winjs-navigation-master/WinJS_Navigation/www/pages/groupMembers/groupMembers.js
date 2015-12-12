@@ -30,6 +30,9 @@
                     WinJS.Navigation.navigate('pages/groupNotes/groupNotes.html', { groupId: options.groupId, userId: options.userId });
                 };
 
+                self.inviteFriend = function () {
+                    WinJS.Navigation.navigate('pages/inviteToGroup/inviteToGroup.html', { groupId: options.groupId, userId: options.userId });
+                }
             };
             ko.applyBindings(new GroupMembersViewModel(), document.getElementById("group-members-container"));
 

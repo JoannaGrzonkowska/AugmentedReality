@@ -49,7 +49,8 @@
                             }
 
                             var infowindow = new google.maps.InfoWindow({
-                                content: '<div>' + item.Topic() + '</div>' +
+                                content: '<div>' + item.LocationAddress() + '</div>' +
+                                    '<div>' + item.Topic() + '</div>' +
                                      '<div>' + item.Content() + '</div>'
                             });
 

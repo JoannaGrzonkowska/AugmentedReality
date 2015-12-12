@@ -1,4 +1,5 @@
-﻿function CategoryModel(data) {
+﻿
+function CategoryModel(data) {
     var self = this;
 
     this.CategoryId = ko.observable(data.CategoryId);

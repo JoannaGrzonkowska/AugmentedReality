@@ -25,5 +25,5 @@ function calcDistance(longitude, latitude, otherLongitude, otherLatitude) {
 };
 
 var Paths = {
-    serverUrl: 'http://skynoteasiatest.azurewebsites.net/api/' //'http://localhost:59284/api/'
+    serverUrl: 'http://localhost:59284/api/' //'http://skynoteasiatest.azurewebsites.net/api/'
 };

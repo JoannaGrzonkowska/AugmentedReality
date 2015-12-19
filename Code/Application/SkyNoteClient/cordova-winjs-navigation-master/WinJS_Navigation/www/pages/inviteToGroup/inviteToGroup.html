@@ -9,7 +9,6 @@
 
     <script src="../../js/knockout-3.3.0.js"></script>
     <script src="../../js/knockout-winjs.js"></script>
-    <script src="../../scripts/App/Models/PotentialFriendModel.js"></script>
     <script src="../../scripts/App/Models/FriendModel.js"></script>
     <script src="../../scripts/App/Services/UserService.js"></script>
 
@@ -25,16 +24,22 @@
 
         <button class="col-xs-2 win-backbutton" data-bind="click: back" aria-label="Back" type="button"></button>
 
-        <h3>My Invitations</h3>
+        <h3>Invite to group</h3>
+        <div>
+            <span>Number of friends: </span><span data-bind="text: friendsArray().length"></span>
+        </div>
         <div data-bind="template: { name: 'invite-template', foreach: friendsArray }"></div>
 
         <script id="invite-template" type="text/html">
-            <div class="remove">
-                <span class="label label-default" data-bind="text: FriendName"></span>
-                <button class="btn btn-default" data-bind="click: $parent.invite">invite</button>
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <img data-bind="attr: { src: AvatarPath() }" style="width:50px; height:50px;" />
+                    <span data-bind="text: FriendName"></span>
+                    <button class="btn btn-default" data-bind="click: $parent.invite">invite</button>
+                </div>
             </div>
-        </script>       
-      
+        </script>
+
     </div>
 </body>
 </html>

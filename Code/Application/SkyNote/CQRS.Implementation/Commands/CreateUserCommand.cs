@@ -12,6 +12,7 @@ namespace CQRS.Implementation.Commands
         public string Mail { get; set; }
         public string Password { get; set; }
         public string PasswordSalt { get; set; }
+        public string avatarPath { get; set; }
 
         public override user Build(user user = null, Action<user> additionalAction = null)
         {

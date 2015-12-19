@@ -41,6 +41,7 @@ namespace SkyNote.Controllers
         [HttpPost]
         public HttpResponseMessage PostAddNewUser(CreateUserCommand command)
         {
+            command.avatarPath = HttpContext.Current.Server.MapPath("~/App_Data/Avatars/defaultAvatar.jpg");
             var result = ServiceLocator.CommandBus.Send(command);
             return Request.CreateResponse(result.IsSuccess ? HttpStatusCode.OK : HttpStatusCode.BadRequest, result);
         }

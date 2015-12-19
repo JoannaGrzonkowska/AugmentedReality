@@ -5,6 +5,9 @@ using DataAccess.Repositories;
 using CQRS.Events;
 using CQRS.Implementation.Events;
 using DataAccess;
+using CQRS.Implementation.Static;
+using System.IO;
+using CQRS.Implementation.Services;
 
 namespace CQRS.Implementation.CommandHandlers
 {
@@ -14,18 +17,30 @@ namespace CQRS.Implementation.CommandHandlers
         private IGroupRepository groupRepository;
         private IUserfriendgroupRepository userfriendgrouRepository;
         private IEventStorage eventStorage;
+        private IImageFileService imageFileService;
+        
 
-        public CreateUserCommandHandler(IUserRepository userRepository, IGroupRepository groupRepository, IUserfriendgroupRepository userfriendgrouRepository, IEventStorage eventStorage)
+        public CreateUserCommandHandler(IUserRepository userRepository, 
+            IGroupRepository groupRepository, 
+            IUserfriendgroupRepository userfriendgrouRepository, 
+            IEventStorage eventStorage, 
+            IImageFileService imageFileService)
         {
             this.userRepository = userRepository;
             this.groupRepository = groupRepository;
             this.userfriendgrouRepository = userfriendgrouRepository;
             this.eventStorage = eventStorage;
+            this.imageFileService = imageFileService;
         }
 
         public CommandResult Execute(CreateUserCommand command)
         {
             var user = command.Build();
+            var filename = user.Login + StaticData.FilesExtension;
+            var serverPath = Path.Combine(Path.GetDirectoryName(command.avatarPath), filename);
+            imageFileService.SaveFile(File.ReadAllBytes(command.avatarPath), serverPath);
+
+            user.Avatar = filename;
             userRepository.Add(user);
             userRepository.SaveChanges();
 

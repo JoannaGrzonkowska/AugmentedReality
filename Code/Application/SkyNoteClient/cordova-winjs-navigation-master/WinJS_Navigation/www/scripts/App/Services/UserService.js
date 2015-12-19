@@ -184,4 +184,17 @@
             }
         });
     };
+
+    self.addUserToGroup = function (invitation) {
+        $.ajaxSetup({ cache: false });
+
+        $.ajax({
+            url: Paths.serverUrl + 'user/JoinGroup/',
+            type: 'Post',
+            data: invitation,
+            success: function (data) {
+                showAlertAfterAjax(data, 'Friend ' + invitation.Name + ' invited.');
+            }
+        });
+    };
 };

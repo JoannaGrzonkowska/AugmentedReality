@@ -14,10 +14,11 @@
                     userService.getFriends(options.groupId, options.userId, function (data) {
                         self.friendsArray(data);
                     });
+
                 };
 
                 self.invite = function (item) {
-                    userService.inviteToGroup({
+                    userService.addUserToGroup({ 
                         UserId: item.FriendId(),
                         GroupId: options.groupId,
                         Name: item.FriendName()
@@ -37,11 +38,11 @@
                 };
 
                 self.gotoGroups = function () {
-                    WinJS.Navigation.navigate('pages/groups/groups.html', { userId: options.id });
+                    WinJS.Navigation.navigate('pages/groups/groups.html', { userId: options.userId });
                 };
 
-                self.gotoFriends = function () {
-                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { userId: options.id });
+                self.gotoNotes = function () {
+                    WinJS.Navigation.navigate('pages/userFriends/userFriends.html', { id: options.userId });
                 };
 
                 self.logout = function () {
